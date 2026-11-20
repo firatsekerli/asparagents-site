@@ -105,7 +105,7 @@ ul { margin: 0 0 16px; }
 .ht-icon svg { width: 20px; height: 20px; }
 
 /* Inner page heading */
-.page-head { background: var(--bg); padding: 72px 0; }
+.page-head { background: var(--bg); padding: 72px 0; overflow-x: clip; }
 .page-head-in { max-width: 820px; }
 .page-head .lead p:last-child { margin-bottom: 0; }
 
