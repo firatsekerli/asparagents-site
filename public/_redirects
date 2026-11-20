@@ -1,0 +1,32 @@
+# asparagents.com: the WooCommerce shop moved to shop.asparagents.com (same WordPress, same paths).
+# 308 keeps the request method (POST stays POST), which plugin licence checks and API calls need.
+/wp-json/*              https://shop.asparagents.com/wp-json/:splat 308
+/wp-admin/*             https://shop.asparagents.com/wp-admin/:splat 308
+/wp-login.php           https://shop.asparagents.com/wp-login.php 308
+/wp-content/*           https://shop.asparagents.com/wp-content/:splat 301
+/xmlrpc.php             https://shop.asparagents.com/xmlrpc.php 308
+/shop/*                 https://shop.asparagents.com/shop/:splat 301
+/shop                   https://shop.asparagents.com/shop/ 301
+/cart/*                 https://shop.asparagents.com/cart/:splat 301
+/cart                   https://shop.asparagents.com/cart/ 301
+/checkout/*             https://shop.asparagents.com/checkout/:splat 301
+/checkout               https://shop.asparagents.com/checkout/ 301
+/my-account/*           https://shop.asparagents.com/my-account/:splat 301
+/my-account             https://shop.asparagents.com/my-account/ 301
+/product/*              https://shop.asparagents.com/product/:splat 301
+/product-category/*     https://shop.asparagents.com/product-category/:splat 301
+/terms-and-conditions/  https://shop.asparagents.com/terms-and-conditions/ 301
+/delivery-and-refund/   https://shop.asparagents.com/delivery-and-refund/ 301
+/distance-selling-contract/ https://shop.asparagents.com/distance-selling-contract/ 301
+
+# Old WordPress URLs on the new site
+/how-to-create-user-account-on-wordpress/ /blog/ 301
+/feed/*                 /blog/ 301
+/feed                   /blog/ 301
+/category/*             /blog/ 301
+/author/*               /about-us/ 301
+/sitemap_index.xml      /sitemap.xml 301
+/wp-sitemap.xml         /sitemap.xml 301
+/page-sitemap.xml       /sitemap.xml 301
+/post-sitemap.xml       /sitemap.xml 301
+/product-sitemap.xml    https://shop.asparagents.com/sitemap.xml 301

@@ -1,0 +1,102 @@
+# Merges the agents' pull requests without a human once they pass the checks (same rule as asparajans-site,
+# Firat's decision 23.10.2026). Branches: content/ (articles), publish/ (Publisher), site/ (page and design changes),
+# tech-audit/ (Technical Auditor). Never merged automatically: changes to .github/, tools/ or build.mjs (Firat merges
+# those). Checks: `node build.mjs` succeeds, the Cloudflare Pages preview succeeds, and Lighthouse on the preview
+# scores 100 for accessibility and best practices and at least 90 for performance (mobile and desktop).
+name: Agent auto-merge
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    branches: [main]
+
+concurrency:
+  group: agent-automerge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  automerge:
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (startsWith(github.head_ref, 'content/') || startsWith(github.head_ref, 'publish/') || startsWith(github.head_ref, 'site/') || startsWith(github.head_ref, 'tech-audit/'))
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      PR: ${{ github.event.pull_request.number }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Only content files changed?
+        run: |
+          gh api "repos/$REPO/pulls/$PR/files?per_page=100" --paginate --jq '.[].filename' > changed.txt
+          cat changed.txt
+          if grep -Eq '^(\.github/|tools/|build\.mjs$|package(-lock)?\.json$)' changed.txt; then
+            gh pr comment "$PR" --repo "$REPO" --body "Agent auto-merge: not merged automatically because this pull request changes the build, tools or workflows. Firat needs to review and merge it."
+            exit 1
+          fi
+
+      - name: Build must succeed
+        run: node build.mjs
+
+      - name: Wait for the Cloudflare Pages preview
+        run: |
+          for i in $(seq 1 80); do
+            run=$(gh api "repos/$REPO/commits/$HEAD_SHA/check-runs" --jq '[.check_runs[] | select(.name | startswith("Cloudflare Pages"))][0]')
+            state=$(echo "$run" | jq -r '"\(.status) \(.conclusion)"')
+            echo "Cloudflare Pages: $state"
+            case "$state" in
+              "completed success")
+                url=$(echo "$run" | jq -r '.output.summary' | grep -o "https://[a-z0-9]*\.asparagents-site\.pages\.dev" | head -1)
+                echo "PREVIEW_URL=$url" >> "$GITHUB_ENV"
+                echo "Preview: $url"
+                exit 0 ;;
+              completed*) gh pr comment "$PR" --repo "$REPO" --body "Agent auto-merge: not merged because the Cloudflare Pages preview failed ($state)."; exit 1 ;;
+            esac
+            sleep 15
+          done
+          gh pr comment "$PR" --repo "$REPO" --body "Agent auto-merge: not merged because the Cloudflare Pages preview did not finish within 20 minutes."
+          exit 1
+
+      - name: Lighthouse on the preview
+        run: |
+          paths="/ /services/"
+          for f in $(grep -E '^content/articles/[a-z0-9-]+/post\.json$' changed.txt | cut -d/ -f3); do paths="$paths /$f/"; done
+          paths=$(echo $paths | tr ' ' '\n' | awk '!seen[$0]++' | head -6 | tr '\n' ' ')
+          echo "Testing: $paths on $PREVIEW_URL"
+          npm i -g lighthouse@12 >/dev/null 2>&1
+          fail=""
+          for p in $paths; do
+            for preset in mobile desktop; do
+              flags="--quiet --output=json --output-path=lh.json --only-categories=performance,accessibility,best-practices --chrome-flags=--headless=new"
+              [ "$preset" = desktop ] && flags="$flags --preset=desktop"
+              ok=0
+              for attempt in 1 2 3; do
+                lighthouse "$PREVIEW_URL$p" $flags || true
+                scores=$(node -e "const c=require('./lh.json').categories;console.log(Math.round(c.performance.score*100), Math.round(c.accessibility.score*100), Math.round(c['best-practices'].score*100))")
+                set -- $scores
+                echo "$p $preset try $attempt: performance $1, accessibility $2, best practices $3"
+                if [ "$1" -ge 90 ] && [ "$2" -eq 100 ] && [ "$3" -eq 100 ]; then ok=1; break; fi
+              done
+              [ $ok = 1 ] || fail="$fail $p ($preset: performance $1, accessibility $2, best practices $3);"
+            done
+          done
+          if [ -n "$fail" ]; then
+            gh pr comment "$PR" --repo "$REPO" --body "Agent auto-merge: not merged because Lighthouse on the preview is below the bar:$fail Fix the page and push again."
+            exit 1
+          fi
+
+      - name: Merge
+        run: gh api -X PUT "repos/$REPO/pulls/$PR/merge" -f merge_method=squash -f sha="$HEAD_SHA" --jq '.sha'
