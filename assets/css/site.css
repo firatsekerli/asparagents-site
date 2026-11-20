@@ -238,7 +238,7 @@ ul { margin: 0 0 16px; }
 .browser-bar i:first-child { background: var(--red); }
 .browser-shot { display: block; overflow: hidden; }
 .browser.main .browser-shot { aspect-ratio: 16 / 10; }
-.browser-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1.2s ease; }
+.browser-shot img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; transition: object-position 4s ease-in-out; }
 .browser.side { position: absolute; width: 30%; z-index: 2; }
 .browser.side .browser-bar { padding: 7px 10px; }
 .browser.side .browser-bar i { width: 7px; height: 7px; }
@@ -246,7 +246,7 @@ ul { margin: 0 0 16px; }
 .side-a { right: 0; bottom: 0; }
 .show.rev .side-a { right: auto; left: 0; }
 .show-media:hover .browser.main { transform: translateY(-6px); }
-.show-media:hover .browser.main img { transform: translateY(-8%); }
+.show-media:hover .browser.main img { object-position: 50% 100%; }
 .show-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
 .show-tags span { font-size: 13px; font-weight: 700; color: var(--blue); background: var(--blue-soft); border-radius: 999px; padding: 5px 12px; }
 .show-tags span:first-child { color: #fff; background: var(--red-text); }
@@ -458,3 +458,29 @@ ul { margin: 0 0 16px; }
   .js .rv.instant { transition: none; }
   @keyframes rvsafe { to { opacity: 1; transform: none; } }
 }
+
+/* Website screenshot that scrolls on hover */
+.scroll-shot { position: relative; display: block; border-radius: 14px; overflow: hidden; background: var(--white); box-shadow: 0 24px 50px rgba(6, 11, 35, 0.16); }
+.scroll-view { display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.two-media .scroll-view img, .scroll-view img { width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: 50% 0; transition: object-position 5s ease-in-out; }
+.scroll-shot:hover .scroll-view img { object-position: 50% 100%; }
+.scroll-hint { position: absolute; right: 14px; bottom: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(6, 11, 35, 0.78); color: #fff; font-size: 13px; font-weight: 700; transition: opacity 0.3s; pointer-events: none; }
+.scroll-shot:hover .scroll-hint { opacity: 0; }
+@media (hover: none) {
+  .scroll-view { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .two-media .scroll-view img, .scroll-view img { height: auto; object-fit: initial; }
+  .scroll-hint { display: none; }
+}
+
+/* Dark band with glass cards (AI message) */
+.ai-band { position: relative; overflow: hidden; }
+.ai-band::before { content: ""; position: absolute; width: 640px; height: 640px; left: -220px; bottom: -320px; border-radius: 50%; background: radial-gradient(circle, rgba(45, 77, 219, 0.55), transparent 70%); pointer-events: none; }
+.ai-band .wrap { position: relative; }
+.ai-band .sec-intro { max-width: 760px; margin: 0 auto; color: #c9d1f6; }
+.ai-band .card { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); box-shadow: none; }
+.ai-band .card:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(159, 178, 255, 0.5); }
+.ai-band .card-icon { background: var(--blue); color: #fff; border-radius: 14px; }
+.ai-band .card-title { color: #fff; font-size: 18px; }
+.ai-band .card p { color: #c9d1f6; }
+@media (max-width: 1023px) { .ai-band .cards.c4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .ai-band .cards.c4 { grid-template-columns: minmax(0, 1fr); } }

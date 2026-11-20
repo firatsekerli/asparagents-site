@@ -47,6 +47,19 @@ ${section({
 </style>
 <script>${windowsDemo.js}</script>
 ${section({
+  tone: 'navy',
+  cls: 'ai-band',
+  tag: 'Why Not Build It With AI',
+  title: 'Anyone Can Build a Prototype, but [[Running It Every Day Is Different]]',
+  intro: 'With today’s AI tools, anyone can put a quote form together in an afternoon. The hard part starts when real customers use it every day: it has to work the same way every time, keep up with your business and keep your customers’ details safe.',
+  body: cards([
+    { icon: 'check', title: 'Consistent', text: 'Works the same way for every customer, on every phone and browser, and is tested before it goes live.' },
+    { icon: 'clock', title: 'Sustainable', text: 'Kept up to date when your products, prices or platform change, instead of being forgotten after launch.' },
+    { icon: 'shield', title: 'Secure', text: 'Forms protected against spam, customer details stored where you control them, and privacy rules such as UK GDPR followed.' },
+    { icon: 'users', title: 'Accountable', text: 'One person who built it and looks after it, and replies to every message within 12 hours.' },
+  ], { cols: 4 }),
+})}
+${section({
   tone: 'light',
   tag: 'What You Get',
   title: 'Built Around [[Your Range]]',

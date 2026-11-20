@@ -1,4 +1,4 @@
-import { pageHead, section, cards, steps, twoCol, checklist, faqBand, ctaRow, worldBand, orgId, site, deskPhoto, refShot, tt, icon } from '../layout.mjs';
+import { pageHead, section, cards, steps, twoCol, checklist, faqBand, ctaRow, worldBand, orgId, site, deskPhoto, refShot, tt, icon, scrollShot } from '../layout.mjs';
 
 // White label for agencies and outsourcing for companies (Firat, 21.11.2026: the value is the client's time). Agency
 // statements come from the approved English articles and the About Us page. Partner agencies and clients are never named.
@@ -45,6 +45,19 @@ ${section({
   ]),
 })}
 ${section({
+  tone: 'navy',
+  cls: 'ai-band',
+  tag: 'Why Not Just Use AI',
+  title: 'Anyone Can Do It With AI, but [[the Details Still Decide]]',
+  intro: 'AI tools let anyone write a page, fix a heading or draft a post, and they are genuinely useful. We use them too. What they do not bring is someone who does this work every day, knows what to check and notices what is wrong before your customers do.',
+  body: cards([
+    { icon: 'seo', title: 'Knowing What to Check', text: 'An accessibility audit, an SEO fix or a new page has steps that are easy to skip when you do not know they exist.' },
+    { icon: 'web', title: 'An Eye for Detail', text: 'Spacing, wording, contrast and how the page looks on a phone. Small things that decide whether a site feels right.' },
+    { icon: 'shield', title: 'Checked Before It Goes Live', text: 'Every change is tested on desktop and phone before anyone sees it, not after a customer complains.' },
+    { icon: 'users', title: 'Someone Accountable', text: 'One person who did the work, knows why and answers for it, within 12 hours.' },
+  ], { cols: 4 }),
+})}
+${section({
   tone: 'light',
   tag: 'What You Can Hand Over',
   title: 'Work Your Team [[Does Not Have to Learn]]',
@@ -60,7 +73,7 @@ ${section({
 })}
 ${section({
   body: twoCol({
-    media: refShot('misbourne-design', 'Misbourne Design Associates website, home page', '(min-width: 1024px) 40vw, 90vw'),
+    media: scrollShot('misbourne-design', 'Misbourne Design Associates website, home page'),
     reverse: true,
     html: `<p class="label">For Agencies</p><h2 class="h2">${tt('What Your [[Clients Get]] Every Month')}</h2>
     ${checklist([

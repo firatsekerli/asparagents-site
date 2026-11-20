@@ -41,6 +41,10 @@ export const img = ({ base, widths, alt, w, h, cls = '', lazy = true, sizes = '1
 
 export const REF_WIDTHS = [360, 420, 460, 520, 640, 760, 900, 1200];
 export const refShot = (key, alt, sizes = '(min-width: 1024px) 30vw, 90vw', suffix = '') => img({ base: `ref-${key}${suffix}`, widths: REF_WIDTHS, alt, w: 1200, h: 1920, sizes });
+// A tall website screenshot in a browser frame of fixed height; it scrolls to the bottom of the page on hover
+// (on touch screens it can be scrolled with a finger).
+export const scrollShot = (key, alt, sizes = '(min-width: 1024px) 46vw, 90vw') =>
+  `<span class="scroll-shot"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="scroll-view">${refShot(key, alt, sizes)}</span><span class="scroll-hint" aria-hidden="true">Hover to scroll</span></span>`;
 export const deskPhoto = (alt = 'A team working together around a wooden table with laptops and notebooks', sizes = '(min-width: 1024px) 40vw, 90vw') =>
   img({ base: 'team-desk', widths: [480, 720, 1000, 1220], w: 1220, h: 1828, alt, sizes });
 
