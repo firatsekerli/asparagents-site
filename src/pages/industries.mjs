@@ -1,4 +1,4 @@
-import { pageHead, section, cards, steps, checklist, faqBand, ctaRow, orgId, site } from '../layout.mjs';
+import { pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon } from '../layout.mjs';
 import { windowsDemo } from '../demos/windows.mjs';
 
 // Industry pages: one problem, one working demo, then what the real tool does. Every feature named here exists in
@@ -21,10 +21,12 @@ const windows = (() => {
 
   const body = `
 ${pageHead({
-  tag: 'AI Tools for Window and Door Companies',
-  title: 'From Website Visit to [[Priced Proposal]]',
+  tag: 'AI Tools for Your Industry',
+  title: 'Quote &amp; Proposal Tool for [[Window &amp; Door Companies]]',
   intro: '<p>Your customers choose their windows and doors on your website, with sizes, colours and glazing, and add as many as they need. You receive a complete request, add your prices and send a branded proposal with VAT. No back and forth to find out what they actually want.</p>',
   actions: `<div class="btns"><a class="btn" href="#demo">Try the Demo</a><a class="btn btn-soft" href="/contact/">Get This Built for You</a></div>`,
+  mediaRight: true,
+  media: `<a class="shot-wrap" href="#demo" aria-label="Try the demo"><span class="browser main"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="/assets/img/demo-windows-1200.webp" srcset="/assets/img/demo-windows-800.webp 800w, /assets/img/demo-windows-1200.webp 1200w" sizes="(min-width: 1024px) 46vw, 92vw" width="1200" height="945" alt="The quote tool demo: a customer choosing bifold doors in anthracite grey, with a casement window already in the basket" fetchpriority="high"></span></a>`,
 })}
 ${section({
   tag: 'The Problem',
@@ -48,21 +50,17 @@ ${section({
   tone: 'light',
   tag: 'What You Get',
   title: 'Built Around [[Your Range]]',
-  body: `<div class="two"><div class="two-text">${checklist([
-    'A step by step quote form: product, type, material, style, size, colours, glazing and hardware',
-    'A basket so customers can add every window and door in one request, with the room for each',
-    'Photo upload, so customers can show you what they have now',
-    'Every request saved in your office dashboard with all its details',
-    'Item prices, installation and removal added in one place, with totals and VAT worked out for you',
-    'A branded PDF proposal letter, created from the quote',
-    'Emails to you and a confirmation to your customer',
-  ])}</div><div class="two-text">${checklist([
-    'Your own products, options and colours, managed from a settings page',
-    'Your logo, your colours and your wording',
-    'Optional postcode check for your service area, conservation areas and Article 4 areas',
-    'Works on phones, tablets and desktops',
-    '<strong>Works with your platform:</strong> WordPress, Shopify, Webflow, Wix, a custom site, or as a standalone page with its own link',
-  ])}</div></div>`,
+  body: `<div class="feats">${[
+    ["layers", "Step by Step Quote Form", "Product, type, material, style, size, colours, glazing and hardware."],
+    ["web", "One Basket for the Whole House", "Every window and door in one request, with the room for each."],
+    ["chat", "Photo Upload", "Customers show you what they have now, before anyone visits."],
+    ["report", "Every Request in Your Dashboard", "All items, sizes and options saved in one place."],
+    ["wrench", "Prices, Installation &amp; VAT", "Add item prices, installation and removal; totals and VAT are worked out for you."],
+    ["mail", "Branded PDF Proposal", "Created from the quote with your logo, then emailed. Your customer gets a confirmation too."],
+    ["code", "Your Range, Your Settings", "Products, options and colours managed from a settings page, in your branding."],
+    ["pin", "Postcode Check", "Optional check for your service area, conservation areas and Article 4 areas."],
+    ["plug", "Works With Your Platform", "WordPress, Shopify, Webflow, Wix, a custom site, or a standalone page with its own link."]
+  ].map(([ic, t, x]) => `<div class="feat"><span class="feat-icon">${icon[ic]}</span><div><h3>${t}</h3><p>${x}</p></div></div>`).join('')}</div>`,
 })}
 ${section({
   tag: 'How We Build It',
@@ -78,7 +76,7 @@ ${faq.html}
 
   return {
     path,
-    title: 'Quote and Proposal Tool for Window and Door Companies | asparagents',
+    title: 'Quote & Proposal Tool for Window & Door Companies | asparagents',
     description: 'Let customers choose windows and doors with sizes, colours and glazing on your website, then price the request and send a branded proposal with VAT. Try the demo.',
     crumbs: [{ name: 'Windows and Doors', path }],
     schema: [

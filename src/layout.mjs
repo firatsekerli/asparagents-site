@@ -115,10 +115,10 @@ export const twoCol = ({ media, html, reverse = false, cls = '' }) =>
   `<div class="two${reverse ? ' rev' : ''}${cls ? ` ${cls}` : ''}"><div class="two-media">${media}</div><div class="two-text">${html}</div></div>`;
 
 // Top of an inner page: light band; with an image it is a two-column intro like the old About page.
-export const pageHead = ({ tag = '', title, intro = '', actions = '', media = '', h = 'h1' }) =>
+export const pageHead = ({ tag = '', title, intro = '', actions = '', media = '', h = 'h1', mediaRight = false }) =>
   `<section class="page-head${media ? ' has-media' : ''}"><div class="wrap">${
     media
-      ? twoCol({ media, html: `${label(tag)}<${h} class="h1">${tt(title)}</${h}>${intro ? `<div class="lead">${intro.startsWith('<') ? intro : `<p>${intro}</p>`}</div>` : ''}${actions}` })
+      ? twoCol({ media, reverse: mediaRight, html: `${label(tag)}<${h} class="h1">${tt(title)}</${h}>${intro ? `<div class="lead">${intro.startsWith('<') ? intro : `<p>${intro}</p>`}</div>` : ''}${actions}` })
       : `<div class="page-head-in">${label(tag)}<${h} class="h1">${tt(title)}</${h}>${intro ? `<div class="lead">${intro.startsWith('<') ? intro : `<p>${intro}</p>`}</div>` : ''}${actions}</div>`
   }</div></section>`;
 
@@ -150,7 +150,7 @@ export const faqBand = (items, { title = 'Answers to Frequently Asked Questions'
   <div class="faq-side"><h2 class="h2">${tt(title)}</h2><p>${intro}</p>
     <div class="feature"><span class="feature-icon">${icon[side.icon]}</span><div><h3>${side.title}</h3><p>${side.text}</p></div></div>
     ${cta}</div>
-  <div>${f.html}</div>
+  <div class="faq-col">${f.html}</div>
 </div></section>`,
     ld: f.ld,
   };
@@ -203,7 +203,7 @@ export const worldList = () => {
   const sum = (k) => worldwide.reduce((n, c) => n + c[k], 0);
   const count = (n, one, many) => (n ? `<span><b>${n}</b> ${n === 1 ? one : many}</span>` : '');
   return `<div class="world">
-  <div class="world-stats"><div><span class="ws-icon">${icon.globe}</span><b>${worldwide.length}+</b><span>countries</span></div><div><span class="ws-icon">${icon.users}</span><b>${sum('agencies')}+</b><span>partner agencies</span></div><div><span class="ws-icon">${icon.web}</span><b>${sum('clients')}+</b><span>clients abroad</span></div></div>
+  <div class="world-stats"><div><span class="ws-icon">${icon.globe}</span><b><span class="js-count" data-to="${worldwide.length}">${worldwide.length}</span>+</b><span>countries</span></div><div><span class="ws-icon">${icon.users}</span><b><span class="js-count" data-to="${sum('agencies')}">${sum('agencies')}</span>+</b><span>partner agencies</span></div><div><span class="ws-icon">${icon.web}</span><b><span class="js-count" data-to="${sum('clients')}">${sum('clients')}</span>+</b><span>clients abroad</span></div></div>
   <ul class="world-list">${worldwide.map((c) => `<li><span class="code" aria-hidden="true">${c.code}</span><span class="name">${esc(c.name)}</span><span class="count">${count(c.agencies, 'partner agency', 'partner agencies')}${count(c.clients, 'client', 'clients')}</span></li>`).join('')}</ul>
 </div>`;
 };
@@ -327,6 +327,10 @@ ${contact ? ctaBand() : ''}
 <script>(function(b){var c;try{c=localStorage.getItem('ag-consent')}catch(e){}if(!c)b.hidden=false})(document.currentScript.previousElementSibling)</script>`;
 
 // page: { path, title, description, body, crumbs?, schema?: [], ogImage?, noindex?, type?, contact? }
+// Scroll animations: these blocks fade and rise into view (site.js adds "in"). Added here so every page gets them.
+const RV = /class="(card|sec-head(?: left)?|two-media|two-text|show(?: rev)?|quote|price-card|feat|demo|footer-brand|footer-col|faq-side|faq-col|world-stats|world-list|cta-band-in|refs|reviews-badge)"/g;
+const reveal = (html) => html.replace(RV, (m, c) => `class="${c} rv${c === 'two-media' || c === 'demo' ? ' rv-z' : ''}"`);
+
 export const render = (page) => {
   const canonical = `${site.url}${page.path}`;
   const graph = [organization, { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.name, inLanguage: 'en', publisher: { '@id': orgId } }];
@@ -360,9 +364,9 @@ ${ld({ '@context': 'https://schema.org', '@graph': graph })}
 <body><!--email_off-->
 ${header(page.path)}
 <main id="content">
-${page.body}
+${reveal(page.body)}
 </main>
-${footer({ contact: page.contact !== false })}
+${reveal(footer({ contact: page.contact !== false }))}
 <script src="/assets/js/site.js?v=${page.assetVersion}" defer></script>
 <!--/email_off--></body>
 </html>
