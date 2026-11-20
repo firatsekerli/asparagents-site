@@ -66,6 +66,7 @@ export const icon = {
   globe: stroke('M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20'),
   report: stroke('M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h8M9 9h3'),
   moon: stroke('M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8z'),
+  phone: stroke('M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z'),
   mail: stroke('M3 5h18v14H3zM3 7l9 6 9-6'),
   whatsapp: svg('0 0 32 32', '<path d="M27.3 4.7A15.8 15.8 0 0 0 2.2 23.8L0 32l8.4-2.2a15.8 15.8 0 0 0 7.6 1.9 15.9 15.9 0 0 0 11.3-27zM16 29a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5A13.2 13.2 0 1 1 16 29zm7.3-9.8c-.4-.2-2.3-1.2-2.7-1.3s-.6-.2-.9.2-1 1.3-1.3 1.6-.5.3-.9.1a10.8 10.8 0 0 1-5.4-4.7c-.4-.7.4-.6 1.2-2.1a.8.8 0 0 0 0-.7c0-.2-.9-2.2-1.2-2.9s-.6-.7-.9-.7h-.8a1.4 1.4 0 0 0-1 .5 4.4 4.4 0 0 0-1.4 3.3 7.7 7.7 0 0 0 1.6 4.1 17.6 17.6 0 0 0 6.8 6c2.5 1.1 3.5 1.2 4.8 1a4.1 4.1 0 0 0 2.7-1.9 3.3 3.3 0 0 0 .2-1.9c-.1-.2-.4-.3-.7-.5z" fill="currentColor"/>', 22),
 };
@@ -92,11 +93,12 @@ export const cards = (items, { cols = 3, cls = '' } = {}) =>
   `<div class="cards c${cols}${cls ? ` ${cls}` : ''}">${items
     .map(
       (it) => `<div class="card">
-    ${it.num ? `<span class="card-num" aria-hidden="true">${it.num}</span>` : ''}
+    ${it.num ? `<span class="card-num" data-n="${it.num}" aria-hidden="true"></span>` : ''}
     ${it.icon ? `<span class="card-icon">${icon[it.icon] || it.icon}</span>` : ''}
     <h3 class="card-title">${it.href ? `<a href="${it.href}">${it.title}</a>` : it.title}</h3>
     ${it.text ? `<p>${it.text}</p>` : ''}
     ${it.list ? checklist(it.list, 'small') : ''}
+    ${it.chips ? `<ul class="chips">${it.chips.map((c) => `<li>${c}</li>`).join('')}</ul>` : ''}
     ${it.href && it.linkText ? `<a class="card-link" href="${it.href}">${it.linkText}</a>` : ''}
   </div>`
     )
@@ -121,15 +123,15 @@ export const pageHead = ({ tag = '', title, intro = '', actions = '', media = ''
   }</div></section>`;
 
 // Home hero: full screen, navy over the code photo, the white logo above the heading.
-export const homeHero = ({ tag, title, intro, actions }) => `
+export const homeHero = ({ tag, title, intro, actions, trust }) => `
 <section class="hero">
   <picture class="hero-bg" aria-hidden="true"><img src="/assets/img/hero-code-1920.webp" srcset="/assets/img/hero-code-800.webp 800w, /assets/img/hero-code-1200.webp 1200w, /assets/img/hero-code-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="960" fetchpriority="high"></picture>
   <div class="hero-in">
-    <span class="hero-logo">${logo(150, 86)}</span>
     ${label(tag)}
     <h1 class="hero-title">${tt(title)}</h1>
     <p class="hero-lead">${intro}</p>
     ${actions}
+    ${trust ? `<ul class="hero-trust">${trust.map(([ic, t]) => `<li><span class="ht-icon">${icon[ic]}</span>${t}</li>`).join('')}</ul>` : ''}
   </div>
 </section>`;
 
@@ -154,26 +156,45 @@ export const faqBand = (items, { title = 'Answers to Frequently Asked Questions'
   };
 };
 
-// Blue band with stars and quotes (the old testimonial band).
+// Blue band with review cards: stars, the review word for word, initials, name and month of the Google review.
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const monthYear = (d) => `${MONTHS[Number(d.slice(5, 7)) - 1]} ${d.slice(0, 4)}`;
+const initials = (n) => n.split(/\s+/).map((w) => w[0]).slice(0, 2).join('');
+const quoteMark = '<svg class="q-mark" aria-hidden="true" focusable="false" viewBox="0 0 48 36" width="48" height="36"><path d="M0 36V22C0 9.6 6.4 2.3 19.2 0l2 4.6C14 6.6 10.6 10.6 10.2 17H19v19zm27 0V22C27 9.6 33.4 2.3 46.2 0l1.8 4.6C41 6.6 37.6 10.6 37.2 17H46v19z" fill="currentColor"/></svg>';
 export const reviewsBand = ({ list = reviews, extra = '' } = {}) => `
 <section class="sec tone-blue reviews" aria-labelledby="reviews-title"><div class="wrap">
-  <div class="stars" role="img" aria-label="5 out of 5 stars">${icon.star.repeat(5)}</div>
-  <h2 class="sr" id="reviews-title">What clients say</h2>
+  <div class="sec-head">
+    <p class="label">Testimonials</p>
+    <h2 class="h2" id="reviews-title">${tt('What Our Clients [[Say]]')}</h2>
+    <div class="reviews-badge"><span class="stars" role="img" aria-label="5 out of 5 stars">${icon.star.repeat(5)}</span><span>Reviews from our Google profile</span></div>
+  </div>
   <div class="quotes">${list
-    .map((r) => `<figure class="quote"><blockquote><p>${esc(r.text)}</p></blockquote><figcaption>${esc(r.name)}<span>Google review</span></figcaption></figure>`)
+    .map(
+      (r) => `<figure class="quote">${quoteMark}<blockquote><p>${esc(r.text)}</p></blockquote><figcaption><span class="q-avatar" aria-hidden="true">${esc(initials(r.name))}</span><span><b>${esc(r.name)}</b><small>Google review, ${monthYear(r.date)}</small></span></figcaption></figure>`
+    )
     .join('')}</div>
   <p class="reviews-note">${site.reviewsNote}</p>
   ${extra}
 </div></section>`;
 
-// Reference cards: screenshot, name, place, link to the case page.
-export const refGrid = (list = references) =>
-  `<div class="refs">${list
+// References: a browser frame with the home page and one inner page beside the name, place, sector, the short
+// case text and links to the case page and the live site. Every second one is mirrored.
+const browser = (inner, cls = '') => `<span class="browser${cls ? ` ${cls}` : ''}"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-shot">${inner}</span></span>`;
+export const refGrid = (list = references, { h = 'h3' } = {}) =>
+  `<div class="showcase">${list
     .map(
-      (r) => `<a class="ref" href="/references/${r.detail}/">
-    <span class="ref-shot">${refShot(r.key, `${r.name} website, home page`, '(min-width: 1024px) 30vw, 90vw')}</span>
-    <span class="ref-body"><span class="ref-label">${esc(r.sector)} · ${esc(r.place)}</span><b>${esc(r.name)}</b><span class="card-link">View the project</span></span>
-  </a>`
+      (r, i) => `<article class="show${i % 2 ? ' rev' : ''}">
+    <a class="show-media" href="/references/${r.detail}/" tabindex="-1" aria-hidden="true">
+      ${browser(refShot(r.key, '', '(min-width: 1024px) 40vw, 90vw'), 'main')}
+      ${browser(refShot(r.key, '', '(min-width: 1024px) 14vw, 30vw', '-a'), 'side side-a')}
+    </a>
+    <div class="show-text">
+      <p class="show-tags"><span>${esc(r.type)}</span><span>${esc(r.sector)}</span><span>${esc(r.place)}</span></p>
+      <${h} class="show-title"><a href="/references/${r.detail}/">${esc(r.name)}</a></${h}>
+      <p>${esc(r.text)}</p>
+      ${buttons([`/references/${r.detail}/`, 'View the Project'], [r.url, 'Visit the Live Site', 'soft', ' target="_blank" rel="noopener"'])}
+    </div>
+  </article>`
     )
     .join('')}</div>`;
 
@@ -182,7 +203,7 @@ export const worldList = () => {
   const sum = (k) => worldwide.reduce((n, c) => n + c[k], 0);
   const count = (n, one, many) => (n ? `<span><b>${n}</b> ${n === 1 ? one : many}</span>` : '');
   return `<div class="world">
-  <div class="world-stats"><div><b>${worldwide.length}+</b><span>countries</span></div><div><b>${sum('agencies')}+</b><span>partner agencies</span></div><div><b>${sum('clients')}+</b><span>clients abroad</span></div></div>
+  <div class="world-stats"><div><span class="ws-icon">${icon.globe}</span><b>${worldwide.length}+</b><span>countries</span></div><div><span class="ws-icon">${icon.users}</span><b>${sum('agencies')}+</b><span>partner agencies</span></div><div><span class="ws-icon">${icon.web}</span><b>${sum('clients')}+</b><span>clients abroad</span></div></div>
   <ul class="world-list">${worldwide.map((c) => `<li><span class="code" aria-hidden="true">${c.code}</span><span class="name">${esc(c.name)}</span><span class="count">${count(c.agencies, 'partner agency', 'partner agencies')}${count(c.clients, 'client', 'clients')}</span></li>`).join('')}</ul>
 </div>`;
 };
@@ -257,24 +278,47 @@ const header = (path) => `
 
 const footer = ({ contact = true } = {}) => `
 ${contact ? ctaBand() : ''}
-<footer class="site-footer"><div class="wrap">
-  <a class="footer-logo" href="/" aria-label="asparagents home page">${logo(120, 69)}</a>
-  <nav class="footer-links" aria-label="Footer menu">
-    <a href="/about-us/">About Us</a>
-    <a href="/blog/">Blog</a>
-    <a href="/privacy-policy/">Privacy Policy</a>
-    <a href="/cookie-policy-eu/">Cookie Policy</a>
-    <a href="${site.shop}terms-and-conditions/">Terms &amp; Conditions</a>
-    <a href="${site.shop}delivery-and-refund/">Delivery &amp; Refund</a>
-    <a href="/contact/">Contact</a>
-    <a href="${site.shop}">Shop</a>
-  </nav>
-  <div class="footer-bottom">
-    <button type="button" class="linklike" data-consent-open>Cookie Settings</button>
-    <a href="https://asparajans.com/" hreflang="tr" lang="tr">Türkçe: asparajans</a>
-    <p>© ${site.year} asparagents</p>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="footer-logo" href="/" aria-label="asparagents home page">${logo(132, 76)}</a>
+      <p>WordPress support, WordPress websites and white label SEO, GEO and social media for agencies. Fully remote from Ankara, Türkiye.</p>
+      <div class="footer-social">
+        <a href="${site.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon.whatsapp}</a>
+        <a href="mailto:${site.email}" aria-label="Email">${icon.mail}</a>
+        <a href="https://www.linkedin.com/in/firatsekerli/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+    <nav class="footer-col" aria-label="Services">
+      <h2>Services</h2>
+      <ul>${services.map((s) => `<li><a href="/services/${s.slug}/">${s.name}</a></li>`).join('')}<li><a href="/white-label/">White Label for Agencies</a></li></ul>
+    </nav>
+    <nav class="footer-col" aria-label="Company">
+      <h2>Company</h2>
+      <ul><li><a href="/about-us/">About Us</a></li><li><a href="/references/">References</a></li><li><a href="/prices/">Prices</a></li><li><a href="/plugins/">Plugins</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul>
+    </nav>
+    <div class="footer-col">
+      <h2>Get in Touch</h2>
+      <ul class="footer-contact">
+        <li><a href="mailto:${site.email}">${icon.mail}<span>${site.email}</span></a></li>
+        <li><a href="${site.phoneHref}">${icon.phone}<span>${site.phone}</span></a></li>
+        <li><span>${icon.clock}<span>Replies within 12 hours</span></span></li>
+      </ul>
+      ${button(site.shop, 'Visit the Shop', 'sm')}
+    </div>
   </div>
-</div></footer>
+  <div class="footer-bottom"><div class="wrap footer-bottom-in">
+    <p>© ${site.year} asparagents</p>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/cookie-policy-eu/">Cookie Policy</a>
+      <a href="${site.shop}terms-and-conditions/">Terms &amp; Conditions</a>
+      <a href="${site.shop}delivery-and-refund/">Delivery &amp; Refund</a>
+      <button type="button" class="linklike" data-consent-open>Cookie Settings</button>
+      <a href="https://asparajans.com/" hreflang="tr" lang="tr">Türkçe: asparajans</a>
+    </nav>
+  </div></div>
+</footer>
 <a class="wa-float" href="${site.whatsapp}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">${icon.whatsapp}</a>
 <div class="consent" role="dialog" aria-live="polite" aria-label="Cookie settings" hidden>
   <p>We value your privacy. Besides necessary cookies, we use analytics and advertising cookies to measure visits and ads only with your consent. <a href="/cookie-policy-eu/">Cookie Policy</a></p>
