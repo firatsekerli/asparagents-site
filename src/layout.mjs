@@ -291,7 +291,7 @@ ${contact ? ctaBand() : ''}
     </div>
     <nav class="footer-col" aria-label="Services">
       <h2>Services</h2>
-      <ul>${services.map((s) => `<li><a href="/services/${s.slug}/">${s.name}</a></li>`).join('')}<li><a href="/white-label/">White Label for Agencies</a></li></ul>
+      <ul>${services.map((s) => `<li><a href="/services/${s.slug}/">${s.name}</a></li>`).join('')}<li><a href="/white-label/">White Label &amp; Outsourcing</a></li></ul>
     </nav>
     <nav class="footer-col" aria-label="Company">
       <h2>Company</h2>
@@ -312,8 +312,6 @@ ${contact ? ctaBand() : ''}
     <nav class="footer-legal" aria-label="Legal">
       <a href="/privacy-policy/">Privacy Policy</a>
       <a href="/cookie-policy-eu/">Cookie Policy</a>
-      <a href="${site.shop}terms-and-conditions/">Terms &amp; Conditions</a>
-      <a href="${site.shop}delivery-and-refund/">Delivery &amp; Refund</a>
       <button type="button" class="linklike" data-consent-open>Cookie Settings</button>
       <a href="https://asparajans.com/" hreflang="tr" lang="tr">Türkçe: asparajans</a>
     </nav>

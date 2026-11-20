@@ -48,7 +48,7 @@ ${section({
     { icon: 'code', title: 'Page Builders', text: 'The page builders our support agents know and are ready to fix.', chips: ['Oxygen Builder', 'Breakdance', 'Elementor', 'WPBakery', 'and more'], href: '/services/wordpress-support/', linkText: 'Get it fixed' },
     { icon: 'plug', title: 'Plugins', text: 'The plugins our support agents know and are ready to fix.', chips: ['WooCommerce', 'SEO plugins', 'Form plugins', 'Membership plugins', 'and more'], href: '/services/wordpress-support/', linkText: 'Get it fixed' },
     ...listedServices.map((sv) => ({ icon: sv.icon, title: sv.card?.title || sv.name, text: sv.card?.text || sv.strip, href: `/services/${sv.slug}/`, linkText: 'Learn more' })),
-    { icon: 'users', title: 'White Label for Agencies', text: '<strong>Websites</strong>, SEO, GEO and <strong>social media</strong> delivered under your brand, with reports carrying your logo. You stay the only contact for the client.', href: '/white-label/', linkText: 'Learn more' },
+    { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'For agencies and companies: hand us the work your team does not have the time or the know-how for, delivered <strong>under your brand</strong> if you want.', href: '/white-label/', linkText: 'Learn more' },
   ], { cols: 3, cls: 'services' }),
 })}
 
