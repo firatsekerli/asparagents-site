@@ -55,7 +55,9 @@ const css = `
 .demo-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .demo-table th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); padding: 8px 10px; border-bottom: 2px solid var(--line); }
 .demo-table td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
-.demo-table td:last-child, .demo-table th:last-child { text-align: right; }
+.demo-table td:last-child, .demo-table th:last-child { text-align: right; padding-right: 0; }
+.demo-tot span:last-child { font-variant-numeric: tabular-nums; }
+.demo-table td:last-child { font-variant-numeric: tabular-nums; }
 .demo-table .demo-in { width: 120px; text-align: right; padding: 7px 10px; }
 .demo-tot { margin: 18px 0 0 auto; max-width: 340px; display: grid; gap: 6px; font-size: 15px; }
 .demo-tot div { display: flex; justify-content: space-between; gap: 12px; }
