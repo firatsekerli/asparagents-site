@@ -1,5 +1,5 @@
 import { site, plugins, references } from '../site.mjs';
-import { homeHero, buttons, section, steps, cards, serviceCards, twoCol, checklist, reviewsBand, refGrid, faqBand, worldBand, ctaRow, deskPhoto, tt } from '../layout.mjs';
+import { homeHero, buttons, section, steps, cards, listedServices, twoCol, checklist, reviewsBand, refGrid, faqBand, worldBand, ctaRow, deskPhoto, tt } from '../layout.mjs';
 import { byId, priceCard } from '../prices.mjs';
 
 // Home page: the order of the old asparagents home (hero, How It Works, Services, testimonial with prices, FAQ),
@@ -23,6 +23,7 @@ ${homeHero({
   title: 'WordPress agents are here to fix your issues.',
   intro: 'asparagents offers solutions for WordPress users who need help with one particular issue, builds WordPress websites and works behind the scenes for agencies that need extra hands. You tell us about the issue, we fix it, and that’s all!',
   actions: buttons(['/services/wordpress-support/', 'WordPress Support'], ['/white-label/', 'For Agencies', 'soft']),
+  trust: [['shield', 'Pay after the fix'], ['clock', 'Replies within 12 hours'], ['globe', 'Partners and clients in 6+ countries'], ['users', 'One person from start to finish']],
 })}
 
 ${section({
@@ -42,11 +43,13 @@ ${section({
   tag: 'Our Services',
   title: 'Services',
   intro: 'Even if you are using a WordPress theme or plugin from a well-known provider, you may still run into problems from time to time. In such times, asparagents is here to help. We know how to fix issues related to themes, page builders and plugins, and we build and grow websites too.',
-  body: `${cards([
-    { icon: 'layers', title: 'Themes', text: 'The themes our support agents know and are ready to fix.', list: ['Avada', 'Salient', 'Bridge', 'Woodmart', 'and more…'] },
-    { icon: 'web', title: 'Page Builders', text: 'The page builders our support agents know and are ready to fix.', list: ['Oxygen Builder', 'Breakdance', 'Elementor', 'WPBakery Page Builder', 'and more…'] },
-    { icon: 'code', title: 'Plugins', text: 'The plugins our support agents know and are ready to fix.', list: ['WooCommerce', 'Popular SEO plugins', 'Most used form plugins', 'Membership plugins', 'and more…'] },
-  ])}<div style="margin-top:56px">${serviceCards()}</div>`,
+  body: cards([
+    { icon: 'layers', title: 'Themes', text: 'The themes our support agents know and are ready to fix.', chips: ['Avada', 'Salient', 'Bridge', 'Woodmart', 'and more'], href: '/services/wordpress-support/', linkText: 'Get it fixed' },
+    { icon: 'code', title: 'Page Builders', text: 'The page builders our support agents know and are ready to fix.', chips: ['Oxygen Builder', 'Breakdance', 'Elementor', 'WPBakery', 'and more'], href: '/services/wordpress-support/', linkText: 'Get it fixed' },
+    { icon: 'plug', title: 'Plugins', text: 'The plugins our support agents know and are ready to fix.', chips: ['WooCommerce', 'SEO plugins', 'Form plugins', 'Membership plugins', 'and more'], href: '/services/wordpress-support/', linkText: 'Get it fixed' },
+    ...listedServices.map((sv) => ({ icon: sv.icon, title: sv.card?.title || sv.name, text: sv.card?.text || sv.strip, href: `/services/${sv.slug}/`, linkText: 'Learn more' })),
+    { icon: 'users', title: 'White Label for Agencies', text: '<strong>Websites</strong>, SEO, GEO and <strong>social media</strong> delivered under your brand, with reports carrying your logo. You stay the only contact for the client.', href: '/white-label/', linkText: 'Learn more' },
+  ], { cols: 3, cls: 'services' }),
 })}
 
 ${reviewsBand({ extra: `<div class="prices" style="margin-top:56px">${priceCard(byId('one-time-wordpress-support'))}${omutCard}</div>` })}

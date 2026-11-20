@@ -15,7 +15,7 @@ const listPage = {
   crumbs: [{ name: 'References', path: '/references/' }],
   body: `
 ${pageHead({ tag: 'References', title: 'From [[Our Work]]', intro: 'Live websites we built directly for businesses. Most of our work for agencies is white label and carries their names, so it is not listed here. <a href="/contact/">Contact us</a> to see more examples privately.', actions: ctaRow() })}
-${section({ body: refGrid(references) })}
+${section({ body: refGrid(references, { h: 'h2' }) })}
 ${worldBand('light')}
 `,
 };
