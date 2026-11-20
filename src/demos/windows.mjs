@@ -3,10 +3,10 @@
 // windows and doors, the office prices each item and the proposal letter is created with VAT.
 
 const css = `
-.demo { background: var(--white); border-radius: 16px; box-shadow: 0 24px 60px rgba(27, 26, 25, 0.18); overflow: hidden; color: var(--text); text-align: left; }
-.demo-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; background: #f0efee; border-bottom: 1px solid var(--line); }
+.demo { background: var(--white); border-radius: 16px; box-shadow: 0 24px 60px rgba(6, 11, 35, 0.18); overflow: hidden; color: var(--text); text-align: left; }
+.demo-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; background: #eef0f6; border-bottom: 1px solid var(--line); }
 .demo-dots { display: flex; gap: 6px; }
-.demo-dots i { width: 11px; height: 11px; border-radius: 50%; background: #d0cecd; }
+.demo-dots i { width: 11px; height: 11px; border-radius: 50%; background: #c9cfdf; }
 .demo-dots i:first-child { background: var(--red); }
 .demo-badge { font-size: 13px; font-weight: 700; color: var(--red-text); background: #fff; border-radius: 999px; padding: 4px 12px; }
 .demo-tabs { display: flex; gap: 4px; padding: 12px 20px 0; border-bottom: 1px solid var(--line); overflow-x: auto; }
@@ -25,7 +25,7 @@ const css = `
 .demo-opt:hover { border-color: var(--blue); }
 .demo-opt[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); }
 .demo-opt svg { width: 34px; height: 34px; }
-.demo-sw { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #c4c2c1; }
+.demo-sw { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #b8bfd0; }
 .demo-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .demo-in { width: 100%; font: inherit; font-size: 15px; padding: 10px 12px; border: 2px solid var(--line); border-radius: 10px; color: var(--navy); background: var(--white); }
 .demo-in:focus { outline: none; border-color: var(--blue); }
@@ -151,12 +151,12 @@ const js = `
   var root = document.getElementById('win-demo'); if (!root) return;
   var $ = function (id) { return document.getElementById(id); };
   var pane = function (cols, rows, opts) {
-    opts = opts || {}; var W = 120, H = opts.tall ? 150 : 110, f = 8, s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" rx="3" fill="var(--c,#fff)" stroke="#1b1a19" stroke-width="3"/>';
+    opts = opts || {}; var W = 120, H = opts.tall ? 150 : 110, f = 8, s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" rx="3" fill="var(--c,#fff)" stroke="#060b23" stroke-width="3"/>';
     var iw = (W - 4 - f * 2) / cols, ih = (H - 4 - f * 2) / rows;
     for (var c = 0; c < cols; c++) for (var r = 0; r < rows; r++) {
       var x = 2 + f + c * iw + 3, y = 2 + f + r * ih + 3;
-      s += '<rect x="' + x + '" y="' + y + '" width="' + (iw - 6) + '" height="' + (ih - 6) + '" fill="#cfe3f7" stroke="#1b1a19" stroke-width="1.5"/>';
-      if (opts.open && c === 0) s += '<path d="M' + (x + iw - 6) + ' ' + y + 'L' + x + ' ' + (y + (ih - 6) / 2) + 'L' + (x + iw - 6) + ' ' + (y + ih - 6) + '" fill="none" stroke="#646263" stroke-width="1.5" stroke-dasharray="4 3"/>';
+      s += '<rect x="' + x + '" y="' + y + '" width="' + (iw - 6) + '" height="' + (ih - 6) + '" fill="#cfe3f7" stroke="#060b23" stroke-width="1.5"/>';
+      if (opts.open && c === 0) s += '<path d="M' + (x + iw - 6) + ' ' + y + 'L' + x + ' ' + (y + (ih - 6) / 2) + 'L' + (x + iw - 6) + ' ' + (y + ih - 6) + '" fill="none" stroke="#2d4ddb" stroke-width="1.5" stroke-dasharray="4 3"/>';
     }
     return s + '</svg>';
   };
