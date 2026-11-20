@@ -327,7 +327,12 @@ ${contact ? ctaBand() : ''}
 // page: { path, title, description, body, crumbs?, schema?: [], ogImage?, noindex?, type?, contact? }
 // Scroll animations: these blocks fade and rise into view (site.js adds "in"). Added here so every page gets them.
 const RV = /class="(card|sec-head(?: left)?|two-media|two-text|show(?: rev)?|quote|price-card|feat|demo|footer-brand|footer-col|faq-side|faq-col|world-stats|world-list|cta-band-in|refs|reviews-badge)"/g;
-const reveal = (html) => html.replace(RV, (m, c) => `class="${c} rv${c === 'two-media' || c === 'demo' ? ' rv-z' : ''}"`);
+const rvAdd = (html) => html.replace(RV, (m, c) => `class="${c} rv${c === 'two-media' || c === 'demo' ? ' rv-z' : ''}"`);
+// The first section (hero or page head) has its own entrance animation, so the scroll animation starts after it.
+const reveal = (html) => {
+  const i = /^\s*<section class="(hero|page-head)/.test(html) ? html.indexOf('</section>') : -1;
+  return i < 0 ? rvAdd(html) : html.slice(0, i) + rvAdd(html.slice(i));
+};
 
 export const render = (page) => {
   const canonical = `${site.url}${page.path}`;

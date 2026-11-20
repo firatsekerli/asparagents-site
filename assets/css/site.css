@@ -124,7 +124,9 @@ ul { margin: 0 0 16px; }
 .center { text-align: center; }
 
 /* Cards */
-.cards { display: grid; gap: 24px; }
+.cards { display: grid; column-gap: 24px; row-gap: 0; margin-bottom: -24px; }
+.cards > .card { margin-bottom: 24px; }
+.card .checklist:last-child { margin-bottom: 0; }
 .cards.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .cards.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .cards.c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -447,7 +449,7 @@ ul { margin: 0 0 16px; }
   .page-head-in > :nth-child(3), .page-head .two-text > :nth-child(3) { animation-delay: 0.2s; }
   .page-head-in > :nth-child(4), .page-head .two-text > :nth-child(4) { animation-delay: 0.3s; }
   .page-head .two-media { animation: zoomin 1s 0.15s cubic-bezier(.2, .7, .2, 1) both; }
-  .site-header { animation: drop 0.6s cubic-bezier(.2, .7, .2, 1) both; }
+  .site-header:not(.is-pinned) { animation: drop 0.6s cubic-bezier(.2, .7, .2, 1) backwards; }
   .reviews::before { animation: glow 12s ease-in-out infinite; }
   .js .rv { opacity: 0; transform: translateY(32px); transition: opacity 0.8s cubic-bezier(.2, .7, .2, 1), transform 0.8s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--rd, 0ms); animation: rvsafe 0s 4s forwards; }
   .js .rv.rv-z { transform: scale(0.95) translateY(24px); }

@@ -180,7 +180,11 @@
   var header = document.querySelector('.site-header');
   if (header) {
     var lastY = 0, ticking = false;
+    // On inner pages the bar sits in the page flow, so pinning it (position: fixed) would pull the content up by its
+    // height. Its height is measured once after the first paint and kept as padding on the body while it is pinned.
+    var inFlow = !header.classList.contains('over-hero'), headerH = 0;
     var pin = function (on) {
+      if (inFlow) document.body.style.paddingTop = on ? headerH + 'px' : '';
       header.classList.toggle('is-pinned', on);
       if (!on) header.classList.remove('is-shown', 'is-ready');
       // Turn the slide transition on only after the bar is in place, so pinning itself never animates.
@@ -201,7 +205,8 @@
     // Keyboard users tabbing into a hidden bar see it.
     header.addEventListener('focusin', function () { if (header.classList.contains('is-pinned')) header.classList.add('is-shown'); });
     // First check after the first paint, so reading the scroll position never forces a layout during load.
-    afterPaint(function () { lastY = window.pageYOffset; onScroll(); });
+    afterPaint(function () { headerH = header.offsetHeight; lastY = window.pageYOffset; onScroll(); });
+    window.addEventListener('resize', function () { if (!header.classList.contains('is-pinned')) headerH = header.offsetHeight; });
   }
 
   // FAQ accordion: one answer open at a time, opening and closing with a smooth height animation.
