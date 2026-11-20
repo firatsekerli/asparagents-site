@@ -26,7 +26,7 @@ ${pageHead({
   intro: '<p>Your customers choose their windows and doors on your website, with sizes, colours and glazing, and add as many as they need. You receive a complete request, add your prices and send a branded proposal with VAT. No back and forth to find out what they actually want.</p>',
   actions: `<div class="btns"><a class="btn" href="#demo">Try the Demo</a><a class="btn btn-soft" href="/contact/">Get This Built for You</a></div>`,
   mediaRight: true,
-  media: `<a class="shot-wrap" href="#demo" aria-label="Try the demo"><span class="browser main"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="/assets/img/demo-windows-1200.webp" srcset="/assets/img/demo-windows-800.webp 800w, /assets/img/demo-windows-1200.webp 1200w" sizes="(min-width: 1024px) 46vw, 92vw" width="1200" height="945" alt="The quote tool demo: a customer choosing bifold doors in anthracite grey, with a casement window already in the basket" fetchpriority="high"></span></a>`,
+  media: `<a class="shot-wrap" href="#demo" aria-label="Try the demo"><span class="browser main"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="/assets/img/demo-windows-1200.webp" srcset="/assets/img/demo-windows-800.webp 800w, /assets/img/demo-windows-1200.webp 1200w" sizes="(min-width: 1024px) 46vw, 92vw" width="1200" height="912" alt="The quote tool demo: a customer choosing bifold doors in anthracite grey, with a casement window already in the basket" fetchpriority="high"></span></a>`,
 })}
 ${section({
   tag: 'The Problem',
