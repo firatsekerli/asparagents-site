@@ -156,7 +156,7 @@ const js = `
     for (var c = 0; c < cols; c++) for (var r = 0; r < rows; r++) {
       var x = 2 + f + c * iw + 3, y = 2 + f + r * ih + 3;
       s += '<rect x="' + x + '" y="' + y + '" width="' + (iw - 6) + '" height="' + (ih - 6) + '" fill="#cfe3f7" stroke="#1b1a19" stroke-width="1.5"/>';
-      if (opts.open && c === 0) s += '<path d="M' + (x + iw - 6) + ' ' + y + 'L' + x + ' ' + (y + (ih - 6) / 2) + 'L' + (x + iw - 6) + ' ' + (y + ih - 6) + '" fill="none" stroke="#646263" stroke-width="1.5" stroke-dasharray="4 3"/>';
+      if (opts.open && c === 0) s += '<path d="M' + (x + iw - 6) + ' ' + y + 'L' + x + ' ' + (y + (ih - 6) / 2) + 'L' + (x + iw - 6) + ' ' + (y + ih - 6) + '" fill="none" stroke="#2d4ddb" stroke-width="1.5" stroke-dasharray="4 3"/>';
     }
     return s + '</svg>';
   };
