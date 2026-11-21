@@ -135,11 +135,17 @@ body.oxygen-body h1, body.oxygen-body h2, body.oxygen-body h3, .woocommerce div.
 .woocommerce-message::before, .woocommerce-info::before { color: #2d4ddb !important; }
 .woocommerce span.onsale { background: #eb5757 !important; }
 body.oxygen-body a { color: #2d4ddb; }
-body.oxygen-body .ag-chrome .btn, body.oxygen-body .ag-chrome .footer-social a, body.oxygen-body .wa-float { color: #fff; }
+body.oxygen-body .ag-chrome .btn, body.oxygen-body .wa-float { color: #fff; }
 body.oxygen-body .ag-chrome .btn.soft { background: #dce1f9; color: #2d4ddb; box-shadow: none; }
 body.oxygen-body .ag-chrome .site-menu li a { color: #060b23; }
 body.oxygen-body .ag-chrome .site-menu li a:hover { color: #2d4ddb; }
-body.oxygen-body .ag-chrome .footer-col a:not(.btn), body.oxygen-body .ag-chrome .footer-bottom a { color: #c3cae6; } .ag-chrome .linklike { background: none; border: 0; padding: 0; font: inherit; color: #c3cae6; cursor: pointer; } .ag-chrome .linklike:hover { color: #fff; }
+body.oxygen-body .ag-chrome .footer-col a:not(.btn) { color: #444; }
+body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #2d4ddb; }
+body.oxygen-body .ag-chrome .footer-social a { background: #dce1f9; color: #2d4ddb; }
+body.oxygen-body .ag-chrome .footer-social a:hover { background: #2d4ddb; color: #fff; }
+body.oxygen-body .ag-chrome .footer-legal a, .ag-chrome .linklike { color: #5f6672; }
+body.oxygen-body .ag-chrome .footer-legal a:hover, .ag-chrome .linklike:hover { color: #2d4ddb; }
+.ag-chrome .linklike { background: none; border: 0; padding: 4px 0; font: inherit; font-size: 14px; cursor: pointer; }
 body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
 ' . '</style>';
 }, 99);
@@ -186,7 +192,7 @@ add_action('wp_footer', function () {
         <li><a href="tel:+905336311907"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>+90 533 631 19 07</span></a></li>
         <li><span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Usually replies within minutes</span></span></li>
       </ul>
-      <a class="btn btn-sm" href="https://shop.asparagents.com/">Visit the Shop</a>
+      <a class="btn btn-sm" href="https://asparagents.com/contact/">Contact Us</a>
     </div>
   </div>
   <div class="footer-bottom"><div class="wrap footer-bottom-in">
