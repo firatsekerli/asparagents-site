@@ -26,6 +26,32 @@
     });
   });
 
+  // Scroll animations (asparagents): blocks marked "rv" by the build fade and rise into view. Siblings come in one
+  // after another (90ms apart). Once the animation has finished the classes are removed, so hover effects and
+  // later layout work exactly as without animation.
+  var rvs = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  var rvDone = function (el) { el.classList.remove('rv', 'rv-z', 'in', 'instant'); el.style.removeProperty('--rd'); };
+  if (reduce || !io) rvs.forEach(rvDone);
+  else {
+    rvs.forEach(function (el) {
+      var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.classList.contains('rv'); });
+      var i = sibs.indexOf(el);
+      if (i > 0) el.style.setProperty('--rd', Math.min(i, 5) * 90 + 'ms');
+    });
+    var rvAt = Date.now();
+    var rvo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting && en.boundingClientRect.bottom >= 0) return;
+        var el = en.target;
+        rvo.unobserve(el);
+        if (en.boundingClientRect.bottom < 0) { rvDone(el); return; }
+        el.classList.add('in');
+        setTimeout(function () { rvDone(el); }, 1400);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    rvs.forEach(function (el) { rvo.observe(el); });
+  }
+
   var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
   if (reduce || !io) reveals.forEach(function (el) { el.classList.add('in'); });
   else {
@@ -154,7 +180,11 @@
   var header = document.querySelector('.site-header');
   if (header) {
     var lastY = 0, ticking = false;
+    // On inner pages the bar sits in the page flow, so pinning it (position: fixed) would pull the content up by its
+    // height. Its height is measured once after the first paint and kept as padding on the body while it is pinned.
+    var inFlow = !header.classList.contains('over-hero'), headerH = 0;
     var pin = function (on) {
+      if (inFlow) document.body.style.paddingTop = on ? headerH + 'px' : '';
       header.classList.toggle('is-pinned', on);
       if (!on) header.classList.remove('is-shown', 'is-ready');
       // Turn the slide transition on only after the bar is in place, so pinning itself never animates.
@@ -175,7 +205,8 @@
     // Keyboard users tabbing into a hidden bar see it.
     header.addEventListener('focusin', function () { if (header.classList.contains('is-pinned')) header.classList.add('is-shown'); });
     // First check after the first paint, so reading the scroll position never forces a layout during load.
-    afterPaint(function () { lastY = window.pageYOffset; onScroll(); });
+    afterPaint(function () { headerH = header.offsetHeight; lastY = window.pageYOffset; onScroll(); });
+    window.addEventListener('resize', function () { if (!header.classList.contains('is-pinned')) headerH = header.offsetHeight; });
   }
 
   // FAQ accordion: one answer open at a time, opening and closing with a smooth height animation.
@@ -203,7 +234,7 @@
     // In a 50/50 band (desktop) the text column gets a fixed minimum height: the height it needs with the longest
     // answer open. Opening another answer then never changes the band's height, so the image next to it stays put.
     // On phones (< 1024px) the column keeps its natural height.
-    var col = faq.closest('.split > .col-text');
+    var col = faq.closest('.split > .col-text, .faq-grid > .faq-col');
     if (!col || !window.matchMedia) return;
     var wide = window.matchMedia('(min-width: 1024px)');
     var fit = function () {
@@ -233,6 +264,10 @@
   // navigate once that blank frame has been painted (two animation frames, ~30ms). Chrome on iPhone draws one or
   // two frames of the outgoing screen shifted ~90px up before the next page; with nothing on them they are
   // invisible. Phone, mail, WhatsApp, external, new-tab and same-page # links are left alone.
+  // asparagents: a link to the page you are already on (the logo on the home page) scrolls back to the top instead
+  // of reloading, and the blanking is only done in Chrome on iPhone, the browser with the glitch. Elsewhere pages
+  // change with a short cross fade (CSS view transitions), so there is no white flash.
+  var criOS = /CriOS/.test(navigator.userAgent);
   document.addEventListener('click', function (e) {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var a = e.target.closest && e.target.closest('a[href]');
@@ -240,6 +275,13 @@
     var url = new URL(a.href, location.href);
     if (url.origin !== location.origin || !/^https?:$/.test(url.protocol)) return;
     if (url.hash && url.pathname === location.pathname && url.search === location.search) return;
+    if (url.pathname === location.pathname && url.search === location.search) {
+      e.preventDefault();
+      if (doc.classList.contains('menu-open')) { var mb = document.querySelector('.menu-btn'); if (mb) mb.click(); }
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      return;
+    }
+    if (!criOS) return;
     e.preventDefault();
     doc.classList.add('leaving');
     requestAnimationFrame(function () { requestAnimationFrame(function () { window.location.href = url.href; }); });

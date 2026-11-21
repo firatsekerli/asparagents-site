@@ -1,4 +1,4 @@
-import { site, services, references, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, deskPhoto, refShot, listedServices, tt } from '../layout.mjs';
+import { site, services, references, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, deskPhoto, refShot, listedServices, tt, scrollShot } from '../layout.mjs';
 import { byId, priceBand } from '../prices.mjs';
 
 // Service pages (/services/ and /services/<slug>/). Facts come from the live asparagents.com pages and the approved
@@ -12,7 +12,7 @@ const pricing = {
   'social-media-management': ['social-media-management'],
 };
 const serviceLd = (s, description) => ({ '@type': 'Service', name: s.name, serviceType: s.name, description, url: `${site.url}/services/${s.slug}/`, provider: { '@id': orgId }, areaServed: ['GB', 'US', 'IE'] });
-const cwShot = () => refShot('cristal-windows', 'Cristal Windows website, home page', '(min-width: 1024px) 40vw, 90vw');
+const cwShot = () => scrollShot('cristal-windows', 'Cristal Windows website, home page');
 
 const servicePage = ({ slug, title, description, h1, intro, includes, includesIntro = '', forWho, process, faqs, extra = '', media = '' }) => {
   const s = services.find((x) => x.slug === slug);

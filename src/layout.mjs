@@ -41,6 +41,10 @@ export const img = ({ base, widths, alt, w, h, cls = '', lazy = true, sizes = '1
 
 export const REF_WIDTHS = [360, 420, 460, 520, 640, 760, 900, 1200];
 export const refShot = (key, alt, sizes = '(min-width: 1024px) 30vw, 90vw', suffix = '') => img({ base: `ref-${key}${suffix}`, widths: REF_WIDTHS, alt, w: 1200, h: 1920, sizes });
+// A tall website screenshot in a browser frame of fixed height; it scrolls to the bottom of the page on hover
+// (on touch screens it can be scrolled with a finger).
+export const scrollShot = (key, alt, sizes = '(min-width: 1024px) 46vw, 90vw') =>
+  `<span class="scroll-shot"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="scroll-view">${refShot(key, alt, sizes)}</span><span class="scroll-hint" aria-hidden="true">Hover to scroll</span></span>`;
 export const deskPhoto = (alt = 'A team working together around a wooden table with laptops and notebooks', sizes = '(min-width: 1024px) 40vw, 90vw') =>
   img({ base: 'team-desk', widths: [480, 720, 1000, 1220], w: 1220, h: 1828, alt, sizes });
 
@@ -115,10 +119,10 @@ export const twoCol = ({ media, html, reverse = false, cls = '' }) =>
   `<div class="two${reverse ? ' rev' : ''}${cls ? ` ${cls}` : ''}"><div class="two-media">${media}</div><div class="two-text">${html}</div></div>`;
 
 // Top of an inner page: light band; with an image it is a two-column intro like the old About page.
-export const pageHead = ({ tag = '', title, intro = '', actions = '', media = '', h = 'h1' }) =>
+export const pageHead = ({ tag = '', title, intro = '', actions = '', media = '', h = 'h1', mediaRight = false }) =>
   `<section class="page-head${media ? ' has-media' : ''}"><div class="wrap">${
     media
-      ? twoCol({ media, html: `${label(tag)}<${h} class="h1">${tt(title)}</${h}>${intro ? `<div class="lead">${intro.startsWith('<') ? intro : `<p>${intro}</p>`}</div>` : ''}${actions}` })
+      ? twoCol({ media, reverse: mediaRight, html: `${label(tag)}<${h} class="h1">${tt(title)}</${h}>${intro ? `<div class="lead">${intro.startsWith('<') ? intro : `<p>${intro}</p>`}</div>` : ''}${actions}` })
       : `<div class="page-head-in">${label(tag)}<${h} class="h1">${tt(title)}</${h}>${intro ? `<div class="lead">${intro.startsWith('<') ? intro : `<p>${intro}</p>`}</div>` : ''}${actions}</div>`
   }</div></section>`;
 
@@ -150,7 +154,7 @@ export const faqBand = (items, { title = 'Answers to Frequently Asked Questions'
   <div class="faq-side"><h2 class="h2">${tt(title)}</h2><p>${intro}</p>
     <div class="feature"><span class="feature-icon">${icon[side.icon]}</span><div><h3>${side.title}</h3><p>${side.text}</p></div></div>
     ${cta}</div>
-  <div>${f.html}</div>
+  <div class="faq-col">${f.html}</div>
 </div></section>`,
     ld: f.ld,
   };
@@ -203,7 +207,7 @@ export const worldList = () => {
   const sum = (k) => worldwide.reduce((n, c) => n + c[k], 0);
   const count = (n, one, many) => (n ? `<span><b>${n}</b> ${n === 1 ? one : many}</span>` : '');
   return `<div class="world">
-  <div class="world-stats"><div><span class="ws-icon">${icon.globe}</span><b>${worldwide.length}+</b><span>countries</span></div><div><span class="ws-icon">${icon.users}</span><b>${sum('agencies')}+</b><span>partner agencies</span></div><div><span class="ws-icon">${icon.web}</span><b>${sum('clients')}+</b><span>clients abroad</span></div></div>
+  <div class="world-stats"><div><span class="ws-icon">${icon.globe}</span><b><span class="js-count" data-to="${worldwide.length}">${worldwide.length}</span>+</b><span>countries</span></div><div><span class="ws-icon">${icon.users}</span><b><span class="js-count" data-to="${sum('agencies')}">${sum('agencies')}</span>+</b><span>partner agencies</span></div><div><span class="ws-icon">${icon.web}</span><b><span class="js-count" data-to="${sum('clients')}">${sum('clients')}</span>+</b><span>clients abroad</span></div></div>
   <ul class="world-list">${worldwide.map((c) => `<li><span class="code" aria-hidden="true">${c.code}</span><span class="name">${esc(c.name)}</span><span class="count">${count(c.agencies, 'partner agency', 'partner agencies')}${count(c.clients, 'client', 'clients')}</span></li>`).join('')}</ul>
 </div>`;
 };
@@ -258,6 +262,7 @@ const ctaBand = () => `
 
 const menu = [
   { href: '/services/', label: 'Services' },
+  { href: '/industries/', label: 'Industries' },
   { href: '/white-label/', label: 'White Label' },
   { href: '/plugins/', label: 'Plugins' },
   { href: '/prices/', label: 'Prices' },
@@ -291,11 +296,11 @@ ${contact ? ctaBand() : ''}
     </div>
     <nav class="footer-col" aria-label="Services">
       <h2>Services</h2>
-      <ul>${services.map((s) => `<li><a href="/services/${s.slug}/">${s.name}</a></li>`).join('')}<li><a href="/white-label/">White Label for Agencies</a></li></ul>
+      <ul>${services.map((s) => `<li><a href="/services/${s.slug}/">${s.name}</a></li>`).join('')}<li><a href="/white-label/">White Label &amp; Outsourcing</a></li></ul>
     </nav>
     <nav class="footer-col" aria-label="Company">
       <h2>Company</h2>
-      <ul><li><a href="/about-us/">About Us</a></li><li><a href="/references/">References</a></li><li><a href="/prices/">Prices</a></li><li><a href="/plugins/">Plugins</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul>
+      <ul><li><a href="/about-us/">About Us</a></li><li><a href="/industries/">Industries</a></li><li><a href="/references/">References</a></li><li><a href="/prices/">Prices</a></li><li><a href="/plugins/">Plugins</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul>
     </nav>
     <div class="footer-col">
       <h2>Get in Touch</h2>
@@ -312,8 +317,6 @@ ${contact ? ctaBand() : ''}
     <nav class="footer-legal" aria-label="Legal">
       <a href="/privacy-policy/">Privacy Policy</a>
       <a href="/cookie-policy-eu/">Cookie Policy</a>
-      <a href="${site.shop}terms-and-conditions/">Terms &amp; Conditions</a>
-      <a href="${site.shop}delivery-and-refund/">Delivery &amp; Refund</a>
       <button type="button" class="linklike" data-consent-open>Cookie Settings</button>
       <a href="https://asparajans.com/" hreflang="tr" lang="tr">Türkçe: asparajans</a>
     </nav>
@@ -327,6 +330,15 @@ ${contact ? ctaBand() : ''}
 <script>(function(b){var c;try{c=localStorage.getItem('ag-consent')}catch(e){}if(!c)b.hidden=false})(document.currentScript.previousElementSibling)</script>`;
 
 // page: { path, title, description, body, crumbs?, schema?: [], ogImage?, noindex?, type?, contact? }
+// Scroll animations: these blocks fade and rise into view (site.js adds "in"). Added here so every page gets them.
+const RV = /class="(card|sec-head(?: left)?|two-media|two-text|show(?: rev)?|quote|price-card|feat|demo|footer-brand|footer-col|faq-side|faq-col|world-stats|world-list|cta-band-in|refs|reviews-badge)"/g;
+const rvAdd = (html) => html.replace(RV, (m, c) => `class="${c} rv${c === 'two-media' || c === 'demo' ? ' rv-z' : ''}"`);
+// The first section (hero or page head) has its own entrance animation, so the scroll animation starts after it.
+const reveal = (html) => {
+  const i = /^\s*<section class="(hero|page-head)/.test(html) ? html.indexOf('</section>') : -1;
+  return i < 0 ? rvAdd(html) : html.slice(0, i) + rvAdd(html.slice(i));
+};
+
 export const render = (page) => {
   const canonical = `${site.url}${page.path}`;
   const graph = [organization, { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.name, inLanguage: 'en', publisher: { '@id': orgId } }];
@@ -360,9 +372,9 @@ ${ld({ '@context': 'https://schema.org', '@graph': graph })}
 <body><!--email_off-->
 ${header(page.path)}
 <main id="content">
-${page.body}
+${reveal(page.body)}
 </main>
-${footer({ contact: page.contact !== false })}
+${reveal(footer({ contact: page.contact !== false }))}
 <script src="/assets/js/site.js?v=${page.assetVersion}" defer></script>
 <!--/email_off--></body>
 </html>

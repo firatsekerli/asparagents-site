@@ -1,4 +1,4 @@
-import { site, pageHead, section, cards, twoCol, checklist, worldBand, formBlock, ctaRow, deskPhoto, refShot, icon, tt } from '../layout.mjs';
+import { site, pageHead, section, cards, twoCol, checklist, worldBand, formBlock, ctaRow, deskPhoto, refShot, icon, tt, scrollShot } from '../layout.mjs';
 
 // About Us and Contact. Text from the live asparagents.com pages (About Us and Contact, 07.11.2026).
 const about = {
@@ -39,7 +39,7 @@ ${section({
 ${section({
   tone: 'light',
   body: twoCol({
-    media: refShot('cristal-windows', 'Cristal Windows website, home page', '(min-width: 1024px) 40vw, 90vw'),
+    media: scrollShot('cristal-windows', 'Cristal Windows website, home page'),
     reverse: true,
     html: `<p class="label">Who Is Behind asparagents</p><h2 class="h2">${tt('Fırat [[Şekerli]]')}</h2>
     <p>Fırat Şekerli has worked on websites, social media, SEO and Google Ads since 2013. He holds an MBA in Marketing from Mississippi State University and worked as a digital marketing specialist, web design specialist and social media manager before running his own studio. He works in English and Turkish.</p>
