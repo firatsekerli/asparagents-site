@@ -172,11 +172,67 @@ add_action('wp_footer', function () {
     <nav class="footer-legal" aria-label="Legal">
       <a href="https://shop.asparagents.com/terms-and-conditions/">Terms</a>
       <a href="https://shop.asparagents.com/delivery-and-refund/">Delivery &amp; Refund</a>
-      <a href="https://shop.asparagents.com/privacy-policy/">Privacy Policy</a>\n      <a href="https://shop.asparagents.com/cookie-policy-eu/">Cookie Policy</a>
+      <a href="https://shop.asparagents.com/privacy-policy/">Privacy Policy</a>
+      <a href="https://shop.asparagents.com/cookie-policy-eu/">Cookie Policy</a>
       <button type="button" class="linklike cky-banner-element">Cookie Settings</button>
     </nav>
   </div></div>
 </footer>';
   echo '<a class="wa-float" href="https://wa.me/905336311907?text=Hello.%20Please%20tell%20us%20your%20name%2C%20your%20company%20(if%20any)%20and%20what%20you%20need%2C%20and%20we%20will%20get%20back%20to%20you%20shortly." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="22" height="22"><path d="M27.3 4.7A15.8 15.8 0 0 0 2.2 23.8L0 32l8.4-2.2a15.8 15.8 0 0 0 7.6 1.9 15.9 15.9 0 0 0 11.3-27zM16 29a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5A13.2 13.2 0 1 1 16 29zm7.3-9.8c-.4-.2-2.3-1.2-2.7-1.3s-.6-.2-.9.2-1 1.3-1.3 1.6-.5.3-.9.1a10.8 10.8 0 0 1-5.4-4.7c-.4-.7.4-.6 1.2-2.1a.8.8 0 0 0 0-.7c0-.2-.9-2.2-1.2-2.9s-.6-.7-.9-.7h-.8a1.4 1.4 0 0 0-1 .5 4.4 4.4 0 0 0-1.4 3.3 7.7 7.7 0 0 0 1.6 4.1 17.6 17.6 0 0 0 6.8 6c2.5 1.1 3.5 1.2 4.8 1a4.1 4.1 0 0 0 2.7-1.9 3.3 3.3 0 0 0 .2-1.9c-.1-.2-.4-.3-.7-.5z" fill="currentColor"/></svg></a>';
   echo '<script>' . '(function(){var d=document.documentElement,b=document.querySelector(\'.ag-chrome .menu-btn\'),m=document.getElementById(\'site-menu\');if(!b||!m)return;var s=function(o){d.classList.toggle(\'menu-open\',o);b.setAttribute(\'aria-expanded\',o?\'true\':\'false\');};b.addEventListener(\'click\',function(){s(!d.classList.contains(\'menu-open\'));});document.addEventListener(\'keydown\',function(e){if(e.key===\'Escape\')s(false);});var w=window.matchMedia(\'(min-width: 1024px)\');var f=function(){if(w.matches)s(false);};w.addEventListener?w.addEventListener(\'change\',f):w.addListener(f);})();' . '</script>';
+}, 5);
+
+// Tracking on the shop (Firat 21.11.2026: purchase tracking on the shop). Loads the same GTM container as
+// asparagents.com (GTM-TCGBCSBJ), and only after the visitor accepts analytics or advertisement cookies in CookieYes.
+add_action('wp_head', function () {
+  if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  ?>
+<script>
+(function () {
+  var loaded = false;
+  window.dataLayer = window.dataLayer || [];
+  function g() { window.dataLayer.push(arguments); }
+  g('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+  function read() {
+    var m = document.cookie.match(/(?:^|; )cookieyes-consent=([^;]+)/);
+    if (!m) return null;
+    var o = {};
+    decodeURIComponent(m[1]).split(',').forEach(function (p) { var k = p.split(':'); o[k[0]] = k[1]; });
+    return o;
+  }
+  function apply() {
+    var c = read();
+    if (!c) return;
+    var a = c.analytics === 'yes', ad = c.advertisement === 'yes';
+    g('consent', 'update', { analytics_storage: a ? 'granted' : 'denied', ad_storage: ad ? 'granted' : 'denied', ad_user_data: ad ? 'granted' : 'denied', ad_personalization: ad ? 'granted' : 'denied' });
+    if (loaded || !(a || ad)) return;
+    loaded = true;
+    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TCGBCSBJ';
+    document.head.appendChild(s);
+  }
+  apply();
+  document.addEventListener('cookieyes_consent_update', apply);
+})();
+</script>
+  <?php
+}, 1);
+
+// Purchase event for GA4 and the Google Ads conversion, once per order, on the order received page.
+add_action('wp_footer', function () {
+  if (!function_exists('is_order_received_page') || !is_order_received_page()) return;
+  $order_id = absint(get_query_var('order-received'));
+  $order = $order_id ? wc_get_order($order_id) : null;
+  if (!$order || $order->get_order_key() !== wc_clean(wp_unslash($_GET['key'] ?? ''))) return;
+  if ($order->get_meta('_ag_purchase_tracked')) return;
+  $items = [];
+  foreach ($order->get_items() as $item) {
+    $items[] = ['item_id' => (string) $item->get_product_id(), 'item_name' => $item->get_name(), 'quantity' => (int) $item->get_quantity(), 'price' => (float) $order->get_item_total($item, false)];
+  }
+  $data = ['event' => 'purchase', 'ecommerce' => ['transaction_id' => (string) $order->get_order_number(), 'value' => (float) $order->get_total(), 'tax' => (float) $order->get_total_tax(), 'currency' => $order->get_currency(), 'items' => $items]];
+  echo '<script>window.dataLayer=window.dataLayer||[];window.dataLayer.push({ecommerce:null});window.dataLayer.push(' . wp_json_encode($data) . ');</script>';
+  $order->update_meta_data('_ag_purchase_tracked', current_time('mysql'));
+  $order->save();
 }, 5);
