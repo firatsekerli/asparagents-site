@@ -85,7 +85,7 @@ ${faq.html}
   return {
     path: '/',
     title: 'AI Tools Built for Your Industry | asparagents',
-    description: 'AI tools for small businesses: quotes, bookings, estimates, paperwork and repairs, connected to the website you already have. Try the demos. White label for agencies.',
+    description: 'AI tools for small businesses: quotes, bookings, estimates, paperwork and repairs, connected to your website. Try the demos. White label for agencies.',
     body,
     schema: [faq.ld],
   };

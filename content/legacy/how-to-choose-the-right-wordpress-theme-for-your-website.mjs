@@ -5,7 +5,7 @@ export default {
   title: 'How to Choose the Right WordPress Theme for Your Website',
   date: '2024-06-10',
   updated: '2026-11-07',
-  excerpt: 'Choosing the right WordPress theme is crucial for creating a website that not only looks great but also functions smoothly. With thousands of themes available, both free and premium, the decision can be overwhelming.',
+  excerpt: 'Ten checks for choosing a WordPress theme: purpose, simplicity, responsiveness, browser support, SEO, reviews, updates, customisation and testing.',
   content: `
 <p>Choosing the right WordPress theme is crucial for creating a website that not only looks great but also functions smoothly. With thousands of themes available, both free and premium, the decision can be overwhelming. In this blog post, we’ll guide you through the essential factors to consider when selecting a WordPress theme for your website.</p>
 <h2>1. Define Your Website’s Purpose</h2>

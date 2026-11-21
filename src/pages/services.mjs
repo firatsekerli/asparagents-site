@@ -119,7 +119,7 @@ const seo = servicePage({
     ['On-Page SEO', 'Titles, meta descriptions, headings and internal links.', 'seo'],
     ['Structured Data', 'So search engines and AI assistants understand the business.', 'layers'],
     ['Content', 'Service pages and articles written for real search questions.', 'report'],
-    ['Local SEO', 'Google Business Profile and local pages. <a href="/services/local-seo/">More</a>', 'pin'],
+    ['Local SEO', 'Google Business Profile and local pages. <a href="/services/local-seo/">More about local SEO</a>', 'pin'],
     ['Monthly Report', 'Rankings, traffic, profile activity and AI mentions in plain language.', 'chat'],
   ],
   forWho: {
@@ -146,7 +146,7 @@ const localSeo = servicePage({
     ['Local Pages', 'Useful pages for the areas you serve.', 'web'],
     ['Review Strategy', 'An easy way to ask happy customers for reviews, and replies to reviews.', 'star'],
     ['Monthly Report', 'Profile views, searches and map results in plain language.', 'report'],
-    ['Together with GEO', 'AI assistants lean on the same signals. <a href="/services/geo-ai-visibility/">More</a>', 'ai'],
+    ['Together with GEO', 'AI assistants lean on the same signals. <a href="/services/geo-ai-visibility/">More about GEO</a>', 'ai'],
   ],
   forWho: {
     title: 'For businesses that serve [[a city or region]]',
@@ -244,7 +244,7 @@ const accessibility = servicePage({
 const listPage = {
   path: '/services/',
   title: 'AI Tools, White Label, Websites, SEO and GEO | asparagents',
-  description: 'AI tools built for your industry, white label and outsourcing for agencies and companies, websites, SEO, local SEO, GEO, social media, accessibility fixes and WordPress support.',
+  description: 'AI tools for your industry, white label work for agencies, websites, SEO, local SEO, GEO, social media, accessibility fixes and WordPress support.',
   crumbs: [{ name: 'Services', path: '/services/' }],
   body: `
 ${pageHead({ tag: 'Our Services', title: 'What We [[Do]]', intro: '<p>We build AI tools for your industry and connect them to the website you already have. Around them we offer the services they need: websites, search, AI visibility, social media and accessibility.</p><p>Agencies and companies can hand any of it over to us, under their own brand if they want.</p>', actions: ctaRow() })}

@@ -21,8 +21,13 @@ export const organization = {
   email: site.email,
   telephone: site.phone.replace(/\s/g, ''),
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.postalCode, addressLocality: site.address.locality, addressRegion: site.address.region, addressCountry: site.address.country },
-  sameAs: site.sameAs,
-  founder: { '@type': 'Person', '@id': `${site.url}/about-us/#person`, name: 'Fırat Şekerli', url: 'https://www.linkedin.com/in/firatsekerli/' },
+  description: 'asparagents is the English-speaking studio of Fırat Şekerli. It builds AI tools for small businesses in specific industries (quotes, bookings, estimates, paperwork and repairs), connected to the website they already have, and works white label for agencies: websites, SEO, local SEO, GEO, social media, accessibility fixes and WordPress support.',
+  slogan: 'AI tools built for how your business works',
+  knowsAbout: ['AI tools for small businesses', 'Business process automation', 'Quote and booking tools', 'WordPress', 'WooCommerce', 'Search engine optimisation (SEO)', 'Local SEO', 'Generative engine optimisation (GEO)', 'AI visibility', 'Social media management', 'Web accessibility', 'White label digital services'],
+  // asparajans is the same studio for businesses in Türkiye (About page).
+  sameAs: [...site.sameAs, 'https://asparajans.com/'],
+  founder: { '@type': 'Person', '@id': `${site.url}/about-us/#person`, name: 'Fırat Şekerli', url: `${site.url}/about-us/`, sameAs: ['https://www.linkedin.com/in/firatsekerli/', 'https://www.firatsekerli.com/'] },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: site.email, telephone: site.phone.replace(/\s/g, ''), availableLanguage: ['English', 'Turkish'] },
   areaServed: worldwide.map((c) => c.code),
   knowsLanguage: ['en', 'tr'],
 };
@@ -125,7 +130,7 @@ export const pageHead = ({ tag = '', title, intro = '', actions = '', media = ''
 // Home hero: full screen, navy over the code photo, the white logo above the heading.
 export const homeHero = ({ tag, title, intro, actions, trust }) => `
 <section class="hero">
-  <picture class="hero-bg" aria-hidden="true"><img src="/assets/img/hero-code-1920.webp" srcset="/assets/img/hero-code-800.webp 800w, /assets/img/hero-code-1200.webp 1200w, /assets/img/hero-code-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="960" fetchpriority="high"></picture>
+  <picture class="hero-bg" aria-hidden="true"><img src="/assets/img/hero-code-1920.webp" srcset="/assets/img/hero-code-800.webp 800w, /assets/img/hero-code-1200.webp 1200w, /assets/img/hero-code-1920.webp 1920w" sizes="100vw" alt="Lines of website code on a dark blue screen" width="1920" height="960" fetchpriority="high"></picture>
   <div class="hero-in">
     ${label(tag)}
     <h1 class="hero-title">${tt(title)}</h1>
@@ -185,8 +190,8 @@ export const refGrid = (list = references, { h = 'h3' } = {}) =>
     .map(
       (r, i) => `<article class="show${i % 2 ? ' rev' : ''}">
     <a class="show-media" href="/references/${r.detail}/" tabindex="-1" aria-hidden="true">
-      ${browser(refShot(r.key, '', '(min-width: 1024px) 40vw, 90vw'), 'main')}
-      ${browser(refShot(r.key, '', '(min-width: 1024px) 14vw, 30vw', '-a'), 'side side-a')}
+      ${browser(refShot(r.key, `${esc(r.name)} website, home page`, '(min-width: 1024px) 40vw, 90vw'), 'main')}
+      ${browser(refShot(r.key, `${esc(r.name)} website, inner page`, '(min-width: 1024px) 14vw, 30vw', '-a'), 'side side-a')}
     </a>
     <div class="show-text">
       <p class="show-tags"><span>${esc(r.type)}</span><span>${esc(r.sector)}</span><span>${esc(r.place)}</span></p>
@@ -358,7 +363,13 @@ const reveal = (html) => {
 export const render = (page) => {
   const canonical = `${site.url}${page.path}`;
   const graph = [organization, { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.name, inLanguage: 'en', publisher: { '@id': orgId } }];
-  if (page.crumbs) graph.push(breadcrumbLd([{ name: 'Home', path: '/' }, ...page.crumbs]));
+  // Every page says what it is, who publishes it and when it last changed, for search engines and AI answers.
+  const hasPageNode = (page.schema || []).some((n) => /Page$/.test(n['@type'] || '') && n['@type'] !== 'FAQPage');
+  if (!page.noindex && page.type !== 'article' && !hasPageNode) {
+    const pageType = page.path === '/about-us/' ? 'AboutPage' : page.path === '/contact/' ? 'ContactPage' : 'WebPage';
+    graph.push({ '@type': pageType, '@id': `${canonical}#webpage`, url: canonical, name: page.title, description: page.description, inLanguage: 'en', isPartOf: { '@id': `${site.url}/#website` }, about: { '@id': orgId }, publisher: { '@id': orgId }, ...(page.updated ? { dateModified: page.updated } : {}), ...(page.crumbs ? { breadcrumb: { '@id': `${canonical}#breadcrumb` } } : {}) });
+  }
+  if (page.crumbs) graph.push({ ...breadcrumbLd([{ name: 'Home', path: '/' }, ...page.crumbs]), '@id': `${canonical}#breadcrumb` });
   if (page.schema) graph.push(...page.schema);
   const og = page.ogImage || '/assets/img/og-default.jpg';
   return `<!doctype html>
