@@ -6,7 +6,8 @@ One folder per article: `content/articles/<slug>/` with
   - `content` is HTML using only h2, h3, p, ul, ol, li, a, strong, em, code (no h1: the page shows the title).
   - `slug`: lowercase letters, digits and hyphens; the article is published at `https://asparagents.com/<slug>/`.
   - `date`: publication date, YYYY-MM-DD.
-- the cover image named in `image` (e.g. `cover.jpg`, from Canva). Then run
+- the cover image named in `image`: every post uses the same blue code cover with the white logo (copy `cover.jpg`
+  from any existing article folder, Firat 21.11.2026). Then run
   `python3 tools/cover.py content/articles/<slug>/cover.jpg cover-<slug>` to make the WebP sizes and the social
   image in `assets/img/` (the build picks them up by name).
 
