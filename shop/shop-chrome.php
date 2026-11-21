@@ -211,6 +211,9 @@ body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
 .quick-band .btns { margin-top: 0; }
 .post-card .label { align-self: flex-start; margin-bottom: 4px; }
 .ag-chrome-hero .wrap, .ag-cta .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.ag-cta .wrap { max-width: 820px; }
+.post-type-archive-product #section-2-63 > .ct-section-inner-wrap { max-width: 1280px; }
+.post-type-archive-product .oxy-woo-products { width: 100% !important; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
 .post-type-archive-product .oxy-woo-products > h1.page-title, .post-type-archive-product .woocommerce-result-count, .post-type-archive-product .woocommerce-ordering { display: none !important; }
 .woocommerce ul.products { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 0 !important; }
 .woocommerce ul.products::before, .woocommerce ul.products::after { display: none !important; }
