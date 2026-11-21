@@ -566,3 +566,18 @@ ul { margin: 0 0 16px; }
   .contact-grid > :first-child { display: flex; flex-direction: column; justify-content: center; padding: 40px 0; }
   .contact-grid > :last-child { height: 100%; }
 }
+
+/* Two-column blocks, site-wide (Firat, 21.11.2026): the text column gets space above and below and sets the
+   height; a photo or a website screenshot next to it fills exactly that height (cropped, not stretched), so a
+   tall image never makes the block taller than its text. Page-head product shots in a browser frame keep their
+   own shape. Phones and tablets stack as before. */
+@media (min-width: 1024px) {
+  .two { align-items: stretch; }
+  .two-text { display: flex; flex-direction: column; justify-content: center; padding: 40px 0; }
+  .two-media:has(> img, > .scroll-shot) { position: relative; min-height: 380px; }
+  .two-media > img { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: 50% 40%; }
+  .two-media > .scroll-shot { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .two-media > .scroll-shot .scroll-view { flex: 1; aspect-ratio: auto; min-height: 0; }
+  .two-media > .scroll-shot .scroll-view img { position: absolute; inset: 0; }
+  .two-media > .scroll-shot .scroll-view { position: relative; }
+}
