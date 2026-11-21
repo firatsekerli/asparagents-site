@@ -148,6 +148,7 @@ body.oxygen-body .ag-chrome .footer-legal a:hover, .ag-chrome .linklike:hover { 
 .ag-chrome .linklike { background: none; border: 0; padding: 4px 0; font: inherit; font-size: 14px; cursor: pointer; }
 body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
 .hl { color: var(--blue); }
+.tone-blue .hl, .tone-navy .hl, .hero .hl { color: #9fb2ff; }
 /* Labels look the same on every background: red text on a light red pill (Firat 21.11.2026) */
 .label { display: inline-block; color: var(--red-text); background: #fdecea; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; margin: 0 0 14px; width: fit-content; }
 .hero .label, .page-head .label, .feature-card .label, .ai-band .label, .cta-band .label, [class*="tone-"] .label { color: var(--red-text); }
@@ -156,6 +157,8 @@ body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
 .lead { font-size: 18px; }
 /* Buttons: blue, or light blue with blue text (the two hero buttons of the old site) */
 .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.sec-head + .btns, .center .btns { justify-content: center; }
+.hero .btns { justify-content: center; }
 /* Inner page heading */
 .page-head { background: var(--bg); padding: 72px 0; overflow-x: clip; }
 .page-head-in { max-width: 820px; }
@@ -165,6 +168,9 @@ body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
 .tone-navy { background: #0a2060; color: #e6eaff; }
 .tone-blue h2, .tone-blue h3, .tone-navy h2, .tone-navy h3 { color: #fff; }
 .tone-navy a:not(.btn) { color: #fff; }
+.page-head .two-media img { max-height: 620px; object-fit: cover; }
+.price-card .btns { margin-top: auto; justify-content: center; }
+.faq-side .btns { margin-top: 32px; }
 /* Call to action band */
 .cta-band { text-align: center; }
 .cta-band .wrap { max-width: 820px; }
@@ -172,11 +178,16 @@ body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
 .cta-mail { margin: 20px 0 0; }
 @media (max-width: 1023px) {.sec { padding: 72px 0; }
 .page-head { padding: 48px 0; }
+.page-head .two-media img { max-height: 360px; }}
 @media (max-width: 680px) {.sec { padding: 56px 0; }
 .hero-lead, .lead { font-size: 16px; }
 .btns .btn { flex: 1 1 auto; }}
 /* Same-site link: blank the content for two frames before leaving (Chrome on iPhone glitch, see site.js) */
+.leaving main, .leaving .site-footer, .leaving .cta-band { visibility: hidden; }
 /* Product shot in a browser frame (page heads) */
+.page-head .two-media .browser { box-shadow: 0 10px 30px rgba(6, 11, 35, 0.18); }
+.page-head .two-media .browser img { max-height: none; width: 100%; height: auto; display: block; }
+.page-head .shot-wrap { position: relative; display: block; }
 /* Inner page heads: the navy to blue gradient of the call to action band (Firat, 21.11.2026) */
 .page-head { background: linear-gradient(135deg, #0a2060 0%, #1d3aa8 55%, #2d4ddb 100%); color: #e6eaff; }
 .page-head .h1, .page-head h1, .page-head h2 { color: #fff; }
@@ -185,12 +196,20 @@ body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
 .page-head a:not(.btn) { color: #fff; }
 .page-head .btn-soft { background: #fff; color: var(--blue); }
 .page-head .btn-soft:hover { background: var(--blue-soft); }
+.page-head .two-media img:not(.browser img) { border-radius: 14px; }
+.page-head .note { color: #c9d4ff; }
+.page-head .contact-lines a { color: #fff; }
+.page-head .contact-lines .ci { background: rgba(255, 255, 255, 0.14); color: #fff; }
+.page-head .form, .page-head .form p, .page-head .form li, .page-head .form span { color: var(--text); }
+.page-head .form h2, .page-head .form-title { color: var(--navy); }
+.page-head .form a:not(.btn) { color: var(--blue); }
 /* Call to action band: slowly moving gradient */
 .cta-band { background: linear-gradient(120deg, #0a2060, #2d4ddb, #1f3bb8, #0a2060); background-size: 300% 300%; }
 @media (prefers-reduced-motion: no-preference) {@keyframes ctaflow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 .cta-band { animation: ctaflow 14s ease-in-out infinite; }}
 /* The quick fix bar: the button sits level with the text; the bar\'s own gap spaces it when it wraps on phones */
-
+.quick-band .btns { margin-top: 0; }
+.post-card .label { align-self: flex-start; margin-bottom: 4px; }
 .ag-chrome-hero .wrap, .ag-cta .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 .post-type-archive-product .oxy-woo-products > h1.page-title, .post-type-archive-product .woocommerce-result-count, .post-type-archive-product .woocommerce-ordering { display: none !important; }
 .woocommerce ul.products { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 0 !important; }
