@@ -11,12 +11,13 @@ export default (() => {
   const list = allPlans();
   return {
     path: '/prices/',
-    title: 'WordPress Support, Website, SEO and Social Media Prices | asparagents',
-    description: 'Clear prices in US dollars and British pounds for one-time WordPress support, WordPress and WooCommerce websites, SEO, local SEO, GEO and social media.',
+    title: 'Prices for AI Tools, Websites, SEO and WordPress Support | asparagents',
+    description: 'Clear prices in US dollars and British pounds for websites, SEO, local SEO, GEO, social media and one-time WordPress support. AI tools are priced by what they need to do.',
     crumbs: [{ name: 'Prices', path: '/prices/' }],
     schema: list.filter((p) => p.usd != null || p.gbp != null).map(offerLd).concat(faq.ld),
     body: `
 ${pageHead({ tag: 'Prices', title: 'Clear [[Prices]]', intro: 'Prices in US dollars and British pounds. One-time work is paid once; SEO, GEO and social media are monthly services.', actions: ctaRow() })}
+${section({ tag: 'AI Tools', title: 'Tools Built for [[Your Industry]]', intro: '<p>Every tool is built around your services, rules and prices, so the price depends on what it needs to do. <a href="/industries/">Try the demos</a> and <a href="/contact/">tell us about your business</a>; we reply within 12 hours with a price.</p>' })}
 ${section({ tone: 'blue', tag: 'One-Time', title: 'Fixes and [[Websites]]', body: `<div class="prices">${list.filter((p) => !p.monthly).map(priceCard).join('')}</div>` })}
 ${section({ tone: 'light', tag: 'Monthly', title: 'Search, AI Visibility and [[Social Media]]', body: `<div class="prices">${list.filter((p) => p.monthly).map(priceCard).join('')}</div>` })}
 ${faq.html}

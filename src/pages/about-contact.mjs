@@ -4,7 +4,7 @@ import { site, pageHead, section, cards, twoCol, checklist, worldBand, formBlock
 const about = {
   path: '/about-us/',
   title: 'About asparagents, Fırat Şekerli’s English-Speaking Studio | asparagents',
-  description: 'asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist in Ankara: WordPress plugins, one-time fixes and white label work.',
+  description: 'asparagents is the English-speaking studio of Fırat Şekerli in Ankara: AI tools built for your industry, white label and outsourcing, websites, SEO and WordPress support.',
   crumbs: [{ name: 'About Us', path: '/about-us/' }],
   schema: [
     {
@@ -23,7 +23,7 @@ const about = {
 ${pageHead({
   tag: 'About Us',
   title: 'Satisfying Our Client Is [[Our Ultimate Goal]]',
-  intro: 'asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. We build WordPress plugins, fix WordPress issues one at a time, and work behind the scenes for agencies that need extra hands, all fully remotely.',
+  intro: 'asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. We build AI tools for small businesses, take on work for agencies and companies that need extra hands, and look after websites, all fully remotely.',
   actions: ctaRow('Get in Touch'),
   media: deskPhoto(),
 })}
@@ -31,9 +31,9 @@ ${section({
   tag: 'What We Do',
   title: 'Three Ways We [[Help]]',
   body: cards([
-    { icon: 'plug', title: 'WordPress Plugins', text: 'Tools for Oxygen Builder and Breakdance users, such as <a href="/plugins/oxygen-media-usage-tracker-pro/">Oxygen Media Usage Tracker Pro</a>, which shows where every image is used.' },
-    { icon: 'wrench', title: 'One-Time WordPress Support', text: 'You tell us about one issue, we fix it, and you pay only when you are happy with the result.' },
-    { icon: 'users', title: 'White Label Work for Agencies', text: 'Websites, on-page SEO, local SEO, AI visibility and social media, delivered under your brand, with monthly reports ready to pass on to your clients.' },
+    { icon: 'ai', title: 'AI Tools for Your Industry', text: 'Quote, booking, estimate, document and repair tools built around how your business works and connected to your website. <a href="/industries/">Try the demos</a>.' },
+    { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'Websites, SEO, local SEO, AI visibility, social media and accessibility fixes for agencies and companies, under your brand if you want. <a href="/white-label/">More</a>' },
+    { icon: 'wrench', title: 'WordPress Support &amp; Plugins', text: 'One issue fixed and paid for only when you are happy, plus <a href="/plugins/">plugins</a> for Oxygen Builder and Breakdance users.' },
   ]),
 })}
 ${section({
@@ -55,7 +55,7 @@ ${worldBand()}
 const contact = {
   path: '/contact/',
   title: 'Contact | asparagents',
-  description: 'Tell us what you need: a WordPress issue to fix, a plugin question or white label work for your agency. We reply within 12 hours, in English or Turkish.',
+  description: 'Tell us what you need: a tool for your business, work to hand over, a website or a WordPress fix. We reply within 12 hours, in English or Turkish.',
   crumbs: [{ name: 'Contact', path: '/contact/' }],
   contact: false,
   schema: [{ '@type': 'ContactPage', url: `${site.url}/contact/`, about: { '@id': `${site.url}/#organization` } }],
@@ -64,7 +64,7 @@ const contact = {
   <div>
     <p class="label">Contact</p>
     <h1 class="h1">${tt('Get [[in Touch]]')}</h1>
-    <div class="lead"><p>Tell us what you need: a WordPress issue to fix, a question about one of our plugins, or white label work for your agency. We reply to every message within 12 hours, in English or Turkish.</p></div>
+    <div class="lead"><p>Tell us what you need: a tool that takes work off your team, work to hand over under your brand, a new website or a WordPress issue to fix. We reply to every message within 12 hours, in English or Turkish.</p></div>
     <div class="contact-lines">
       <a href="mailto:${site.email}"><span class="ci">${icon.mail}</span>${site.email}</a>
       <a href="${site.whatsapp}" target="_blank" rel="noopener"><span class="ci">${icon.whatsapp}</span>WhatsApp ${site.phone}</a>

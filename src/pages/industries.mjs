@@ -1,4 +1,4 @@
-import { pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon } from '../layout.mjs';
+import { pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon, aiBand } from '../layout.mjs';
 import { windowsDemo } from '../demos/windows.mjs';
 import { demoCss, tabsJs } from '../demos/common.mjs';
 import { tradesDemo } from '../demos/trades.mjs';
@@ -14,24 +14,6 @@ import { lettingsDemo } from '../demos/lettings.mjs';
 const platforms = 'WordPress, Shopify, Webflow, Wix, a custom site, or a standalone page with its own link.';
 const platformFaq = { q: 'Does it work with my website?', a: '<p>Yes. We integrate it into the website you already have, whatever it runs on: WordPress, Shopify, Webflow, Wix or a custom build. If you prefer, it can also run as its own page with its own link that you share by email or in your adverts.</p>' };
 const demoFaq = (what) => ({ q: 'Is the demo the real tool?', a: `<p>It is a simplified version with sample data, so you can see how it works. The tool we build for you uses ${what}, and it is tested with you before it goes live.</p>` });
-
-const aiBand = (intro) =>
-  section({
-    tone: 'navy',
-    cls: 'ai-band',
-    tag: 'Why Not Build It With AI',
-    title: 'Anyone Can Build a Prototype, but [[Running It Every Day Is Different]]',
-    intro,
-    body: cards(
-      [
-        { icon: 'check', title: 'Consistent', text: 'Works the same way for every customer, on every phone and browser, and is tested before it goes live.' },
-        { icon: 'clock', title: 'Sustainable', text: 'Kept up to date when your services, prices or platform change, instead of being forgotten after launch.' },
-        { icon: 'shield', title: 'Secure', text: 'Forms protected against spam, customer details stored where you control them, and privacy rules such as UK GDPR followed.' },
-        { icon: 'users', title: 'Accountable', text: 'One person who built it and looks after it, and replies to every message within 12 hours.' },
-      ],
-      { cols: 4 }
-    ),
-  });
 
 const feats = (list) => `<div class="feats">${list.map(([ic, t, x]) => `<div class="feat"><span class="feat-icon">${icon[ic]}</span><div><h3>${t}</h3><p>${x}</p></div></div>`).join('')}</div>`;
 
@@ -58,7 +40,7 @@ ${section({ tag: 'The Problem', title: c.problemTitle, body: cards(c.problems.ma
 <style>${demoCss}${c.demo.css || ''}</style>
 <script>${c.slug === 'windows-doors' ? '' : tabsJs}${c.demo.js}</script>
 ${section({ tone: 'light', tag: 'What You Get', title: c.featsTitle, body: feats([...c.feats, ['plug', 'Works With Your Platform', platforms]]) })}
-${aiBand(c.aiIntro)}
+${aiBand({ intro: c.aiIntro })}
 ${section({ tag: 'How We Build It', title: 'Three Steps to [[Your Own Tool]]', body: steps(c.steps) })}
 ${faq.html}
 `;
@@ -355,6 +337,9 @@ const list = [
 
 const pages = list.map(industryPage);
 
+// Cards for the home and services pages: one per industry, linking to its demo.
+export const industryCards = pages.map((p) => ({ icon: p.card[0], title: `<span class="label" style="display:block;margin-bottom:6px">${p.name}</span>${p.card[1]}`, text: p.card[2], href: p.path, linkText: 'Try the demo' }));
+
 // Overview page: one card per industry, then the same AI message and a call for industries not listed yet.
 const hub = {
   path: '/industries/',
@@ -372,12 +357,9 @@ ${section({
   id: 'list',
   tag: 'Choose Your Industry',
   title: 'Try a [[Working Demo]]',
-  body: cards(
-    pages.map((p) => ({ icon: p.card[0], title: `<span class="label" style="display:block;margin-bottom:6px">${p.name}</span>${p.card[1]}`, text: p.card[2], href: p.path, linkText: 'Try the demo' })),
-    { cls: 'services' }
-  ),
+  body: cards(industryCards, { cls: 'services' }),
 })}
-${aiBand('With today’s AI tools, anyone can build a prototype. The hard part starts when real customers use it every day: it has to work the same way every time, keep up with your business and keep your customers’ details safe.')}
+${aiBand()}
 ${section({
   tone: 'light',
   tag: 'Not Listed',
