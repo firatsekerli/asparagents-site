@@ -229,6 +229,22 @@ body.oxygen-body .ag-chrome-hero .btn-soft, body.oxygen-body .ag-cta .btn-soft {
 body.oxygen-body .ag-cta p { color: #e6eaff; }
 body.oxygen-body .ag-cta .cta-mail a { color: #fff; }
 #section-2-63 { padding-top: 56px; }
+
+/* Same entrance and scroll animations as asparagents.com (only when the visitor has not asked for less motion) */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes agup { from { opacity: 0.01; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes agdrop { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
+  @keyframes agsafe { to { opacity: 1; transform: none; } }
+  header.ag-chrome { animation: agdrop 0.6s cubic-bezier(.2, .7, .2, 1) backwards; }
+  .ag-chrome-hero .page-head-in > * { animation: agup 0.8s cubic-bezier(.2, .7, .2, 1) both; }
+  .ag-chrome-hero .page-head-in > :nth-child(2) { animation-delay: 0.1s; }
+  .ag-chrome-hero .page-head-in > :nth-child(3) { animation-delay: 0.2s; }
+  .ag-chrome-hero .page-head-in > :nth-child(4) { animation-delay: 0.3s; }
+  .ag-anim ul.products > li.product, .ag-anim .ag-cta .wrap > * { opacity: 0; transform: translateY(32px); transition: opacity 0.8s cubic-bezier(.2, .7, .2, 1), transform 0.8s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--rd, 0ms); animation: agsafe 0s 4s forwards; }
+  .ag-anim ul.products > li.product.in, .ag-anim .ag-cta .wrap > .in { opacity: 1; transform: none; animation: none; }
+  .ag-anim ul.products > li.product.in.done { transition: transform 0.2s, box-shadow 0.2s; transition-delay: 0ms; }
+  .ag-anim ul.products > li.product.in.done:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(6, 11, 35, 0.1); }
+}
 ' . '</style>';
 }, 99);
 function ag_chrome_header() {
@@ -306,3 +322,13 @@ add_action('wp_footer', function () {
   if (!function_exists('is_shop') || !is_shop()) return;
   echo '<script>(function(){var u=document.querySelector(".woocommerce ul.products");if(u)u.id="products";var c=document.querySelector(".ag-cta"),f=document.querySelector("footer.ag-chrome");if(c&&f&&c.nextElementSibling!==f)f.parentNode.insertBefore(c,f);var h=document.querySelector(".ag-chrome-hero"),hd=document.querySelector("header.ag-chrome");if(h&&hd&&hd.nextElementSibling!==h)hd.parentNode.insertBefore(h,hd.nextSibling);})();</script>';
 }, 50);
+
+// Animations like asparagents.com: products and the call to action fade and rise into view, one after another.
+add_action('wp_head', function () {
+  if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  echo '<script>if(!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)&&"IntersectionObserver" in window)document.documentElement.classList.add("ag-anim");</script>';
+}, 2);
+add_action('wp_footer', function () {
+  if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  echo '<script>(function(){if(!document.documentElement.classList.contains("ag-anim"))return;var els=[].slice.call(document.querySelectorAll("ul.products > li.product, .ag-cta .wrap > *"));els.forEach(function(el){var sib=[].filter.call(el.parentNode.children,function(c){return els.indexOf(c)>-1;});var i=sib.indexOf(el);if(i>0)el.style.setProperty("--rd",Math.min(i,5)*90+"ms");});var io=new IntersectionObserver(function(en){en.forEach(function(e){if(!e.isIntersecting&&e.boundingClientRect.bottom>=0)return;var el=e.target;io.unobserve(el);el.classList.add("in");setTimeout(function(){el.classList.add("done");el.style.removeProperty("--rd");},1400);});},{rootMargin:"0px 0px -10% 0px"});els.forEach(function(el){io.observe(el);});})();</script>';
+}, 60);
