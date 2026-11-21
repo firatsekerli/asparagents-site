@@ -144,7 +144,7 @@ export const plugins = [
     slug: 'oxygen-media-usage-tracker-pro',
     name: 'Oxygen Media Usage Tracker Pro',
     short: 'See where every image is used in your Oxygen Builder site, and clean up your media library with confidence.',
-    priceUsd: 47,
+    priceUsd: 27, // Firat 21.11.2026 (was 47)
     buy: 'product/oxygen-media-usage-tracker-pro/',
   },
 ];
