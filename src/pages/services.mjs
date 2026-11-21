@@ -39,7 +39,7 @@ ${section({ tag: 'Also From Us', title: '[[Services]] That Work Better Together'
 };
 
 const baseProcess = [
-  ['Tell us what you need', 'Send the form, an email or a WhatsApp message. We reply within 12 hours.'],
+  ['Tell us what you need', 'Send the form, an email or a WhatsApp message. We usually reply within minutes.'],
   ['Plan and quote', 'We agree on the scope, the deliverables and the price before any work starts.'],
   ['The work and the report', 'We do the work, check with you at each stage and report what changed in plain language.'],
 ];
@@ -71,7 +71,7 @@ const wpSupport = servicePage({
   faqs: [
     { q: 'What if my issue is not fixed?', a: '<p>Then you do not pay. You pay only after the issue is fixed and you are happy with the result.</p>' },
     { q: 'Are you providing custom code?', a: '<p>Yes. For a single fix we use One-Time WordPress Support. Larger custom work, from a landing page to a full website, is priced by your requirements. <a href="/contact/">Tell us what you need</a>.</p>' },
-    { q: 'How fast do you reply?', a: '<p>We reply to every message within 12 hours, in English or Turkish.</p>' },
+    { q: 'How fast do you reply?', a: '<p>We usually reply within minutes, and always within 12 hours, in English or Turkish.</p>' },
     { q: 'Do you need my WordPress login?', a: '<p>We need access to fix the issue. Create a separate administrator account for us and remove it when the fix is done; never send us your own password.</p>' },
   ],
 });
@@ -259,7 +259,7 @@ ${section({ tone: 'light', tag: 'Services', title: 'Choose What You [[Need]]', b
     ...listedServices.filter((sv) => sv.slug !== 'wordpress-support').map((sv) => ({ icon: sv.icon, title: sv.card?.title || sv.name, text: sv.card?.text || sv.strip, href: `/services/${sv.slug}/`, linkText: `More about ${sv.name}` })),
   ], { cols: 3, cls: 'services' })}
   <div class="quick-band"><div><h3>Need One WordPress Fix?</h3><p>${services.find((x) => x.slug === 'wordpress-support').strip}</p></div><div class="btns"><a class="btn" href="/services/wordpress-support/">WordPress Support</a></div></div>` })}
-${section({ body: twoCol({ media: cwShot(), html: `<p class="label">One Partner</p><h2 class="h2">One Person From [[Start to Finish]]</h2><p>asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. You deal with one person from the first message to the last report.</p>${checklist(['We reply to every message within 12 hours', 'In English or Turkish', 'Fully remote, for clients and agencies abroad'])}${ctaRow()}` }).replace(/\[\[(.+?)\]\]/g, '<span class="hl">$1</span>') })}
+${section({ body: twoCol({ media: cwShot(), html: `<p class="label">One Partner</p><h2 class="h2">One Person From [[Start to Finish]]</h2><p>asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. You deal with one person from the first message to the last report.</p>${checklist(['We usually reply within minutes', 'In English or Turkish', 'Fully remote, for clients and agencies abroad'])}${ctaRow()}` }).replace(/\[\[(.+?)\]\]/g, '<span class="hl">$1</span>') })}
 `,
 };
 

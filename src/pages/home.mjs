@@ -12,7 +12,7 @@ export default (() => {
     { q: 'Can I not just build it myself with AI?', a: '<p>You can build a prototype. Running it every day is different: it has to work the same way for every customer, keep up with your business and keep your customers’ details safe. That is the part we take care of.</p>' },
     { q: 'Do you work with agencies and companies?', a: '<p>Yes. Agencies sell our work under their own brand, and companies hand us the work their team does not have the time or the know-how for. See <a href="/white-label/">White Label &amp; Outsourcing</a>.</p>' },
     { q: 'Do you still fix WordPress issues?', a: '<p>Yes. With <a href="/services/wordpress-support/">One-Time WordPress Support</a> you tell us about one issue, we fix it, and you pay only when you are happy with the result.</p>' },
-    { q: 'How fast do you reply?', a: '<p>We reply to every message within 12 hours, in English or Turkish, and you deal with one person from start to finish.</p>' },
+    { q: 'How fast do you reply?', a: '<p>We usually reply within minutes, and always within 12 hours, in English or Turkish, and you deal with one person from start to finish.</p>' },
   ]);
 
   const omut = plugins[0];
@@ -25,7 +25,7 @@ ${homeHero({
   title: 'AI Tools Built for How [[Your Business]] Works',
   intro: 'We build AI tools for your industry, from quotes and bookings to paperwork and repairs, and connect them to the website you already have. Built and looked after by people who pay attention to the details.',
   actions: buttons(['/industries/', 'See the Industries'], ['/white-label/', 'White Label &amp; Outsourcing', 'soft']),
-  trust: [['layers', 'Working demos for 6 industries'], ['plug', 'Works with the platform you use'], ['clock', 'Replies within 12 hours'], ['users', 'One person from start to finish']],
+  trust: [['layers', 'Working demos for 6 industries'], ['plug', 'Works with the platform you use'], ['clock', 'Usually replies within minutes'], ['users', 'One person from start to finish']],
 })}
 
 ${section({

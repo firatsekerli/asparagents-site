@@ -45,7 +45,7 @@ const postPage = (p) => {
   <div class="post-cover">${img({ ...cover(p.image), lazy: false, sizes: '(min-width: 800px) 760px, 92vw' })}</div>
   <article class="prose">
     ${p.body}
-    <p><strong>Need a hand?</strong> <a href="/contact/">Tell us what you need</a>. We reply within 12 hours.</p>
+    <p><strong>Need a hand?</strong> <a href="/contact/">Tell us what you need</a>. We usually reply within minutes.</p>
   </article>
 </div></section>
 `,
