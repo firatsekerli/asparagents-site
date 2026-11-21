@@ -558,3 +558,11 @@ ul { margin: 0 0 16px; }
 
 /* The quick fix bar: the button sits level with the text; the bar's own gap spaces it when it wraps on phones */
 .quick-band .btns { margin-top: 0; }
+
+/* Contact page (Firat, 21.11.2026): narrower form column, breathing room above and below the text column,
+   and the form card stretched to the same height as the text column. */
+@media (min-width: 1024px) {
+  .contact-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: stretch; }
+  .contact-grid > :first-child { display: flex; flex-direction: column; justify-content: center; padding: 40px 0; }
+  .contact-grid > :last-child { height: 100%; }
+}
