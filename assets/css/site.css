@@ -601,3 +601,7 @@ ul { margin: 0 0 16px; }
   .tool-head { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-bottom: 24px; }
   .tool-block + .tool-block { margin-top: 64px; }
 }
+
+/* Screenshots inside a browser frame: square top edge under the bar, no own shadow (Firat 22.11.2026); the frame
+   itself rounds the outer corners. */
+.browser img, .scroll-shot img, .two-media .browser img, .two-media .scroll-shot img, .page-head .two-media .browser img { border-radius: 0; box-shadow: none; }
