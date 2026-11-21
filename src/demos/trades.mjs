@@ -1,6 +1,6 @@
 import { demoShell } from './common.mjs';
 
-// Trades demo: an enquiry agent that answers at any hour, asks the questions the office would ask, sorts emergencies
+// Trades demo: an enquiry tool that answers at any hour, asks the questions the office would ask, sorts emergencies
 // from routine jobs and books a visit. Sample questions, slots and names only.
 
 const html = demoShell(
@@ -8,11 +8,11 @@ const html = demoShell(
   ['Customer', 'Office', 'Text Message'],
   [
     `<div class="demo-grid"><div><div class="chat" id="tr-chat" aria-live="polite"></div><div class="chat-act" id="tr-act"></div></div>
-    <aside class="demo-preview" aria-label="What the agent has collected"><h3>Collected So Far</h3><ul class="demo-spec" id="tr-sum"></ul><p class="demo-hint">The agent fills this in as the customer answers. Nobody in your office has to pick up the phone.</p></aside></div>`,
+    <aside class="demo-preview" aria-label="What the tool has collected"><h3>Collected So Far</h3><ul class="demo-spec" id="tr-sum"></ul><p class="demo-hint">The tool fills this in as the customer answers. Nobody in your office has to pick up the phone.</p></aside></div>`,
     `<div class="job" id="tr-job"></div>`,
     `<div class="sms" id="tr-sms"></div><div class="demo-btns" style="justify-content:center;margin-top:22px"><button type="button" class="btn btn-soft" id="tr-again">Start Again</button><a class="btn" href="/contact/">Get This Built for You</a></div>`,
   ],
-  'Interactive demo of an enquiry and booking agent for trades'
+  'Interactive demo of an enquiry and booking tool for trades'
 );
 
 const js = `

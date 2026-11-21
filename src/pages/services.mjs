@@ -48,11 +48,11 @@ const wpSupport = servicePage({
   slug: 'wordpress-support',
   title: 'One-Time WordPress Support, Pay When Fixed | asparagents',
   description: 'Tell us about one WordPress issue, we fix it, and you pay only when you are happy with the result. Themes, page builders, WooCommerce and plugins.',
-  h1: 'WordPress Agents Are Here to [[Fix Your Issues]]',
+  h1: 'WordPress Issues Fixed, [[Pay When You Are Happy]]',
   intro: 'You do not have to be a WordPress expert to get help. You tell us about the issue you are facing, we fix it, and you pay only after it is fixed and you are happy with the result.',
   includesIntro: 'Even if you are using a WordPress theme or plugin from a well-known provider, you may still run into problems from time to time. We know how to fix issues related to themes, page builders and plugins.',
   includes: [
-    ['Themes', 'The themes our support agents know and are ready to fix: Avada, Salient, Bridge, Woodmart and more.', 'layers'],
+    ['Themes', 'The themes we know and are ready to fix: Avada, Salient, Bridge, Woodmart and more.', 'layers'],
     ['Page Builders', 'Oxygen Builder, Breakdance, Elementor, WPBakery Page Builder, Bold Page Builder and more.', 'web'],
     ['Plugins', 'WooCommerce, popular SEO plugins, form plugins, membership plugins and more.', 'plug'],
     ['A Backup First', 'We back up your website before we change anything.', 'shield'],

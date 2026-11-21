@@ -110,10 +110,10 @@ const list = [
   {
     slug: 'trades',
     name: 'Trades',
-    card: ['wrench', 'Enquiry &amp; Booking Agent', 'Answers every enquiry at any hour, spots emergencies and books visits into your free slots.'],
-    h1: 'Enquiry &amp; Booking Agent for [[Trades]]',
-    intro: 'For roofers, plumbers, heating engineers and every trade that works away from the desk. When you are on a roof or under a sink, you cannot answer the phone. The agent answers every enquiry on your website at any hour, asks the questions you would ask, spots emergencies and books the visit into your free slots. You get a complete job card instead of a missed call.',
-    heroAlt: 'The enquiry agent demo: a customer reporting a roof leak and being offered visit times',
+    card: ['wrench', 'Enquiry &amp; Booking Tool', 'Answers every enquiry at any hour, spots emergencies and books visits into your free slots.'],
+    h1: 'Enquiry &amp; Booking Tool for [[Trades]]',
+    intro: 'For roofers, plumbers, heating engineers and every trade that works away from the desk. When you are on a roof or under a sink, you cannot answer the phone. The tool answers every enquiry on your website at any hour, asks the questions you would ask, spots emergencies and books the visit into your free slots. You get a complete job card instead of a missed call.',
+    heroAlt: 'The enquiry tool demo: a customer reporting a roof leak and being offered visit times',
     problemTitle: 'The Phone Rings While [[You Are Working]]',
     problems: [
       ['chat', 'Missed Calls Become Lost Jobs', 'While you are on a job, the phone rings out. Many callers do not leave a message; they try the next company on the list.'],
@@ -121,12 +121,12 @@ const list = [
       ['shield', 'Emergencies Mixed With Routine Jobs', 'A leak coming through a ceiling and a slow gutter look the same in your inbox until you read every message.'],
     ],
     demo: tradesDemo,
-    demoIntro: 'Step 1 is a visitor chatting with the agent on your website. Step 2 is the job card your office receives. Step 3 is the text your customer gets.',
+    demoIntro: 'Step 1 is a visitor chatting with the tool on your website. Step 2 is the job card your office receives. Step 3 is the text your customer gets.',
     aiIntro: 'With today’s AI tools, anyone can put a chatbot on a website. The hard part is a bot your customers can trust every day: it must ask the right questions, never promise a slot you do not have and keep people’s details safe.',
     featsTitle: 'Built Around [[Your Jobs]]',
     feats: [
       ['clock', 'Answers Day and Night', 'Every enquiry gets an answer at once, evenings and weekends included.'],
-      ['chat', 'Your Questions, Your Way', 'The agent asks what you would ask for each kind of job, in your tone.'],
+      ['chat', 'Your Questions, Your Way', 'It asks what you would ask for each kind of job, in your tone.'],
       ['shield', 'Emergencies First', 'Urgent jobs are recognised by your rules and offered the first free slots.'],
       ['report', 'Books Your Free Slots', 'Visits go straight into your calendar, so there is no double booking.'],
       ['pin', 'Your Service Area', 'Postcodes outside your area are told politely before anyone books.'],
@@ -147,10 +147,10 @@ const list = [
       { q: 'Will it promise things I do not offer?', a: '<p>No. It works inside the services, prices, area and rules you give it, and only offers slots that are really free.</p>' },
     ],
     asideTitle: 'Tell Us About Your Jobs',
-    asideText: 'Send us your services, your area and how you book visits today. We reply within 12 hours with how the agent would work for you.',
-    metaTitle: 'Enquiry & Booking Agent for Roofers, Plumbers & Heating Engineers',
-    description: 'An agent on your website that answers every enquiry at any hour, asks your questions, spots emergencies and books visits into your free slots. Try the demo.',
-    serviceName: 'Enquiry and booking agent for trades',
+    asideText: 'Send us your services, your area and how you book visits today. We reply within 12 hours with how the tool would work for you.',
+    metaTitle: 'Enquiry & Booking Tool for Roofers, Plumbers & Heating Engineers',
+    description: 'A tool on your website that answers every enquiry at any hour, asks your questions, spots emergencies and books visits into your free slots. Try the demo.',
+    serviceName: 'Enquiry and booking tool for trades',
     audience: 'Roofers, plumbers, heating engineers and other trades',
   },
   {
@@ -344,7 +344,7 @@ export const industryCards = pages.map((p) => ({ icon: p.card[0], title: `<span 
 const hub = {
   path: '/industries/',
   title: 'AI Tools for Your Industry | asparagents',
-  description: 'Quote tools, booking agents, estimate tools, document chasing and repair triage, built for your industry and connected to your website. Try the demos.',
+  description: 'Quote tools, booking tools, estimate tools, document chasing and repair triage, built for your industry and connected to your website. Try the demos.',
   crumbs: [{ name: 'Industries', path: '/industries/' }],
   body: `
 ${pageHead({
