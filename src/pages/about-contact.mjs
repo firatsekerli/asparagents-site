@@ -67,7 +67,7 @@ ${worldBand()}
 const contact = {
   path: '/contact/',
   title: 'Contact | asparagents',
-  description: 'Tell us what you need: a tool for your business, work to hand over, a website or a WordPress fix. We reply within 12 hours, in English or Turkish.',
+  description: 'Tell us what you need: a tool for your business, work to hand over, a website or a WordPress fix. We usually reply within minutes, in English or Turkish.',
   crumbs: [{ name: 'Contact', path: '/contact/' }],
   contact: false,
   schema: [{ '@type': 'ContactPage', url: `${site.url}/contact/`, about: { '@id': `${site.url}/#organization` } }],
@@ -76,7 +76,7 @@ const contact = {
   <div>
     <p class="label">Contact</p>
     <h1 class="h1">${tt('Get [[in Touch]]')}</h1>
-    <div class="lead"><p>Tell us what you need: a tool that takes work off your team, work to hand over under your brand, a new website or a WordPress issue to fix. We reply to every message within 12 hours, in English or Turkish.</p></div>
+    <div class="lead"><p>Tell us what you need: a tool that takes work off your team, work to hand over under your brand, a new website or a WordPress issue to fix. We usually reply within minutes, and always within 12 hours, in English or Turkish.</p></div>
     <div class="contact-lines">
       <a href="mailto:${site.email}"><span class="ci">${icon.mail}</span>${site.email}</a>
       <a href="${site.whatsapp}" target="_blank" rel="noopener"><span class="ci">${icon.whatsapp}</span>WhatsApp ${site.phone}</a>
@@ -84,7 +84,7 @@ const contact = {
     <h2 class="h2" style="font-size:24px">What happens next</h2>
     ${checklist([
       'You send the form, an email or a WhatsApp message.',
-      'We read your message and reply within 12 hours, with questions if we need more detail.',
+      'We read your message and usually reply within minutes, with questions if we need more detail.',
       'For a one-time WordPress fix, we agree on the issue and start; you pay only after the issue is fixed and you are happy with the result.',
     ])}
     <p class="note">You can also send a short screen recording of the issue with a free tool such as bubbles; it often helps us fix it faster.</p>

@@ -1,6 +1,6 @@
 # asparagents
 
-> asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye, working on websites, social media, SEO and Google Ads since 2013. It builds AI tools for small businesses in specific industries (quotes, bookings, estimates, paperwork and repairs) and connects them to the website the business already has. It also works white label and as an outsourcing partner for agencies and companies: websites, SEO, local SEO, GEO (AI visibility), social media, accessibility fixes and WordPress support. One person handles each project from start to finish, and every message gets a reply within 12 hours, in English or Turkish.
+> asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye, working on websites, social media, SEO and Google Ads since 2013. It builds AI tools for small businesses in specific industries (quotes, bookings, estimates, paperwork and repairs) and connects them to the website the business already has. It also works white label and as an outsourcing partner for agencies and companies: websites, SEO, local SEO, GEO (AI visibility), social media, accessibility fixes and WordPress support. One person handles each project from start to finish, and most messages get a reply within minutes (always within 12 hours, for messages that arrive at night in Türkiye), in English or Turkish.
 
 ## AI tools by industry (each page has a working demo with sample data)
 

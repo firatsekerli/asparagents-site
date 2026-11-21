@@ -22,7 +22,7 @@ export const site = {
   email: 'info@asparagents.com',
   whatsapp:
     'https://wa.me/905336311907?text=' +
-    encodeURIComponent('Hello. Please tell us your name, your company (if any) and what you need, and we will get back to you within 12 hours.'),
+    encodeURIComponent('Hello. Please tell us your name, your company (if any) and what you need, and we will get back to you shortly.'),
   sameAs: ['https://www.linkedin.com/in/firatsekerli/'],
   // asparajans and asparagents are Fırat Şekerli's brands; the business is registered in his name.
   legalName: 'Fırat Şekerli',

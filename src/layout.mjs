@@ -149,7 +149,7 @@ export const faqList = (items) => ({
 });
 export const faqBand = (items, { title = 'Answers to Frequently Asked Questions', intro = 'You can find answers to some of the most frequently asked questions here, so feel free to send us a message if you do not find what you are looking for.', aside, cta = ctaRow(), tone = 'light' } = {}) => {
   const f = faqList(items);
-  const side = aside || { icon: 'moon', title: 'Quick WordPress Support', text: 'We reply to every message within 12 hours, in English or Turkish, and you deal with one person from start to finish.' };
+  const side = aside || { icon: 'moon', title: 'Quick WordPress Support', text: 'We usually reply within minutes, and always within 12 hours, in English or Turkish, and you deal with one person from start to finish.' };
   return {
     html: `<section class="sec tone-${tone}"><div class="wrap faq-grid">
   <div class="faq-side"><h2 class="h2">${tt(title)}</h2><p>${intro}</p>
@@ -226,7 +226,7 @@ export const aiBand = ({ intro, tag = 'Why Not Build It With AI', title = 'Anyon
         { icon: 'check', title: 'Consistent', text: 'Works the same way for every customer, on every phone and browser, and is tested before it goes live.' },
         { icon: 'clock', title: 'Sustainable', text: 'Kept up to date when your services, prices or platform change, instead of being forgotten after launch.' },
         { icon: 'shield', title: 'Secure', text: 'Forms protected against spam, customer details stored where you control them, and privacy rules such as UK GDPR followed.' },
-        { icon: 'users', title: 'Accountable', text: 'One person who built it and looks after it, and replies to every message within 12 hours.' },
+        { icon: 'users', title: 'Accountable', text: 'One person who built it and looks after it, and usually replies within minutes.' },
       ],
       { cols: 4 }
     ),
@@ -276,7 +276,7 @@ export const formBlock = ({ heading = 'Send us a message' } = {}) => {
 const ctaBand = () => `
 <section class="sec tone-navy cta-band"><div class="wrap">
   <h2 class="h2">Tell Us <span class="hl">What You Need</span></h2>
-  <p>A tool for your business, work your team has no time for, a new website or a WordPress issue to fix. We reply to every message within 12 hours, in English or Turkish.</p>
+  <p>A tool for your business, work your team has no time for, a new website or a WordPress issue to fix. We usually reply within minutes, and always within 12 hours, in English or Turkish.</p>
   ${buttons(['/contact/', 'Get in Touch'], [site.whatsapp, 'WhatsApp Us', 'soft', ' target="_blank" rel="noopener"'])}
   <p class="cta-mail"><a href="mailto:${site.email}">${site.email}</a></p>
 </div></section>`;
@@ -328,7 +328,7 @@ ${contact ? ctaBand() : ''}
       <ul class="footer-contact">
         <li><a href="mailto:${site.email}">${icon.mail}<span>${site.email}</span></a></li>
         <li><a href="${site.phoneHref}">${icon.phone}<span>${site.phone}</span></a></li>
-        <li><span>${icon.clock}<span>Replies within 12 hours</span></span></li>
+        <li><span>${icon.clock}<span>Usually replies within minutes</span></span></li>
       </ul>
       ${button(site.shop, 'Visit the Shop', 'sm')}
     </div>

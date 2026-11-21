@@ -12,7 +12,7 @@ export default (() => {
       { q: 'Who sets the price for my client?', a: '<p>You do. You sell the service at your own price under your own brand, pay us a wholesale fee and keep the margin.</p>' },
       { q: 'When does handing it over beat hiring?', a: '<p>Usually when the work comes in projects rather than every week, when your team would first have to learn how to do it, or when you want to test a service before you build a team. Hiring tends to win once one kind of work keeps a person busy every week.</p>' },
     ],
-    { aside: { icon: 'users', title: 'One Partner, One Contact', text: 'You deal with one person from start to finish, and we reply to every message within 12 hours.' }, cta: ctaRow('Tell Us What You Need') }
+    { aside: { icon: 'users', title: 'One Partner, One Contact', text: 'You deal with one person from start to finish, and we usually reply within minutes.' }, cta: ctaRow('Tell Us What You Need') }
   );
 
   const tiles = [
@@ -39,7 +39,7 @@ ${section({
     { icon: 'clock', title: 'Hours You Get Back', text: 'A task your team has never done can take days of research before any real work starts. We already know how, so it gets done while your team carries on.' },
     { icon: 'shield', title: 'Done Right the First Time', text: 'Accessibility, SEO and website changes have details that are easy to miss when you learn on the job. We have done them before.' },
     { icon: 'users', title: 'No Hiring for One Project', text: 'You get the skills when you need them, without a job advert, interviews or a new salary.' },
-    { icon: 'chat', title: 'One Contact, Fast Replies', text: 'You deal with one person from start to finish, and we reply to every message within 12 hours.' },
+    { icon: 'chat', title: 'One Contact, Fast Replies', text: 'You deal with one person from start to finish, and we usually reply within minutes.' },
     { icon: 'report', title: 'Plain Language Reports', text: 'You always know what was done and why, in words your whole team understands.' },
     { icon: 'globe', title: 'Fully Remote', text: 'Clients and partner agencies in the UK, the US, Austria, South Africa and the Netherlands.' },
   ]),
@@ -54,7 +54,7 @@ ${section({
     { icon: 'seo', title: 'Knowing What to Check', text: 'An accessibility audit, an SEO fix or a new page has steps that are easy to skip when you do not know they exist.' },
     { icon: 'web', title: 'An Eye for Detail', text: 'Spacing, wording, contrast and how the page looks on a phone. Small things that decide whether a site feels right.' },
     { icon: 'shield', title: 'Checked Before It Goes Live', text: 'Every change is tested on desktop and phone before anyone sees it, not after a customer complains.' },
-    { icon: 'users', title: 'Someone Accountable', text: 'One person who did the work, knows why and answers for it, within 12 hours.' },
+    { icon: 'users', title: 'Someone Accountable', text: 'One person who did the work, knows why and answers for it, usually within minutes.' },
   ], { cols: 4 }),
 })}
 ${section({
