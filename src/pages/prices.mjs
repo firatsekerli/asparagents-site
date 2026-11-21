@@ -1,5 +1,7 @@
 import { pageHead, faqBand, ctaRow, section } from '../layout.mjs';
 import { allPlans, priceCard, offerLd } from '../prices.mjs';
+import { industryCards } from './industries.mjs';
+import { cards } from '../layout.mjs';
 
 // Prices page. Numbers live in src/prices.mjs (only prices Firat gave; the rest say "Price on request").
 export default (() => {
@@ -17,7 +19,7 @@ export default (() => {
     schema: list.filter((p) => p.usd != null || p.gbp != null).map(offerLd).concat(faq.ld),
     body: `
 ${pageHead({ tag: 'Prices', title: 'Clear [[Prices]]', intro: 'Prices in US dollars and British pounds. One-time work is paid once; SEO, GEO and social media are monthly services.', actions: ctaRow() })}
-${section({ tag: 'AI Tools', title: 'Tools Built for [[Your Industry]]', intro: '<p>Every tool is built around your services, rules and prices, so the price depends on what it needs to do. <a href="/industries/">Try the demos</a> and <a href="/contact/">tell us about your business</a>; we usually reply within minutes with a price.</p>' })}
+${section({ tag: 'AI Tools', title: 'Tools Built for [[Your Industry]]', intro: '<p>Every tool is built around your services, rules and prices, so the price depends on what it needs to do. Try a demo below and <a href="/contact/">tell us about your business</a>; we usually reply within minutes with a price.</p>', body: cards(industryCards, { cls: 'services' }) })}
 ${section({ tone: 'blue', tag: 'One-Time', title: 'Fixes and [[Websites]]', body: `<div class="prices">${list.filter((p) => !p.monthly).map(priceCard).join('')}</div>` })}
 ${section({ tone: 'light', tag: 'Monthly', title: 'Search, AI Visibility and [[Social Media]]', body: `<div class="prices">${list.filter((p) => p.monthly).map(priceCard).join('')}</div>` })}
 ${faq.html}
