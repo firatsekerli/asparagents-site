@@ -1,7 +1,6 @@
-import { site, plugins, references, services } from '../site.mjs';
-import { homeHero, buttons, section, steps, cards, listedServices, twoCol, checklist, reviewsBand, refGrid, faqBand, worldBand, ctaRow, deskPhoto, tt, aiBand } from '../layout.mjs';
+import { site, references, services } from '../site.mjs';
+import { homeHero, buttons, section, steps, cards, listedServices, twoCol, checklist, reviewsBand, refGrid, faqBand, worldBand, ctaRow, founderPhoto, tt, aiBand } from '../layout.mjs';
 import { industryCards } from './industries.mjs';
-import { byId, priceCard } from '../prices.mjs';
 
 // Home page (Firat, 21.11.2026): AI tools for industries lead, then the AI message, the supporting services with
 // white label first and one-time WordPress support as a quick entry point, reviews, agencies, projects and FAQ.
@@ -15,8 +14,6 @@ export default (() => {
     { q: 'How fast do you reply?', a: '<p>We usually reply within minutes, and always within 12 hours, in English or Turkish, and you deal with one person from start to finish.</p>' },
   ]);
 
-  const omut = plugins[0];
-  const omutCard = `<div class="price-card"><h3>${omut.name}</h3><p class="price-sub">Plugin for Oxygen Builder</p><p class="price-num">$${omut.priceUsd}</p>${checklist(['Perfect for developers, agencies and site owners who want to optimize their media libraries', '7-day refund for technical issues'])}${buttons([`/plugins/${omut.slug}/`, 'See the Plugin'])}</div>`;
   const support = services.find((x) => x.slug === 'wordpress-support');
 
   const body = `
@@ -62,12 +59,12 @@ ${section({
   <div class="quick-band"><div><h3>Need One WordPress Fix?</h3><p>${support.strip}</p></div>${buttons(['/services/wordpress-support/', 'WordPress Support'])}</div>`,
 })}
 
-${reviewsBand({ extra: `<div class="prices" style="margin-top:56px">${priceCard(byId('one-time-wordpress-support'))}${omutCard}</div>` })}
+${reviewsBand()}
 
 ${section({
   id: 'agencies',
   body: twoCol({
-    media: deskPhoto(),
+    media: founderPhoto(),
     html: `<p class="label">For Agencies and Companies</p><h2 class="h2">${tt('Extra Hands, [[Your Brand]]')}</h2>
     <p>Your team’s time is worth more than learning something new for one project. Hand the work to us: agencies sell it under their own brand, companies get it done without hiring.</p>
     ${checklist(['Websites, SEO, local SEO, AI visibility (GEO), social media and accessibility fixes', 'Reports with your logo and your name, ready to forward', 'You stay the only contact for your client', 'Partner agencies in the UK, the US, Austria, South Africa and the Netherlands'])}

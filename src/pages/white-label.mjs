@@ -1,4 +1,4 @@
-import { pageHead, section, cards, steps, twoCol, checklist, faqBand, ctaRow, worldBand, orgId, site, deskPhoto, refShot, tt, icon, scrollShot } from '../layout.mjs';
+import { pageHead, section, cards, steps, twoCol, checklist, faqBand, ctaRow, worldBand, orgId, site, founderPhoto, refShot, tt, icon, scrollShot } from '../layout.mjs';
 
 // White label for agencies and outsourcing for companies (Firat, 21.11.2026: the value is the client's time). Agency
 // statements come from the approved English articles and the About Us page. Partner agencies and clients are never named.
@@ -30,7 +30,7 @@ ${pageHead({
   title: 'Your Team’s Time Is [[Worth More]]',
   intro: '<p>Agencies and companies hand us the work their own team does not have the time or the know-how for. Instead of spending days learning something new, your team stays on the work only they can do, and we deliver the rest, under your brand if you want.</p>',
   actions: ctaRow('Tell Us What You Need'),
-  media: deskPhoto(),
+  media: founderPhoto({ lazy: false }),
 })}
 ${section({
   tag: 'Why Hand It Over',
