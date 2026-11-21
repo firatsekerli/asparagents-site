@@ -18,7 +18,7 @@ const omutPage = (() => {
       { q: 'What if it does not work for my site?', a: '<p>We offer a 7-day refund for technical issues that prevent proper use of the plugin. Refunds are not available after 7 days or for non-technical reasons.</p>' },
       { q: 'Do you offer support?', a: '<p>Email support is included for 12 months, with priority support for faster replies.</p>' },
     ],
-    { aside: { icon: 'wrench', title: 'WordPress Support Also Available', text: 'No matter the problem, our WordPress agents are ready to fix it. <a href="/services/wordpress-support/">One-Time WordPress Support</a>' }, cta: buy() }
+    { aside: { icon: 'wrench', title: 'WordPress Support Also Available', text: 'No matter the problem, we are ready to fix it. <a href="/services/wordpress-support/">One-Time WordPress Support</a>' }, cta: buy() }
   );
   return {
     path: '/plugins/oxygen-media-usage-tracker-pro/',

@@ -21,7 +21,7 @@ export default (() => {
     ['seo', 'SEO &amp; Local SEO', 'On-page and technical SEO, Google Business Profile management and review strategy.'],
     ['ai', 'GEO &amp; AI Visibility', 'Monthly checks in ChatGPT, Gemini and Google AI Overviews, and the fixes they point to.'],
     ['social', 'Social Media', 'A content calendar, post designs, captions, short videos and posting.'],
-    ['code', 'AI Tools &amp; Automations', 'Quote forms, enquiry agents and other tools built for your industry and connected to your site.'],
+    ['code', 'AI Tools &amp; Automations', 'Quote forms, booking tools and more, built for your industry and connected to your site.'],
   ];
 
   const body = `

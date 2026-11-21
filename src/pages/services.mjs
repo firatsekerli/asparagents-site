@@ -1,4 +1,4 @@
-import { site, services, references, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, deskPhoto, refShot, listedServices, tt, scrollShot } from '../layout.mjs';
+import { site, services, references, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, deskPhoto, refShot, listedServices, tt, scrollShot, icon } from '../layout.mjs';
 import { byId, priceBand } from '../prices.mjs';
 
 // Service pages (/services/ and /services/<slug>/). Facts come from the live asparagents.com pages and the approved
@@ -11,6 +11,7 @@ const pricing = {
   'geo-ai-visibility': ['seo-local-seo-geo'],
   'social-media-management': ['social-media-management'],
 };
+import { industryCards } from './industries.mjs';
 const serviceLd = (s, description) => ({ '@type': 'Service', name: s.name, serviceType: s.name, description, url: `${site.url}/services/${s.slug}/`, provider: { '@id': orgId }, areaServed: ['GB', 'US', 'IE'] });
 const cwShot = () => scrollShot('cristal-windows', 'Cristal Windows website, home page');
 
@@ -47,11 +48,11 @@ const wpSupport = servicePage({
   slug: 'wordpress-support',
   title: 'One-Time WordPress Support, Pay When Fixed | asparagents',
   description: 'Tell us about one WordPress issue, we fix it, and you pay only when you are happy with the result. Themes, page builders, WooCommerce and plugins.',
-  h1: 'WordPress Agents Are Here to [[Fix Your Issues]]',
+  h1: 'WordPress Issues Fixed, [[Pay When You Are Happy]]',
   intro: 'You do not have to be a WordPress expert to get help. You tell us about the issue you are facing, we fix it, and you pay only after it is fixed and you are happy with the result.',
   includesIntro: 'Even if you are using a WordPress theme or plugin from a well-known provider, you may still run into problems from time to time. We know how to fix issues related to themes, page builders and plugins.',
   includes: [
-    ['Themes', 'The themes our support agents know and are ready to fix: Avada, Salient, Bridge, Woodmart and more.', 'layers'],
+    ['Themes', 'The themes we know and are ready to fix: Avada, Salient, Bridge, Woodmart and more.', 'layers'],
     ['Page Builders', 'Oxygen Builder, Breakdance, Elementor, WPBakery Page Builder, Bold Page Builder and more.', 'web'],
     ['Plugins', 'WooCommerce, popular SEO plugins, form plugins, membership plugins and more.', 'plug'],
     ['A Backup First', 'We back up your website before we change anything.', 'shield'],
@@ -77,9 +78,9 @@ const wpSupport = servicePage({
 
 const websites = servicePage({
   slug: 'websites',
-  title: 'WordPress and WooCommerce Websites | asparagents',
+  title: 'Websites and Online Shops | asparagents',
   description: 'Fast, mobile-friendly WordPress websites and WooCommerce shops for small businesses, with the SEO foundations built in from the start.',
-  h1: 'WordPress Websites and [[WooCommerce Shops]]',
+  h1: 'Websites and [[Online Shops]]',
   intro: 'We build WordPress websites that present your business clearly, open fast on every device and lead visitors to get in touch or buy. The SEO foundations are built in from the start, not added later.',
   includes: [
     ['Structure First', 'We agree on your goals, your audience and the page structure before the design starts.', 'layers'],
@@ -209,16 +210,57 @@ const social = servicePage({
   ],
 });
 
+const accessibility = servicePage({
+  slug: 'accessibility-fixes',
+  title: 'Accessibility Fixes From Your Reporting Tool | asparagents',
+  description: 'Your accessibility reporting tool lists the issues; we fix them on the platform you already use, check them again and tell you what changed.',
+  h1: 'Accessibility Fixes for [[Your Website]]',
+  intro: 'Your accessibility reporting tool lists the issues. We fix them on the platform your site runs on, check them again with the same tool, and tell you in plain language what changed. Your team does not have to learn accessibility first.',
+  includesIntro: 'We work from the report your own tool produces, so you can see every fix in the place you already track them.',
+  includes: [
+    ['Fixes From Your Report', 'We work through the issues your reporting tool lists, starting with the ones that affect the most pages.', 'report'],
+    ['On Your Platform', 'Webflow, WordPress, Shopify, Wix or a custom site. No rebuild needed.', 'web'],
+    ['Checked Again', 'After each round of fixes we check the pages again with your tool.', 'check'],
+    ['Plain Language Summary', 'What was fixed, on which pages, and anything that needs a decision from you.', 'chat'],
+    ['Under Your Brand', 'Agencies can sell the work to their clients as their own.', 'users'],
+    ['Ongoing or One-Off', 'Clear the current report once, or keep new issues fixed as your site changes.', 'clock'],
+  ],
+  forWho: {
+    title: 'For companies and agencies with [[a report full of issues]]',
+    html: '<p>Your reporting tool shows a long list of accessibility issues, and your team has neither the time nor the know-how to work through it.</p><p>Agencies can hand us a client’s report and sell the fixes under their own brand. See <a href="/white-label/">White Label &amp; Outsourcing</a>.</p>',
+  },
+  process: [
+    ['Send us the report', 'Share the report from your accessibility tool and access to your site or a staging copy.'],
+    ['We fix and check again', 'We fix the issues on your platform and check them again with the same tool.'],
+    ['You get the summary', 'A plain language summary of what changed and anything that needs your decision.'],
+  ],
+  faqs: [
+    { q: 'Do you need a report from an accessibility tool?', a: '<p>Yes, we work from the report your tool produces, so every fix can be checked in the same place. If you do not have one yet, <a href="/contact/">tell us</a> and we will talk about how to start.</p>' },
+    { q: 'Which platforms do you work on?', a: '<p>Webflow, WordPress, Shopify, Wix and custom built sites.</p>' },
+    { q: 'Can my agency sell this under its own name?', a: '<p>Yes. The client sees your reports and your invoices, not our name. See <a href="/white-label/">White Label &amp; Outsourcing</a>.</p>' },
+  ],
+});
+
 const listPage = {
   path: '/services/',
-  title: 'WordPress Support, Websites, SEO and GEO | asparagents',
-  description: 'One-time WordPress fixes, WordPress and WooCommerce websites, SEO, local SEO, GEO and social media management, for businesses or white label for agencies.',
+  title: 'AI Tools, White Label, Websites, SEO and GEO | asparagents',
+  description: 'AI tools built for your industry, white label and outsourcing for agencies and companies, websites, SEO, local SEO, GEO, social media, accessibility fixes and WordPress support.',
   crumbs: [{ name: 'Services', path: '/services/' }],
   body: `
-${pageHead({ tag: 'Our Services', title: 'What We [[Do]]', intro: '<p>We fix WordPress issues one at a time, build WordPress and WooCommerce websites, and help businesses be found on Google, on Google Maps and in AI answers.</p><p>Agencies can get all of it white label: your brand, your client, our work in the background. <a href="/white-label/">White label for agencies</a></p>', actions: ctaRow(), media: deskPhoto() })}
-${section({ tag: 'Services', title: 'Choose What You [[Need]]', body: serviceCards() })}
-${section({ tone: 'light', body: twoCol({ media: cwShot(), html: `<p class="label">One Partner</p><h2 class="h2">One Person From [[Start to Finish]]</h2><p>asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. You deal with one person from the first message to the last report.</p>${checklist(['We reply to every message within 12 hours', 'In English or Turkish', 'Fully remote, for clients and agencies abroad'])}${ctaRow()}` }).replace(/\[\[(.+?)\]\]/g, '<span class="hl">$1</span>') })}
+${pageHead({ tag: 'Our Services', title: 'What We [[Do]]', intro: '<p>We build AI tools for your industry and connect them to the website you already have. Around them we offer the services they need: websites, search, AI visibility, social media and accessibility.</p><p>Agencies and companies can hand any of it over to us, under their own brand if they want.</p>', actions: ctaRow() })}
+${section({
+  tag: 'Where We Start',
+  title: 'AI Tools Built for [[Your Industry]]',
+  body: `<div class="feature-card"><div><p class="label">Our Main Focus</p><h3 class="h2" style="font-size:clamp(24px,2.4vw,32px)">Quotes, Bookings, Estimates, Paperwork and Repairs</h3><p>Tools that take repeated work off your team, built around your rules and prices and connected to your website. Each industry has a working demo you can try.</p><div class="btns"><a class="btn btn-soft" href="/industries/">See the Industries</a></div></div>
+  <ul class="fc-tiles">${industryCards.map((c) => `<li><a href="${c.href}"><span class="fc-i">${icon[c.icon]}</span><span>${c.title.match(/>([^<]*)<\/span>/)[1]}<small>${c.title.replace(/<span[^>]*>[^<]*<\/span>/, '')}</small></span></a></li>`).join('')}</ul></div>`,
+})}
+${section({ tone: 'light', tag: 'Services', title: 'Choose What You [[Need]]', body: `${cards([
+    { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'For agencies and companies: hand us the work your team does not have the time or the know-how for, <strong>under your brand</strong> if you want.', href: '/white-label/', linkText: 'Learn more' },
+    ...listedServices.filter((sv) => sv.slug !== 'wordpress-support').map((sv) => ({ icon: sv.icon, title: sv.card?.title || sv.name, text: sv.card?.text || sv.strip, href: `/services/${sv.slug}/`, linkText: 'Learn more' })),
+  ], { cols: 3, cls: 'services' })}
+  <div class="quick-band"><div><h3>Need One WordPress Fix?</h3><p>${services.find((x) => x.slug === 'wordpress-support').strip}</p></div><div class="btns"><a class="btn" href="/services/wordpress-support/">WordPress Support</a></div></div>` })}
+${section({ body: twoCol({ media: cwShot(), html: `<p class="label">One Partner</p><h2 class="h2">One Person From [[Start to Finish]]</h2><p>asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. You deal with one person from the first message to the last report.</p>${checklist(['We reply to every message within 12 hours', 'In English or Turkish', 'Fully remote, for clients and agencies abroad'])}${ctaRow()}` }).replace(/\[\[(.+?)\]\]/g, '<span class="hl">$1</span>') })}
 `,
 };
 
-export default [listPage, wpSupport, websites, seo, localSeo, geo, social];
+export default [listPage, websites, seo, localSeo, geo, social, accessibility, wpSupport];

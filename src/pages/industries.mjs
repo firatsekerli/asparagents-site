@@ -1,4 +1,4 @@
-import { pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon } from '../layout.mjs';
+import { pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon, aiBand } from '../layout.mjs';
 import { windowsDemo } from '../demos/windows.mjs';
 import { demoCss, tabsJs } from '../demos/common.mjs';
 import { tradesDemo } from '../demos/trades.mjs';
@@ -14,24 +14,6 @@ import { lettingsDemo } from '../demos/lettings.mjs';
 const platforms = 'WordPress, Shopify, Webflow, Wix, a custom site, or a standalone page with its own link.';
 const platformFaq = { q: 'Does it work with my website?', a: '<p>Yes. We integrate it into the website you already have, whatever it runs on: WordPress, Shopify, Webflow, Wix or a custom build. If you prefer, it can also run as its own page with its own link that you share by email or in your adverts.</p>' };
 const demoFaq = (what) => ({ q: 'Is the demo the real tool?', a: `<p>It is a simplified version with sample data, so you can see how it works. The tool we build for you uses ${what}, and it is tested with you before it goes live.</p>` });
-
-const aiBand = (intro) =>
-  section({
-    tone: 'navy',
-    cls: 'ai-band',
-    tag: 'Why Not Build It With AI',
-    title: 'Anyone Can Build a Prototype, but [[Running It Every Day Is Different]]',
-    intro,
-    body: cards(
-      [
-        { icon: 'check', title: 'Consistent', text: 'Works the same way for every customer, on every phone and browser, and is tested before it goes live.' },
-        { icon: 'clock', title: 'Sustainable', text: 'Kept up to date when your services, prices or platform change, instead of being forgotten after launch.' },
-        { icon: 'shield', title: 'Secure', text: 'Forms protected against spam, customer details stored where you control them, and privacy rules such as UK GDPR followed.' },
-        { icon: 'users', title: 'Accountable', text: 'One person who built it and looks after it, and replies to every message within 12 hours.' },
-      ],
-      { cols: 4 }
-    ),
-  });
 
 const feats = (list) => `<div class="feats">${list.map(([ic, t, x]) => `<div class="feat"><span class="feat-icon">${icon[ic]}</span><div><h3>${t}</h3><p>${x}</p></div></div>`).join('')}</div>`;
 
@@ -58,7 +40,7 @@ ${section({ tag: 'The Problem', title: c.problemTitle, body: cards(c.problems.ma
 <style>${demoCss}${c.demo.css || ''}</style>
 <script>${c.slug === 'windows-doors' ? '' : tabsJs}${c.demo.js}</script>
 ${section({ tone: 'light', tag: 'What You Get', title: c.featsTitle, body: feats([...c.feats, ['plug', 'Works With Your Platform', platforms]]) })}
-${aiBand(c.aiIntro)}
+${aiBand({ intro: c.aiIntro })}
 ${section({ tag: 'How We Build It', title: 'Three Steps to [[Your Own Tool]]', body: steps(c.steps) })}
 ${faq.html}
 `;
@@ -128,10 +110,10 @@ const list = [
   {
     slug: 'trades',
     name: 'Trades',
-    card: ['wrench', 'Enquiry &amp; Booking Agent', 'Answers every enquiry at any hour, spots emergencies and books visits into your free slots.'],
-    h1: 'Enquiry &amp; Booking Agent for [[Trades]]',
-    intro: 'For roofers, plumbers, heating engineers and every trade that works away from the desk. When you are on a roof or under a sink, you cannot answer the phone. The agent answers every enquiry on your website at any hour, asks the questions you would ask, spots emergencies and books the visit into your free slots. You get a complete job card instead of a missed call.',
-    heroAlt: 'The enquiry agent demo: a customer reporting a roof leak and being offered visit times',
+    card: ['wrench', 'Enquiry &amp; Booking Tool', 'Answers every enquiry at any hour, spots emergencies and books visits into your free slots.'],
+    h1: 'Enquiry &amp; Booking Tool for [[Trades]]',
+    intro: 'For roofers, plumbers, heating engineers and every trade that works away from the desk. When you are on a roof or under a sink, you cannot answer the phone. The tool answers every enquiry on your website at any hour, asks the questions you would ask, spots emergencies and books the visit into your free slots. You get a complete job card instead of a missed call.',
+    heroAlt: 'The enquiry tool demo: a customer reporting a roof leak and being offered visit times',
     problemTitle: 'The Phone Rings While [[You Are Working]]',
     problems: [
       ['chat', 'Missed Calls Become Lost Jobs', 'While you are on a job, the phone rings out. Many callers do not leave a message; they try the next company on the list.'],
@@ -139,12 +121,12 @@ const list = [
       ['shield', 'Emergencies Mixed With Routine Jobs', 'A leak coming through a ceiling and a slow gutter look the same in your inbox until you read every message.'],
     ],
     demo: tradesDemo,
-    demoIntro: 'Step 1 is a visitor chatting with the agent on your website. Step 2 is the job card your office receives. Step 3 is the text your customer gets.',
+    demoIntro: 'Step 1 is a visitor chatting with the tool on your website. Step 2 is the job card your office receives. Step 3 is the text your customer gets.',
     aiIntro: 'With today’s AI tools, anyone can put a chatbot on a website. The hard part is a bot your customers can trust every day: it must ask the right questions, never promise a slot you do not have and keep people’s details safe.',
     featsTitle: 'Built Around [[Your Jobs]]',
     feats: [
       ['clock', 'Answers Day and Night', 'Every enquiry gets an answer at once, evenings and weekends included.'],
-      ['chat', 'Your Questions, Your Way', 'The agent asks what you would ask for each kind of job, in your tone.'],
+      ['chat', 'Your Questions, Your Way', 'It asks what you would ask for each kind of job, in your tone.'],
       ['shield', 'Emergencies First', 'Urgent jobs are recognised by your rules and offered the first free slots.'],
       ['report', 'Books Your Free Slots', 'Visits go straight into your calendar, so there is no double booking.'],
       ['pin', 'Your Service Area', 'Postcodes outside your area are told politely before anyone books.'],
@@ -165,10 +147,10 @@ const list = [
       { q: 'Will it promise things I do not offer?', a: '<p>No. It works inside the services, prices, area and rules you give it, and only offers slots that are really free.</p>' },
     ],
     asideTitle: 'Tell Us About Your Jobs',
-    asideText: 'Send us your services, your area and how you book visits today. We reply within 12 hours with how the agent would work for you.',
-    metaTitle: 'Enquiry & Booking Agent for Roofers, Plumbers & Heating Engineers',
-    description: 'An agent on your website that answers every enquiry at any hour, asks your questions, spots emergencies and books visits into your free slots. Try the demo.',
-    serviceName: 'Enquiry and booking agent for trades',
+    asideText: 'Send us your services, your area and how you book visits today. We reply within 12 hours with how the tool would work for you.',
+    metaTitle: 'Enquiry & Booking Tool for Roofers, Plumbers & Heating Engineers',
+    description: 'A tool on your website that answers every enquiry at any hour, asks your questions, spots emergencies and books visits into your free slots. Try the demo.',
+    serviceName: 'Enquiry and booking tool for trades',
     audience: 'Roofers, plumbers, heating engineers and other trades',
   },
   {
@@ -355,11 +337,14 @@ const list = [
 
 const pages = list.map(industryPage);
 
+// Cards for the home and services pages: one per industry, linking to its demo.
+export const industryCards = pages.map((p) => ({ icon: p.card[0], title: `<span class="label" style="display:block;margin-bottom:6px">${p.name}</span>${p.card[1]}`, text: p.card[2], href: p.path, linkText: 'Try the demo' }));
+
 // Overview page: one card per industry, then the same AI message and a call for industries not listed yet.
 const hub = {
   path: '/industries/',
   title: 'AI Tools for Your Industry | asparagents',
-  description: 'Quote tools, booking agents, estimate tools, document chasing and repair triage, built for your industry and connected to your website. Try the demos.',
+  description: 'Quote tools, booking tools, estimate tools, document chasing and repair triage, built for your industry and connected to your website. Try the demos.',
   crumbs: [{ name: 'Industries', path: '/industries/' }],
   body: `
 ${pageHead({
@@ -372,12 +357,9 @@ ${section({
   id: 'list',
   tag: 'Choose Your Industry',
   title: 'Try a [[Working Demo]]',
-  body: cards(
-    pages.map((p) => ({ icon: p.card[0], title: `<span class="label" style="display:block;margin-bottom:6px">${p.name}</span>${p.card[1]}`, text: p.card[2], href: p.path, linkText: 'Try the demo' })),
-    { cls: 'services' }
-  ),
+  body: cards(industryCards, { cls: 'services' }),
 })}
-${aiBand('With today’s AI tools, anyone can build a prototype. The hard part starts when real customers use it every day: it has to work the same way every time, keep up with your business and keep your customers’ details safe.')}
+${aiBand()}
 ${section({
   tone: 'light',
   tag: 'Not Listed',

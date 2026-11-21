@@ -211,6 +211,26 @@ export const worldList = () => {
   <ul class="world-list">${worldwide.map((c) => `<li><span class="code" aria-hidden="true">${c.code}</span><span class="name">${esc(c.name)}</span><span class="count">${count(c.agencies, 'partner agency', 'partner agencies')}${count(c.clients, 'client', 'clients')}</span></li>`).join('')}</ul>
 </div>`;
 };
+// The AI message band (Firat, 21.11.2026): anyone can build a prototype with AI; consistency, upkeep, security and
+// one accountable person are what we add.
+export const aiBand = ({ intro, tag = 'Why Not Build It With AI', title = 'Anyone Can Build a Prototype, but [[Running It Every Day Is Different]]' } = {}) =>
+  section({
+    tone: 'navy',
+    cls: 'ai-band',
+    tag,
+    title,
+    intro: intro || 'With today’s AI tools, anyone can build a prototype. The hard part starts when real customers use it every day: it has to work the same way every time, keep up with your business and keep your customers’ details safe.',
+    body: cards(
+      [
+        { icon: 'check', title: 'Consistent', text: 'Works the same way for every customer, on every phone and browser, and is tested before it goes live.' },
+        { icon: 'clock', title: 'Sustainable', text: 'Kept up to date when your services, prices or platform change, instead of being forgotten after launch.' },
+        { icon: 'shield', title: 'Secure', text: 'Forms protected against spam, customer details stored where you control them, and privacy rules such as UK GDPR followed.' },
+        { icon: 'users', title: 'Accountable', text: 'One person who built it and looks after it, and replies to every message within 12 hours.' },
+      ],
+      { cols: 4 }
+    ),
+  });
+
 export const worldBand = (tone = 'white') =>
   section({
     tone,
@@ -232,7 +252,7 @@ export const formBlock = ({ heading = 'Send us a message' } = {}) => {
     ${f(`Email ${req}`, '<input type="email" name="email" autocomplete="email" placeholder="Your email address" required>')}
     ${f('Phone (optional)', '<input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+44 or +1 …">')}
     ${f('Company or Agency (optional)', '<input type="text" name="company" autocomplete="organization" placeholder="Your company or agency name">')}
-    ${f(`How can we help? ${req}`, '<textarea name="message" rows="5" placeholder="A WordPress issue to fix, a plugin question, a new website or white label work for your agency" required data-voice-alt></textarea>', true)}
+    ${f(`How can we help? ${req}`, '<textarea name="message" rows="5" placeholder="A tool for your business, work to hand over, a new website, SEO or a WordPress issue to fix" required data-voice-alt></textarea>', true)}
     <div class="field wide voice" data-voice>
       <span>Prefer not to type? Leave a voice message.</span>
       <div class="voice-row">
@@ -255,14 +275,14 @@ export const formBlock = ({ heading = 'Send us a message' } = {}) => {
 const ctaBand = () => `
 <section class="sec tone-navy cta-band"><div class="wrap">
   <h2 class="h2">Tell Us <span class="hl">What You Need</span></h2>
-  <p>A WordPress issue to fix, a question about one of our plugins, a new website or white label work for your agency. We reply to every message within 12 hours, in English or Turkish.</p>
+  <p>A tool for your business, work your team has no time for, a new website or a WordPress issue to fix. We reply to every message within 12 hours, in English or Turkish.</p>
   ${buttons(['/contact/', 'Get in Touch'], [site.whatsapp, 'WhatsApp Us', 'soft', ' target="_blank" rel="noopener"'])}
   <p class="cta-mail"><a href="mailto:${site.email}">${site.email}</a></p>
 </div></section>`;
 
 const menu = [
-  { href: '/services/', label: 'Services' },
   { href: '/industries/', label: 'Industries' },
+  { href: '/services/', label: 'Services' },
   { href: '/white-label/', label: 'White Label' },
   { href: '/plugins/', label: 'Plugins' },
   { href: '/prices/', label: 'Prices' },
@@ -287,7 +307,7 @@ ${contact ? ctaBand() : ''}
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <a class="footer-logo" href="/" aria-label="asparagents home page">${logo(132, 76)}</a>
-      <p>WordPress support, WordPress websites and white label SEO, GEO and social media for agencies. Fully remote from Ankara, Türkiye.</p>
+      <p>AI tools built for your industry, white label and outsourcing for agencies and companies, websites, SEO and GEO. Fully remote from Ankara, Türkiye.</p>
       <div class="footer-social">
         <a href="${site.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon.whatsapp}</a>
         <a href="mailto:${site.email}" aria-label="Email">${icon.mail}</a>

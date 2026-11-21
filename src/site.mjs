@@ -42,24 +42,17 @@ export const site = {
 };
 
 // Services. The paths are English (/services/<slug>/). card = how the service shows in the service strip.
+// Order (Firat, 21.11.2026): AI tools for industries lead (see /industries/), then these supporting services, with
+// one-time WordPress support last as a quick entry point.
 export const services = [
   {
-    slug: 'wordpress-support',
-    name: 'WordPress Support',
-    lines: ['WordPress', 'Support'],
-    label: 'Fix It Once',
-    icon: 'wrench',
-    short: 'One WordPress issue fixed for a fixed price. You pay after it is fixed and you are happy.',
-    strip: 'You tell us about <strong>one issue</strong>, we fix it, and you <strong>pay only when you are happy</strong> with the result.',
-  },
-  {
     slug: 'websites',
-    name: 'WordPress Websites',
-    lines: ['WordPress', 'Websites'],
+    name: 'Websites',
+    lines: ['Websites', 'and Shops'],
     label: 'Build',
     icon: 'web',
-    short: 'Fast, mobile-friendly WordPress and WooCommerce websites with the SEO foundations built in.',
-    strip: '<strong>Fast</strong>, mobile-friendly <strong>WordPress</strong> and <strong>WooCommerce</strong> sites with the SEO foundations built in from the start.',
+    short: 'Fast, mobile-friendly websites and online shops, with the SEO foundations built in.',
+    strip: '<strong>Fast</strong>, mobile-friendly websites and <strong>online shops</strong>, with the SEO foundations built in from the start.',
   },
   {
     slug: 'seo',
@@ -96,6 +89,24 @@ export const services = [
     icon: 'social',
     short: 'A content plan, post designs and regular publishing that keep your brand active.',
     strip: 'A <strong>content plan</strong>, post designs and <strong>regular publishing</strong> that keep your brand active.',
+  },
+  {
+    slug: 'accessibility-fixes',
+    name: 'Accessibility Fixes',
+    lines: ['Accessibility', 'Fixes'],
+    label: 'Access',
+    icon: 'shield',
+    short: 'We fix the issues your accessibility reporting tool finds, on the platform you already use.',
+    strip: 'We fix the issues your <strong>accessibility reporting tool</strong> finds, on <strong>any platform</strong>, and check them again.',
+  },
+  {
+    slug: 'wordpress-support',
+    name: 'WordPress Support',
+    lines: ['WordPress', 'Support'],
+    label: 'Fix It Once',
+    icon: 'wrench',
+    short: 'One WordPress issue fixed for a fixed price. You pay after it is fixed and you are happy.',
+    strip: 'You tell us about <strong>one issue</strong>, we fix it, and you <strong>pay only when you are happy</strong> with the result.',
   },
 ];
 
