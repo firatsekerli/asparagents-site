@@ -1,4 +1,4 @@
-import { site, pageHead, section, cards, twoCol, checklist, worldBand, formBlock, ctaRow, deskPhoto, refShot, icon, tt, scrollShot } from '../layout.mjs';
+import { site, pageHead, section, cards, steps, twoCol, checklist, worldBand, formBlock, ctaRow, deskPhoto, refShot, icon, tt, scrollShot, img } from '../layout.mjs';
 
 // About Us and Contact. Text from the live asparagents.com pages (About Us and Contact, 07.11.2026).
 const about = {
@@ -17,6 +17,7 @@ const about = {
       alumniOf: { '@type': 'CollegeOrUniversity', name: 'Mississippi State University' },
       worksFor: { '@id': `${site.url}/#organization` },
       knowsLanguage: ['en', 'tr'],
+      image: `${site.url}/assets/img/firat-sekerli-720.webp`,
     },
   ],
   body: `
@@ -25,7 +26,8 @@ ${pageHead({
   title: 'Satisfying Our Client Is [[Our Ultimate Goal]]',
   intro: 'asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. We build AI tools for small businesses, take on work for agencies and companies that need extra hands, and look after websites, all fully remotely.',
   actions: ctaRow('Get in Touch'),
-  media: deskPhoto(),
+  // Fırat's photo, from firatsekerli.com (Firat 21.11.2026).
+  media: img({ base: 'firat-sekerli', widths: [360, 480, 720], w: 720, h: 892, alt: 'Fırat Şekerli, founder of asparagents', cls: 'portrait', lazy: false, sizes: '(min-width: 1024px) 40vw, 90vw' }),
 })}
 ${section({
   tag: 'What We Do',
@@ -44,9 +46,19 @@ ${section({
     html: `<p class="label">Who Is Behind asparagents</p><h2 class="h2">${tt('Fırat [[Şekerli]]')}</h2>
     <p>Fırat Şekerli has worked on websites, social media, SEO and Google Ads since 2013. He holds an MBA in Marketing from Mississippi State University and worked as a digital marketing specialist, web design specialist and social media manager before running his own studio. He works in English and Turkish.</p>
     <p>In Türkiye the same studio works as <a href="https://asparajans.com/" hreflang="tr" lang="tr">asparajans</a>. <a href="https://www.linkedin.com/in/firatsekerli/" target="_blank" rel="noopener">Fırat on LinkedIn</a></p>
-    <h3>How we work</h3>
-    ${checklist(['We reply to every message within 12 hours', 'You deal with one person from start to finish', `Questions through the <a href="/contact/">contact page</a> or WhatsApp at ${site.phone}`])}`,
+    ${checklist(['You deal with one person from start to finish', 'Most messages get an answer within minutes', `Questions through the <a href="/contact/">contact page</a> or WhatsApp at ${site.phone}`])}`,
   }),
+})}
+${section({
+  id: 'how-we-work',
+  tag: 'How We Work',
+  title: 'Three Steps, [[One Person]]',
+  intro: '<p>We work from Ankara, Türkiye (UTC+3). During our day most messages get an answer within minutes, unless we are in the middle of an emergency fix for a client. If your message arrives while we sleep, you get a reply within 12 hours.</p>',
+  body: steps([
+    ['Tell Us What You Need', 'Send the form, an email or a WhatsApp message, in English or Turkish. We ask questions if we need more detail.'],
+    ['Agree What We Deliver', 'A written list of what we deliver and the price, before any work starts.'],
+    ['We Do the Work and Report', 'The same person does the work, checks with you at each stage, tests it with you before it goes live and tells you what changed in plain language.'],
+  ]),
 })}
 ${worldBand()}
 `,
