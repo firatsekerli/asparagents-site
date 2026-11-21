@@ -1,5 +1,5 @@
 // asparagents shop: same header, footer, colours and buttons as asparagents.com (Firat 21.11.2026).
-// Header and footer are copies of the static site (menu changes there need the same change here).
+// Shop-only header and footer (Firat 21.11.2026: the shop holds the products, with one small link back to asparagents.com).
 add_action('wp_head', function () {
   if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
   echo '<style id="ag-chrome-css">' . ':root {
@@ -143,7 +143,7 @@ body.oxygen-body .ag-chrome .footer-col a:not(.btn) { color: #444; }
 body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #2d4ddb; }
 body.oxygen-body .ag-chrome .footer-social a { background: #dce1f9; color: #2d4ddb; }
 body.oxygen-body .ag-chrome .footer-social a:hover { background: #2d4ddb; color: #fff; }
-body.oxygen-body .ag-chrome .footer-legal a, .ag-chrome .linklike { color: #5f6672; }
+body.oxygen-body .ag-chrome .footer-legal a, .ag-chrome .linklike, body.oxygen-body .ag-chrome a.ag-home { color: #5f6672; } body.oxygen-body .ag-chrome a.ag-home { text-decoration: underline; }
 body.oxygen-body .ag-chrome .footer-legal a:hover, .ag-chrome .linklike:hover { color: #2d4ddb; }
 .ag-chrome .linklike { background: none; border: 0; padding: 4px 0; font: inherit; font-size: 14px; cursor: pointer; }
 body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
@@ -154,10 +154,10 @@ function ag_chrome_header() {
   if ($done || is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
   $done = true;
   echo '<header class="site-header ag-chrome"><div class="header-in">
-  <a class="logo" href="https://asparagents.com/"><img src="https://asparagents.com/assets/img/logo-grey.svg?v=fb83d1ae" alt="asparagents home page" width="104" height="60"></a>
-  <nav id="site-menu" class="site-menu" aria-label="Main menu">
-    <ul><li><a href="https://asparagents.com/industries/">Industries</a></li><li><a href="https://asparagents.com/services/">Services</a></li><li><a href="https://asparagents.com/white-label/">White Label</a></li><li><a href="https://asparagents.com/about-us/">About Us</a></li><li><a href="https://asparagents.com/prices/">Prices</a></li><li><a href="https://asparagents.com/references/">References</a></li><li><a href="https://asparagents.com/blog/">Blog</a></li></ul>
-    <div class="menu-btns"><a class="btn btn-sm" href="https://asparagents.com/contact/">Contact</a><a class="btn btn-sm soft" href="https://shop.asparagents.com/cart/">Cart</a></div>
+  <a class="logo" href="https://shop.asparagents.com/"><img src="https://asparagents.com/assets/img/logo-grey.svg" alt="asparagents shop home page" width="104" height="60"></a>
+  <nav id="site-menu" class="site-menu" aria-label="Shop menu">
+    <ul><li><a href="https://shop.asparagents.com/">Products</a></li><li><a href="https://shop.asparagents.com/my-account/">My Account</a></li></ul>
+    <div class="menu-btns"><a class="btn btn-sm" href="https://shop.asparagents.com/cart/">Cart</a></div>
   </nav>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div></header>';
@@ -167,43 +167,13 @@ add_action('ct_before_builder', 'ag_chrome_header', 1);
 add_action('wp_footer', function () {
   if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
   echo '<footer class="site-footer ag-chrome">
-  <div class="wrap footer-grid">
-    <div class="footer-brand">
-      <a class="footer-logo" href="https://asparagents.com/"><img src="https://asparagents.com/assets/img/logo-grey.svg?v=fb83d1ae" alt="asparagents home page" width="132" height="77" loading="lazy"></a>
-      <p>AI tools built for your industry, white label and outsourcing for agencies and companies, websites, SEO and GEO. Fully remote from Ankara, Türkiye.</p>
-      <div class="footer-social">
-        <a href="https://wa.me/905336311907?text=Hello.%20Please%20tell%20us%20your%20name%2C%20your%20company%20(if%20any)%20and%20what%20you%20need%2C%20and%20we%20will%20get%20back%20to%20you%20shortly." target="_blank" rel="noopener" aria-label="WhatsApp"><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="22" height="22"><path d="M27.3 4.7A15.8 15.8 0 0 0 2.2 23.8L0 32l8.4-2.2a15.8 15.8 0 0 0 7.6 1.9 15.9 15.9 0 0 0 11.3-27zM16 29a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5A13.2 13.2 0 1 1 16 29zm7.3-9.8c-.4-.2-2.3-1.2-2.7-1.3s-.6-.2-.9.2-1 1.3-1.3 1.6-.5.3-.9.1a10.8 10.8 0 0 1-5.4-4.7c-.4-.7.4-.6 1.2-2.1a.8.8 0 0 0 0-.7c0-.2-.9-2.2-1.2-2.9s-.6-.7-.9-.7h-.8a1.4 1.4 0 0 0-1 .5 4.4 4.4 0 0 0-1.4 3.3 7.7 7.7 0 0 0 1.6 4.1 17.6 17.6 0 0 0 6.8 6c2.5 1.1 3.5 1.2 4.8 1a4.1 4.1 0 0 0 2.7-1.9 3.3 3.3 0 0 0 .2-1.9c-.1-.2-.4-.3-.7-.5z" fill="currentColor"/></svg></a>
-        <a href="mailto:info@asparagents.com" aria-label="Email"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M3 5h18v14H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="https://www.linkedin.com/in/firatsekerli/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z" fill="currentColor"/></svg></a>
-      </div>
-    </div>
-    <nav class="footer-col" aria-label="Services">
-      <h2>Services</h2>
-      <ul><li><a href="https://asparagents.com/services/websites/">Websites</a></li><li><a href="https://asparagents.com/services/seo/">SEO</a></li><li><a href="https://asparagents.com/services/local-seo/">Local SEO</a></li><li><a href="https://asparagents.com/services/geo-ai-visibility/">GEO and AI Visibility</a></li><li><a href="https://asparagents.com/services/social-media-management/">Social Media Management</a></li><li><a href="https://asparagents.com/services/accessibility-fixes/">Accessibility Fixes</a></li><li><a href="https://asparagents.com/services/wordpress-support/">WordPress Support</a></li><li><a href="https://asparagents.com/white-label/">White Label &amp; Outsourcing</a></li></ul>
-    </nav>
-    <nav class="footer-col" aria-label="Company">
-      <h2>Company</h2>
-      <ul><li><a href="https://asparagents.com/about-us/">About Us</a></li><li><a href="https://asparagents.com/industries/">Industries</a></li><li><a href="https://asparagents.com/references/">References</a></li><li><a href="https://asparagents.com/prices/">Prices</a></li><li><a href="https://asparagents.com/plugins/">Plugins</a></li><li><a href="https://asparagents.com/blog/">Blog</a></li><li><a href="https://asparagents.com/contact/">Contact</a></li></ul>
-    </nav>
-    <div class="footer-col">
-      <h2>Get in Touch</h2>
-      <ul class="footer-contact">
-        <li><a href="mailto:info@asparagents.com"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M3 5h18v14H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>info@asparagents.com</span></a></li>
-        <li><a href="tel:+905336311907"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>+90 533 631 19 07</span></a></li>
-        <li><span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Usually replies within minutes</span></span></li>
-      </ul>
-      <a class="btn btn-sm" href="https://asparagents.com/contact/">Contact Us</a>
-    </div>
-  </div>
   <div class="footer-bottom"><div class="wrap footer-bottom-in">
-    <p>© 2026 asparagents</p>
+    <p>© 2026 asparagents shop. Plugins and one-time WordPress support. <a class="ag-home" href="https://asparagents.com/">asparagents.com</a></p>
     <nav class="footer-legal" aria-label="Legal">
-      <a href="https://asparagents.com/privacy-policy/">Privacy Policy</a>
-      <a href="https://asparagents.com/cookie-policy-eu/">Cookie Policy</a>
       <a href="https://shop.asparagents.com/terms/">Terms</a>
       <a href="https://shop.asparagents.com/delivery-and-refund/">Delivery &amp; Refund</a>
+      <a href="https://shop.asparagents.com/privacy-policy/">Privacy Policy</a>
       <button type="button" class="linklike cky-banner-element">Cookie Settings</button>
-      <a href="https://asparajans.com/" hreflang="tr" lang="tr" target="_blank" rel="noopener">Türkçe: asparajans</a>
     </nav>
   </div></div>
 </footer>';
