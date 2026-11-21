@@ -1,6 +1,6 @@
 import { pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon, aiBand } from '../layout.mjs';
 import { windowsDemo } from '../demos/windows.mjs';
-import { demoCss, tabsJs } from '../demos/common.mjs';
+import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
 import { tradesDemo } from '../demos/trades.mjs';
 import { buildersDemo } from '../demos/builders.mjs';
 import { hireDemo } from '../demos/hire.mjs';
@@ -38,7 +38,7 @@ ${section({ tag: 'The Problem', title: c.problemTitle, body: cards(c.problems.ma
   ${c.demo.html}
 </div></section>
 <style>${demoCss}${c.demo.css || ''}</style>
-<script>${c.slug === 'windows-doors' ? '' : tabsJs}${c.demo.js}</script>
+<script>${c.slug === 'windows-doors' ? '' : tabsJs}${c.demo.js}${lockJs}</script>
 ${section({ tone: 'light', tag: 'What You Get', title: c.featsTitle, body: feats([...c.feats, ['plug', 'Works With Your Platform', platforms]]) })}
 ${aiBand({ intro: c.aiIntro })}
 ${section({ tag: 'How We Build It', title: 'Three Steps to [[Your Own Tool]]', body: steps(c.steps) })}

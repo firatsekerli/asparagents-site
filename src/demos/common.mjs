@@ -34,10 +34,28 @@ window.agEsc = function (s) { return String(s).replace(/[&<>"]/g, function (c) {
 window.agGbp = function (n) { return '£' + Number(n).toLocaleString('en-GB', { maximumFractionDigits: 0 }); };
 `;
 
+// window.agLock(): gives every demo panel the height of the tallest panel (measured as the page loads and again
+// when the width changes), so switching steps or adding answers never moves the page. Longer content scrolls inside.
+export const lockJs = `
+(function () {
+  function lock() {
+    [].forEach.call(document.querySelectorAll('.demo'), function (d) {
+      var ps = [].slice.call(d.querySelectorAll('.demo-panel')), max = 0;
+      ps.forEach(function (p) { var h = p.hidden; p.style.height = ''; p.hidden = false; max = Math.max(max, p.offsetHeight); p.hidden = h; });
+      ps.forEach(function (p) { p.style.height = max + 'px'; });
+    });
+  }
+  lock(); var w = innerWidth, t;
+  addEventListener('resize', function () { if (innerWidth === w) return; w = innerWidth; clearTimeout(t); t = setTimeout(lock, 150); });
+})();
+`;
+
 export const demoCss = `${windowsDemo.css}
+.demo-panel { overflow-y: auto; scrollbar-width: thin; }
+.demo-panel .demo-preview { top: 0; }
 .demo-sec .sec-head .h2, .demo-sec .sec-intro { color: #fff; }
 .demo-sec .sec-head { margin-bottom: 40px; }
-.chat { display: flex; flex-direction: column; gap: 12px; min-height: 360px; max-height: 520px; overflow-y: auto; padding: 4px 4px 12px; }
+.chat { display: flex; flex-direction: column; gap: 12px; height: 440px; overflow-y: auto; padding: 4px 4px 12px; }
 .msg { max-width: 82%; padding: 12px 16px; border-radius: 16px; font-size: 15px; line-height: 1.5; }
 .msg.bot { background: var(--bg); border: 1px solid var(--line); color: var(--navy); border-bottom-left-radius: 4px; align-self: flex-start; }
 .msg.me { background: var(--blue); color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }

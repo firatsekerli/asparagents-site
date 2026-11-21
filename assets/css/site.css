@@ -424,10 +424,9 @@ ul { margin: 0 0 16px; }
 @media (max-width: 680px) { .feats { grid-template-columns: minmax(0, 1fr); } .feat { padding: 20px; } }
 
 /* Product shot in a browser frame (page heads) */
-.page-head .two-media .browser { box-shadow: 0 30px 70px rgba(6, 11, 35, 0.22); }
+.page-head .two-media .browser { box-shadow: 0 10px 30px rgba(6, 11, 35, 0.18); }
 .page-head .two-media .browser img { max-height: none; width: 100%; height: auto; display: block; }
 .page-head .shot-wrap { position: relative; display: block; }
-.page-head .shot-wrap::before { content: ""; position: absolute; inset: 8% -6% -8% 10%; border-radius: 28px; background: var(--blue-soft); z-index: 0; }
 
 /* Smooth page changes in browsers that support them */
 @view-transition { navigation: auto; }
@@ -509,7 +508,6 @@ ul { margin: 0 0 16px; }
 .page-head a:not(.btn) { color: #fff; }
 .page-head .btn-soft { background: #fff; color: var(--blue); }
 .page-head .btn-soft:hover { background: var(--blue-soft); }
-.page-head .shot-wrap::before { background: rgba(255, 255, 255, 0.1); }
 .page-head .two-media img:not(.browser img) { border-radius: 14px; }
 .page-head .note { color: #c9d4ff; }
 .page-head .contact-lines a { color: #fff; }
