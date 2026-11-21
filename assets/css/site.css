@@ -555,3 +555,6 @@ ul { margin: 0 0 16px; }
 .fc-tiles a { width: 100%; }
 @media (min-width: 1200px) { .fc-tiles a > span:last-child, .fc-tiles small { white-space: nowrap; } }
 @media (max-width: 1199px) { .feature-card { grid-template-columns: minmax(0, 1fr); } }
+
+/* The quick fix bar: the button sits level with the text; the bar's own gap spaces it when it wraps on phones */
+.quick-band .btns { margin-top: 0; }
