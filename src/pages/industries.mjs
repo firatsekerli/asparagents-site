@@ -341,6 +341,18 @@ const pages = list.map(industryPage);
 export const industryCards = pages.map((p) => ({ icon: p.card[0], title: `<span class="label" style="display:table;margin-bottom:10px">${p.name}</span>${p.card[1]}`, text: p.card[2], href: p.path, linkText: 'Try the demo' }));
 
 // Overview page: one card per industry, then the same AI message and a call for industries not listed yet.
+// FAQ below the call (Firat 22.11.2026). Answers only repeat what the industry pages and the prices page already say.
+const hubFaq = faqBand(
+  [
+    { q: 'Is the demo the real tool?', a: '<p>Each demo is a simplified version with sample data, so you can see how it works. The tool we build for you uses your own services, options, rules and prices, and it is tested with you before it goes live.</p>' },
+    platformFaq,
+    { q: 'How much does a tool cost?', a: '<p>Every tool is built around your services, rules and prices, so the price depends on what it needs to do. <a href="/contact/">Tell us about your business</a> and we usually reply within minutes with a price.</p>' },
+    { q: 'Can you build a tool for an industry that is not listed?', a: '<p>Yes. The industries above are the ones we have built demos for so far. If your team spends hours on the same task every week, tell us about it and we will tell you how a tool could take it off your hands.</p>' },
+    { q: 'Will the tool make things up?', a: '<p>No. It works inside the services, prices, area and rules you give it. When a customer asks something it cannot answer, it takes their details and passes the conversation to you instead of guessing.</p>' },
+    { q: 'Do I need to change the software I use?', a: '<p>No. We connect the tool to the website, calendar or job software you already use when that software allows it. Otherwise requests arrive by email and in a simple dashboard.</p>' },
+  ],
+  { tone: 'white', aside: { icon: 'chat', title: 'One Contact, Fast Replies', text: 'You deal with one person from start to finish, and we usually reply within minutes.' }, cta: ctaRow('Tell Us About Your Business') }
+);
 const hub = {
   path: '/industries/',
   title: 'AI Tools for Your Industry | asparagents',
@@ -367,7 +379,9 @@ ${section({
   intro: '<p>These are the industries we have built demos for so far. If your team spends hours on the same task every week, tell us about it. We usually reply within minutes with how a tool could take it off your hands.</p>',
   body: ctaRow('Tell Us About Your Business'),
 })}
+${hubFaq.html}
 `,
+  schema: [hubFaq.ld],
 };
 
 export default [hub, ...pages.map(({ card, name, ...p }) => p)];
