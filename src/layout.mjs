@@ -1,4 +1,3 @@
-import { readFileSync } from 'node:fs';
 import { site, services, references, reviews, worldwide } from './site.mjs';
 
 // asparagents.com layout. The look follows the asparagents WordPress site (Firat, 20.11.2026: keep the look and
@@ -6,10 +5,7 @@ import { site, services, references, reviews, worldwide } from './site.mjs';
 // shadows, blue buttons, small red labels, a full-screen navy hero over the code photo on the home page.
 // Styles: assets/css/site.css. Script: assets/js/site.js (menu, FAQ, consent, forms).
 
-const logoSvg = readFileSync(new URL('../assets/img/logo-white.svg', import.meta.url), 'utf8')
-  .trim()
-  .replace(/fill="#fff"/g, 'fill="currentColor"');
-const logo = (w, h, extra = '') => logoSvg.replace('<svg ', `<svg width="${w}" height="${h}" aria-hidden="true" focusable="false"${extra} `);
+const logo = (w, h, alt, lazy = '') => `<img src="/assets/img/logo-grey.svg" alt="${alt}" width="${w}" height="${h}"${lazy}>`;
 
 export const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
@@ -293,7 +289,7 @@ const menu = [
 const header = (path) => `
 <a class="skip" href="#content">Skip to content</a>
 <header class="site-header${path === '/' ? ' over-hero' : ''}"><div class="header-in">
-  <a class="logo" href="/" aria-label="asparagents home page">${logo(104, 60)}</a>
+  <a class="logo" href="/">${logo(104, 60, 'asparagents home page')}</a>
   <nav id="site-menu" class="site-menu" aria-label="Main menu">
     <ul>${menu.map((m) => `<li><a href="${m.href}">${m.label}</a></li>`).join('')}</ul>
     <div class="menu-btns">${button('/contact/', 'Contact', 'sm')}${button(site.shop, 'Shop', 'sm soft')}</div>
@@ -306,7 +302,7 @@ ${contact ? ctaBand() : ''}
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <a class="footer-logo" href="/" aria-label="asparagents home page">${logo(132, 76)}</a>
+      <a class="footer-logo" href="/">${logo(132, 77, 'asparagents home page', ' loading="lazy"')}</a>
       <p>AI tools built for your industry, white label and outsourcing for agencies and companies, websites, SEO and GEO. Fully remote from Ankara, Türkiye.</p>
       <div class="footer-social">
         <a href="${site.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon.whatsapp}</a>
