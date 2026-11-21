@@ -547,3 +547,11 @@ ul { margin: 0 0 16px; }
 .fc-tiles .fc-i svg { width: 20px; height: 20px; }
 .fc-tiles small { display: block; font-weight: 400; font-size: 13px; color: #c9d4ff; }
 @media (max-width: 520px) { .fc-tiles { grid-template-columns: minmax(0, 1fr); } }
+
+/* Focus card: wider tile area so every tile is two lines (name, tool) and all tiles share one height */
+.feature-card { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+.fc-tiles { grid-auto-rows: 1fr; }
+.fc-tiles li { display: flex; }
+.fc-tiles a { width: 100%; }
+@media (min-width: 1200px) { .fc-tiles a > span:last-child, .fc-tiles small { white-space: nowrap; } }
+@media (max-width: 1199px) { .feature-card { grid-template-columns: minmax(0, 1fr); } }
