@@ -170,9 +170,9 @@ add_action('wp_footer', function () {
   <div class="footer-bottom"><div class="wrap footer-bottom-in">
     <p>© 2026 asparagents shop. Plugins and one-time WordPress support. <a class="ag-home" href="https://asparagents.com/">asparagents.com</a></p>
     <nav class="footer-legal" aria-label="Legal">
-      <a href="https://shop.asparagents.com/terms/">Terms</a>
+      <a href="https://shop.asparagents.com/terms-and-conditions/">Terms</a>
       <a href="https://shop.asparagents.com/delivery-and-refund/">Delivery &amp; Refund</a>
-      <a href="https://shop.asparagents.com/privacy-policy/">Privacy Policy</a>
+      <a href="https://shop.asparagents.com/privacy-policy/">Privacy Policy</a>\n      <a href="https://shop.asparagents.com/cookie-policy-eu/">Cookie Policy</a>
       <button type="button" class="linklike cky-banner-element">Cookie Settings</button>
     </nav>
   </div></div>
