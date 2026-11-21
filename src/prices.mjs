@@ -2,14 +2,15 @@ import { checklist, buttons, orgId, site, section } from './layout.mjs';
 
 // asparagents.com prices in USD and GBP. Every number must come from Firat (standing rule: never guess a price).
 // null = not given yet: the card says "Price on request" and the build prints a warning, so a preview can be
-// reviewed but nothing goes live with a guessed number. One-Time WordPress Support ($47) is the live shop price.
-// PENDING Firat (20.11.2026): all other USD and GBP prices.
+// reviewed but nothing goes live with a guessed number. USD prices from Firat (21.11.2026), matched to the
+// asparajans.com packages: fix $27, website $247, shop $447, SEO/GEO $247 a month, social media $147 a month.
+// PENDING Firat: GBP prices (the site says "US dollars" until they are given).
 export const plans = [
   {
     id: 'one-time-wordpress-support',
     name: 'One-Time WordPress Support',
     sub: 'One issue, fixed',
-    usd: 47,
+    usd: 27,
     gbp: null,
     items: ['You describe one issue, in writing or with a short video', 'We back up your site before we change anything', 'We record our screen while we fix it', 'You pay after the fix, when you are happy'],
     cta: ['Buy in the Shop', `${site.shop}product/one-time-wordpress-support/`],
@@ -17,19 +18,19 @@ export const plans = [
   {
     id: 'wordpress-website',
     name: 'WordPress Website',
-    sub: 'Business website, one-time',
-    usd: null,
+    sub: 'Business website, 5 to 10 pages, one-time',
+    usd: 247,
     gbp: null,
-    items: ['A WordPress website made for your business', 'Mobile-friendly and fast', 'SEO foundations from the start', 'Easy to update yourself'],
+    items: ['A WordPress website made for your business, 5 to 10 pages', 'Mobile-friendly and fast on every device', 'Technical and on-page SEO foundations from the start', 'Google Business Profile setup', 'A basic structure for AI visibility (GEO)', 'Maintenance and support free for the first year'],
     cta: ['Get a Quote', '/contact/'],
   },
   {
     id: 'woocommerce-shop',
     name: 'WooCommerce Shop',
-    sub: 'Online shop, one-time',
-    usd: null,
+    sub: 'Online shop, unlimited products, one-time',
+    usd: 447,
     gbp: null,
-    items: ['A WooCommerce shop with payment setup', 'Mobile-friendly product and checkout pages', 'SEO foundations from the start'],
+    items: ['Unlimited products, and we add your first 100', 'Payment setup included', 'Mobile-friendly and fast', 'Technical and on-page SEO foundations', 'Google Business Profile setup and a basic structure for GEO', 'Maintenance and support free for the first year'],
     cta: ['Get a Quote', '/contact/'],
   },
   {
@@ -37,19 +38,19 @@ export const plans = [
     monthly: true,
     name: 'SEO, Local SEO and GEO',
     sub: 'Monthly service',
-    usd: null,
+    usd: 247,
     gbp: null,
-    items: ['Technical and on-page SEO', 'Google Business Profile management and review strategy', 'Monthly AI visibility checks', 'A plain-language monthly report'],
+    items: ['Regular SEO: keyword and competitor tracking, a content plan', 'Google Business Profile management and review strategy', 'Tracking your visibility in ChatGPT and Google AI answers', 'Website maintenance included', 'A plain-language monthly report'],
     cta: ['Get a Quote', '/contact/'],
   },
   {
     id: 'social-media-management',
     monthly: true,
     name: 'Social Media Management',
-    sub: 'Monthly service',
-    usd: null,
+    sub: 'Monthly service, Instagram',
+    usd: 147,
     gbp: null,
-    items: ['A monthly content calendar, shared for approval', 'Post designs, captions and hashtags', 'Scheduling and posting', 'A plain-language monthly report'],
+    items: ['12 posts and 4 Reels a month', 'A content calendar, post designs and captions', 'Reels made from footage your business sends', 'Regular posting and a monthly report', 'Each extra platform (Facebook, LinkedIn) +20%', 'Ads management and ad budget not included'],
     cta: ['Get a Quote', '/contact/'],
   },
 ];
