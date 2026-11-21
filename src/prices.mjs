@@ -3,7 +3,7 @@ import { checklist, buttons, orgId, site, section } from './layout.mjs';
 // asparagents.com prices, in US dollars only (Firat 21.11.2026: one currency; we convert to the client's currency in the quote). Every number must come from Firat (standing rule: never guess a price).
 // null = not given yet: the card says "Price on request" and the build prints a warning, so a preview can be
 // reviewed but nothing goes live with a guessed number. USD prices from Firat (21.11.2026), matched to the
-// asparajans.com packages: fix $27, website $247, shop $447, SEO/GEO $247 a month, social media $147 a month.
+// asparajans.com packages: fix $27, website $447, shop $747 (raised 21.11.2026), SEO/GEO $247 a month, social media $147 a month.
 export const plans = [
   {
     id: 'one-time-wordpress-support',
@@ -17,7 +17,7 @@ export const plans = [
     id: 'wordpress-website',
     name: 'WordPress Website',
     sub: 'Business website, 5 to 10 pages, one-time',
-    usd: 247,
+    usd: 447,
     items: ['A WordPress website made for your business, 5 to 10 pages', 'Mobile-friendly and fast on every device', 'Technical and on-page SEO foundations from the start', 'Google Business Profile setup', 'A basic structure for AI visibility (GEO)', 'Maintenance and support free for the first year'],
     cta: ['Get a Quote', '/contact/'],
   },
@@ -25,7 +25,7 @@ export const plans = [
     id: 'woocommerce-shop',
     name: 'WooCommerce Shop',
     sub: 'Online shop, unlimited products, one-time',
-    usd: 447,
+    usd: 747,
     items: ['Unlimited products, and we add your first 100', 'Payment setup included', 'Mobile-friendly and fast', 'Technical and on-page SEO foundations', 'Google Business Profile setup and a basic structure for GEO', 'Maintenance and support free for the first year'],
     cta: ['Get a Quote', '/contact/'],
   },
