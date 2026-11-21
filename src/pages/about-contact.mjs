@@ -39,7 +39,7 @@ ${section({
 ${section({
   tone: 'light',
   body: twoCol({
-    media: scrollShot('cristal-windows', 'Cristal Windows website, home page'),
+    media: scrollShot('firatsekerli', 'firatsekerli.com, Fırat Şekerli’s own website, home page'),
     reverse: true,
     html: `<p class="label">Who Is Behind asparagents</p><h2 class="h2">${tt('Fırat [[Şekerli]]')}</h2>
     <p>Fırat Şekerli has worked on websites, social media, SEO and Google Ads since 2013. He holds an MBA in Marketing from Mississippi State University and worked as a digital marketing specialist, web design specialist and social media manager before running his own studio. He works in English and Turkish.</p>
