@@ -182,43 +182,8 @@ add_action('wp_footer', function () {
   echo '<script>' . '(function(){var d=document.documentElement,b=document.querySelector(\'.ag-chrome .menu-btn\'),m=document.getElementById(\'site-menu\');if(!b||!m)return;var s=function(o){d.classList.toggle(\'menu-open\',o);b.setAttribute(\'aria-expanded\',o?\'true\':\'false\');};b.addEventListener(\'click\',function(){s(!d.classList.contains(\'menu-open\'));});document.addEventListener(\'keydown\',function(e){if(e.key===\'Escape\')s(false);});var w=window.matchMedia(\'(min-width: 1024px)\');var f=function(){if(w.matches)s(false);};w.addEventListener?w.addEventListener(\'change\',f):w.addListener(f);})();' . '</script>';
 }, 5);
 
-// Tracking on the shop (Firat 21.11.2026: purchase tracking on the shop). Loads the same GTM container as
-// asparagents.com (GTM-TCGBCSBJ), and only after the visitor accepts analytics or advertisement cookies in CookieYes.
-add_action('wp_head', function () {
-  if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
-  ?>
-<script>
-(function () {
-  var loaded = false;
-  window.dataLayer = window.dataLayer || [];
-  function g() { window.dataLayer.push(arguments); }
-  g('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
-  function read() {
-    var m = document.cookie.match(/(?:^|; )cookieyes-consent=([^;]+)/);
-    if (!m) return null;
-    var o = {};
-    decodeURIComponent(m[1]).split(',').forEach(function (p) { var k = p.split(':'); o[k[0]] = k[1]; });
-    return o;
-  }
-  function apply() {
-    var c = read();
-    if (!c) return;
-    var a = c.analytics === 'yes', ad = c.advertisement === 'yes';
-    g('consent', 'update', { analytics_storage: a ? 'granted' : 'denied', ad_storage: ad ? 'granted' : 'denied', ad_user_data: ad ? 'granted' : 'denied', ad_personalization: ad ? 'granted' : 'denied' });
-    if (loaded || !(a || ad)) return;
-    loaded = true;
-    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TCGBCSBJ';
-    document.head.appendChild(s);
-  }
-  apply();
-  document.addEventListener('cookieyes_consent_update', apply);
-})();
-</script>
-  <?php
-}, 1);
+// Tracking on the shop: GTM-TCGBCSBJ is loaded by the snippets "Google Tag Manager - HEAD" (id 6, CookieYes consent)
+// and "Google Tag Manager - BODY" (id 7). This snippet only adds the purchase event.
 
 // Purchase event for GA4 and the Google Ads conversion, once per order, on the order received page.
 add_action('wp_footer', function () {
