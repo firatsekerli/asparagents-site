@@ -126,21 +126,19 @@ export const worldwide = [
 export const references = [
   { key: 'cristal-windows', name: 'Cristal Windows', sector: 'Windows and Doors', type: 'Website', place: 'Fleet, Hampshire, England', url: 'https://cristalwindows.co.uk/', mock: true, detail: 'cristal-windows', color: '#1f3a8a',
     text: 'For Cristal Windows, which installs double and triple glazed windows and doors in England, we designed a website that highlights its products, customer reviews and online quote process. We also continue to maintain and support the site.',
-    // Tools Firat built for Cristal Windows (Firat 21.11.2026: show them on this page). Facts from the plugins'
-    // own descriptions and the Survey Pro readme. Survey screenshots show the real app with no customer data.
+    // Tools Firat built for Cristal Windows (Firat 21.11.2026: show them on this page; 22.11.2026: as prototypes on
+    // our site, not links to his). Facts from the plugins' own descriptions and the Survey Pro readme.
     tools: [
-      { img: 'quote', label: 'Online Quotation Form', title: 'A Quote in [[Four Steps]]', link: ['https://cristalwindows.co.uk/free-double-glazing-price-quotation/', 'Try the Quotation Form'],
-        alt: 'Cristal Windows quotation form, choosing the configuration style of a casement window',
+      { demo: 'quote', label: 'Online Quotation Form', title: 'A Quote in [[Four Steps]]',
         text: 'Homeowners choose a product, a style and a configuration, add each window or door to a basket and send one quote request for all of them.',
         points: ['Windows, doors and bay windows in one form', 'Product types, materials, colours and styles managed in WordPress', 'Quote requests handled in the WordPress dashboard'] },
-      { img: 'survey', label: 'Survey App', title: 'Surveys on a Phone, [[Not on Paper]]', phone: ['survey-job', 'survey-bay'],
-        alt: ['Cristal Survey Pro, the job details screen on a phone', 'Cristal Survey Pro, choosing the shape of a bay window'],
+      { demo: 'survey', label: 'Survey App', title: 'Surveys on a Phone, [[Not on Paper]]',
         text: 'Cristal Windows surveyors measure every window, door and bay window on a phone or tablet, and the office receives a finished survey it can order from.',
         points: ['Every required answer is checked before a survey can be sent', 'Photos, voice notes and drafts saved on the device', 'Bay windows drawn as seen from inside the room', 'The office gets an email with the survey PDF and tracks each job from submitted to installed', 'Styles come from the quotation form, so both always match'] },
-      { img: 'checker', label: 'Conservation Area Checker', title: 'Planning Questions [[Answered Early]]', link: ['https://cristalwindows.co.uk/conservation-area-checker/', 'Try the Checker'],
-        alt: 'Cristal Windows conservation area checker showing a result for a postcode in a conservation area',
+      { demo: 'checker', label: 'Conservation Area Checker', title: 'Planning Questions [[Answered Early]]',
         text: 'Visitors enter a postcode and see whether they are in the service area, and whether the address may be in a conservation area or an Article 4 Direction area, which can affect replacement windows and doors.',
-        points: ['Works from any page through a postcode box', 'Service area, counties and the call to action set in WordPress', 'Every result leads to booking a free survey'] },
+        points: ['Works from any page through a postcode box', 'Service area, counties and the call to action set in WordPress', 'Every result leads to booking a free survey'],
+        source: 'Postcodes are located with <a href="https://postcodes.io/" target="_blank" rel="noopener">postcodes.io</a> and checked against the conservation area and Article 4 Direction datasets of <a href="https://www.planning.data.gov.uk/" target="_blank" rel="noopener">Planning Data</a> (GOV.UK).' },
     ] },
   { key: 'misbourne-design', name: 'Misbourne Design', sector: 'Architectural Design', type: 'Website', place: 'Oxfordshire, England', url: 'https://misbournedesign.com/', mock: true, detail: 'misbourne-design', color: '#0f8a3c', built: true,
     text: 'For Misbourne Design Associates, which offers residential and commercial architectural design in Oxfordshire and the surrounding counties in England, we developed a WordPress website that highlights its services, way of working and projects.' },

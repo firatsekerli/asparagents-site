@@ -589,18 +589,15 @@ ul { margin: 0 0 16px; }
 .two-media img.portrait { object-position: 50% 20%; }
 .post-card .label { align-self: flex-start; margin-bottom: 4px; }
 
-/* Tools built for a client (reference pages) */
-.tool-row + .tool-row { margin-top: 72px; }
-.tool-shot { display: block; border-radius: 14px; overflow: hidden; background: var(--white); box-shadow: 0 24px 50px rgba(6, 11, 35, 0.16); }
-.tool-shot img { display: block; width: 100%; height: auto; }
-.tool-phones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 460px; margin: 0 auto; }
-.phone-shot { display: block; border: 8px solid var(--navy); border-radius: 28px; overflow: hidden; background: var(--white); box-shadow: 0 24px 50px rgba(6, 11, 35, 0.16); }
-.phone-shot img { display: block; width: 100%; height: auto; }
-.phone-shot:nth-child(2) { margin-top: 40px; }
-.tool-row .checklist { margin: 16px 0 24px; }
-@media (max-width: 767px) {
-  .tool-row + .tool-row { margin-top: 56px; }
-  .tool-phones { gap: 12px; }
-  .phone-shot { border-width: 5px; border-radius: 20px; }
-  .phone-shot:nth-child(2) { margin-top: 24px; }
+/* Reference pages (Firat 22.11.2026): hero shows the top of the home page; gallery shots get a visible shadow */
+.page-head .two-media .ref-hero img { aspect-ratio: 4 / 3; height: auto; object-fit: cover; object-position: top; }
+.gallery img { box-shadow: 0 14px 36px rgba(6, 11, 35, 0.14), 0 0 0 1px rgba(6, 11, 35, 0.06); }
+.tool-block + .tool-block { margin-top: 88px; }
+.tool-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: end; margin-bottom: 32px; }
+.tool-head .checklist { margin: 0; }
+.tool-head p:last-child { margin-bottom: 0; }
+.tool-source { margin: 16px 0 0; font-size: 14px; color: var(--muted); text-align: center; }
+@media (max-width: 860px) {
+  .tool-head { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-bottom: 24px; }
+  .tool-block + .tool-block { margin-top: 64px; }
 }
