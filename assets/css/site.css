@@ -34,9 +34,9 @@ ul { margin: 0 0 16px; }
 .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
 .hl { color: var(--blue); }
 .tone-blue .hl, .tone-navy .hl, .hero .hl { color: #9fb2ff; }
-.label { color: var(--red-text); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 12px; }
-.hero .label, .tone-navy .label { color: #ff8a8a; }
-.tone-blue .label { color: #ffd0d0; }
+/* Labels look the same on every background: red text on a light red pill (Firat 21.11.2026) */
+.label { display: inline-block; color: var(--red-text); background: #fdecea; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; margin: 0 0 14px; width: fit-content; }
+.hero .label, .page-head .label, .feature-card .label, .ai-band .label, .cta-band .label, [class*="tone-"] .label { color: var(--red-text); }
 .h1 { font-size: clamp(32px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -0.025em; }
 .h2 { font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.02em; }
 .lead { font-size: 18px; }
@@ -490,7 +490,6 @@ ul { margin: 0 0 16px; }
 /* Featured card (one service shown above the others) */
 .feature-card { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; align-items: center; background: linear-gradient(135deg, #0a2060, #2d4ddb); color: #e6eaff; border-radius: 18px; padding: 44px; margin-bottom: 32px; box-shadow: 0 24px 50px rgba(6, 11, 35, 0.2); }
 .feature-card h2, .feature-card h3 { color: #fff; }
-.feature-card .label { color: #ffd0d0; }
 .feature-card p { color: #e6eaff; }
 .feature-card .chips li { background: rgba(255, 255, 255, 0.14); color: #fff; }
 .feature-card .chips li a { color: #fff; text-decoration: none; }
@@ -504,7 +503,6 @@ ul { margin: 0 0 16px; }
 .page-head { background: linear-gradient(135deg, #0a2060 0%, #1d3aa8 55%, #2d4ddb 100%); color: #e6eaff; }
 .page-head .h1, .page-head h1, .page-head h2 { color: #fff; }
 .page-head .hl { color: #9fb2ff; }
-.page-head .label { color: #ffd0d0; }
 .page-head .lead, .page-head p, .page-head li { color: #e6eaff; }
 .page-head a:not(.btn) { color: #fff; }
 .page-head .btn-soft { background: #fff; color: var(--blue); }
@@ -548,11 +546,11 @@ ul { margin: 0 0 16px; }
 @media (max-width: 520px) { .fc-tiles { grid-template-columns: minmax(0, 1fr); } }
 
 /* Focus card: wider tile area so every tile is two lines (name, tool) and all tiles share one height */
-.feature-card { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+.feature-card { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 .fc-tiles { grid-auto-rows: 1fr; }
 .fc-tiles li { display: flex; }
 .fc-tiles a { width: 100%; }
-@media (min-width: 1200px) { .fc-tiles a > span:last-child, .fc-tiles small { white-space: nowrap; } }
+@media (min-width: 1260px) { .fc-tiles a > span:last-child, .fc-tiles small { white-space: nowrap; } }
 @media (max-width: 1199px) { .feature-card { grid-template-columns: minmax(0, 1fr); } }
 
 /* The quick fix bar: the button sits level with the text; the bar's own gap spaces it when it wraps on phones */
@@ -579,7 +577,11 @@ ul { margin: 0 0 16px; }
   .two-media > .scroll-shot .scroll-view { flex: 1; aspect-ratio: auto; min-height: 0; }
   .two-media > .scroll-shot .scroll-view img { position: absolute; inset: 0; }
   .two-media > .scroll-shot .scroll-view { position: relative; }
+  /* The portrait keeps its own shape so the face is not zoomed in */
+  .two-media:has(> img.portrait) { min-height: 0; align-self: center; }
+  .two-media > img.portrait { position: static; height: auto; aspect-ratio: 720 / 892; max-height: 640px; }
 }
 
 /* Portrait photo (About page head): keep the face in view when the frame crops it */
-.portrait { object-position: 50% 15%; }
+.two-media img.portrait { object-position: 50% 20%; }
+.post-card .label { align-self: flex-start; margin-bottom: 4px; }

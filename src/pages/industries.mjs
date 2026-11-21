@@ -338,7 +338,7 @@ const list = [
 const pages = list.map(industryPage);
 
 // Cards for the home and services pages: one per industry, linking to its demo.
-export const industryCards = pages.map((p) => ({ icon: p.card[0], title: `<span class="label" style="display:block;margin-bottom:6px">${p.name}</span>${p.card[1]}`, text: p.card[2], href: p.path, linkText: 'Try the demo' }));
+export const industryCards = pages.map((p) => ({ icon: p.card[0], title: `<span class="label" style="display:table;margin-bottom:10px">${p.name}</span>${p.card[1]}`, text: p.card[2], href: p.path, linkText: 'Try the demo' }));
 
 // Overview page: one card per industry, then the same AI message and a call for industries not listed yet.
 const hub = {

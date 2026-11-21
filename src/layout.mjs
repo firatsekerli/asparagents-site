@@ -46,8 +46,9 @@ export const refShot = (key, alt, sizes = '(min-width: 1024px) 30vw, 90vw', suff
 // (on touch screens it can be scrolled with a finger).
 export const scrollShot = (key, alt, sizes = '(min-width: 1024px) 46vw, 90vw') =>
   `<span class="scroll-shot"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="scroll-view">${refShot(key, alt, sizes)}</span><span class="scroll-hint" aria-hidden="true">Hover to scroll</span></span>`;
-export const deskPhoto = (alt = 'A team working together around a wooden table with laptops and notebooks', sizes = '(min-width: 1024px) 40vw, 90vw') =>
-  img({ base: 'team-desk', widths: [480, 720, 1000, 1220], w: 1220, h: 1828, alt, sizes });
+// Fırat's photo (from firatsekerli.com), used instead of a stock team photo (Firat 21.11.2026). Portrait 720x892.
+export const founderPhoto = ({ alt = 'Fırat Şekerli, founder of asparagents', lazy = true, sizes = '(min-width: 1024px) 40vw, 90vw' } = {}) =>
+  img({ base: 'firat-sekerli', widths: [360, 480, 720], w: 720, h: 892, alt, cls: 'portrait', lazy, sizes });
 
 const svg = (vb, body, size = 24) => `<svg aria-hidden="true" focusable="false" viewBox="${vb}" width="${size}" height="${size}">${body}</svg>`;
 const stroke = (d, size = 24) => svg('0 0 24 24', `<path d="${d}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`, size);
@@ -285,7 +286,7 @@ const menu = [
   { href: '/industries/', label: 'Industries' },
   { href: '/services/', label: 'Services' },
   { href: '/white-label/', label: 'White Label' },
-  { href: '/plugins/', label: 'Plugins' },
+  { href: '/about-us/', label: 'About Us' },
   { href: '/prices/', label: 'Prices' },
   { href: '/references/', label: 'References' },
   { href: '/blog/', label: 'Blog' },
@@ -360,6 +361,11 @@ const reveal = (html) => {
   return i < 0 ? rvAdd(html) : html.slice(0, i) + rvAdd(html.slice(i));
 };
 
+// Links to other sites (asparajans.com, LinkedIn, WhatsApp, client sites) open in a new tab (Firat 21.11.2026).
+// asparagents.com and the shop subdomain stay in the same tab.
+const externalLinks = (html) =>
+  html.replace(/<a ((?:(?!target=)[^>])*?)href="(https?:\/\/(?!(?:www\.)?asparagents\.com|shop\.asparagents\.com)[^"]+)"((?:(?!target=)[^>])*)>/g, '<a $1href="$2"$3 target="_blank" rel="noopener">');
+
 export const render = (page) => {
   const canonical = `${site.url}${page.path}`;
   const graph = [organization, { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.name, inLanguage: 'en', publisher: { '@id': orgId } }];
@@ -372,7 +378,7 @@ export const render = (page) => {
   if (page.crumbs) graph.push({ ...breadcrumbLd([{ name: 'Home', path: '/' }, ...page.crumbs]), '@id': `${canonical}#breadcrumb` });
   if (page.schema) graph.push(...page.schema);
   const og = page.ogImage || '/assets/img/og-default.jpg';
-  return `<!doctype html>
+  return externalLinks(`<!doctype html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -405,7 +411,7 @@ ${reveal(footer({ contact: page.contact !== false }))}
 <script src="/assets/js/site.js?v=${page.assetVersion}" defer></script>
 <!--/email_off--></body>
 </html>
-`;
+`);
 };
 
 export { references, services, site };

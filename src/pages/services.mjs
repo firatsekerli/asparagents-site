@@ -1,4 +1,4 @@
-import { site, services, references, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, deskPhoto, refShot, listedServices, tt, scrollShot, icon } from '../layout.mjs';
+import { site, services, references, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, refShot, listedServices, tt, scrollShot, icon } from '../layout.mjs';
 import { byId, priceBand } from '../prices.mjs';
 
 // Service pages (/services/ and /services/<slug>/). Facts come from the live asparagents.com pages and the approved
@@ -252,7 +252,7 @@ ${section({
   tag: 'Where We Start',
   title: 'AI Tools Built for [[Your Industry]]',
   body: `<div class="feature-card"><div><p class="label">Our Main Focus</p><h3 class="h2" style="font-size:clamp(24px,2.4vw,32px)">Quotes, Bookings, Estimates, Paperwork and Repairs</h3><p>Tools that take repeated work off your team, built around your rules and prices and connected to your website. Each industry has a working demo you can try.</p><div class="btns"><a class="btn btn-soft" href="/industries/">See the Industries</a></div></div>
-  <ul class="fc-tiles">${industryCards.map((c) => `<li><a href="${c.href}"><span class="fc-i">${icon[c.icon]}</span><span>${c.title.match(/>([^<]*)<\/span>/)[1]}<small>${c.title.replace(/<span[^>]*>[^<]*<\/span>/, '')}</small></span></a></li>`).join('')}</ul></div>`,
+  <ul class="fc-tiles">${industryCards.map((c) => `<li><a href="${c.href}"><span class="fc-i">${icon[c.icon]}</span><span>${c.title.match(/>([^<]*)<\/span>/)[1].replace(/ and /g, ' &amp; ')}<small>${c.title.replace(/<span[^>]*>[^<]*<\/span>/, '')}</small></span></a></li>`).join('')}</ul></div>`,
 })}
 ${section({ tone: 'light', tag: 'Services', title: 'Choose What You [[Need]]', body: `${cards([
     { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'For agencies and companies: hand us the work your team does not have the time or the know-how for, <strong>under your brand</strong> if you want.', href: '/white-label/', linkText: 'More about White Label' },

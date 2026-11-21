@@ -1,4 +1,4 @@
-import { site, pageHead, section, cards, steps, twoCol, checklist, worldBand, formBlock, ctaRow, deskPhoto, refShot, icon, tt, scrollShot, img } from '../layout.mjs';
+import { site, pageHead, section, cards, steps, twoCol, checklist, worldBand, formBlock, ctaRow, founderPhoto, refShot, icon, tt, scrollShot, img } from '../layout.mjs';
 
 // About Us and Contact. Text from the live asparagents.com pages (About Us and Contact, 07.11.2026).
 const about = {
@@ -26,8 +26,7 @@ ${pageHead({
   title: 'Satisfying Our Client Is [[Our Ultimate Goal]]',
   intro: 'asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. We build AI tools for small businesses, take on work for agencies and companies that need extra hands, and look after websites, all fully remotely.',
   actions: ctaRow('Get in Touch'),
-  // Fırat's photo, from firatsekerli.com (Firat 21.11.2026).
-  media: img({ base: 'firat-sekerli', widths: [360, 480, 720], w: 720, h: 892, alt: 'Fırat Şekerli, founder of asparagents', cls: 'portrait', lazy: false, sizes: '(min-width: 1024px) 40vw, 90vw' }),
+  media: founderPhoto({ lazy: false }),
 })}
 ${section({
   tag: 'What We Do',
