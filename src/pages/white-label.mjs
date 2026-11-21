@@ -49,7 +49,7 @@ ${section({
   cls: 'ai-band',
   tag: 'Why Not Just Use AI',
   title: 'Anyone Can Do It With AI, but [[the Details Still Decide]]',
-  intro: 'AI tools let anyone write a page, fix a heading or draft a post, and they are genuinely useful. We use them too. What they do not bring is someone who does this work every day, knows what to check and notices what is wrong before your customers do.',
+  intro: 'AI tools let anyone write a page, fix a heading or draft a post, and they are genuinely useful. We use them too, and that is why our prices are lower. What you get in return is fast fixes that are right the first time. AI makes mistakes, and if you do not know the technical side, they are easy to miss: it looks done, but a wrong fix can cost you far more than it saved.',
   body: cards([
     { icon: 'seo', title: 'Knowing What to Check', text: 'An accessibility audit, an SEO fix or a new page has steps that are easy to skip when you do not know they exist.' },
     { icon: 'web', title: 'An Eye for Detail', text: 'Spacing, wording, contrast and how the page looks on a phone. Small things that decide whether a site feels right.' },
