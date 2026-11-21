@@ -4,6 +4,7 @@ import { site, references, pageHead, section, refGrid, worldBand, ctaRow, img, e
 const alts = {
   'cristal-windows': { a: 'Cristal Windows website, About page', b: 'Cristal Windows website, double glazed windows product page' },
   'misbourne-design': { a: 'Misbourne Design Associates website, About page', b: 'Misbourne Design Associates website, residential architectural design page' },
+  'dimak-kapi': { a: 'Dimak Kapı website, certified fire door product page', b: 'Dimak Kapı website, About page' },
 };
 const meta = (text) => (text.length > 155 ? text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : text);
 // Tools built for a client: desktop screenshots in a browser frame, phone screenshots side by side.
@@ -34,8 +35,8 @@ const shot = (key, suffix, alt) => img({ base: `ref-${key}${suffix}`, widths: RE
 
 const listPage = {
   path: '/references/',
-  title: 'Website References in the UK | asparagents',
-  description: 'Websites we built for businesses in England: a double glazing installer in Hampshire and an architectural design practice in Oxfordshire.',
+  title: 'Website References | asparagents',
+  description: 'Websites we built for businesses: a double glazing installer in Hampshire, an architectural design practice in Oxfordshire and a fire door manufacturer in Ankara.',
   crumbs: [{ name: 'References', path: '/references/' }],
   body: `
 ${pageHead({ tag: 'References', title: 'From [[Our Work]]', intro: 'Live websites we built directly for businesses. Most of our work for agencies is white label and carries their names, so it is not listed here. <a href="/contact/">Contact us</a> to see more examples privately.', actions: ctaRow() })}

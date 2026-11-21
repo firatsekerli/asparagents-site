@@ -144,6 +144,9 @@ export const references = [
     ] },
   { key: 'misbourne-design', name: 'Misbourne Design', sector: 'Architectural Design', type: 'Website', place: 'Oxfordshire, England', url: 'https://misbournedesign.com/', mock: true, detail: 'misbourne-design', color: '#0f8a3c', built: true,
     text: 'For Misbourne Design Associates, which offers residential and commercial architectural design in Oxfordshire and the surrounding counties in England, we developed a WordPress website that highlights its services, way of working and projects.' },
+  // Firat 21.11.2026: Dimak gets its own reference page; the tools are shown as built for Dimak. Text and images from asparajans.com.
+  { key: 'dimak-kapi', name: 'Dimak Kapı', sector: 'Fire Door Manufacturer', type: 'Corporate Website', place: 'Ankara, Türkiye', url: 'https://www.dimak.com.tr/', mock: true, detail: 'dimak-kapi', color: '#ff6b00',
+    text: 'For Dimak Kapı, which makes fire doors, sectional doors and steel doors, we designed a corporate website that highlights its products, reference projects and quote process.' },
 ];
 
 // English Google reviews of Fırat Şekerli's work, copied word for word from the asparajans Google profile.
