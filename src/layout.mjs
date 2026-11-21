@@ -262,6 +262,7 @@ const ctaBand = () => `
 
 const menu = [
   { href: '/services/', label: 'Services' },
+  { href: '/industries/', label: 'Industries' },
   { href: '/white-label/', label: 'White Label' },
   { href: '/plugins/', label: 'Plugins' },
   { href: '/prices/', label: 'Prices' },
@@ -299,7 +300,7 @@ ${contact ? ctaBand() : ''}
     </nav>
     <nav class="footer-col" aria-label="Company">
       <h2>Company</h2>
-      <ul><li><a href="/about-us/">About Us</a></li><li><a href="/references/">References</a></li><li><a href="/prices/">Prices</a></li><li><a href="/plugins/">Plugins</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul>
+      <ul><li><a href="/about-us/">About Us</a></li><li><a href="/industries/">Industries</a></li><li><a href="/references/">References</a></li><li><a href="/prices/">Prices</a></li><li><a href="/plugins/">Plugins</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul>
     </nav>
     <div class="footer-col">
       <h2>Get in Touch</h2>

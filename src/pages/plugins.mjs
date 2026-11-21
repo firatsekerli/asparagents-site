@@ -32,6 +32,8 @@ const omutPage = (() => {
     body: `
 ${pageHead({ tag: 'Oxygen Media Usage Tracker Pro', title: 'Finally See Where Every Image Is Used in Your [[Oxygen Builder]] Site', intro: '<p>Stop guessing. Start knowing. Clean up your media library with confidence.</p><p>✓ 7-day refund policy for technical issues only</p>', actions: buy() })}
 ${section({
+  tag: 'Why It Exists',
+  title: 'The Problem and [[the Solution]]',
   body: `<div class="cards c2">
     <div class="card"><h3 class="card-title">The Problem</h3><p>You’ve built a site with Oxygen Builder, but your media library is a mess:</p>${checklist(['Hundreds of unused images taking up space', 'No idea which images are safe to delete', 'Hours spent checking pages by hand', 'A slower site because of a bloated media library'], 'small')}</div>
     <div class="card"><h3 class="card-title">The Solution</h3><p>Oxygen Media Usage Tracker Pro instantly shows you:</p>${checklist(['Every page using each image', 'Direct edit links to make changes', 'Which images are completely unused', 'Hidden usage in dynamic data and CSS'], 'small')}</div>
@@ -78,7 +80,7 @@ const listPage = {
   crumbs: [{ name: 'Plugins', path: '/plugins/' }],
   body: `
 ${pageHead({ tag: 'Plugins', title: 'Tools for [[Oxygen]] and [[Breakdance]] Users', intro: 'We build WordPress plugins for the page builders we use every day. Each plugin is sold in our shop, with support by email.', actions: buttons([site.shop, 'Open the Shop'], ['/contact/', 'Ask a Question', 'soft']) })}
-${section({ body: cards(plugins.map((p) => ({ icon: 'plug', title: `${p.name}, $${p.priceUsd}`, text: p.short, href: `/plugins/${p.slug}/`, linkText: 'See the plugin' })), { cols: 2 }) })}
+${section({ tag: 'Our Plugins', title: 'Available in [[Our Shop]]', body: cards(plugins.map((p) => ({ icon: 'plug', title: `${p.name}, $${p.priceUsd}`, text: p.short, href: `/plugins/${p.slug}/`, linkText: 'See the plugin' })), { cols: 2 }) })}
 `,
 };
 
