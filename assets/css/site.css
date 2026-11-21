@@ -184,6 +184,9 @@ ul { margin: 0 0 16px; }
 .price-num small { font-size: 16px; font-weight: 400; color: var(--muted); }
 .price-num.ask { font-size: 26px; padding: 10px 0; }
 .price-card .checklist { text-align: left; margin: 20px 0 24px; font-size: 15px; }
+.price-note { border: 1px solid var(--light-blue, #DCE1F9); background: #F5F7FE; border-radius: 10px; padding: 12px 14px; font-size: 14px; color: var(--text); margin: -8px 0 24px; text-align: left; }
+.price-note b { color: var(--blue); }
+.price-note small { color: var(--muted); }
 .price-card .btns { margin-top: auto; justify-content: center; }
 .price-card .btn { width: 100%; }
 
