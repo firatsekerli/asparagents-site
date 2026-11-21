@@ -593,7 +593,7 @@ ul { margin: 0 0 16px; }
 .page-head .two-media .ref-hero img { aspect-ratio: 4 / 3; height: auto; object-fit: cover; object-position: top; }
 .gallery img { box-shadow: 0 14px 36px rgba(6, 11, 35, 0.14), 0 0 0 1px rgba(6, 11, 35, 0.06); }
 .tool-block + .tool-block { margin-top: 88px; }
-.tool-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: end; margin-bottom: 32px; }
+.tool-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; margin-bottom: 32px; }
 .tool-head .checklist { margin: 0; }
 .tool-head p:last-child { margin-bottom: 0; }
 .tool-source { margin: 16px 0 0; font-size: 14px; color: var(--muted); text-align: center; }
