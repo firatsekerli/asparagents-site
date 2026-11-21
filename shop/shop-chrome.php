@@ -147,6 +147,66 @@ body.oxygen-body .ag-chrome .footer-legal a, .ag-chrome .linklike, body.oxygen-b
 body.oxygen-body .ag-chrome .footer-legal a:hover, .ag-chrome .linklike:hover { color: #2d4ddb; }
 .ag-chrome .linklike { background: none; border: 0; padding: 4px 0; font: inherit; font-size: 14px; cursor: pointer; }
 body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
+.hl { color: var(--blue); }
+/* Labels look the same on every background: red text on a light red pill (Firat 21.11.2026) */
+.label { display: inline-block; color: var(--red-text); background: #fdecea; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; margin: 0 0 14px; width: fit-content; }
+.hero .label, .page-head .label, .feature-card .label, .ai-band .label, .cta-band .label, [class*="tone-"] .label { color: var(--red-text); }
+.h1 { font-size: clamp(32px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -0.025em; }
+.h2 { font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.02em; }
+.lead { font-size: 18px; }
+/* Buttons: blue, or light blue with blue text (the two hero buttons of the old site) */
+.btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+/* Inner page heading */
+.page-head { background: var(--bg); padding: 72px 0; overflow-x: clip; }
+.page-head-in { max-width: 820px; }
+.page-head .lead p:last-child { margin-bottom: 0; }
+/* Sections */
+.sec { padding: 96px 0; }
+.tone-navy { background: #0a2060; color: #e6eaff; }
+.tone-blue h2, .tone-blue h3, .tone-navy h2, .tone-navy h3 { color: #fff; }
+.tone-navy a:not(.btn) { color: #fff; }
+/* Call to action band */
+.cta-band { text-align: center; }
+.cta-band .wrap { max-width: 820px; }
+.cta-band .btns { justify-content: center; }
+.cta-mail { margin: 20px 0 0; }
+@media (max-width: 1023px) {.sec { padding: 72px 0; }
+.page-head { padding: 48px 0; }
+@media (max-width: 680px) {.sec { padding: 56px 0; }
+.hero-lead, .lead { font-size: 16px; }
+.btns .btn { flex: 1 1 auto; }}
+/* Same-site link: blank the content for two frames before leaving (Chrome on iPhone glitch, see site.js) */
+/* Product shot in a browser frame (page heads) */
+/* Inner page heads: the navy to blue gradient of the call to action band (Firat, 21.11.2026) */
+.page-head { background: linear-gradient(135deg, #0a2060 0%, #1d3aa8 55%, #2d4ddb 100%); color: #e6eaff; }
+.page-head .h1, .page-head h1, .page-head h2 { color: #fff; }
+.page-head .hl { color: #9fb2ff; }
+.page-head .lead, .page-head p, .page-head li { color: #e6eaff; }
+.page-head a:not(.btn) { color: #fff; }
+.page-head .btn-soft { background: #fff; color: var(--blue); }
+.page-head .btn-soft:hover { background: var(--blue-soft); }
+/* Call to action band: slowly moving gradient */
+.cta-band { background: linear-gradient(120deg, #0a2060, #2d4ddb, #1f3bb8, #0a2060); background-size: 300% 300%; }
+@media (prefers-reduced-motion: no-preference) {@keyframes ctaflow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.cta-band { animation: ctaflow 14s ease-in-out infinite; }}
+/* The quick fix bar: the button sits level with the text; the bar\'s own gap spaces it when it wraps on phones */
+
+.ag-chrome-hero .wrap, .ag-cta .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.post-type-archive-product .oxy-woo-products > h1.page-title, .post-type-archive-product .woocommerce-result-count, .post-type-archive-product .woocommerce-ordering { display: none !important; }
+.woocommerce ul.products { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 0 !important; }
+.woocommerce ul.products::before, .woocommerce ul.products::after { display: none !important; }
+.woocommerce ul.products li.product { width: auto !important; float: none !important; margin: 0 !important; background: #fff; border-radius: 8px; padding: 16px 16px 20px; box-shadow: 0 10px 30px rgba(6, 11, 35, 0.06); display: flex; flex-direction: column; }
+.woocommerce ul.products li.product a.button { margin-top: auto !important; }
+@media (max-width: 1023px) { .woocommerce ul.products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+@media (max-width: 600px) { .woocommerce ul.products { grid-template-columns: 1fr; } }
+body.oxygen-body .ag-chrome-hero .h1, body.oxygen-body .ag-chrome-hero h1 { color: #fff; font-family: Arial, Helvetica, sans-serif; margin: 0 0 16px; }
+body.oxygen-body .ag-chrome-hero .hl, body.oxygen-body .ag-cta .hl { color: #9fb2ff; }
+body.oxygen-body .ag-cta h2 { color: #fff; margin: 0 0 16px; }
+body.oxygen-body .ag-chrome-hero .btn, body.oxygen-body .ag-cta .btn { color: #fff; }
+body.oxygen-body .ag-chrome-hero .btn-soft, body.oxygen-body .ag-cta .btn-soft { background: #fff; color: #2d4ddb; box-shadow: none; }
+body.oxygen-body .ag-cta p { color: #e6eaff; }
+body.oxygen-body .ag-cta .cta-mail a { color: #fff; }
+#section-2-63 { padding-top: 56px; }
 ' . '</style>';
 }, 99);
 function ag_chrome_header() {
@@ -201,3 +261,26 @@ add_action('wp_footer', function () {
   $order->update_meta_data('_ag_purchase_tracked', current_time('mysql'));
   $order->save();
 }, 5);
+
+// Shop home: page head instead of the plain "Shop" title, and one call to action band before the footer (Firat 21.11.2026).
+function ag_shop_hero() {
+  static $done = false;
+  if ($done || is_admin() || !function_exists('is_shop') || !is_shop() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  $done = true;
+  echo '<section class="page-head ag-chrome-hero"><div class="wrap"><div class="page-head-in"><p class="label">Shop</p><h1 class="h1">WordPress Plugins and <span class="hl">One-Time Support</span></h1><div class="lead"><p>Plugins for Oxygen Builder and Breakdance, and one WordPress issue fixed for $27. For a fix, you pay only after the issue is fixed and you are happy with the result.</p></div><div class="btns"><a class="btn" href="#products">See the Products</a><a class="btn btn-soft" href="https://wa.me/905336311907?text=Hello.%20Please%20tell%20us%20your%20name%2C%20your%20company%20(if%20any)%20and%20what%20you%20need%2C%20and%20we%20will%20get%20back%20to%20you%20shortly." target="_blank" rel="noopener">Ask on WhatsApp</a></div></div></div></section>';
+}
+add_action('wp_body_open', 'ag_shop_hero', 2);
+add_action('ct_before_builder', 'ag_shop_hero', 2);
+add_action('wp_footer', function () {
+  if (is_admin() || !function_exists('is_shop') || !is_shop() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  echo '<section class="sec tone-navy cta-band ag-cta"><div class="wrap">
+  <h2 class="h2">Need More Than <span class="hl">a Plugin?</span></h2>
+  <p>We also build websites and online shops, AI tools for your industry, and look after SEO, GEO and social media every month. We usually reply within minutes.</p>
+  <div class="btns"><a class="btn" href="https://asparagents.com/services/">See Our Services</a><a class="btn btn-soft" href="https://asparagents.com/prices/">See Prices</a></div>
+  <p class="cta-mail"><a href="mailto:info@asparagents.com">info@asparagents.com</a></p>
+</div></section>';
+}, 4);
+add_action('wp_footer', function () {
+  if (!function_exists('is_shop') || !is_shop()) return;
+  echo '<script>(function(){var u=document.querySelector(".woocommerce ul.products");if(u)u.id="products";var c=document.querySelector(".ag-cta"),f=document.querySelector("footer.ag-chrome");if(c&&f&&c.nextElementSibling!==f)f.parentNode.insertBefore(c,f);var h=document.querySelector(".ag-chrome-hero"),hd=document.querySelector("header.ag-chrome");if(h&&hd&&hd.nextElementSibling!==h)hd.parentNode.insertBefore(h,hd.nextSibling);})();</script>';
+}, 50);
