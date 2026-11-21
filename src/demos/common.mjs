@@ -34,14 +34,18 @@ window.agEsc = function (s) { return String(s).replace(/[&<>"]/g, function (c) {
 window.agGbp = function (n) { return '£' + Number(n).toLocaleString('en-GB', { maximumFractionDigits: 0 }); };
 `;
 
-// window.agLock(): gives every demo panel the height of the tallest panel (measured as the page loads and again
-// when the width changes), so switching steps or adding answers never moves the page. Longer content scrolls inside.
+// Height lock: on wide screens every demo panel gets the height of the tallest panel (measured as the page loads and
+// again when the width changes), so switching steps never moves the page; longer content scrolls inside. On phones
+// (Firat 22.11.2026: too much empty space) panels keep their own height and a step change scrolls the demo to its top.
 export const lockJs = `
 (function () {
   function lock() {
+    var wide = innerWidth > 860;
     [].forEach.call(document.querySelectorAll('.demo'), function (d) {
       var ps = [].slice.call(d.querySelectorAll('.demo-panel')), max = 0;
-      ps.forEach(function (p) { var h = p.hidden; p.style.height = ''; p.hidden = false; max = Math.max(max, p.offsetHeight); p.hidden = h; });
+      ps.forEach(function (p) { p.style.height = ''; });
+      if (!wide || ps.length < 2) return;
+      ps.forEach(function (p) { var h = p.hidden; p.hidden = false; max = Math.max(max, p.offsetHeight); p.hidden = h; });
       ps.forEach(function (p) { p.style.height = max + 'px'; });
     });
   }
@@ -52,6 +56,7 @@ export const lockJs = `
 
 export const demoCss = `${windowsDemo.css}
 .demo-panel { overflow-y: auto; scrollbar-width: thin; }
+@media (max-width: 860px) { .demo-panel { overflow-y: visible; } }
 .demo-panel .demo-preview { top: 0; }
 .demo-sec .sec-head .h2, .demo-sec .sec-intro { color: #fff; }
 .demo-sec .sec-head { margin-bottom: 40px; }

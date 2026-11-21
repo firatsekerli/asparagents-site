@@ -1,3 +1,6 @@
+import { windowsDemo } from '../demos/windows.mjs';
+import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
+import { cristalDemos } from '../demos/cristal.mjs';
 import { site, references, pageHead, section, refGrid, worldBand, ctaRow, img, esc, REF_WIDTHS, buttons, twoCol, checklist, tt } from '../layout.mjs';
 
 // References: live sites Fırat Şekerli built directly (src/site.mjs). Screenshots are shared with asparajans.com.
@@ -7,30 +10,28 @@ const alts = {
   'dimak-kapi': { a: 'Dimak Kapı website, certified fire door product page', b: 'Dimak Kapı website, About page' },
 };
 const meta = (text) => (text.length > 155 ? text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : text);
-// Tools built for a client: desktop screenshots in a browser frame, phone screenshots side by side.
-const toolMedia = (r, t) =>
-  t.phone
-    ? `<div class="tool-phones">${t.phone.map((p, i) => `<span class="phone-shot">${img({ base: `tool-${r.key}-${p}`, widths: [300, 420, 600], alt: t.alt[i], w: 600, h: 954, sizes: '(min-width: 1024px) 20vw, 44vw' })}</span>`).join('')}</div>`
-    : `<span class="tool-shot"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span>${img({ base: `tool-${r.key}-${t.img}`, widths: [360, 520, 760, 1200], alt: t.alt, w: 1200, h: 750, sizes: '(min-width: 1024px) 46vw, 90vw' })}</span>`;
+// Tools built for a client, each shown as a working prototype with sample data (Firat 22.11.2026).
+const demos = { quote: windowsDemo, survey: cristalDemos.survey, checker: cristalDemos.checker };
 const toolsSection = (r) =>
   r.tools
     ? section({
         tone: 'light',
+        cls: 'tools-sec',
         tag: 'Built Beyond the Website',
         title: `Tools We Built for [[${esc(r.name)}]]`,
-        intro: `Alongside the website, we built ${['one', 'two', 'three', 'four', 'five'][r.tools.length - 1]} tools for ${esc(r.name)}. Each one is a WordPress plugin made for how the business works.`,
-        body: r.tools
-          .map((t, i) =>
-            twoCol({
-              media: toolMedia(r, t),
-              reverse: i % 2 === 1,
-              cls: 'tool-row',
-              html: `<p class="label">${t.label}</p><h3 class="h2">${tt(t.title)}</h3><p>${t.text}</p>${checklist(t.points)}${t.link ? buttons([t.link[0], t.link[1], '', ' target="_blank" rel="noopener"']) : ''}`,
-            })
-          )
-          .join(''),
+        intro: `Alongside the website, we built ${['one', 'two', 'three', 'four', 'five'][r.tools.length - 1]} tools for ${esc(r.name)}. Each one is a WordPress plugin made for how the business works. Try simplified versions below, with sample data.`,
+        body:
+          r.tools
+            .map(
+              (t) => `<div class="tool-block"><div class="tool-head"><div><p class="label">${t.label}</p><h3 class="h2">${tt(t.title)}</h3><p>${t.text}</p></div><div>${checklist(t.points)}</div></div>${demos[t.demo].html}${t.source ? `<p class="tool-source">${t.source}</p>` : ''}</div>`
+            )
+            .join('') +
+          `<style>${demoCss}${cristalDemos.css}</style><script>${tabsJs}${r.tools.map((t) => demos[t.demo].js).join('')}${lockJs}</script>`,
       })
     : '';
+// The hero shows the top of the home page (Firat 22.11.2026) in a browser frame, so it stands apart from the band.
+const heroShot = (r) =>
+  `<span class="browser main ref-hero"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span>${img({ base: `ref-${r.key}`, widths: REF_WIDTHS, alt: `${r.name} website, home page`, w: 1200, h: 1920, lazy: false, sizes: '(min-width: 1024px) 40vw, 90vw' })}</span>`;
 const shot = (key, suffix, alt) => img({ base: `ref-${key}${suffix}`, widths: REF_WIDTHS, alt, w: 1200, h: 1920, sizes: '(min-width: 1024px) 34vw, 90vw' });
 
 const listPage = {
@@ -55,7 +56,7 @@ const detailPages = references.map((r) => {
     ogImage: `/assets/img/og-${r.key}.jpg`,
     schema: [{ '@type': 'CreativeWork', name: h1, description: r.text, url: `${site.url}/references/${r.detail}/`, creator: { '@id': `${site.url}/#organization` }, image: `${site.url}/assets/img/ref-${r.key}-1200.webp` }],
     body: `
-${pageHead({ tag: `${esc(r.sector)} · ${esc(r.place)}`, title: `${esc(r.name)} [[Website]]`, intro: r.text, actions: buttons([r.url, 'View the Site', '', ' target="_blank" rel="noopener"'], ['/references/', 'All References', 'soft']), media: shot(r.key, '', `${r.name} website, home page`) })}
+${pageHead({ tag: `${esc(r.sector)} · ${esc(r.place)}`, title: `${esc(r.name)} [[Website]]`, intro: r.text, actions: buttons([r.url, 'View the Site', '', ' target="_blank" rel="noopener"'], ['/references/', 'All References', 'soft']), media: heroShot(r) })}
 ${section({ body: `<div class="gallery">${shot(r.key, '-a', alts[r.key].a)}${shot(r.key, '-b', alts[r.key].b)}</div>` })}
 ${toolsSection(r)}
 `,
