@@ -108,7 +108,7 @@ export const steps = (items) => cards(items.map(([title, text], i) => ({ num: St
 
 export const listedServices = services.filter((s) => s.listed !== false);
 export const serviceCards = (list = listedServices) =>
-  cards(list.map((s) => ({ icon: s.icon, title: s.card?.title || s.name, text: s.card?.text || s.strip, href: `/services/${s.slug}/`, linkText: 'Learn more' })), { cols: 3, cls: 'services' });
+  cards(list.map((s) => ({ icon: s.icon, title: s.card?.title || s.name, text: s.card?.text || s.strip, href: `/services/${s.slug}/`, linkText: `More about ${s.name}` })), { cols: 3, cls: 'services' });
 
 // Two columns: rounded image + text.
 export const twoCol = ({ media, html, reverse = false, cls = '' }) =>

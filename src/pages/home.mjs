@@ -56,8 +56,8 @@ ${section({
   title: 'Services That [[Support Your Tools]]',
   intro: 'The foundations your tools sit on, and the work agencies and companies hand over to us.',
   body: `${cards([
-    { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'For agencies and companies: hand us the work your team does not have the time or the know-how for, <strong>under your brand</strong> if you want.', href: '/white-label/', linkText: 'Learn more' },
-    ...listedServices.filter((sv) => sv.slug !== 'wordpress-support').map((sv) => ({ icon: sv.icon, title: sv.card?.title || sv.name, text: sv.card?.text || sv.strip, href: `/services/${sv.slug}/`, linkText: 'Learn more' })),
+    { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'For agencies and companies: hand us the work your team does not have the time or the know-how for, <strong>under your brand</strong> if you want.', href: '/white-label/', linkText: 'More about White Label' },
+    ...listedServices.filter((sv) => sv.slug !== 'wordpress-support').map((sv) => ({ icon: sv.icon, title: sv.card?.title || sv.name, text: sv.card?.text || sv.strip, href: `/services/${sv.slug}/`, linkText: `More about ${sv.name}` })),
   ], { cols: 3, cls: 'services' })}
   <div class="quick-band"><div><h3>Need One WordPress Fix?</h3><p>${support.strip}</p></div>${buttons(['/services/wordpress-support/', 'WordPress Support'])}</div>`,
 })}
