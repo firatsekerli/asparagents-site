@@ -102,7 +102,7 @@ ${faq.html}
   return {
     path: '/white-label/',
     title: 'White Label & Outsourcing for Agencies & Companies | asparagents',
-    description: 'Hand us the work your team does not have the time or the know-how for: accessibility fixes, website changes, SEO, GEO, social media and AI tools. Under your brand if you want.',
+    description: 'Hand us the work your team has no time for: accessibility fixes, website changes, SEO, GEO, social media and AI tools, under your brand if you want.',
     crumbs: [{ name: 'White Label', path: '/white-label/' }],
     schema: [
       { '@type': 'Service', name: 'White label and outsourced digital work', serviceType: 'White label and outsourced web, SEO and social media services', provider: { '@id': orgId }, url: `${site.url}/white-label/`, audience: { '@type': 'BusinessAudience', audienceType: 'Digital agencies and companies' } },

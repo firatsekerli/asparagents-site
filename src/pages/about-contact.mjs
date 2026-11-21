@@ -4,7 +4,7 @@ import { site, pageHead, section, cards, twoCol, checklist, worldBand, formBlock
 const about = {
   path: '/about-us/',
   title: 'About asparagents, Fırat Şekerli’s English-Speaking Studio | asparagents',
-  description: 'asparagents is the English-speaking studio of Fırat Şekerli in Ankara: AI tools built for your industry, white label and outsourcing, websites, SEO and WordPress support.',
+  description: 'The English-speaking studio of Fırat Şekerli in Ankara: AI tools for your industry, white label work for agencies, websites, SEO and WordPress support.',
   crumbs: [{ name: 'About Us', path: '/about-us/' }],
   schema: [
     {
@@ -32,7 +32,7 @@ ${section({
   title: 'Three Ways We [[Help]]',
   body: cards([
     { icon: 'ai', title: 'AI Tools for Your Industry', text: 'Quote, booking, estimate, document and repair tools built around how your business works and connected to your website. <a href="/industries/">Try the demos</a>.' },
-    { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'Websites, SEO, local SEO, AI visibility, social media and accessibility fixes for agencies and companies, under your brand if you want. <a href="/white-label/">More</a>' },
+    { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'Websites, SEO, local SEO, AI visibility, social media and accessibility fixes for agencies and companies, under your brand if you want. <a href="/white-label/">More about white label work</a>.' },
     { icon: 'wrench', title: 'WordPress Support &amp; Plugins', text: 'One issue fixed and paid for only when you are happy, plus <a href="/plugins/">plugins</a> for Oxygen Builder and Breakdance users.' },
   ]),
 })}

@@ -5,7 +5,7 @@ export default {
   title: 'How to Disable Comments in WordPress',
   date: '2024-06-16',
   updated: '2026-11-07',
-  excerpt: 'WordPress offers several ways to disable comments, from adjusting settings to using plugins. In this comprehensive guide, we’ll walk you through how to disable comments in WordPress effectively.',
+  excerpt: 'How to disable comments in WordPress site-wide, on single posts or pages, on custom post types, with a plugin or with custom code, plus best practices.',
   content: `
 <p>Comments can be a valuable part of your WordPress site, fostering engagement and community interaction. However, there are times when you may want to disable comments, whether it's to prevent spam, maintain a professional tone, or streamline your site's content management. Fortunately, WordPress offers several ways to disable comments, from adjusting settings to using plugins. In this comprehensive guide, we’ll walk you through how to disable comments in WordPress effectively.</p>
 <h2>Why Disable Comments in WordPress?</h2>

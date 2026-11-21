@@ -12,7 +12,7 @@ export default (() => {
   return {
     path: '/prices/',
     title: 'Prices for AI Tools, Websites, SEO and WordPress Support | asparagents',
-    description: 'Clear prices in US dollars and British pounds for websites, SEO, local SEO, GEO, social media and one-time WordPress support. AI tools are priced by what they need to do.',
+    description: 'Prices in US dollars and British pounds for websites, SEO, local SEO, GEO, social media and WordPress support. AI tools are priced by what they need to do.',
     crumbs: [{ name: 'Prices', path: '/prices/' }],
     schema: list.filter((p) => p.usd != null || p.gbp != null).map(offerLd).concat(faq.ld),
     body: `

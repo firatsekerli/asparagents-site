@@ -4,7 +4,7 @@ export default {
   title: 'How to Add Custom Code in WordPress',
   date: '2024-06-16',
   updated: '2026-11-07',
-  excerpt: 'WordPress is a versatile platform that powers a significant portion of the web. While its out-of-the-box functionality is impressive, there may come a time when you need to add custom code to tailor your site to your specific needs.',
+  excerpt: "Four ways to add custom code in WordPress: the theme's functions.php file, a child theme, a custom plugin or the Code Snippets plugin, plus best practices.",
   content: `
 <p>WordPress is a versatile platform that powers a significant portion of the web. While its out-of-the-box functionality is impressive, there may come a time when you need to add custom code to tailor your site to your specific needs. Whether you want to add custom styles, enhance functionality, or integrate third-party services, understanding how to add custom code in WordPress is essential. In this guide, we’ll explore various methods to safely and effectively add custom code to your WordPress site.</p>
 <h2>Why Add Custom Code in WordPress?</h2>
