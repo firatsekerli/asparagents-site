@@ -1,0 +1,206 @@
+// asparagents shop: same header, footer, colours and buttons as asparagents.com (Firat 21.11.2026).
+// Header and footer are copies of the static site (menu changes there need the same change here).
+add_action('wp_head', function () {
+  if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  echo '<style id="ag-chrome-css">' . ':root {
+  --navy: #060b23;
+  --hero: rgba(10, 32, 96, 0.88);
+  --blue: #2d4ddb;
+  --blue-dark: #1f3bb8;
+  --blue-soft: #dce1f9;
+  --red: #eb5757;
+  --red-text: #c62828;
+  --bg: #f9fafb;
+  --white: #fff;
+  --text: #444;
+  --muted: #5f6672;
+  --line: #e5e7eb;
+  --shadow: 0 10px 30px rgba(6, 11, 35, 0.06);
+  --radius: 8px;
+  --wrap: 1280px;
+}
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+/* Buttons: blue, or light blue with blue text (the two hero buttons of the old site) */
+.btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 24px; border: 0; border-radius: 6px; background: var(--blue); color: #fff; font: 600 15px/1.2 Arial, Helvetica, sans-serif; text-decoration: none; cursor: pointer; box-shadow: 0 4px 9px rgba(45, 77, 219, 0.2); transition: background 0.2s, transform 0.2s; }
+.btn:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(45, 77, 219, 0.28); }
+.btn { transition: background 0.2s, transform 0.2s, box-shadow 0.2s; }
+.btn-soft { background: var(--blue-soft); color: var(--blue); box-shadow: none; }
+.btn-soft:hover { background: #c9d1f6; box-shadow: none; }
+.btn-sm { min-height: 40px; padding: 8px 22px; font-size: 14px; }
+/* Header: white bar with the grey logo; over the home hero it is transparent with white text */
+.site-header { position: relative; z-index: 50; background: var(--white); border-bottom: 1px solid var(--line); }
+.header-in { max-width: 1280px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 84px; }
+.logo { color: #646263; display: block; }
+.logo img { display: block; width: 104px; height: auto; }
+.site-menu { display: flex; align-items: center; gap: 28px; }
+.site-menu ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 26px; }
+.site-menu li a { color: var(--navy); text-decoration: none; font-weight: 700; font-size: 15px; white-space: nowrap; }
+.site-menu li a:hover, .site-menu li a[aria-current="page"] { color: var(--blue); }
+.menu-btns { display: flex; gap: 10px; }
+.menu-btn { display: none; width: 48px; height: 48px; border: 0; border-radius: 50%; background: var(--blue-soft); color: var(--blue); cursor: pointer; align-items: center; justify-content: center; }
+.burger { display: grid; gap: 4px; width: 18px; }
+.burger i { display: block; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+.menu-open .burger i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-open .burger i:nth-child(2) { opacity: 0; }
+.menu-open .burger i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.site-header.over-hero { position: absolute; top: 0; left: 0; right: 0; background: transparent; border-bottom: 0; }
+.over-hero .logo img { filter: brightness(0) invert(1); }
+.over-hero .site-menu li a { color: #fff; }
+.over-hero .site-menu li a:hover { color: #c9d4ff; }
+.site-header.is-pinned { position: fixed; top: 0; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--line); transform: translateY(-100%); box-shadow: var(--shadow); }
+.site-header.is-pinned.is-ready { transition: transform 0.25s ease; }
+.site-header.is-pinned.is-shown { transform: none; }
+.is-pinned.over-hero .logo img { filter: none; }
+.is-pinned.over-hero .site-menu li a { color: var(--navy); }
+@media (max-width: 1023px) {.menu-btn { display: inline-flex; }
+.site-menu { position: fixed; inset: 84px 0 0 0; background: var(--white); flex-direction: column; align-items: stretch; gap: 24px; padding: 24px; overflow-y: auto; visibility: hidden; opacity: 0; transition: opacity 0.2s, visibility 0.2s; }
+.menu-open .site-menu { visibility: visible; opacity: 1; }
+.menu-open body { overflow: hidden; }
+.site-menu ul { flex-direction: column; gap: 0; }
+.site-menu li a, .over-hero .site-menu li a { display: block; padding: 14px 0; font-size: 20px; color: var(--navy); border-bottom: 1px solid var(--line); }
+.over-hero .menu-btn { background: rgba(255, 255, 255, 0.92); }
+.menu-open .site-header.over-hero { background: var(--white); }
+.menu-open .over-hero .logo img { filter: none; }}
+/* Footer: navy, four columns */
+.site-footer { background: var(--navy); color: #c3cae6; font-size: 15px; }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 2fr) minmax(0, 3fr); gap: 48px; padding-top: 72px; padding-bottom: 56px; }
+.footer-logo { display: inline-block; color: #fff; margin-bottom: 20px; }
+.footer-logo img { display: block; width: 132px; height: auto; }
+.footer-brand p { margin: 0 0 24px; max-width: 340px; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a { width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); color: #fff; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.footer-social a:hover { background: var(--blue); }
+.footer-social svg { width: 20px; height: 20px; }
+.footer-col h2 { color: #fff; font-size: 16px; margin: 0 0 20px; letter-spacing: 0.02em; }
+.footer-col h2::after { content: ""; display: block; width: 28px; height: 3px; margin-top: 10px; border-radius: 2px; background: var(--red); }
+.footer-col ul { list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 4px; }
+.footer-col a:not(.btn) { color: #c3cae6; text-decoration: none; display: inline-block; padding: 4px 0; }
+.footer-col a:not(.btn):hover { color: #fff; }
+.footer-contact li > *, .footer-col .footer-contact a { display: inline-flex; gap: 10px; align-items: center; padding: 4px 0; color: #c3cae6; }
+.footer-contact svg { flex: none; width: 18px; height: 18px; color: #9fb2ff; }
+.footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.footer-bottom-in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; padding-top: 22px; padding-bottom: 22px; font-size: 14px; }
+.footer-bottom p { margin: 0; }
+.footer-legal { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; }
+.footer-legal a, .footer-legal .linklike { color: #c3cae6; text-decoration: none; font-size: 14px; padding: 4px 0; }
+.footer-legal a:hover, .footer-legal .linklike:hover { color: #fff; }
+.wa-float { position: fixed; right: 20px; bottom: 20px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(6, 11, 35, 0.18); }
+.wa-float:hover { background: var(--blue-dark); }
+@media (max-width: 1023px) {.footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }}
+@media (max-width: 680px) {.wrap { padding: 0 20px; }
+.header-in { min-height: 72px; padding: 10px 20px; }
+.site-menu { inset: 72px 0 0 0; }
+.btns .btn { flex: 1 1 auto; }
+.consent-actions .btn { flex: 1; }
+.footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 56px 20px 48px; gap: 36px 20px; }
+.footer-brand, .footer-grid > .footer-col:last-child { grid-column: 1 / -1; }
+.footer-bottom-in { flex-direction: column; align-items: flex-start; padding: 22px 20px 88px; }}
+/* Same-site link: blank the content for two frames before leaving (Chrome on iPhone glitch, see site.js) */
+.leaving main, .leaving .site-footer, .leaving .cta-band { visibility: hidden; }
+.ai-band .wrap { position: relative; }
+.feature-card .btn-soft { background: #fff; }
+.page-head a:not(.btn) { color: #fff; }
+.page-head .btn-soft { background: #fff; color: var(--blue); }
+.page-head .btn-soft:hover { background: var(--blue-soft); }
+.page-head .form a:not(.btn) { color: var(--blue); }
+/* Light footer */
+.site-footer { background: var(--bg); color: var(--muted); border-top: 1px solid var(--line); }
+.footer-logo { color: #646263; }
+.footer-col h2 { color: var(--navy); }
+.footer-col a:not(.btn) { color: var(--text); }
+.footer-col a:not(.btn):hover { color: var(--blue); }
+.footer-contact li > *, .footer-col .footer-contact a { color: var(--text); }
+.footer-contact svg { color: var(--blue); }
+.footer-social a { background: var(--blue-soft); color: var(--blue); }
+.footer-social a:hover { background: var(--blue); color: #fff; }
+.footer-bottom { border-top: 1px solid var(--line); }
+.footer-legal a, .footer-legal .linklike { color: var(--muted); }
+.footer-legal a:hover, .footer-legal .linklike:hover { color: var(--blue); }
+/* The quick fix bar: the button sits level with the text; the bar\'s own gap spaces it when it wraps on phones */
+.quick-band .btns { margin-top: 0; }
+
+#_header-56-12, footer#section-10-12, #div_block-87-12 { display: none !important; }
+html { scroll-padding-top: 0; }
+body.oxygen-body { font-family: Arial, Helvetica, sans-serif; color: #444; }
+body.oxygen-body h1, body.oxygen-body h2, body.oxygen-body h3, .woocommerce div.product .product_title { color: #060b23; font-family: Arial, Helvetica, sans-serif; letter-spacing: -0.015em; }
+.ag-chrome a { text-decoration: none; }
+.ag-chrome img { display: block; max-width: 100%; height: auto; }
+.woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce #respond input#submit, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt, .wc-block-components-button:not(.is-link), .wp-element-button, .woocommerce a.added_to_cart { background: #2d4ddb !important; color: #fff !important; border-radius: 6px !important; font: 600 15px/1.2 Arial, Helvetica, sans-serif !important; padding: 12px 22px !important; text-transform: none !important; letter-spacing: 0 !important; border: 0 !important; box-shadow: 0 4px 9px rgba(45, 77, 219, 0.2); }
+.woocommerce a.button:hover, .woocommerce button.button:hover, .wc-block-components-button:not(.is-link):hover, .wp-element-button:hover { background: #1f3bb8 !important; color: #fff !important; }
+.woocommerce ul.products li.product .woocommerce-loop-product__title, .woocommerce ul.products li.product .price, .woocommerce div.product p.price, .woocommerce div.product span.price { color: #060b23 !important; font-family: Arial, Helvetica, sans-serif; }
+.woocommerce ul.products li.product .woocommerce-loop-product__title { color: #2d4ddb !important; font-weight: 700; }
+.woocommerce-message, .woocommerce-info { border-top-color: #2d4ddb !important; }
+.woocommerce-message::before, .woocommerce-info::before { color: #2d4ddb !important; }
+.woocommerce span.onsale { background: #eb5757 !important; }
+body.oxygen-body a { color: #2d4ddb; }
+body.oxygen-body .ag-chrome .btn, body.oxygen-body .ag-chrome .footer-social a, body.oxygen-body .wa-float { color: #fff; }
+body.oxygen-body .ag-chrome .btn.soft { background: #dce1f9; color: #2d4ddb; box-shadow: none; }
+body.oxygen-body .ag-chrome .site-menu li a { color: #060b23; }
+body.oxygen-body .ag-chrome .site-menu li a:hover { color: #2d4ddb; }
+body.oxygen-body .ag-chrome .footer-col a:not(.btn), body.oxygen-body .ag-chrome .footer-bottom a { color: #c3cae6; } .ag-chrome .linklike { background: none; border: 0; padding: 0; font: inherit; color: #c3cae6; cursor: pointer; } .ag-chrome .linklike:hover { color: #fff; }
+body.oxygen-body .ag-chrome .footer-col a:not(.btn):hover { color: #fff; }
+' . '</style>';
+}, 99);
+function ag_chrome_header() {
+  static $done = false;
+  if ($done || is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  $done = true;
+  echo '<header class="site-header ag-chrome"><div class="header-in">
+  <a class="logo" href="https://asparagents.com/"><img src="https://asparagents.com/assets/img/logo-grey.svg?v=fb83d1ae" alt="asparagents home page" width="104" height="60"></a>
+  <nav id="site-menu" class="site-menu" aria-label="Main menu">
+    <ul><li><a href="https://asparagents.com/industries/">Industries</a></li><li><a href="https://asparagents.com/services/">Services</a></li><li><a href="https://asparagents.com/white-label/">White Label</a></li><li><a href="https://asparagents.com/about-us/">About Us</a></li><li><a href="https://asparagents.com/prices/">Prices</a></li><li><a href="https://asparagents.com/references/">References</a></li><li><a href="https://asparagents.com/blog/">Blog</a></li></ul>
+    <div class="menu-btns"><a class="btn btn-sm" href="https://asparagents.com/contact/">Contact</a><a class="btn btn-sm soft" href="https://shop.asparagents.com/cart/">Cart</a></div>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span></button>
+</div></header>';
+}
+add_action('wp_body_open', 'ag_chrome_header', 1);
+add_action('ct_before_builder', 'ag_chrome_header', 1);
+add_action('wp_footer', function () {
+  if (is_admin() || (defined('SHOW_CT_BUILDER') && SHOW_CT_BUILDER)) return;
+  echo '<footer class="site-footer ag-chrome">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="footer-logo" href="https://asparagents.com/"><img src="https://asparagents.com/assets/img/logo-grey.svg?v=fb83d1ae" alt="asparagents home page" width="132" height="77" loading="lazy"></a>
+      <p>AI tools built for your industry, white label and outsourcing for agencies and companies, websites, SEO and GEO. Fully remote from Ankara, Türkiye.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/905336311907?text=Hello.%20Please%20tell%20us%20your%20name%2C%20your%20company%20(if%20any)%20and%20what%20you%20need%2C%20and%20we%20will%20get%20back%20to%20you%20shortly." target="_blank" rel="noopener" aria-label="WhatsApp"><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="22" height="22"><path d="M27.3 4.7A15.8 15.8 0 0 0 2.2 23.8L0 32l8.4-2.2a15.8 15.8 0 0 0 7.6 1.9 15.9 15.9 0 0 0 11.3-27zM16 29a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5A13.2 13.2 0 1 1 16 29zm7.3-9.8c-.4-.2-2.3-1.2-2.7-1.3s-.6-.2-.9.2-1 1.3-1.3 1.6-.5.3-.9.1a10.8 10.8 0 0 1-5.4-4.7c-.4-.7.4-.6 1.2-2.1a.8.8 0 0 0 0-.7c0-.2-.9-2.2-1.2-2.9s-.6-.7-.9-.7h-.8a1.4 1.4 0 0 0-1 .5 4.4 4.4 0 0 0-1.4 3.3 7.7 7.7 0 0 0 1.6 4.1 17.6 17.6 0 0 0 6.8 6c2.5 1.1 3.5 1.2 4.8 1a4.1 4.1 0 0 0 2.7-1.9 3.3 3.3 0 0 0 .2-1.9c-.1-.2-.4-.3-.7-.5z" fill="currentColor"/></svg></a>
+        <a href="mailto:info@asparagents.com" aria-label="Email"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M3 5h18v14H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://www.linkedin.com/in/firatsekerli/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+    <nav class="footer-col" aria-label="Services">
+      <h2>Services</h2>
+      <ul><li><a href="https://asparagents.com/services/websites/">Websites</a></li><li><a href="https://asparagents.com/services/seo/">SEO</a></li><li><a href="https://asparagents.com/services/local-seo/">Local SEO</a></li><li><a href="https://asparagents.com/services/geo-ai-visibility/">GEO and AI Visibility</a></li><li><a href="https://asparagents.com/services/social-media-management/">Social Media Management</a></li><li><a href="https://asparagents.com/services/accessibility-fixes/">Accessibility Fixes</a></li><li><a href="https://asparagents.com/services/wordpress-support/">WordPress Support</a></li><li><a href="https://asparagents.com/white-label/">White Label &amp; Outsourcing</a></li></ul>
+    </nav>
+    <nav class="footer-col" aria-label="Company">
+      <h2>Company</h2>
+      <ul><li><a href="https://asparagents.com/about-us/">About Us</a></li><li><a href="https://asparagents.com/industries/">Industries</a></li><li><a href="https://asparagents.com/references/">References</a></li><li><a href="https://asparagents.com/prices/">Prices</a></li><li><a href="https://asparagents.com/plugins/">Plugins</a></li><li><a href="https://asparagents.com/blog/">Blog</a></li><li><a href="https://asparagents.com/contact/">Contact</a></li></ul>
+    </nav>
+    <div class="footer-col">
+      <h2>Get in Touch</h2>
+      <ul class="footer-contact">
+        <li><a href="mailto:info@asparagents.com"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M3 5h18v14H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>info@asparagents.com</span></a></li>
+        <li><a href="tel:+905336311907"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>+90 533 631 19 07</span></a></li>
+        <li><span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Usually replies within minutes</span></span></li>
+      </ul>
+      <a class="btn btn-sm" href="https://shop.asparagents.com/">Visit the Shop</a>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="wrap footer-bottom-in">
+    <p>© 2026 asparagents</p>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="https://asparagents.com/privacy-policy/">Privacy Policy</a>
+      <a href="https://asparagents.com/cookie-policy-eu/">Cookie Policy</a>
+      <a href="https://shop.asparagents.com/terms/">Terms</a>
+      <a href="https://shop.asparagents.com/delivery-and-refund/">Delivery &amp; Refund</a>
+      <button type="button" class="linklike cky-banner-element">Cookie Settings</button>
+      <a href="https://asparajans.com/" hreflang="tr" lang="tr" target="_blank" rel="noopener">Türkçe: asparajans</a>
+    </nav>
+  </div></div>
+</footer>';
+  echo '<a class="wa-float" href="https://wa.me/905336311907?text=Hello.%20Please%20tell%20us%20your%20name%2C%20your%20company%20(if%20any)%20and%20what%20you%20need%2C%20and%20we%20will%20get%20back%20to%20you%20shortly." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="22" height="22"><path d="M27.3 4.7A15.8 15.8 0 0 0 2.2 23.8L0 32l8.4-2.2a15.8 15.8 0 0 0 7.6 1.9 15.9 15.9 0 0 0 11.3-27zM16 29a13.2 13.2 0 0 1-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5A13.2 13.2 0 1 1 16 29zm7.3-9.8c-.4-.2-2.3-1.2-2.7-1.3s-.6-.2-.9.2-1 1.3-1.3 1.6-.5.3-.9.1a10.8 10.8 0 0 1-5.4-4.7c-.4-.7.4-.6 1.2-2.1a.8.8 0 0 0 0-.7c0-.2-.9-2.2-1.2-2.9s-.6-.7-.9-.7h-.8a1.4 1.4 0 0 0-1 .5 4.4 4.4 0 0 0-1.4 3.3 7.7 7.7 0 0 0 1.6 4.1 17.6 17.6 0 0 0 6.8 6c2.5 1.1 3.5 1.2 4.8 1a4.1 4.1 0 0 0 2.7-1.9 3.3 3.3 0 0 0 .2-1.9c-.1-.2-.4-.3-.7-.5z" fill="currentColor"/></svg></a>';
+  echo '<script>' . '(function(){var d=document.documentElement,b=document.querySelector(\'.ag-chrome .menu-btn\'),m=document.getElementById(\'site-menu\');if(!b||!m)return;var s=function(o){d.classList.toggle(\'menu-open\',o);b.setAttribute(\'aria-expanded\',o?\'true\':\'false\');};b.addEventListener(\'click\',function(){s(!d.classList.contains(\'menu-open\'));});document.addEventListener(\'keydown\',function(e){if(e.key===\'Escape\')s(false);});var w=window.matchMedia(\'(min-width: 1024px)\');var f=function(){if(w.matches)s(false);};w.addEventListener?w.addEventListener(\'change\',f):w.addListener(f);})();' . '</script>';
+}, 5);
