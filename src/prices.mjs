@@ -3,7 +3,7 @@ import { checklist, buttons, orgId, site, section } from './layout.mjs';
 // asparagents.com prices, in US dollars only (Firat 21.11.2026: one currency; we convert to the client's currency in the quote). Every number must come from Firat (standing rule: never guess a price).
 // null = not given yet: the card says "Price on request" and the build prints a warning, so a preview can be
 // reviewed but nothing goes live with a guessed number. USD prices from Firat (21.11.2026), matched to the
-// asparajans.com packages: fix $27, website $447, shop $747 (raised 21.11.2026), SEO/GEO $247 a month, social media $147 a month.
+// asparajans.com packages (bundle SEO + social $345 = same 12.5% discount as 17,500 TL instead of 20,000 TL): fix $27, website $447, shop $747 (raised 21.11.2026), SEO/GEO $247 a month, social media $147 a month.
 export const plans = [
   {
     id: 'one-time-wordpress-support',
@@ -35,6 +35,7 @@ export const plans = [
     name: 'SEO, Local SEO and GEO',
     sub: 'Monthly service',
     usd: 247,
+    note: 'With social media management: <b>$345 a month</b> <small>(instead of $394)</small>',
     items: ['Regular SEO: keyword and competitor tracking, a content plan', 'Google Business Profile management and review strategy', 'Tracking your visibility in ChatGPT and Google AI answers', 'Website maintenance included', 'A plain-language monthly report'],
     cta: ['Get a Quote', '/contact/'],
   },
@@ -44,6 +45,7 @@ export const plans = [
     name: 'Social Media Management',
     sub: 'Monthly service, Instagram',
     usd: 147,
+    note: 'With SEO, Local SEO and GEO: <b>$345 a month</b> <small>(instead of $394)</small>',
     items: ['12 posts and 4 Reels a month', 'A content calendar, post designs and captions', 'Reels made from footage your business sends', 'Regular posting and a monthly report', 'Each extra platform (Facebook, LinkedIn) +20%', 'Ads management and ad budget not included'],
     cta: ['Get a Quote', '/contact/'],
   },
@@ -73,6 +75,7 @@ export const priceCard = (p) => `<div class="price-card" id="${p.id}">
   <h3>${p.name}</h3><p class="price-sub">${p.sub}</p>
   ${priceLine(p)}
   ${checklist(p.items)}
+  ${p.note ? `<p class="price-note">${p.note}</p>` : ''}
   ${buttons([p.cta[1], p.cta[0]])}
 </div>`;
 
