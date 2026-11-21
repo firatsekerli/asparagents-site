@@ -1,4 +1,4 @@
-import { site, references, pageHead, section, refGrid, worldBand, ctaRow, img, esc, REF_WIDTHS, buttons } from '../layout.mjs';
+import { site, references, pageHead, section, refGrid, worldBand, ctaRow, img, esc, REF_WIDTHS, buttons, twoCol, checklist, tt } from '../layout.mjs';
 
 // References: live sites Fırat Şekerli built directly (src/site.mjs). Screenshots are shared with asparajans.com.
 const alts = {
@@ -6,6 +6,30 @@ const alts = {
   'misbourne-design': { a: 'Misbourne Design Associates website, About page', b: 'Misbourne Design Associates website, residential architectural design page' },
 };
 const meta = (text) => (text.length > 155 ? text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : text);
+// Tools built for a client: desktop screenshots in a browser frame, phone screenshots side by side.
+const toolMedia = (r, t) =>
+  t.phone
+    ? `<div class="tool-phones">${t.phone.map((p, i) => `<span class="phone-shot">${img({ base: `tool-${r.key}-${p}`, widths: [300, 420, 600], alt: t.alt[i], w: 600, h: 954, sizes: '(min-width: 1024px) 20vw, 44vw' })}</span>`).join('')}</div>`
+    : `<span class="tool-shot"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span>${img({ base: `tool-${r.key}-${t.img}`, widths: [360, 520, 760, 1200], alt: t.alt, w: 1200, h: 750, sizes: '(min-width: 1024px) 46vw, 90vw' })}</span>`;
+const toolsSection = (r) =>
+  r.tools
+    ? section({
+        tone: 'light',
+        tag: 'Built Beyond the Website',
+        title: `Tools We Built for [[${esc(r.name)}]]`,
+        intro: `Alongside the website, we built ${['one', 'two', 'three', 'four', 'five'][r.tools.length - 1]} tools for ${esc(r.name)}. Each one is a WordPress plugin made for how the business works.`,
+        body: r.tools
+          .map((t, i) =>
+            twoCol({
+              media: toolMedia(r, t),
+              reverse: i % 2 === 1,
+              cls: 'tool-row',
+              html: `<p class="label">${t.label}</p><h3 class="h2">${tt(t.title)}</h3><p>${t.text}</p>${checklist(t.points)}${t.link ? buttons([t.link[0], t.link[1], '', ' target="_blank" rel="noopener"']) : ''}`,
+            })
+          )
+          .join(''),
+      })
+    : '';
 const shot = (key, suffix, alt) => img({ base: `ref-${key}${suffix}`, widths: REF_WIDTHS, alt, w: 1200, h: 1920, sizes: '(min-width: 1024px) 34vw, 90vw' });
 
 const listPage = {
@@ -32,6 +56,7 @@ const detailPages = references.map((r) => {
     body: `
 ${pageHead({ tag: `${esc(r.sector)} · ${esc(r.place)}`, title: `${esc(r.name)} [[Website]]`, intro: r.text, actions: buttons([r.url, 'View the Site', '', ' target="_blank" rel="noopener"'], ['/references/', 'All References', 'soft']), media: shot(r.key, '', `${r.name} website, home page`) })}
 ${section({ body: `<div class="gallery">${shot(r.key, '-a', alts[r.key].a)}${shot(r.key, '-b', alts[r.key].b)}</div>` })}
+${toolsSection(r)}
 `,
   };
 });
