@@ -30,7 +30,7 @@ ${pageHead({ tag: s.name, title: h1, intro, actions: ctaRow(), media })}
 ${section({ tag: 'What We Do', title: 'What Is [[Included]]', intro: includesIntro, body: cards(includes.map(([title, text, ic]) => ({ icon: ic, title, text })), { cols: 3 }) })}
 ${section({ tone: 'light', body: twoCol({ media: cwShot(), reverse: true, html: `<p class="label">Who It Is For</p><h2 class="h2">${tt(forWho.title)}</h2>${forWho.html}` }) })}
 ${section({ tag: 'How It Works', title: 'Simple and [[Clear]]', body: steps(process) })}
-${plans.length ? priceBand(plans, { title: 'Clear [[Prices]]', intro: 'Prices in US dollars. <a href="/prices/">All prices</a>' }) : ''}
+${plans.length ? priceBand(plans, { title: 'Clear and Transparent [[Prices]]', intro: 'All prices are in US dollars, and we convert them to your country’s currency in your quote. <a href="/prices/">All prices</a>' }) : ''}
 ${extra}
 ${faq.html}
 ${section({ tag: 'Also From Us', title: '[[Services]] That Work Better Together', body: serviceCards(listedServices.filter((x) => x.slug !== slug)) })}
