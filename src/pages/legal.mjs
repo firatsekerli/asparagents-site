@@ -34,6 +34,7 @@ ${splitHero({ tag: 'Legal', compact: true, title: 'Privacy [[Policy]]', intro: `
   <li>To answer your message and prepare a quote, and to perform our services: steps you asked for before a contract, and the contract itself.</li>
   <li>To keep the website secure and prevent misuse: our legitimate interest.</li>
   <li>To measure visits and the effect of our ads: your consent, which you can withdraw at any time through “Cookie Settings”.</li>
+  <li>To check which of our Google ads led to an enquiry or a purchase (enhanced conversions): your consent to advertising cookies. If you have given it and you send a form or place an order, your email address, phone number, name and address are converted in your browser into a one-way code (SHA-256 hashing) before they are sent to Google. Google uses the code only to match the enquiry to an ad click and does not receive the readable details from this measurement. Without your consent nothing is sent.</li>
   <li>To meet legal obligations, such as keeping invoices.</li>
 </ul>
 
@@ -42,7 +43,7 @@ ${splitHero({ tag: 'Legal', compact: true, title: 'Privacy [[Policy]]', intro: `
   <li>Hosting and security: Cloudflare, Inc.</li>
   <li>Email: Uzman Posta (our mailbox provider).</li>
   <li>Delivery of form messages: Resend, Inc. (USA).</li>
-  <li>Analytics and ad measurement, only with your consent: Google LLC (Google Analytics, Google Ads, Google Tag Manager).</li>
+  <li>Analytics and ad measurement, only with your consent: Google LLC (Google Analytics, Google Ads, Google Tag Manager), including the hashed contact details used for enhanced conversions.</li>
   <li>Public authorities, where the law requires it.</li>
 </ul>
 <p>Some of these providers process data outside the UK and the European Economic Area, mainly in the USA. Where that happens, the transfer relies on the safeguards those providers offer, such as standard contractual clauses.</p>
