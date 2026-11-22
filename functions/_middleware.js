@@ -23,8 +23,12 @@ function localPrices(response, [sign, name]) {
     .transform(response);
 }
 
+// IndexNow key (search engine recrawl requests, 22.11.2026), served here because build.mjs copies a fixed file list.
+const INDEXNOW_KEY = 'f41f2651db5847bc866ec4cee45457d3';
+
 export async function onRequest({ request, next }) {
   const url = new URL(request.url);
+  if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { 'content-type': 'text/plain; charset=utf-8' } });
   if (!url.pathname.startsWith('/api/') && KEYS.some((k) => url.searchParams.has(k))) {
     return Response.redirect(`${SHOP}${url.pathname}${url.search}`, request.method === 'GET' || request.method === 'HEAD' ? 301 : 308);
   }
