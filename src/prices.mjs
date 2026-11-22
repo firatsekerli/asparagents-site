@@ -1,6 +1,6 @@
 import { checklist, buttons, orgId, site, section } from './layout.mjs';
 
-// asparagents.com prices, in US dollars only (Firat 21.11.2026: one currency; we convert to the client's currency in the quote). Every number must come from Firat (standing rule: never guess a price).
+// asparagents.com prices in US dollars; shown with the local sign for the main markets (see m() below, Firat 22.11.2026). Every number must come from Firat (standing rule: never guess a price).
 // null = not given yet: the card says "Price on request" and the build prints a warning, so a preview can be
 // reviewed but nothing goes live with a guessed number. USD prices from Firat (21.11.2026), matched to the
 // asparajans.com packages (bundle SEO + social $345 = same 12.5% discount as 17,500 TL instead of 20,000 TL): fix $27, website $447, shop $747 (raised 21.11.2026), SEO/GEO $247 a month, social media $147 a month.
@@ -55,9 +55,15 @@ export const allPlans = () => plans;
 export const byId = (id) => plans.find((p) => p.id === id);
 export const pendingPrices = () => plans.filter((p) => p.usd == null).map((p) => p.name);
 
-const money = (n, cur) => (n == null ? null : `${cur === 'usd' ? '$' : '£'}${n.toLocaleString('en-GB')}`);
+// Local currency (Firat 22.11.2026: "447 dollars becomes 447 euro"): the same number in the visitor's currency for
+// the main markets, swapped at the edge by functions/_middleware.js. Amounts it may swap are wrapped in
+// <span class="m">; items bought in the shop stay in US dollars because the shop checkout charges USD.
+export const m = (n) => `<span class="m">$${n.toLocaleString('en-GB')}</span>`;
+export const wrapMoney = (html) => html.replace(/\$([0-9][0-9,]*)/g, (_, n) => `<span class="m">$${n}</span>`);
+const inShop = (p) => p.cta && p.cta[1].startsWith(site.shop);
+const money = (n, p) => (n == null ? null : inShop(p) ? `$${n.toLocaleString('en-GB')}` : m(n));
 const priceLine = (p) => {
-  const parts = [money(p.usd, 'usd')].filter(Boolean);
+  const parts = [money(p.usd, p)].filter(Boolean);
   if (!parts.length) return '<p class="price-num ask">Price on request</p>';
   return `<p class="price-num">${parts.join(' <small>/</small> ')}${p.monthly ? ' <small>a month</small>' : ''}</p>`;
 };
@@ -75,7 +81,7 @@ export const priceCard = (p) => `<div class="price-card" id="${p.id}">
   <h3>${p.name}</h3><p class="price-sub">${p.sub}</p>
   ${priceLine(p)}
   ${checklist(p.items)}
-  ${p.note ? `<p class="price-note">${p.note}</p>` : ''}
+  ${p.note ? `<p class="price-note">${wrapMoney(p.note)}</p>` : ''}
   ${buttons([p.cta[1], p.cta[0]])}
 </div>`;
 
