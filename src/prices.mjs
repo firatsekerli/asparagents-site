@@ -57,13 +57,13 @@ export const pendingPrices = () => plans.filter((p) => p.usd == null).map((p) =>
 
 // Local currency (Firat 22.11.2026: "447 dollars becomes 447 euro"): the same number in the visitor's currency for
 // the main markets, swapped at the edge by functions/_middleware.js. Amounts it may swap are wrapped in
-// <span class="m">; items bought in the shop stay in US dollars because the shop checkout charges USD.
+// <span class="m">. Every plan on this page is swapped, One-Time WordPress Support included (Firat 22.11.2026); the
+// plugin price on /plugins/ stays in US dollars. South Africa stays in US dollars (Firat 22.11.2026).
 export const m = (n) => `<span class="m">$${n.toLocaleString('en-GB')}</span>`;
 export const wrapMoney = (html) => html.replace(/\$([0-9][0-9,]*)/g, (_, n) => `<span class="m">$${n}</span>`);
-const inShop = (p) => p.cta && p.cta[1].startsWith(site.shop);
-const money = (n, p) => (n == null ? null : inShop(p) ? `$${n.toLocaleString('en-GB')}` : m(n));
+const money = (n) => (n == null ? null : m(n));
 const priceLine = (p) => {
-  const parts = [money(p.usd, p)].filter(Boolean);
+  const parts = [money(p.usd)].filter(Boolean);
   if (!parts.length) return '<p class="price-num ask">Price on request</p>';
   return `<p class="price-num">${parts.join(' <small>/</small> ')}${p.monthly ? ' <small>a month</small>' : ''}</p>`;
 };

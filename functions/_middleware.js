@@ -2,7 +2,7 @@
 // ?add-to-cart=, ?wc-api= payment callbacks) cannot be matched by _redirects, so they are sent to the shop here.
 // It also shows prices in the visitor's currency for the main markets (Firat 22.11.2026: the same number, "447 dollars
 // becomes 447 euro"): amounts in <span class="m"> get the local sign and <span class="cur-note"> sentences are replaced.
-// Everyone else, the structured data and items bought in the shop (USD checkout) stay in US dollars. ?cc=GB etc.
+// Everyone else (South Africa included, Firat 22.11.2026), the structured data and the plugin price stay in US dollars. ?cc=GB etc.
 // previews a country. public/_routes.json limits this function to the pages that show prices and "/api/*".
 const SHOP = 'https://shop.asparagents.com';
 const KEYS = ['download_file', 'add-to-cart', 'wc-api', 'wc-ajax', 'order', 'key', 'p', 'page_id', 'post_type', 's'];
