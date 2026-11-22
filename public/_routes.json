@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "include": ["/", "/plugins/*", "/api/*", "/prices/*", "/services/*", "/f41f2651db5847bc866ec4cee45457d3.txt"],
+  "include": ["/", "/plugins/*", "/api/*", "/prices/*", "/services/*", "/websites-for-tradesmen/*", "/wordpress-help/*", "/f41f2651db5847bc866ec4cee45457d3.txt"],
   "exclude": []
 }
