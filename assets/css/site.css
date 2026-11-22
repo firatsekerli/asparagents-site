@@ -85,6 +85,7 @@ ul { margin: 0 0 16px; }
   .site-menu ul { flex-direction: column; gap: 0; }
   .site-menu li a, .over-hero .site-menu li a { display: block; padding: 14px 0; font-size: 20px; color: var(--navy); border-bottom: 1px solid var(--line); }
   .over-hero .menu-btn { background: rgba(255, 255, 255, 0.92); }
+  .site-header.is-pinned .menu-btn { background: var(--blue-soft); } /* same as the normal header (Firat 22.11.2026) */
   .menu-open .site-header.over-hero { background: var(--white); }
   .menu-open .over-hero .logo img { filter: none; }
 }
@@ -401,7 +402,7 @@ ul { margin: 0 0 16px; }
   .quote p { font-size: 16px; }
   .quote { padding: 28px 22px 22px; }
   .hero-trust { grid-template-columns: minmax(0, 1fr); padding: 18px 20px; gap: 14px; margin-top: 40px; }
-  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 56px 20px 48px; gap: 36px 20px; }
+  .footer-grid { grid-template-columns: minmax(0, 1fr) auto; padding: 56px 20px 48px; gap: 36px 24px; } /* Company on the right, Services gets the room (Firat 22.11.2026) */
   .footer-brand, .footer-grid > .footer-col:last-child { grid-column: 1 / -1; }
   .footer-bottom-in { flex-direction: column; align-items: flex-start; padding: 22px 20px 88px; }
   .world-list { grid-template-rows: none; }
