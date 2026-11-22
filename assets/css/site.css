@@ -593,7 +593,7 @@ ul { margin: 0 0 16px; }
 .post-card .label { align-self: flex-start; margin-bottom: 4px; }
 
 /* Reference pages (Firat 22.11.2026): hero shows the top of the home page; gallery shots get a visible shadow */
-.page-head .two-media .ref-hero img { aspect-ratio: 4 / 3; height: auto; object-fit: cover; object-position: top; }
+.page-head .two-media .ref-hero .browser-shot { aspect-ratio: 4 / 3; }
 .gallery img { box-shadow: 0 14px 36px rgba(6, 11, 35, 0.14), 0 0 0 1px rgba(6, 11, 35, 0.06); }
 .tool-block + .tool-block { margin-top: 88px; }
 .tool-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; margin-bottom: 32px; }
@@ -629,3 +629,14 @@ ul { margin: 0 0 16px; }
 @media (max-width: 1023px) { .ref-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 860px) { .ref-story { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
 @media (max-width: 600px) { .ref-cards { grid-template-columns: minmax(0, 1fr); } }
+
+/* Images keep their natural shape (Firat 22.11.2026, SEO Checkup "natural aspect ratio"): screenshots sit at full size
+   inside their frame, which crops them, and the hover scroll moves the image instead of re-cropping it. The hero code
+   picture is decorative, so it is a CSS background chosen by screen width. */
+.browser-shot, .scroll-view { position: relative; }
+.browser-shot img, .scroll-view img, .two-media .scroll-view img, .two-media > .scroll-shot .scroll-view img, .page-head .two-media .ref-hero img { inset: auto; position: absolute; top: 0; left: 0; width: 100%; height: auto; max-height: none; aspect-ratio: auto; object-fit: fill; transform: translateY(0); transition: top 4s ease-in-out, transform 4s ease-in-out; }
+.show-media:hover .browser.main .browser-shot img, .scroll-shot:hover .scroll-view img { top: 100%; transform: translateY(-100%); }
+.hero-bg { background: #0b1238 url(/assets/img/hero-code-800.webp) center / cover no-repeat; }
+@media (min-width: 801px) { .hero-bg { background-image: url(/assets/img/hero-code-1200.webp); } }
+@media (min-width: 1201px) { .hero-bg { background-image: url(/assets/img/hero-code-1920.webp); } }
+@media (prefers-reduced-motion: no-preference) { .hero-bg { animation: heroimg 2.4s cubic-bezier(.2, .7, .2, 1) both; } }

@@ -26,7 +26,7 @@ const toolsSection = (r) =>
     : '';
 // The hero shows the top of the home page (Firat 22.11.2026) in a browser frame, so it stands apart from the band.
 const heroShot = (r) =>
-  `<span class="browser main ref-hero"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span>${img({ base: `ref-${r.key}`, widths: REF_WIDTHS, alt: `${r.name} website, home page`, w: 1200, h: 1920, lazy: false, sizes: '(min-width: 1024px) 40vw, 90vw' })}</span>`;
+  `<span class="browser main ref-hero"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-shot">${img({ base: `ref-${r.key}`, widths: REF_WIDTHS, alt: `${r.name} website, home page`, w: 1200, h: 1920, lazy: false, sizes: '(min-width: 1024px) 40vw, 90vw' })}</span></span>`;
 // The project in three parts, from the case study facts (src/reference-stories.mjs); only when a story exists.
 const projectSection = (r) =>
   r.made
