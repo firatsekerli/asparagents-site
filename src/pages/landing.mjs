@@ -7,6 +7,15 @@ import { byId, priceCard, m } from '../prices.mjs';
 // ?need= so every keyword gets its own headline (server side, so Google's AdsBot sees the same page as the visitor).
 // Facts only from the site (prices.mjs, services, reference stories, Google reviews). Plan: claude/asparagents-google-ads-plan.md.
 
+// Closing call to action: the same navy band as every other page, pointing at this page's form.
+const lpCta = (h, p, label) => `
+<section class="sec tone-navy cta-band"><div class="wrap">
+  <h2 class="h2">${tt(h)}</h2>
+  <p>${p}</p>
+  <div class="btns"><a class="btn" href="#quote">${label}</a><a class="btn btn-soft" href="${site.whatsapp}" target="_blank" rel="noopener">WhatsApp Us</a></div>
+  <p class="cta-mail"><a href="mailto:${site.email}">${site.email}</a></p>
+</div></section>`;
+
 const hero = ({ tag, h1, lead, points, formHeading, cta }) => `
 <section class="page-head lp-head"><div class="wrap contact-grid">
   <div>
@@ -86,7 +95,7 @@ ${section({ tag: 'How It Works', title: 'Three Steps to [[Your New Website]]', b
   ['We build, you approve, it goes live', 'We design and build the site, check it on every phone and launch it when you are happy.'],
 ]) })}
 ${tradesFaq.html}
-${section({ tone: 'light', body: `<div class="lp-cta"><h2 class="h2">${tt('Ready for a Website That [[Brings Work In]]?')}</h2><p>Tell us about your trade and we usually reply within minutes.</p><div class="btns"><a class="btn" href="#quote">Get a Quote</a><a class="btn btn-soft" href="${site.whatsapp}" target="_blank" rel="noopener">WhatsApp</a></div></div>` })}
+${lpCta('Ready for a Website That [[Brings Work In]]?', 'Tell us about your trade and we usually reply within minutes, and always within 12 hours.', 'Get a Quote')}
 `,
 };
 
@@ -156,7 +165,7 @@ ${section({
 })}
 ${reviewsBand()}
 ${wpFaq.html}
-${section({ body: `<div class="lp-cta"><h2 class="h2">${tt('Tell Us What Is [[Broken]]')}</h2><p>Your first small fix is free, and you only pay for a fix when you are happy.</p><div class="btns"><a class="btn" href="#quote">Describe Your Issue</a><a class="btn btn-soft" href="${site.whatsapp}" target="_blank" rel="noopener">WhatsApp</a></div></div>` })}
+${lpCta('Tell Us What Is [[Broken]]', 'Your first small fix is free, and you only pay for a fix when you are happy.', 'Describe Your Issue')}
 `,
 };
 

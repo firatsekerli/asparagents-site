@@ -644,8 +644,6 @@ ul { margin: 0 0 16px; }
 /* Google Ads landing pages (Firat 22.11.2026) */
 .lp-offer { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 32px; align-items: start; }
 .lp-stats { margin: 20px 0 8px; }
-.lp-cta { text-align: center; max-width: 720px; margin: 0 auto; }
-.lp-cta .btns { justify-content: center; }
 /* Ads landing pages: room between the lead and the points; on phones, where the form sits below the fold, a button jumps to it */
 .lp-points { margin-top: 24px; }
 .lp-jump { display: none; }
