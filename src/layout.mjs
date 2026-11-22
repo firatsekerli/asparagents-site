@@ -1,4 +1,4 @@
-import { site, services, references, reviews, worldwide } from './site.mjs';
+import { site, services, references, featuredReferences, reviews, worldwide } from './site.mjs';
 
 // asparagents.com layout. The look follows the asparagents WordPress site (Firat, 20.11.2026: keep the look and
 // colours of asparagents): navy and blue on white and light grey, Arial, centred sections, white cards with soft
@@ -21,14 +21,13 @@ export const organization = {
   email: site.email,
   telephone: site.phone.replace(/\s/g, ''),
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, postalCode: site.address.postalCode, addressLocality: site.address.locality, addressRegion: site.address.region, addressCountry: site.address.country },
-  description: 'asparagents is the English-speaking studio of Fırat Şekerli. It builds AI tools for small businesses in specific industries (quotes, bookings, estimates, paperwork and repairs), connected to the website they already have, and works white label for agencies: websites, SEO, local SEO, GEO, social media, accessibility fixes and WordPress support.',
-  slogan: 'AI tools built for how your business works',
-  knowsAbout: ['AI tools for small businesses', 'Business process automation', 'Quote and booking tools', 'WordPress', 'WooCommerce', 'Search engine optimisation (SEO)', 'Local SEO', 'Generative engine optimisation (GEO)', 'AI visibility', 'Social media management', 'Web accessibility', 'White label digital services'],
+  description: 'asparagents is the studio of Fırat Şekerli that builds websites and website tools for small businesses and agencies. Its tools solve everyday problems (quotes, bookings, estimates, paperwork and repairs) inside the website a business already has. It builds them with the help of AI and makes them trustworthy and honest: they use only the business’s real information and never make things up. It also works white label for agencies (websites, SEO, local SEO, GEO, social media, accessibility fixes and WordPress support), worldwide, in English or Turkish.',
+  slogan: 'Tools built into your website that solve everyday problems',
+  knowsAbout: ['Website tools for small businesses', 'Quote calculators', 'Online booking tools', 'Business process automation', 'White label SEO', 'White label web design', 'WordPress', 'WooCommerce', 'Search engine optimisation (SEO)', 'Local SEO', 'Generative engine optimisation (GEO)', 'AI visibility', 'Social media management', 'Web accessibility', 'White label digital services'],
   // asparajans is the same studio for businesses in Türkiye (About page).
   sameAs: [...site.sameAs, 'https://asparajans.com/'],
   founder: { '@type': 'Person', '@id': `${site.url}/about-us/#person`, name: 'Fırat Şekerli', url: `${site.url}/about-us/`, sameAs: ['https://www.linkedin.com/in/firatsekerli/', 'https://www.firatsekerli.com/'] },
   contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: site.email, telephone: site.phone.replace(/\s/g, ''), availableLanguage: ['English', 'Turkish'] },
-  areaServed: worldwide.map((c) => c.code),
   knowsLanguage: ['en', 'tr'],
 };
 const breadcrumbLd = (crumbs) => ({
@@ -148,9 +147,12 @@ export const faqList = (items) => ({
     .join('')}</div>`,
   ld: { '@type': 'FAQPage', mainEntity: items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })) },
 });
+// The free offers (Firat: agreed 21.11.2026, made consistent site-wide 22.11.2026): a free prototype of a tool with
+// sample data from the business's own process, and one free small fix of up to 30 minutes per business.
+export const freeOfferFaq = { q: 'Can I try you before I pay anything?', a: '<p>Yes, in two ways. For a tool, we first build a free prototype with sample data from your own process, so you can try it before you decide. For your website, we fix one small issue for free if it takes up to 30 minutes, once per business. <a href="/contact/">Tell us what you need</a>.</p>' };
 export const faqBand = (items, { title = 'Answers to Frequently Asked Questions', intro = 'You can find answers to some of the most frequently asked questions here, so feel free to send us a message if you do not find what you are looking for.', aside, cta = ctaRow(), tone = 'light' } = {}) => {
   const f = faqList(items);
-  const side = aside || { icon: 'moon', title: 'Quick WordPress Support', text: 'We usually reply within minutes, and always within 12 hours, in English or Turkish, and you deal with one person from start to finish.' };
+  const side = aside || { icon: 'chat', title: 'One Contact, Fast Replies', text: 'We usually reply within minutes, and always within 12 hours, in English or Turkish, and you deal with one person from start to finish.' };
   return {
     html: `<section class="sec tone-${tone}"><div class="wrap faq-grid">
   <div class="faq-side"><h2 class="h2">${tt(title)}</h2><p>${intro}</p>
@@ -186,6 +188,15 @@ export const reviewsBand = ({ list = reviews, extra = '' } = {}) => `
 // References: a browser frame with the home page and one inner page beside the name, place, sector, the short
 // case text and links to the case page and the live site. Every second one is mirrored.
 const browser = (inner, cls = '') => `<span class="browser${cls ? ` ${cls}` : ''}"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-shot">${inner}</span></span>`;
+// Compact reference cards for the references page, after the featured showcases (Firat 22.11.2026: every website build).
+export const refCards = (list) =>
+  `<div class="ref-cards">${list
+    .map(
+      (r) => `<article class="ref-card"><a class="ref-card-media" href="/references/${r.detail}/" tabindex="-1" aria-hidden="true">${browser(refShot(r.key, `${esc(r.name)} website, home page`, '(min-width: 1024px) 30vw, (min-width: 700px) 45vw, 90vw'), 'main')}</a>
+    <p class="show-tags">${[r.type, r.sector, r.place].filter(Boolean).map((t) => `<span>${esc(t)}</span>`).join('')}</p>
+    <h3 class="ref-card-title"><a href="/references/${r.detail}/">${esc(r.name)}</a></h3><p>${esc(r.text)}</p></article>`
+    )
+    .join('')}</div>`;
 export const refGrid = (list = references, { h = 'h3' } = {}) =>
   `<div class="showcase">${list
     .map(
@@ -195,7 +206,7 @@ export const refGrid = (list = references, { h = 'h3' } = {}) =>
       ${browser(refShot(r.key, `${esc(r.name)} website, inner page`, '(min-width: 1024px) 14vw, 30vw', '-a'), 'side side-a')}
     </a>
     <div class="show-text">
-      <p class="show-tags"><span>${esc(r.type)}</span><span>${esc(r.sector)}</span><span>${esc(r.place)}</span></p>
+      <p class="show-tags">${[r.type, r.sector, r.place].filter(Boolean).map((t) => `<span>${esc(t)}</span>`).join('')}</p>
       <${h} class="show-title"><a href="/references/${r.detail}/">${esc(r.name)}</a></${h}>
       <p>${esc(r.text)}</p>
       ${buttons([`/references/${r.detail}/`, 'View the Project'], [r.url, 'Visit the Live Site', 'soft', ' target="_blank" rel="noopener"'])}
@@ -215,19 +226,19 @@ export const worldList = () => {
 };
 // The AI message band (Firat, 21.11.2026): anyone can build a prototype with AI; consistency, upkeep, security and
 // one accountable person are what we add.
-export const aiBand = ({ intro, tag = 'Why Not Build It With AI', title = 'Anyone Can Build a Prototype, but [[Running It Every Day Is Different]]' } = {}) =>
+export const aiBand = ({ intro, tag = 'Where AI Comes In', title = 'Built With AI, Made to Be [[Trustworthy and Honest]]' } = {}) =>
   section({
     tone: 'navy',
     cls: 'ai-band',
     tag,
     title,
-    intro: intro || 'With today’s AI tools, anyone can build a prototype. The hard part starts when real customers use it every day: it has to work the same way every time, keep up with your business and keep your customers’ details safe.',
+    intro: intro || 'We use AI to build your tool, and that is part of why it costs less. What matters is that your customers can rely on it every day: it works the same way every time, uses only your real information, says so when it does not know and keeps your customers’ details safe.',
     body: cards(
       [
         { icon: 'check', title: 'Consistent', text: 'Works the same way for every customer, on every phone and browser, and is tested before it goes live.' },
-        { icon: 'clock', title: 'Sustainable', text: 'Kept up to date when your services, prices or platform change, instead of being forgotten after launch.' },
+        { icon: 'chat', title: 'Honest', text: 'Works only with your real services, prices and rules. When it cannot answer, it says so and passes the customer to you instead of guessing.' },
         { icon: 'shield', title: 'Secure', text: 'Forms protected against spam, customer details stored where you control them, and privacy rules such as UK GDPR followed.' },
-        { icon: 'users', title: 'Accountable', text: 'One person who built it and looks after it, and usually replies within minutes.' },
+        { icon: 'users', title: 'Accountable', text: 'One person who built it, keeps it up to date when your business changes and usually replies within minutes.' },
       ],
       { cols: 4 }
     ),
@@ -238,14 +249,14 @@ export const worldBand = (tone = 'white') =>
     tone,
     tag: 'Where We Work',
     title: 'Fully Remote, [[Worldwide]]',
-    intro: 'We work fully remotely from Ankara, Türkiye. Agencies in the United Kingdom, the United States, Austria, South Africa and the Netherlands trust us with work for their clients, and we also work directly with businesses in the United Kingdom, the United States and Ireland. We never name the agencies we work for: white label work stays white label.',
+    intro: 'We work fully remotely from Ankara, Türkiye, for clients anywhere in the world, in English or Turkish. Agencies in the United Kingdom, the United States, Austria, South Africa and the Netherlands trust us with work for their clients, and we also work directly with businesses in the United Kingdom, the United States, Ireland and Türkiye. We never name the agencies we work for: white label work stays white label.',
     body: worldList(),
   });
 
 // Contact form. Posts to /api/form (functions/api/form.js).
 const micIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"/></svg>';
 const req = '<span class="req" aria-hidden="true">*</span>';
-export const formBlock = ({ heading = 'Send us a message' } = {}) => {
+export const formBlock = ({ heading = 'Send Us a Message' } = {}) => {
   const f = (lab, input, wide = false) => `<label class="field${wide ? ' wide' : ''}"><span>${lab}</span>${input}</label>`;
   return `<form class="form" data-form="iletisim" novalidate>
   ${heading ? `<h2 class="form-title">${heading}</h2>` : ''}
@@ -309,7 +320,7 @@ ${contact ? ctaBand() : ''}
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <a class="footer-logo" href="/">${logo(132, 77, 'asparagents home page', ' loading="lazy"')}</a>
-      <p>AI tools built for your industry, white label and outsourcing for agencies and companies, websites, SEO and GEO. Fully remote from Ankara, Türkiye.</p>
+      <p>Tools built into your website that solve everyday problems, white label work for agencies, websites, SEO and GEO. Fully remote from Ankara, Türkiye, for clients worldwide in English or Turkish.</p>
       <div class="footer-social">
         <a href="${site.whatsapp}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon.whatsapp}</a>
         <a href="mailto:${site.email}" aria-label="Email">${icon.mail}</a>
@@ -414,4 +425,4 @@ ${reveal(footer({ contact: page.contact !== false }))}
 `);
 };
 
-export { references, services, site };
+export { references, featuredReferences, services, site };

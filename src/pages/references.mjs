@@ -1,14 +1,10 @@
 import { windowsDemo } from '../demos/windows.mjs';
 import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
 import { cristalDemos } from '../demos/cristal.mjs';
-import { site, references, pageHead, section, refGrid, worldBand, ctaRow, img, esc, REF_WIDTHS, buttons, twoCol, checklist, tt } from '../layout.mjs';
+import { site, references, pageHead, section, refGrid, refCards, worldBand, ctaRow, img, esc, REF_WIDTHS, buttons, twoCol, checklist, tt } from '../layout.mjs';
 
 // References: live sites Fırat Şekerli built directly (src/site.mjs). Screenshots are shared with asparajans.com.
-const alts = {
-  'cristal-windows': { a: 'Cristal Windows website, About page', b: 'Cristal Windows website, double glazed windows product page' },
-  'misbourne-design': { a: 'Misbourne Design Associates website, About page', b: 'Misbourne Design Associates website, residential architectural design page' },
-  'dimak-kapi': { a: 'Dimak Kapı website, certified fire door product page', b: 'Dimak Kapı website, About page' },
-};
+const alts = Object.fromEntries(references.map((r) => [r.key, r.alts || { a: `${r.name} website, inner page`, b: `${r.name} website, inner page` }]));
 const meta = (text) => (text.length > 155 ? text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : text);
 // Tools built for a client, each shown as a working prototype with sample data (Firat 22.11.2026).
 const demos = { quote: windowsDemo, survey: cristalDemos.survey, checker: cristalDemos.checker };
@@ -32,16 +28,29 @@ const toolsSection = (r) =>
 // The hero shows the top of the home page (Firat 22.11.2026) in a browser frame, so it stands apart from the band.
 const heroShot = (r) =>
   `<span class="browser main ref-hero"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span>${img({ base: `ref-${r.key}`, widths: REF_WIDTHS, alt: `${r.name} website, home page`, w: 1200, h: 1920, lazy: false, sizes: '(min-width: 1024px) 40vw, 90vw' })}</span>`;
+// The project in three parts, from the case study facts (src/reference-stories.mjs); only when a story exists.
+const projectSection = (r) =>
+  r.made
+    ? section({
+        tone: 'light',
+        tag: 'The Project',
+        title: `What We Built for [[${esc(r.name)}]]`,
+        body: `${r.stats ? `<div class="ref-stats">${r.stats.map(([n, l]) => `<div><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div>` : ''}<div class="ref-story"><div><h3>The Starting Point</h3><p>${esc(r.start)}</p><h3>The Result</h3><p>${esc(r.result)}</p></div><div><h3>What We Built</h3>${checklist(r.made.map(esc))}</div></div>`,
+      })
+    : '';
+// Three other projects after this one (wrapping round), so every reference page links to others.
+const nextRefs = (r) => { const i = references.indexOf(r); return [1, 2, 3].map((n) => references[(i + n) % references.length]); };
 const shot = (key, suffix, alt) => img({ base: `ref-${key}${suffix}`, widths: REF_WIDTHS, alt, w: 1200, h: 1920, sizes: '(min-width: 1024px) 34vw, 90vw' });
 
 const listPage = {
   path: '/references/',
   title: 'Website References | asparagents',
-  description: 'Websites we built for businesses: a double glazing installer in Hampshire, an architectural design practice in Oxfordshire and a fire door manufacturer in Ankara.',
+  description: 'Websites, online shops and tools we built for businesses in England, the United States and Türkiye, from window installers to law firms and manufacturers.',
   crumbs: [{ name: 'References', path: '/references/' }],
   body: `
-${pageHead({ tag: 'References', title: 'From [[Our Work]]', intro: 'Live websites we built directly for businesses. Most of our work for agencies is white label and carries their names, so it is not listed here. <a href="/contact/">Contact us</a> to see more examples privately.', actions: ctaRow() })}
-${section({ body: refGrid(references, { h: 'h2' }) })}
+${pageHead({ tag: 'References', title: 'Websites and Tools [[We Built]]', intro: 'Live websites we built directly for businesses. Most of our work for agencies is white label and carries their names, so it is not listed here. <a href="/contact/">Contact us</a> to see more examples privately.', actions: ctaRow() })}
+${section({ body: refGrid(references.slice(0, 5), { h: 'h2' }) })}
+${section({ tone: 'light', tag: 'More Projects', title: 'More Websites [[We Built]]', body: refCards(references.slice(5)) })}
 ${worldBand('light')}
 `,
 };
@@ -51,14 +60,16 @@ const detailPages = references.map((r) => {
   return {
     path: `/references/${r.detail}/`,
     title: `Website for ${r.name} | asparagents`,
-    description: meta(r.text),
+    description: r.desc || meta(r.text),
     crumbs: [{ name: 'References', path: '/references/' }, { name: h1, path: `/references/${r.detail}/` }],
     ogImage: `/assets/img/og-${r.key}.jpg`,
     schema: [{ '@type': 'CreativeWork', name: h1, description: r.text, url: `${site.url}/references/${r.detail}/`, creator: { '@id': `${site.url}/#organization` }, image: `${site.url}/assets/img/ref-${r.key}-1200.webp` }],
     body: `
-${pageHead({ tag: `${esc(r.sector)} · ${esc(r.place)}`, title: `${esc(r.name)} [[Website]]`, intro: r.text, actions: buttons([r.url, 'View the Site', '', ' target="_blank" rel="noopener"'], ['/references/', 'All References', 'soft']), media: heroShot(r) })}
+${pageHead({ tag: [r.sector, r.place].filter(Boolean).map(esc).join(' · '), title: `${esc(r.name)} [[Website]]`, intro: r.text, actions: buttons([r.url, 'View the Site', '', ' target="_blank" rel="noopener"'], ['/references/', 'All References', 'soft']), media: heroShot(r) })}
+${projectSection(r)}
 ${section({ body: `<div class="gallery">${shot(r.key, '-a', alts[r.key].a)}${shot(r.key, '-b', alts[r.key].b)}</div>` })}
 ${toolsSection(r)}
+${section({ tone: r.tools ? 'white' : 'light', tag: 'More Projects', title: 'Other Websites [[We Built]]', body: refCards(nextRefs(r)) + `<div class="btns" style="justify-content:center;margin-top:40px"><a class="btn" href="/references/">All References</a></div>` })}
 `,
   };
 });

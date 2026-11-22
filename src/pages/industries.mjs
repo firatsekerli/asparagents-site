@@ -1,4 +1,4 @@
-import { pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon, aiBand } from '../layout.mjs';
+import { freeOfferFaq, pageHead, section, cards, steps, faqBand, ctaRow, orgId, site, icon, aiBand } from '../layout.mjs';
 import { windowsDemo } from '../demos/windows.mjs';
 import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
 import { tradesDemo } from '../demos/trades.mjs';
@@ -25,7 +25,7 @@ const industryPage = (c) => {
   const faq = faqBand(c.faq, { aside: { icon: 'chat', title: c.asideTitle, text: c.asideText }, cta: ctaRow('Get This Built for You') });
   const body = `
 ${pageHead({
-  tag: 'AI Tools for Your Industry',
+  tag: 'Tools for Your Industry',
   title: c.h1,
   intro: `<p>${c.intro}</p>`,
   actions: `<div class="btns"><a class="btn" href="#demo">Try the Demo</a><a class="btn btn-soft" href="/contact/">Get This Built for You</a></div>`,
@@ -102,7 +102,7 @@ const list = [
     ],
     asideTitle: 'Tell Us How You Quote Today',
     asideText: 'Send us your product range and how you price a job. We usually reply within minutes with how the tool would work for you.',
-    metaTitle: 'Quote & Proposal Tool for Window & Door Companies',
+    metaTitle: 'Window Quote Calculator and Proposal Tool',
     description: 'Customers pick windows and doors, sizes, colours and glazing on your website; the tool prices it and sends a branded proposal with VAT. Try the demo.',
     serviceName: 'Quote and proposal tool for window and door companies',
     audience: 'Window, door and glazing installers',
@@ -148,7 +148,7 @@ const list = [
     ],
     asideTitle: 'Tell Us About Your Jobs',
     asideText: 'Send us your services, your area and how you book visits today. We usually reply within minutes with how the tool would work for you.',
-    metaTitle: 'Enquiry & Booking Tool for Roofers, Plumbers & Heating Engineers',
+    metaTitle: 'Enquiry and Booking Tool for Trades',
     description: 'A tool on your website that answers every enquiry at any hour, asks your questions, spots emergencies and books visits into your free slots. Try the demo.',
     serviceName: 'Enquiry and booking tool for trades',
     audience: 'Roofers, plumbers, heating engineers and other trades',
@@ -193,7 +193,7 @@ const list = [
     ],
     asideTitle: 'Tell Us How You Price a Job',
     asideText: 'Send us your project types and rates. We usually reply within minutes with how the tool would work for you.',
-    metaTitle: 'Project Estimate Tool for Builders & Renovation Companies',
+    metaTitle: 'Building Cost Estimate Tool for Builders',
     description: 'Show homeowners a rough price range from your own rates, collect photos and book site visits with the right questions ready. Try the demo.',
     serviceName: 'Project estimate tool for builders and renovation companies',
     audience: 'Builders and renovation companies',
@@ -238,7 +238,7 @@ const list = [
     ],
     asideTitle: 'Tell Us About Your Fleet',
     asideText: 'Send us your sizes, prices and area. We usually reply within minutes with how the booking tool would work for you.',
-    metaTitle: 'Online Booking Tool for Skip & Equipment Hire',
+    metaTitle: 'Online Booking Tool for Skip Hire',
     description: 'Let customers choose a skip size, see availability and the full price including permits, then book and pay online. Try the demo.',
     serviceName: 'Online booking tool for skip and equipment hire',
     audience: 'Skip hire and equipment hire companies',
@@ -283,7 +283,7 @@ const list = [
     ],
     asideTitle: 'Tell Us How You Chase Documents',
     asideText: 'Send us your case types and checklists. We usually reply within minutes with how the tool would work for you.',
-    metaTitle: 'Fact-Find & Document Chasing for Mortgage & Insurance Brokers',
+    metaTitle: 'Fact-Find and Document Chasing for Brokers',
     description: 'A guided fact-find builds each client’s document checklist, collects uploads from their phone and chases what is missing for you. Try the demo.',
     serviceName: 'Fact-find and document chasing tool for mortgage and insurance brokers',
     audience: 'Mortgage and insurance brokers',
@@ -328,7 +328,7 @@ const list = [
     ],
     asideTitle: 'Tell Us How You Handle Repairs',
     asideText: 'Send us your categories, response times and contractors. We usually reply within minutes with how the tool would work for you.',
-    metaTitle: 'Repair Reporting & Triage Tool for Letting Agents',
+    metaTitle: 'Repair Reporting Tool for Letting Agents',
     description: 'Tenants report repairs with photos; the tool sorts them by urgency, sends them to the right contractor and keeps everyone updated. Try the demo.',
     serviceName: 'Repair reporting and triage tool for letting agents',
     audience: 'Letting agents and property managers',
@@ -346,6 +346,7 @@ const hubFaq = faqBand(
   [
     { q: 'Is the demo the real tool?', a: '<p>Each demo is a simplified version with sample data, so you can see how it works. The tool we build for you uses your own services, options, rules and prices, and it is tested with you before it goes live.</p>' },
     platformFaq,
+    freeOfferFaq,
     { q: 'How much does a tool cost?', a: '<p>Every tool is built around your services, rules and prices, so the price depends on what it needs to do. <a href="/contact/">Tell us about your business</a> and we usually reply within minutes with a price.</p>' },
     { q: 'Can you build a tool for an industry that is not listed?', a: '<p>Yes. The industries above are the ones we have built demos for so far. If your team spends hours on the same task every week, tell us about it and we will tell you how a tool could take it off your hands.</p>' },
     { q: 'Will the tool make things up?', a: '<p>No. It works inside the services, prices, area and rules you give it. When a customer asks something it cannot answer, it takes their details and passes the conversation to you instead of guessing.</p>' },
@@ -355,13 +356,13 @@ const hubFaq = faqBand(
 );
 const hub = {
   path: '/industries/',
-  title: 'AI Tools for Your Industry | asparagents',
+  title: 'Website Tools for Your Industry | asparagents',
   description: 'Quote tools, booking tools, estimate tools, document chasing and repair triage, built for your industry and connected to your website. Try the demos.',
   crumbs: [{ name: 'Industries', path: '/industries/' }],
   body: `
 ${pageHead({
   tag: 'Industries',
-  title: 'AI Tools Built for [[Your Industry]]',
+  title: 'Tools Built for [[Your Industry]]',
   intro: '<p>Every industry loses time in its own way: quotes, missed calls, paperwork, repairs. We build tools that take that work off your hands, connected to the website and systems you already use. Each page has a working demo, so you can see it before you ask.</p>',
   actions: `<div class="btns"><a class="btn" href="#list">See the Industries</a><a class="btn btn-soft" href="/contact/">Tell Us About Yours</a></div>`,
 })}
