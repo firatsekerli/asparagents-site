@@ -26,10 +26,12 @@ const VARIANTS = {
     roofers: ['Roofers', 'Website Design for Roofers, Fixed Price | asparagents'],
     'small-businesses': ['Small Businesses', 'Website Design for Small Businesses, Fixed Price | asparagents'],
   } },
-  '/wordpress-help/': { param: 'need', values: {
+  '/website-help/': { param: 'need', values: {
     developer: ['Freelance WordPress Developer', 'Freelance WordPress Developer, Pay When Fixed | asparagents'],
     maintenance: ['WordPress Maintenance and Help', 'WordPress Maintenance and Help | asparagents'],
     fix: ['WordPress Fix', 'WordPress Fix, Pay Only When It Is Fixed | asparagents'],
+    wordpress: ['WordPress Help', 'WordPress Help, Pay Only When It Is Fixed | asparagents'],
+    'website-fix': ['Website Fix', 'Website Fix, Pay Only When It Is Fixed | asparagents'],
   } },
 };
 function variant(url) {
@@ -49,6 +51,8 @@ const INDEXNOW_KEY = 'f41f2651db5847bc866ec4cee45457d3';
 
 export async function onRequest({ request, next }) {
   const url = new URL(request.url);
+  // The help landing page covers any platform since 22.11.2026; old links keep their ?need= and other parameters.
+  if (url.pathname.startsWith('/wordpress-help')) return Response.redirect(`${url.origin}/website-help/${url.search}`, 301);
   if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { 'content-type': 'text/plain; charset=utf-8' } });
   if (!url.pathname.startsWith('/api/') && KEYS.some((k) => url.searchParams.has(k))) {
     return Response.redirect(`${SHOP}${url.pathname}${url.search}`, request.method === 'GET' || request.method === 'HEAD' ? 301 : 308);
