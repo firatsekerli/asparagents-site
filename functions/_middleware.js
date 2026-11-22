@@ -24,6 +24,7 @@ const VARIANTS = {
     builders: ['Builders', 'Website Design for Builders, Fixed Price | asparagents'],
     electricians: ['Electricians', 'Website Design for Electricians, Fixed Price | asparagents'],
     roofers: ['Roofers', 'Website Design for Roofers, Fixed Price | asparagents'],
+    'small-businesses': ['Small Businesses', 'Website Design for Small Businesses, Fixed Price | asparagents'],
   } },
   '/wordpress-help/': { param: 'need', values: {
     developer: ['Freelance WordPress Developer', 'Freelance WordPress Developer, Pay When Fixed | asparagents'],
