@@ -1,4 +1,4 @@
-import { pageHead, section, cards, steps, twoCol, checklist, faqBand, ctaRow, worldBand, orgId, site, founderPhoto, refShot, tt, icon, scrollShot } from '../layout.mjs';
+import { freeOfferFaq, pageHead, section, cards, steps, twoCol, checklist, faqBand, ctaRow, worldBand, orgId, site, founderPhoto, refShot, tt, icon, scrollShot } from '../layout.mjs';
 
 // White label for agencies and outsourcing for companies (Firat, 21.11.2026: the value is the client's time). Agency
 // statements come from the approved English articles and the About Us page. Partner agencies and clients are never named.
@@ -6,6 +6,7 @@ export default (() => {
   const faq = faqBand(
     [
       { q: 'We are not an agency. Can we still work with you?', a: '<p>Yes. Companies hand us work their own team does not have the time or the know-how for, such as accessibility fixes, website changes or SEO. You deal with us directly and we report back in plain language.</p>' },
+      freeOfferFaq,
       { q: 'Which platforms do you work on?', a: '<p>WordPress, Webflow, Shopify, Wix and custom built sites. If your site runs on something else, tell us what it is and we will tell you honestly whether we can help.</p>' },
       { q: 'Will my client see your name?', a: '<p>Not if you are an agency working with us white label. The end client sees your emails, your reports and your invoices. They do not see our name unless you choose to tell them.</p>' },
       { q: 'Do you contact my clients?', a: '<p>Not unless you ask us to join a call, and then we join as part of your team.</p>' },
@@ -21,14 +22,14 @@ export default (() => {
     ['seo', 'SEO &amp; Local SEO', 'On-page and technical SEO, Google Business Profile management and review strategy.'],
     ['ai', 'GEO &amp; AI Visibility', 'Monthly checks in ChatGPT, Gemini and Google AI Overviews, and the fixes they point to.'],
     ['social', 'Social Media', 'A content calendar, post designs, captions, short videos and posting.'],
-    ['code', 'AI Tools &amp; Automations', 'Quote forms, booking tools and more, built for your industry and connected to your site.'],
+    ['code', 'Website Tools &amp; Automations', 'Quote forms, booking tools and more, built for your industry and connected to your site.'],
   ];
 
   const body = `
 ${pageHead({
   tag: 'White Label &amp; Outsourcing',
   title: 'Your Team’s Time Is [[Worth More]]',
-  intro: '<p>Agencies and companies hand us the work their own team does not have the time or the know-how for. Instead of spending days learning something new, your team stays on the work only they can do, and we deliver the rest, under your brand if you want.</p>',
+  intro: '<p>White label SEO, GEO, web design and social media for agencies, and outsourcing for companies. Agencies and companies hand us the work their own team does not have the time or the know-how for. Instead of spending days learning something new, your team stays on the work only they can do, and we deliver the rest, under your brand if you want.</p>',
   actions: ctaRow('Tell Us What You Need'),
   media: founderPhoto({ lazy: false }),
 })}
@@ -41,7 +42,7 @@ ${section({
     { icon: 'users', title: 'No Hiring for One Project', text: 'You get the skills when you need them, without a job advert, interviews or a new salary.' },
     { icon: 'chat', title: 'One Contact, Fast Replies', text: 'You deal with one person from start to finish, and we usually reply within minutes.' },
     { icon: 'report', title: 'Plain Language Reports', text: 'You always know what was done and why, in words your whole team understands.' },
-    { icon: 'globe', title: 'Fully Remote', text: 'Clients and partner agencies in the UK, the US, Austria, South Africa and the Netherlands.' },
+    { icon: 'globe', title: 'Fully Remote, Worldwide', text: 'Clients and partner agencies anywhere in the world, in English or Turkish.' },
   ]),
 })}
 ${section({
@@ -95,14 +96,24 @@ ${section({
     ['We Do the Work', 'In the background, with plain language updates, under your brand if you want.'],
   ]),
 })}
+${section({
+  tone: 'light',
+  tag: 'Guides for Agencies',
+  title: 'How White Label [[Works in Practice]]',
+  body: cards([
+    { icon: 'seo', title: 'White Label SEO for Small Web Design Studios', text: 'What gets delivered, what your client sees and how the first month runs.', href: '/white-label-seo-for-small-web-design-studios/', linkText: 'Read the guide' },
+    { icon: 'ai', title: 'White Label GEO and Local SEO for Agencies', text: 'Selling AI visibility and local SEO under your own brand, and how it is reported.', href: '/white-label-geo-and-local-seo-for-small-agencies/', linkText: 'Read the guide' },
+    { icon: 'social', title: 'White Label Social Media for Web Studios', text: 'What is delivered each month, what your client sees and when it beats hiring.', href: '/white-label-social-media-management-for-small-web-studios/', linkText: 'Read the guide' },
+  ]),
+})}
 ${worldBand()}
 ${faq.html}
 `;
 
   return {
     path: '/white-label/',
-    title: 'White Label & Outsourcing for Agencies & Companies | asparagents',
-    description: 'Hand us the work your team has no time for: accessibility fixes, website changes, SEO, GEO, social media and AI tools, under your brand if you want.',
+    title: 'White Label SEO, GEO and Web Design | asparagents',
+    description: 'Hand us the work your team has no time for: accessibility fixes, website changes, SEO, GEO, social media and website tools, under your brand if you want.',
     crumbs: [{ name: 'White Label', path: '/white-label/' }],
     schema: [
       { '@type': 'Service', name: 'White label and outsourced digital work', serviceType: 'White label and outsourced web, SEO and social media services', provider: { '@id': orgId }, url: `${site.url}/white-label/`, audience: { '@type': 'BusinessAudience', audienceType: 'Digital agencies and companies' } },

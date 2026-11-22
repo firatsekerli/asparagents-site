@@ -2,7 +2,7 @@
 // link to the "create a user account" post now goes to the WordPress support page (that post was not moved).
 export default {
   slug: 'how-to-choose-the-right-wordpress-theme-for-your-website',
-  title: 'How to Choose the Right WordPress Theme for Your Website',
+  title: 'How to Choose the Right WordPress Theme',
   date: '2024-06-10',
   updated: '2026-11-07',
   excerpt: 'Ten checks for choosing a WordPress theme: purpose, simplicity, responsiveness, browser support, SEO, reviews, updates, customisation and testing.',

@@ -22,7 +22,7 @@ const omutPage = (() => {
   );
   return {
     path: '/plugins/oxygen-media-usage-tracker-pro/',
-    title: 'Oxygen Media Usage Tracker Pro, See Where Images Are Used | asparagents',
+    title: 'Oxygen Media Usage Tracker Pro Plugin | asparagents',
     description: 'See every page that uses each image in your Oxygen Builder site, find unused media and clean up your media library with confidence. $27, 7-day refund.',
     crumbs: [{ name: 'Plugins', path: '/plugins/' }, { name: omut.name, path: '/plugins/oxygen-media-usage-tracker-pro/' }],
     schema: [
@@ -81,6 +81,7 @@ const listPage = {
   body: `
 ${pageHead({ tag: 'Plugins', title: 'Tools for [[Oxygen]] and [[Breakdance]] Users', intro: 'We build WordPress plugins for the page builders we use every day. Each plugin is sold in our shop, with support by email.', actions: buttons([site.shop, 'Open the Shop'], ['/contact/', 'Ask a Question', 'soft']) })}
 ${section({ tag: 'Our Plugins', title: 'Available in [[Our Shop]]', body: cards(plugins.map((p) => ({ icon: 'plug', title: `${p.name}, $${p.priceUsd}`, text: p.short, href: `/plugins/${p.slug}/`, linkText: 'See the plugin' })), { cols: 2 }) })}
+${section({ tone: 'light', tag: 'Why Our Plugins', title: 'Built From [[Real Site Work]]', intro: '<p>We work on Oxygen Builder and Breakdance sites every day, for our own clients and white label for agencies. When the same problem keeps coming back, we turn the fix into a plugin, so you can solve it in a few clicks instead of by hand.</p>', body: `<div style="max-width:760px;margin:0 auto">${checklist(['Oxygen Media Usage Tracker Pro: all features included, 12 months of updates and priority email support', 'Full refund within 7 days if it does not work as described (technical issues)', 'Built and supported by the same person, with replies usually within minutes'])}</div><p class="center" style="margin-top:28px"><a class="btn" href="/plugins/oxygen-media-usage-tracker-pro/">See Oxygen Media Usage Tracker Pro</a></p>` })}
 `,
 };
 

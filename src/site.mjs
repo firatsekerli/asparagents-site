@@ -123,7 +123,9 @@ export const worldwide = [
 
 // References: only live sites Firat built directly (never partner-agency work). Images are shared with asparajans.com.
 // PENDING Firat (20.11.2026): which other UK/US sites may be shown.
-export const references = [
+import { moreReferences, stories, referenceAlts } from './reference-stories.mjs';
+
+const baseReferences = [
   { key: 'cristal-windows', name: 'Cristal Windows', sector: 'Windows and Doors', type: 'Website', place: 'Fleet, Hampshire, England', url: 'https://cristalwindows.co.uk/', mock: true, detail: 'cristal-windows', color: '#1f3a8a',
     text: 'For Cristal Windows, which installs double and triple glazed windows and doors in England, we designed a website that highlights its products, customer reviews and online quote process. We also continue to maintain and support the site.',
     // Tools Firat built for Cristal Windows (Firat 21.11.2026: show them on this page; 22.11.2026: as prototypes on
@@ -146,6 +148,13 @@ export const references = [
   { key: 'dimak-kapi', name: 'Dimak Kapı', sector: 'Fire Door Manufacturer', type: 'Corporate Website', place: 'Ankara, Türkiye', url: 'https://www.dimak.com.tr/', mock: true, detail: 'dimak-kapi', color: '#ff6b00',
     text: 'For Dimak Kapı, which makes fire doors, sectional doors and steel doors, we designed a corporate website that highlights its products, reference projects and quote process.' },
 ];
+// Order (Firat 22.11.2026: every asparajans.com website build): English-speaking market first, then Türkiye.
+const order = ['cristal-windows', 'misbourne-design', 'academease', 'dr-tim-jaeger', 'dimak-kapi', 'hatupen', 'proga', 'intek-metal', 'neo-global-metal', 'arman-elektronik', 'meya-hukuk', 'lilia', 'nurhayat-tutuncu', 'dr-erkan-ozturk'];
+export const references = [...baseReferences, ...moreReferences]
+  .map((r) => ({ ...r, ...(stories[r.key] || {}), alts: referenceAlts[r.key] }))
+  .sort((x, y) => order.indexOf(x.key) - order.indexOf(y.key));
+export const featuredReferences = references.slice(0, 3);
+
 
 // English Google reviews of Fırat Şekerli's work, copied word for word from the asparajans Google profile.
 export const reviews = [

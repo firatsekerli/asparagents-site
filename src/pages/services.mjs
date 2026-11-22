@@ -1,4 +1,4 @@
-import { site, services, references, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, refShot, listedServices, tt, scrollShot, icon } from '../layout.mjs';
+import { freeOfferFaq, site, services, references, featuredReferences, pageHead, section, cards, steps, serviceCards, checklist, twoCol, faqBand, refGrid, ctaRow, orgId, refShot, listedServices, tt, scrollShot, icon } from '../layout.mjs';
 import { byId, priceBand } from '../prices.mjs';
 
 // Service pages (/services/ and /services/<slug>/). Facts come from the live asparagents.com pages and the approved
@@ -12,12 +12,20 @@ const pricing = {
   'social-media-management': ['social-media-management'],
 };
 import { industryCards } from './industries.mjs';
-const serviceLd = (s, description) => ({ '@type': 'Service', name: s.name, serviceType: s.name, description, url: `${site.url}/services/${s.slug}/`, provider: { '@id': orgId }, areaServed: ['GB', 'US', 'IE'] });
+const serviceLd = (s, description) => ({ '@type': 'Service', name: s.name, serviceType: s.name, description, url: `${site.url}/services/${s.slug}/`, provider: { '@id': orgId } });
 const cwShot = () => scrollShot('cristal-windows', 'Cristal Windows website, home page');
 
+// Agency guides linked from the matching service pages (internal links, audit 22.11.2026).
+const agencyGuides = {
+  seo: ['/white-label-seo-for-small-web-design-studios/', 'White Label SEO for Small Web Design Studios'],
+  'local-seo': ['/white-label-geo-and-local-seo-for-small-agencies/', 'White Label GEO and Local SEO for Agencies'],
+  'geo-ai-visibility': ['/white-label-geo-and-local-seo-for-small-agencies/', 'White Label GEO and Local SEO for Agencies'],
+  'social-media-management': ['/white-label-social-media-management-for-small-web-studios/', 'White Label Social Media for Web Studios'],
+};
 const servicePage = ({ slug, title, description, h1, intro, includes, includesIntro = '', forWho, process, faqs, extra = '', media = '' }) => {
   const s = services.find((x) => x.slug === slug);
-  const faq = faqBand(faqs);
+  const guide = agencyGuides[slug];
+  const faq = faqBand([...faqs, ...(guide ? [{ q: 'How does this work white label for an agency?', a: `<p>Our guide explains what gets delivered, what your client sees and how the first month runs: <a href="${guide[0]}">${guide[1]}</a>.</p>` }] : []), freeOfferFaq], slug === 'wordpress-support' ? { aside: { icon: 'moon', title: 'Quick WordPress Support', text: 'We usually reply within minutes, and always within 12 hours, in English or Turkish, and you deal with one person from start to finish.' } } : {});
   const plans = (pricing[slug] || []).map(byId);
   return {
     path: `/services/${slug}/`,
@@ -46,7 +54,7 @@ const baseProcess = [
 
 const wpSupport = servicePage({
   slug: 'wordpress-support',
-  title: 'One-Time WordPress Support, Pay When Fixed | asparagents',
+  title: 'WordPress Support and Help, Pay When Fixed | asparagents',
   description: 'Tell us about one WordPress issue, we fix it, and you pay only when you are happy with the result. Themes, page builders, WooCommerce and plugins.',
   h1: 'WordPress Issues Fixed, [[Pay When You Are Happy]]',
   intro: 'You do not have to be a WordPress expert to get help. You tell us about the issue you are facing, we fix it, and you pay only after it is fixed and you are happy with the result.',
@@ -78,7 +86,7 @@ const wpSupport = servicePage({
 
 const websites = servicePage({
   slug: 'websites',
-  title: 'Websites and Online Shops | asparagents',
+  title: 'WordPress Websites and WooCommerce Shops | asparagents',
   description: 'Fast, mobile-friendly WordPress websites and WooCommerce shops for small businesses, with the SEO foundations built in from the start.',
   h1: 'Websites and [[Online Shops]]',
   intro: 'We build WordPress websites that present your business clearly, open fast on every device and lead visitors to get in touch or buy. The SEO foundations are built in from the start, not added later.',
@@ -105,12 +113,12 @@ const websites = servicePage({
     { q: 'Do you build online shops?', a: '<p>Yes, with WooCommerce, including payment setup.</p>' },
     { q: 'Can you build a site my agency sells under its own name?', a: '<p>Yes. That is our <a href="/white-label/">white label service</a>: your brand, your client, our work in the background.</p>' },
   ],
-  extra: section({ tone: 'light', tag: 'Projects', title: 'From [[Our Work]]', body: refGrid(references) }),
+  extra: section({ tone: 'light', tag: 'Projects', title: 'From [[Our Work]]', body: refGrid(featuredReferences) + `<div class="btns" style="justify-content:center;margin-top:40px"><a class="btn" href="/references/">All References</a></div>` }),
 });
 
 const seo = servicePage({
   slug: 'seo',
-  title: 'SEO for Small Businesses and Agencies | asparagents',
+  title: 'SEO Services and White Label SEO | asparagents',
   description: 'Technical and on-page SEO, content for real search questions and a plain-language monthly report, for small businesses or white label for agencies.',
   h1: 'SEO That Helps the [[Right People]] Find You',
   intro: 'Your customers search on Google before they call. From the technical foundations to the content, we work on your site so it appears for the searches your buyers really make.',
@@ -136,7 +144,7 @@ const seo = servicePage({
 
 const localSeo = servicePage({
   slug: 'local-seo',
-  title: 'Local SEO and Google Business Profile | asparagents',
+  title: 'Local SEO Services and Google Business Profile | asparagents',
   description: 'Google Business Profile management, local pages, consistent business details and a review strategy for businesses that serve a city or region.',
   h1: 'Be Found on [[Google Maps]] with Local SEO',
   intro: 'When someone searches for “a dentist near me” or “plumber in Leeds”, the map results come first. We work on your Google Business Profile and your website so you stand out in those searches.',
@@ -162,7 +170,7 @@ const localSeo = servicePage({
 
 const geo = servicePage({
   slug: 'geo-ai-visibility',
-  title: 'GEO and AI Visibility for Small Businesses | asparagents',
+  title: 'Generative Engine Optimization (GEO) Services | asparagents',
   description: 'We check whether ChatGPT, Gemini and Google AI Overviews mention your business, fix what the checks point to and report it every month.',
   h1: 'Get Mentioned [[in AI Answers]] with GEO',
   intro: 'Buyers now ask AI assistants for recommendations: “Who is a good dentist near me?” GEO (generative engine optimization) is the work of making a business show up, and be described correctly, in those answers.',
@@ -187,7 +195,7 @@ const geo = servicePage({
 
 const social = servicePage({
   slug: 'social-media-management',
-  title: 'Social Media Management | asparagents',
+  title: 'Social Media Management for Small Businesses | asparagents',
   description: 'A monthly content calendar, post designs, captions, scheduling and a plain-language report, for small businesses or white label for agencies.',
   h1: 'Social Media Management That [[Keeps You Active]]',
   intro: 'Social media keeps a business visible to the people who already follow it. We plan, design and publish the posts, so your channels stay active every month.',
@@ -212,7 +220,7 @@ const social = servicePage({
 
 const accessibility = servicePage({
   slug: 'accessibility-fixes',
-  title: 'Accessibility Fixes From Your Reporting Tool | asparagents',
+  title: 'Website Accessibility Fixes and Remediation | asparagents',
   description: 'Your accessibility reporting tool lists the issues; we fix them on the platform you already use, check them again and tell you what changed.',
   h1: 'Accessibility Fixes for [[Your Website]]',
   intro: 'Your accessibility reporting tool lists the issues. We fix them on the platform your site runs on, check them again with the same tool, and tell you in plain language what changed. Your team does not have to learn accessibility first.',
@@ -243,14 +251,14 @@ const accessibility = servicePage({
 
 const listPage = {
   path: '/services/',
-  title: 'AI Tools, White Label, Websites, SEO and GEO | asparagents',
-  description: 'AI tools for your industry, white label work for agencies, websites, SEO, local SEO, GEO, social media, accessibility fixes and WordPress support.',
+  title: 'Services for Small Businesses and Agencies | asparagents',
+  description: 'Website tools that solve everyday problems, white label work for agencies, websites, SEO, local SEO, GEO, social media and WordPress support.',
   crumbs: [{ name: 'Services', path: '/services/' }],
   body: `
-${pageHead({ tag: 'Our Services', title: 'What We [[Do]]', intro: '<p>We build AI tools for your industry and connect them to the website you already have. Around them we offer the services they need: websites, search, AI visibility, social media and accessibility.</p><p>Agencies and companies can hand any of it over to us, under their own brand if they want.</p>', actions: ctaRow() })}
+${pageHead({ tag: 'Our Services', title: 'Tools, Websites and Search for [[Small Businesses and Agencies]]', intro: '<p>We build tools that solve your everyday problems and connect them to the website you already have. Around them we offer the services they need: websites, search, AI visibility, social media and accessibility.</p><p>Agencies and companies can hand any of it over to us, under their own brand if they want.</p>', actions: ctaRow() })}
 ${section({
   tag: 'Where We Start',
-  title: 'AI Tools Built for [[Your Industry]]',
+  title: 'Tools Built for [[Your Industry]]',
   body: `<div class="feature-card"><div><p class="label">Our Main Focus</p><h3 class="h2" style="font-size:clamp(24px,2.4vw,32px)">Quotes, Bookings, Estimates, Paperwork and Repairs</h3><p>Tools that take repeated work off your team, built around your rules and prices and connected to your website. Each industry has a working demo you can try.</p><div class="btns"><a class="btn btn-soft" href="/industries/">See the Industries</a></div></div>
   <ul class="fc-tiles">${industryCards.map((c) => `<li><a href="${c.href}"><span class="fc-i">${icon[c.icon]}</span><span>${c.title.match(/>([^<]*)<\/span>/)[1].replace(/ and /g, ' &amp; ')}<small>${c.title.replace(/<span[^>]*>[^<]*<\/span>/, '')}</small></span></a></li>`).join('')}</ul></div>`,
 })}
@@ -259,7 +267,7 @@ ${section({ tone: 'light', tag: 'Services', title: 'Choose What You [[Need]]', b
     ...listedServices.filter((sv) => sv.slug !== 'wordpress-support').map((sv) => ({ icon: sv.icon, title: sv.card?.title || sv.name, text: sv.card?.text || sv.strip, href: `/services/${sv.slug}/`, linkText: `More about ${sv.name}` })),
   ], { cols: 3, cls: 'services' })}
   <div class="quick-band"><div><h3>Need One WordPress Fix?</h3><p>${services.find((x) => x.slug === 'wordpress-support').strip}</p></div><div class="btns"><a class="btn" href="/services/wordpress-support/">WordPress Support</a></div></div>` })}
-${section({ body: twoCol({ media: cwShot(), html: `<p class="label">One Partner</p><h2 class="h2">One Person From [[Start to Finish]]</h2><p>asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. You deal with one person from the first message to the last report.</p>${checklist(['We usually reply within minutes', 'In English or Turkish', 'Fully remote, for clients and agencies abroad'])}${ctaRow()}` }).replace(/\[\[(.+?)\]\]/g, '<span class="hl">$1</span>') })}
+${section({ body: twoCol({ media: cwShot(), html: `<p class="label">One Partner</p><h2 class="h2">One Person From [[Start to Finish]]</h2><p>asparagents is the studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye, building websites and website tools for small businesses and agencies. You deal with one person from the first message to the last report.</p>${checklist(['We usually reply within minutes', 'In English or Turkish', 'Fully remote, for clients and agencies abroad'])}${ctaRow()}` }).replace(/\[\[(.+?)\]\]/g, '<span class="hl">$1</span>') })}
 `,
 };
 

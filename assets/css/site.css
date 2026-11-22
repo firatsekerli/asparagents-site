@@ -605,3 +605,24 @@ ul { margin: 0 0 16px; }
 /* Screenshots inside a browser frame: square top edge under the bar, no own shadow (Firat 22.11.2026); the frame
    itself rounds the outer corners. */
 .browser img, .scroll-shot img, .two-media .browser img, .two-media .scroll-shot img, .page-head .two-media .browser img { border-radius: 0; box-shadow: none; }
+
+/* References (Firat 22.11.2026): project story, figures and compact cards */
+.ref-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 0 0 40px; }
+.ref-stats div { background: var(--white); border-radius: 14px; padding: 20px 22px; box-shadow: var(--shadow); }
+.ref-stats b { display: block; font-size: 30px; line-height: 1.2; color: var(--blue); }
+.ref-stats span { display: block; margin-top: 4px; font-size: 15px; color: var(--muted); }
+.ref-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.ref-story h3 { font-size: 20px; margin: 0 0 10px; }
+.ref-story p + h3 { margin-top: 28px; }
+.ref-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.ref-card { display: flex; flex-direction: column; }
+.ref-card-media { display: block; margin-bottom: 18px; }
+.ref-card .browser-shot { aspect-ratio: 16 / 10; }
+.ref-card .show-tags { margin-bottom: 8px; }
+.ref-card-title { font-size: 21px; margin: 0 0 8px; }
+.ref-card-title a { color: var(--navy); text-decoration: none; }
+.ref-card-title a:hover { color: var(--blue); }
+.ref-card p:last-child { margin: 0; font-size: 15px; }
+@media (max-width: 1023px) { .ref-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) { .ref-story { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+@media (max-width: 600px) { .ref-cards { grid-template-columns: minmax(0, 1fr); } }

@@ -32,7 +32,7 @@ const postPage = (p) => {
         publisher: { '@id': orgId },
         image: `${site.url}/assets/img/${p.image.base}-${p.image.widths[p.image.widths.length - 1]}.webp`,
         ...(p.date ? { datePublished: p.date } : {}),
-        ...(p.updated ? { dateModified: p.updated } : {}),
+        ...(p.updated || p.date ? { dateModified: p.updated || p.date } : {}),
       },
     ],
     body: `

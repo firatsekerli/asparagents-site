@@ -3,8 +3,8 @@ import { site, pageHead, section, cards, steps, twoCol, checklist, worldBand, fo
 // About Us and Contact. Text from the live asparagents.com pages (About Us and Contact, 07.11.2026).
 const about = {
   path: '/about-us/',
-  title: 'About asparagents, Fırat Şekerli’s English-Speaking Studio | asparagents',
-  description: 'The English-speaking studio of Fırat Şekerli in Ankara: AI tools for your industry, white label work for agencies, websites, SEO and WordPress support.',
+  title: 'About Fırat Şekerli and asparagents | asparagents',
+  description: 'Fırat Şekerli’s studio in Ankara builds websites and website tools for small businesses and agencies worldwide, in English or Turkish, since 2013.',
   crumbs: [{ name: 'About Us', path: '/about-us/' }],
   schema: [
     {
@@ -23,8 +23,8 @@ const about = {
   body: `
 ${pageHead({
   tag: 'About Us',
-  title: 'Satisfying Our Client Is [[Our Ultimate Goal]]',
-  intro: 'asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye. We build AI tools for small businesses, take on work for agencies and companies that need extra hands, and look after websites, all fully remotely.',
+  title: 'About Fırat Şekerli and [[asparagents]]',
+  intro: 'asparagents is the studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye, building websites and website tools for small businesses and agencies. We build tools that solve everyday problems, take on work for agencies and companies that need extra hands, and look after websites, fully remotely, for clients worldwide in English or Turkish. Satisfying our clients is our ultimate goal.',
   actions: ctaRow('Get in Touch'),
   media: founderPhoto({ lazy: false }),
 })}
@@ -32,9 +32,9 @@ ${section({
   tag: 'What We Do',
   title: 'Three Ways We [[Help]]',
   body: cards([
-    { icon: 'ai', title: 'AI Tools for Your Industry', text: 'Quote, booking, estimate, document and repair tools built around how your business works and connected to your website. <a href="/industries/">Try the demos</a>.' },
+    { icon: 'ai', title: 'Tools for Your Industry', text: 'Quote, booking, estimate, document and repair tools built around how your business works, inside your website, made with AI and built to be trustworthy and honest. <a href="/industries/">Try the demos</a>.' },
     { icon: 'users', title: 'White Label &amp; Outsourcing', text: 'Websites, SEO, local SEO, AI visibility, social media and accessibility fixes for agencies and companies, under your brand if you want. <a href="/white-label/">More about white label work</a>.' },
-    { icon: 'wrench', title: 'WordPress Support &amp; Plugins', text: 'One issue fixed and paid for only when you are happy, plus <a href="/plugins/">plugins</a> for Oxygen Builder and Breakdance users.' },
+    { icon: 'wrench', title: 'WordPress Support &amp; Plugins', text: 'One issue fixed and paid for only when you are happy, plus <a href="/plugins/">plugins</a> for Oxygen Builder and Breakdance users, such as <a href="/plugins/oxygen-media-usage-tracker-pro/">Oxygen Media Usage Tracker Pro</a>.' },
   ]),
 })}
 ${section({
@@ -80,7 +80,7 @@ const contact = {
       <a href="mailto:${site.email}"><span class="ci">${icon.mail}</span>${site.email}</a>
       <a href="${site.whatsapp}" target="_blank" rel="noopener"><span class="ci">${icon.whatsapp}</span>WhatsApp ${site.phone}</a>
     </div>
-    <h2 class="h2" style="font-size:24px">What happens next</h2>
+    <h2 class="h2" style="font-size:24px">What Happens Next</h2>
     ${checklist([
       'You send the form, an email or a WhatsApp message.',
       'We read your message and usually reply within minutes, with questions if we need more detail.',

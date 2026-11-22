@@ -1,11 +1,11 @@
 # asparagents
 
-> asparagents is the English-speaking studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye, working on websites, social media, SEO and Google Ads since 2013. It builds AI tools for small businesses in specific industries (quotes, bookings, estimates, paperwork and repairs) and connects them to the website the business already has. It also works white label and as an outsourcing partner for agencies and companies: websites, SEO, local SEO, GEO (AI visibility), social media, accessibility fixes and WordPress support. One person handles each project from start to finish, and most messages get a reply within minutes (always within 12 hours, for messages that arrive at night in Türkiye), in English or Turkish.
+> asparagents is the studio of Fırat Şekerli, a web and digital marketing specialist based in Ankara, Türkiye, who has worked on websites, social media, SEO and Google Ads since 2013. It builds tools that solve everyday problems for small businesses (quotes, bookings, estimates, paperwork and repairs) inside the website the business already has. It builds them with the help of AI and makes them trustworthy and honest: they use only the business's real services, prices and rules, and when they cannot answer, they pass the customer to a person instead of guessing. It also works white label and as an outsourcing partner for agencies and companies: websites, SEO, local SEO, GEO (AI visibility), social media, accessibility fixes and WordPress support. It works fully remotely for clients anywhere in the world, in English or Turkish. One person handles each project from start to finish, and most messages get a reply within minutes (always within 12 hours, for messages that arrive at night in Türkiye).
 
-## AI tools by industry (each page has a working demo with sample data)
+## Tools by industry (each page has a working demo with sample data)
 
 - [All industries](https://asparagents.com/industries/): quote tools, booking tools, estimate tools, document chasing and repair triage
-- [Window and door companies](https://asparagents.com/industries/windows-doors/): customers configure windows and doors on the website; the tool prices the request and sends a branded proposal with VAT
+- [Window and door companies](https://asparagents.com/industries/windows-doors/): a window quote calculator on the website; the tool prices the request and sends a branded proposal with VAT
 - [Roofers, plumbers and heating engineers](https://asparagents.com/industries/trades/): answers every enquiry at any hour, spots emergencies and books visits into free slots
 - [Builders and renovation companies](https://asparagents.com/industries/builders-renovation/): rough price ranges from the builder's own rates, photo collection and site visit booking
 - [Skip and equipment hire](https://asparagents.com/industries/skip-equipment-hire/): size, availability and full price including permits, booked and paid online
@@ -15,21 +15,35 @@
 ## Services
 
 - [All services](https://asparagents.com/services/)
-- [White label and outsourcing](https://asparagents.com/white-label/): work for agencies and companies, under their brand if they want
+- [White label and outsourcing](https://asparagents.com/white-label/): white label SEO, GEO, web design and social media for agencies, and outsourcing for companies
 - [Websites and online shops](https://asparagents.com/services/websites/): WordPress websites and WooCommerce shops with SEO foundations
-- [SEO](https://asparagents.com/services/seo/): technical and on-page SEO, content and a plain-language monthly report
+- [SEO](https://asparagents.com/services/seo/): technical and on-page SEO, content and a plain-language monthly report, also white label
 - [Local SEO](https://asparagents.com/services/local-seo/): Google Business Profile, local pages, business details and reviews
 - [GEO and AI visibility](https://asparagents.com/services/geo-ai-visibility/): checks whether ChatGPT, Gemini and Google AI Overviews mention a business, fixes what the checks point to and reports monthly
 - [Social media management](https://asparagents.com/services/social-media-management/): content calendar, post designs, captions, scheduling and reporting
 - [Accessibility fixes](https://asparagents.com/services/accessibility-fixes/): fixes the issues an accessibility reporting tool lists, on the platform the site already uses
 - [One-time WordPress support](https://asparagents.com/services/wordpress-support/): one WordPress issue fixed, paid only when the client is happy with the result
-- [Prices](https://asparagents.com/prices/): fixes from $27, websites from $447, shops from $747, SEO and GEO $247 a month, social media $147 a month (US dollars)
+- [Prices](https://asparagents.com/prices/): one-time WordPress fix $27, WordPress website $447, WooCommerce shop $747, SEO, local SEO and GEO $247 a month, social media $147 a month, both monthly services together $345 a month. Shown in pounds, euros, Canadian, Australian or New Zealand dollars (same number) for visitors from those countries; tools are priced by what they need to do
+
+## Free offers
+
+- A free prototype of a tool, built with sample data from the business's own process, before it decides
+- One small website fix for free if it takes up to 30 minutes, once per business
+
+## References (live websites built directly; agency work is white label and not listed)
+
+- [All references](https://asparagents.com/references/)
+- [Cristal Windows](https://asparagents.com/references/cristal-windows/): double glazing installer in Fleet, Hampshire, England; 34 area pages, a 4-step online quote, a survey app and a conservation area checker; 95 contact forms and 25 quote requests in about 18 months after the 2025 relaunch
+- [Misbourne Design](https://asparagents.com/references/misbourne-design/): architectural design practice in Oxfordshire, England
+- [AcademEase](https://asparagents.com/references/academease/): university admissions consultancy in the United States; bilingual website and Instagram management
+- [Dr. Tim Jaeger](https://asparagents.com/references/dr-tim-jaeger/): membership education platform
+- [Dimak Kapı](https://asparagents.com/references/dimak-kapi/): fire door manufacturer in Ankara; website and ads bring up to 10 to 15 qualified enquiries a month
+- [Hatüpen](https://asparagents.com/references/hatupen/), [PROGA](https://asparagents.com/references/proga/), [İntek](https://asparagents.com/references/intek-metal/), [NEO Global Metal](https://asparagents.com/references/neo-global-metal/), [Arman Elektronik](https://asparagents.com/references/arman-elektronik/), [MEYA Hukuk](https://asparagents.com/references/meya-hukuk/), [Lilia](https://asparagents.com/references/lilia/), [Nurhayat Tütüncü](https://asparagents.com/references/nurhayat-tutuncu/), [Dr. Erkan Öztürk](https://asparagents.com/references/dr-erkan-ozturk/): websites and online shops for businesses in Türkiye
 
 ## Company
 
 - [About asparagents and Fırat Şekerli](https://asparagents.com/about-us/)
-- [References](https://asparagents.com/references/): websites built for businesses in England
-- [Plugins](https://asparagents.com/plugins/): WordPress plugins for Oxygen Builder and Breakdance, such as Oxygen Media Usage Tracker Pro
+- [Plugins](https://asparagents.com/plugins/): WordPress plugins for Oxygen Builder and Breakdance users, such as Oxygen Media Usage Tracker Pro ($27, 7-day refund for technical issues)
 - [Blog](https://asparagents.com/blog/): guides on WordPress, SEO, local SEO, GEO and white label work
 - [Contact](https://asparagents.com/contact/): info@asparagents.com, WhatsApp +90 533 631 19 07
 - [Shop](https://shop.asparagents.com/): plugins and one-time WordPress support
