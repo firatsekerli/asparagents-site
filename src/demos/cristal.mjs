@@ -134,7 +134,7 @@ const surveyJs = `
 // The checker uses sample addresses: the real plugin finds the postcode with postcodes.io and checks it against the
 // conservation area and Article 4 Direction datasets of planning.data.gov.uk.
 const checkerHtml = `
-<div class="demo" id="ck-demo" aria-label="Interactive demo of a conservation area checker">
+<div class="demo" id="ck-demo" role="region" aria-label="Interactive demo of a conservation area checker">
   <div class="demo-top"><span class="demo-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="demo-badge">Demo with sample addresses. Nothing is sent.</span></div>
   <div class="demo-panel">
     <div class="ck-box">
