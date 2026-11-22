@@ -640,3 +640,14 @@ ul { margin: 0 0 16px; }
 @media (min-width: 801px) { .hero-bg { background-image: url(/assets/img/hero-code-1200.webp); } }
 @media (min-width: 1201px) { .hero-bg { background-image: url(/assets/img/hero-code-1920.webp); } }
 @media (prefers-reduced-motion: no-preference) { .hero-bg { animation: heroimg 2.4s cubic-bezier(.2, .7, .2, 1) both; } }
+
+/* Google Ads landing pages (Firat 22.11.2026) */
+.lp-offer { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.lp-stats { margin: 20px 0 8px; }
+.lp-cta { text-align: center; max-width: 720px; margin: 0 auto; }
+.lp-cta .btns { justify-content: center; }
+/* Ads landing pages: room between the lead and the points; on phones, where the form sits below the fold, a button jumps to it */
+.lp-points { margin-top: 24px; }
+.lp-jump { display: none; }
+@media (max-width: 1023px) { .lp-jump { display: flex; margin: 24px 0 8px; } }
+@media (max-width: 1023px) { .lp-offer { grid-template-columns: minmax(0, 1fr); } }
