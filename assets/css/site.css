@@ -146,6 +146,8 @@ ul { margin: 0 0 16px; }
 .card-icon { display: inline-flex; width: 52px; height: 52px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); align-items: center; justify-content: center; margin-bottom: 20px; }
 .card-link { display: inline-block; margin-top: 8px; font-weight: 700; font-size: 15px; color: var(--blue); text-decoration: none; }
 .card-link::after { content: " →"; }
+/* Links only as wide as their text (Firat 22.11.2026), also inside grid and flex cards */
+.card > .card-link, .post-card .card-link { justify-self: start; align-self: flex-start; width: auto; }
 .services .card { transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; border-top: 4px solid transparent; }
 .services .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(6, 11, 35, 0.12); border-top-color: var(--blue); }
 .services .card-icon { border-radius: 14px; transition: background 0.2s, color 0.2s; }
@@ -392,7 +394,7 @@ ul { margin: 0 0 16px; }
   .sec-head { margin-bottom: 32px; }
   .hero-in { padding: 104px 20px 64px; }
   .hero-lead, .lead { font-size: 16px; }
-  .btns .btn { flex: 1 1 auto; }
+  .btns .btn { flex: 0 0 auto; } /* buttons sized to their text on phones (Firat 22.11.2026) */
   .form { padding: 24px 18px; }
   .consent { flex-direction: column; align-items: stretch; }
   .consent-actions .btn { flex: 1; }
