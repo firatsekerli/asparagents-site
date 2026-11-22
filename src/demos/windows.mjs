@@ -88,7 +88,7 @@ const css = `
 `;
 
 const html = `
-<div class="demo" id="win-demo" aria-label="Interactive demo of a window and door quotation tool">
+<div class="demo" id="win-demo" role="region" aria-label="Interactive demo of a window and door quotation tool">
   <div class="demo-top"><span class="demo-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="demo-badge">Demo with sample products and prices. Nothing is sent.</span></div>
   <div class="demo-tabs" role="tablist" aria-label="Demo steps">
     <button class="demo-tab" role="tab" id="wd-t1" aria-controls="wd-p1" aria-selected="true"><span>1</span>Customer</button>

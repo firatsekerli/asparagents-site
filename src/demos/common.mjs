@@ -3,7 +3,7 @@
 import { windowsDemo } from './windows.mjs';
 
 export const demoShell = (id, tabs, panels, label) => `
-<div class="demo" id="${id}" aria-label="${label}">
+<div class="demo" id="${id}" role="region" aria-label="${label}">
   <div class="demo-top"><span class="demo-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="demo-badge">Demo with sample data. Nothing is sent.</span></div>
   <div class="demo-tabs" role="tablist" aria-label="Demo steps">${tabs
     .map((t, i) => `<button class="demo-tab" role="tab" id="${id}-t${i}" aria-controls="${id}-p${i}" aria-selected="${i === 0}"${i ? ' tabindex="-1" disabled' : ''}><span>${i + 1}</span>${t}</button>`)

@@ -21,9 +21,8 @@ const toolsSection = (r) =>
             .map(
               (t) => `<div class="tool-block"><div class="tool-head"><div><p class="label">${t.label}</p><h3 class="h2">${tt(t.title)}</h3><p>${t.text}</p></div><div>${checklist(t.points)}</div></div>${demos[t.demo].html}${t.source ? `<p class="tool-source">${t.source}</p>` : ''}</div>`
             )
-            .join('') +
-          `<style>${demoCss}${cristalDemos.css}</style><script>${tabsJs}${r.tools.map((t) => demos[t.demo].js).join('')}${lockJs}</script>`,
-      })
+            .join(''),
+      }) + `<style>${demoCss}${cristalDemos.css}</style><script>${tabsJs}${r.tools.map((t) => demos[t.demo].js).join('')}${lockJs}</script>`
     : '';
 // The hero shows the top of the home page (Firat 22.11.2026) in a browser frame, so it stands apart from the band.
 const heroShot = (r) =>
