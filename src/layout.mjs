@@ -130,7 +130,7 @@ export const pageHead = ({ tag = '', title, intro = '', actions = '', media = ''
 // Home hero: full screen, navy over the code photo, the white logo above the heading.
 export const homeHero = ({ tag, title, intro, actions, trust }) => `
 <section class="hero">
-  <picture class="hero-bg" aria-hidden="true"><img src="/assets/img/hero-code-1920.webp" srcset="/assets/img/hero-code-800.webp 800w, /assets/img/hero-code-1200.webp 1200w, /assets/img/hero-code-1920.webp 1920w" sizes="100vw" alt="Lines of website code on a dark blue screen" width="1920" height="960" fetchpriority="high"></picture>
+  <span class="hero-bg" aria-hidden="true"></span>
   <div class="hero-in">
     ${label(tag)}
     <h1 class="hero-title">${tt(title)}</h1>
@@ -393,7 +393,6 @@ export const render = (page) => {
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
-<script>document.documentElement.className='js'</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(page.description)}">
@@ -413,7 +412,7 @@ ${page.noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonica
 <link rel="stylesheet" href="/assets/css/site.css?v=${page.assetVersion}">
 ${ld({ '@context': 'https://schema.org', '@graph': graph })}
 </head>
-<body><!--email_off-->
+<body><script>document.documentElement.className='js'</script><!--email_off-->
 ${header(page.path)}
 <main id="content">
 ${reveal(page.body)}

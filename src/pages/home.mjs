@@ -29,7 +29,7 @@ ${homeHero({
 ${section({
   id: 'industries',
   tag: 'Built for Your Industry',
-  title: 'Pick Your Industry, [[Try the Demo]]',
+  title: 'Website Tools for [[Your Industry]]',
   intro: 'Every industry loses time in its own way. Each of these tools has a working demo with sample data, so you can see it before you ask.',
   body: `${cards(industryCards, { cls: 'services' })}<p class="center" style="margin-top:32px"><a class="btn btn-soft" href="/industries/">All Industries</a></p>`,
 })}
@@ -82,8 +82,8 @@ ${faq.html}
 
   return {
     path: '/',
-    title: 'Tools That Solve Everyday Business Problems | asparagents',
-    description: 'We build tools into your website that take quotes, bookings, estimates, paperwork and repairs off your hands. Try the demos. White label for agencies.',
+    title: 'Website Tools for Everyday Business Problems | asparagents',
+    description: 'Website tools for everyday business problems: we take quotes, bookings, estimates, paperwork and repairs off your hands. Try the demos. White label too.',
     body,
     schema: [faq.ld],
   };
