@@ -99,45 +99,50 @@ ${lpCta('Ready for a Website That [[Brings Work In]]?', 'Tell us about your trad
 `,
 };
 
-// WordPress help (ad group 2: freelance wordpress developer, wordpress maintenance services, wordpress help, wordpress
-// fix). Noindex: the indexable page for these searches stays /services/wordpress-support/.
-const wpFaq = faqBand(
+// Website help (ad groups: freelance wordpress developer, wordpress maintenance services, wordpress help, wordpress
+// fix, website help). Any platform (Firat 22.11.2026: "we can fix any sites with any issues"; the one-time fix is 27
+// for any platform). Noindex: the indexable pages for these searches stay /services/wordpress-support/ and the
+// service pages. ?need= in functions/_middleware.js swaps the H1 start and the title per ad group.
+const fixCard = { ...byId('one-time-wordpress-support'), id: 'one-time-fix', name: 'One-Time Website Fix', sub: 'One issue, fixed, on any platform', cta: ['Describe Your Issue', '#quote'] };
+
+const helpFaq = faqBand(
   [
+    { q: 'Which websites can you fix?', a: '<p>WordPress and WooCommerce, Shopify, Webflow, TYPO3, Next.js and plain HTML sites. If your site runs on something else, tell us what it is and we will tell you honestly whether we can help.</p>' },
     { q: 'What if my issue is not fixed?', a: '<p>Then you do not pay. You pay only after the issue is fixed and you are happy with the result.</p>' },
-    { q: 'Is the first fix really free?', a: '<p>Yes, if it takes up to 30 minutes, once per business. Bigger issues are a one-time fix, paid when you are happy, and custom work is priced before we start.</p>' },
-    { q: 'Do you offer ongoing WordPress maintenance?', a: '<p>Yes. Website maintenance is included in our SEO, Local SEO and GEO plan, and every new website we build comes with the first year of maintenance free.</p>' },
-    { q: 'Do you need my WordPress login?', a: '<p>We need access to fix the issue. Create a separate administrator account for us and remove it when the fix is done; never send us your own password.</p>' },
+    { q: 'Is the first fix really free?', a: `<p>Yes, if it takes up to 30 minutes, once per business. After that a one-time fix of one issue is ${m(27)}, on any platform, paid when you are happy, and bigger custom work is priced before we start.</p>` },
+    { q: 'Do you offer ongoing website maintenance?', a: '<p>Yes. Website maintenance is included in our SEO, Local SEO and GEO plan, and every new website we build comes with the first year of maintenance free.</p>' },
+    { q: 'Do you need my login?', a: '<p>We need access to fix the issue. Create a separate user or administrator account for us and remove it when the fix is done; never send us your own password.</p>' },
     { q: 'How fast do you reply?', a: '<p>We usually reply within minutes, and always within 12 hours, in English or Turkish.</p>' },
   ],
-  { aside: { icon: 'moon', title: 'Quick WordPress Support', text: 'We usually reply within minutes, and always within 12 hours, and you deal with one person from start to finish.' }, cta: '' }
+  { aside: { icon: 'moon', title: 'Quick Website Support', text: 'We usually reply within minutes, and always within 12 hours, and you deal with one person from start to finish.' }, cta: '' }
 );
 
-const wp = {
-  path: '/wordpress-help/',
-  title: 'WordPress Help, Pay Only When It Is Fixed | asparagents',
-  description: 'WordPress help from one developer: we back up your site, fix the issue and you pay only when you are happy. Your first small fix is free.',
-  crumbs: [{ name: 'WordPress Help', path: '/wordpress-help/' }],
+const help = {
+  path: '/website-help/',
+  title: 'Website Help, Pay Only When It Is Fixed | asparagents',
+  description: 'Website help for WordPress, Shopify, Webflow, TYPO3 and custom sites: we back up your site, fix the issue and you pay only when you are happy.',
+  crumbs: [{ name: 'Website Help', path: '/website-help/' }],
   contact: false,
   noindex: true,
-  schema: [wpFaq.ld],
+  schema: [helpFaq.ld],
   body: `
 ${hero({
-  tag: 'WordPress Help',
-  h1: tt('<span data-variant>WordPress Help</span>, [[Pay Only When It Is Fixed]]'),
-  lead: `Tell us what is wrong with your WordPress site. We back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time fix is ${m(27)}.`,
+  tag: 'Website Help',
+  h1: tt('<span data-variant>Website Help</span>, [[Pay Only When It Is Fixed]]'),
+  lead: `Tell us what is wrong with your website, whatever it is built on. We back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time fix is ${m(27)}.`,
   points: ['Pay only when it is fixed', 'Your site backed up before we start', 'A screen recording of the fix', 'Usually replies within minutes'],
-  formHeading: 'Describe Your WordPress Issue',
+  formHeading: 'Describe Your Website Issue',
   cta: 'Describe Your Issue',
 })}
 ${section({
   tag: 'What We Fix',
-  title: 'Themes, Page Builders, Plugins and [[WooCommerce]]',
-  intro: '<p>A layout that falls apart after an update, a form that stops sending, a checkout error, a page builder that will not load: things break even on good themes and plugins.</p>',
+  title: 'Any Website, [[Any Issue]]',
+  intro: '<p>A layout that falls apart after an update, a form that stops sending, a checkout error, a slow page, a broken link or a page that will not load: things break on every platform.</p>',
   body: cards(
     [
-      { icon: 'layers', title: 'Themes', text: 'Avada, Salient, Bridge, Woodmart and more.' },
-      { icon: 'web', title: 'Page Builders', text: 'Oxygen Builder, Breakdance, Elementor, WPBakery Page Builder, Bold Page Builder and more.' },
-      { icon: 'plug', title: 'Plugins and WooCommerce', text: 'WooCommerce, popular SEO plugins, form plugins, membership plugins and more.' },
+      { icon: 'layers', title: 'WordPress and WooCommerce', text: 'Themes, page builders such as Elementor, Oxygen Builder and Breakdance, plugins, checkouts and updates that went wrong.' },
+      { icon: 'web', title: 'Shopify and Webflow', text: 'Theme and layout issues, forms, apps and integrations, product pages and checkout problems.' },
+      { icon: 'code', title: 'TYPO3, Next.js and HTML', text: 'Content management, extensions, custom code, builds and deployments, and hand-written sites.' },
     ],
     { cols: 3 }
   ),
@@ -146,10 +151,10 @@ ${section({
   tone: 'light',
   tag: 'Prices',
   title: 'Clear Prices, [[Paid When You Are Happy]]',
-  body: `<div class="prices">${priceCard(byId('one-time-wordpress-support'))}${priceCard(byId('seo-local-seo-geo'))}</div><p class="center note" style="margin-top:24px">Need ongoing WordPress maintenance? It is included in the SEO, Local SEO and GEO plan.</p>`,
+  body: `<div class="prices">${priceCard(fixCard)}${priceCard(byId('seo-local-seo-geo'))}</div><p class="center note" style="margin-top:24px">Need ongoing website maintenance? It is included in the SEO, Local SEO and GEO plan.</p>`,
 })}
 ${section({ tag: 'How It Works', title: 'Fixed in [[Three Steps]]', body: steps([
-  ['Describe the issue', 'Tell us what is wrong in as much detail as you can, or send a short screen recording.'],
+  ['Describe the issue', 'Tell us what is wrong and what your site is built on, or send a short screen recording.'],
   ['We fix the issue', 'We back up your website and fix the issue, recording our screen while we work.'],
   ['You pay when happy', 'You pay after the issue is solved and you are happy with the fix.'],
 ]) })}
@@ -158,15 +163,15 @@ ${section({
   body: `<div class="two"><div class="two-media">${scrollShot('cristal-windows', 'Cristal Windows website, home page')}</div><div class="two-text">
     <p class="label">One Developer</p>
     <h2 class="h2">${tt('The Person Who [[Fixes It]] Answers You')}</h2>
-    <p>Fırat Şekerli has worked on websites since 2013 and builds and looks after WordPress sites every day, including plugins for Oxygen Builder and Breakdance users. You deal with him from the first message to the fix.</p>
+    <p>Fırat Şekerli has worked on websites since 2013 and builds and looks after websites every day, from WordPress and WooCommerce to Shopify, Webflow, TYPO3 and Next.js, including plugins for Oxygen Builder and Breakdance users. You deal with him from the first message to the fix.</p>
     ${checklist(['Live sites built for businesses in England, the United States and Türkiye', 'Our own WordPress plugins, sold in our shop', 'English or Turkish, usually within minutes'])}
     <p><a class="card-link" href="/references/">See our work</a></p>
   </div></div>`,
 })}
 ${reviewsBand()}
-${wpFaq.html}
+${helpFaq.html}
 ${lpCta('Tell Us What Is [[Broken]]', 'Your first small fix is free, and you only pay for a fix when you are happy.', 'Describe Your Issue')}
 `,
 };
 
-export default [trades, wp];
+export default [trades, help];
