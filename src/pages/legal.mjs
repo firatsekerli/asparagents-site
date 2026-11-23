@@ -6,7 +6,7 @@ const splitHero = ({ tag, title, intro, actions }) => pageHead({ tag, title, int
 // accounts and payments. DRAFT for Firat's review (20.11.2026): adapted from the asparajans.com texts and the old
 // asparagents pages; processors and retention periods are the ones already confirmed for asparajans.com.
 const media = '';
-const updated = '20 November 2026';
+const updated = '24 November 2026';
 
 const privacy = {
   path: '/privacy-policy/',
@@ -44,6 +44,7 @@ ${splitHero({ tag: 'Legal', compact: true, title: 'Privacy [[Policy]]', intro: `
   <li>Email: Uzman Posta (our mailbox provider).</li>
   <li>Delivery of form messages: Resend, Inc. (USA).</li>
   <li>Analytics and ad measurement, only with your consent: Google LLC (Google Analytics, Google Ads, Google Tag Manager), including the hashed contact details used for enhanced conversions.</li>
+  <li>Usage analytics, only with your consent: Microsoft Corporation (Microsoft Clarity), which records how pages are used, such as clicks, scrolling and the steps of our forms. What you type into form fields is masked and not recorded.</li>
   <li>Public authorities, where the law requires it.</li>
 </ul>
 <p>Some of these providers process data outside the UK and the European Economic Area, mainly in the USA. Where that happens, the transfer relies on the safeguards those providers offer, such as standard contractual clauses.</p>
@@ -53,6 +54,7 @@ ${splitHero({ tag: 'Legal', compact: true, title: 'Privacy [[Policy]]', intro: `
 <ul>
   <li>Messages and correspondence: 2 years from the last contact. If your request becomes a contract, it is kept with the contract records.</li>
   <li>Contracts, quotes and invoices: as long as the law requires (up to 10 years).</li>
+  <li>Session recordings in Microsoft Clarity: 30 days.</li>
   <li>Analytics data: at most 14 months in Google Analytics. For cookie durations see the <a href="/cookie-policy-eu/">Cookie Policy</a>.</li>
   <li>Security logs: for the period our hosting provider sets.</li>
 </ul>
@@ -97,6 +99,10 @@ ${splitHero({ tag: 'Legal', compact: true, title: '[[Cookie]] Policy', intro: '<
   <tbody>
     <tr><td>_ga</td><td>Google Analytics</td><td>Tells visits apart with a random number to count visitors and sessions.</td><td>2 years</td></tr>
     <tr><td>_ga_&lt;id&gt;</td><td>Google Analytics</td><td>Stores and counts page views.</td><td>2 years</td></tr>
+    <tr><td>_clck</td><td>Microsoft Clarity</td><td>Keeps the same random visitor ID across pages.</td><td>1 year</td></tr>
+    <tr><td>_clsk</td><td>Microsoft Clarity</td><td>Joins the page views of one visit into one session.</td><td>1 day</td></tr>
+    <tr><td>CLID</td><td>Microsoft Clarity</td><td>Recognises a returning visitor across sites that use Clarity (set on clarity.ms).</td><td>1 year</td></tr>
+    <tr><td>MUID</td><td>Microsoft</td><td>Identifies the browser for Microsoft services (set on bing.com).</td><td>1 year</td></tr>
   </tbody>
 </table></div>
 
