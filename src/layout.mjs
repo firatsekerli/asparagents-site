@@ -284,6 +284,61 @@ export const formBlock = ({ heading = 'Send Us a Message' } = {}) => {
 </form>`;
 };
 
+// Multi-step quote form for the landing pages (Firat 24.11.2026: "people are too lazy to fill the forms"; keep the
+// voice message; "the data is very important, count everything"). Taps first, contact details last. Every step is
+// pushed to the dataLayer (event lead_form) and to Microsoft Clarity when it is loaded; a sent form still pushes
+// form_submit for the Google Ads conversion. `preset` answers step 1 when the page already says what the visitor
+// wants (a trade page means a new website), so they start at step 2 and can go back.
+const opt = (name, value, label) => `<label class="sf-opt"><input type="radio" name="${name}" value="${value}"><span>${label}</span></label>`;
+export const STEP_NEEDS = [
+  ['website', 'A new website'],
+  ['fix', 'Fix my website'],
+  ['google', 'More customers from Google'],
+  ['social', 'Social media'],
+  ['tool', 'A tool for my business'],
+];
+const STEP_DETAILS = {
+  website: ['What kind of website?', [['1-5 pages', '1 to 5 pages'], ['5-10 pages', '5 to 10 pages'], ['online shop', 'An online shop'], ['not sure', 'Not sure yet']]],
+  fix: ['Which platform is it on?', [['WordPress', 'WordPress'], ['WooCommerce', 'WooCommerce'], ['Shopify', 'Shopify'], ['Webflow', 'Webflow'], ['other', 'Something else or not sure']]],
+  google: ['Do you have a website now?', [['yes', 'Yes'], ['yes, not happy', 'Yes, but I don’t like it'], ['no', 'No']]],
+  social: ['Which platforms?', [['Facebook and Instagram', 'Facebook and Instagram'], ['LinkedIn', 'LinkedIn'], ['TikTok', 'TikTok'], ['not sure', 'Not sure yet']]],
+  tool: ['What should it do?', [['quotes', 'Give quotes or estimates'], ['bookings', 'Take bookings'], ['team app', 'An app for my team'], ['other', 'Something else']]],
+};
+export const stepForm = ({ heading = 'Get a Quote', preset = '' } = {}) => {
+  const f = (lab, input, wide = false) => `<label class="field${wide ? ' wide' : ''}"><span>${lab}</span>${input}</label>`;
+  const step = (n, legend, body, hidden = true) => `<fieldset class="sf-step" data-step="${n}"${hidden ? ' hidden' : ''}><legend class="sf-q">${legend}</legend>${body}</fieldset>`;
+  return `<form class="form step-form" data-form="quote" data-steps data-preset="${preset}" novalidate>
+  ${heading ? `<h2 class="form-title">${heading}</h2>` : ''}
+  <div class="sf-top"><p class="sf-count" aria-live="polite">Step <b data-sf-num>1</b> of 4</p><div class="sf-bar" aria-hidden="true"><span data-sf-bar></span></div></div>
+  ${step(1, 'What do you need?', `<div class="sf-opts">${STEP_NEEDS.map(([v, l]) => opt('need', v, l)).join('')}</div>`, false)}
+  ${step(2, 'Tell us a little more', Object.entries(STEP_DETAILS).map(([k, [q, list]]) => `<div class="sf-group" data-for="${k}" hidden><p class="sf-sub">${q}</p><div class="sf-opts">${list.map(([v, l]) => opt(`detail_${k}`, v, l)).join('')}</div></div>`).join(''))}
+  ${step(3, 'When do you want to start?', `<div class="sf-opts">${[['asap', 'As soon as possible'], ['this month', 'This month'], ['just looking', 'Just looking for now']].map(([v, l]) => opt('timing', v, l)).join('')}</div>`)}
+  ${step(4, 'How can we reach you?', `<div class="form-grid">
+    ${f(`Your Name ${req}`, '<input type="text" name="name" autocomplete="name" placeholder="Your name" required>')}
+    ${f('Company (optional)', '<input type="text" name="company" autocomplete="organization" placeholder="Your business name">')}
+    ${f('WhatsApp or Phone', '<input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+353 …" data-sf-phone>')}
+    ${f('Email', '<input type="email" name="email" autocomplete="email" placeholder="Your email address">')}
+    <p class="sf-hint wide" data-sf-contact>Fill in your WhatsApp number or your email, whichever you prefer.</p>
+    ${f('Anything else? (optional)', '<textarea name="message" rows="3" placeholder="Your website address, what you want to change, or a site you like"></textarea>', true)}
+    <div class="field wide voice" data-voice>
+      <span>Prefer not to type? Leave a voice message.</span>
+      <div class="voice-row">
+        <button type="button" class="voice-btn" data-voice-rec>${micIcon}<b>Start Recording</b></button>
+        <span class="voice-time" data-voice-time hidden>0:00 / 2:00</span>
+        <audio class="voice-audio" data-voice-audio controls preload="metadata" hidden></audio>
+        <button type="button" class="voice-del" data-voice-del hidden>Delete recording</button>
+      </div>
+      <small class="voice-note" data-voice-note>Up to 2 minutes. You can listen to or delete the recording before sending.</small>
+    </div>
+  </div>
+  <label class="hp" aria-hidden="true">Leave this field empty<input type="text" name="fax" tabindex="-1" autocomplete="off"></label>
+  <label class="check"><input type="checkbox" name="privacy" value="1" required><span>I have read the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>. ${req}</span></label>
+  <button class="btn" type="submit">Send</button>`)}
+  <div class="sf-nav"><button type="button" class="sf-back" data-sf-back hidden>&larr; Back</button></div>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>`;
+};
+
 // Navy call-to-action band at the bottom of every page except Contact.
 const ctaBand = () => `
 <section class="sec tone-navy cta-band"><div class="wrap">

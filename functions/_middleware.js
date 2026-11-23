@@ -55,9 +55,13 @@ export async function onRequest({ request, next }) {
   const res = await next();
   if (url.pathname.startsWith('/api/') || request.method !== 'GET' || !(res.headers.get('content-type') || '').includes('text/html')) return res;
   const pick = (url.searchParams.get('cc') || '').toUpperCase();
-  const cur = CURRENCIES[/^[A-Z]{2}$/.test(pick) ? pick : (request.cf && request.cf.country) || ''];
-  if (!cur) return res;
-  const out = localPrices(res, cur);
+  const country = /^[A-Z]{2}$/.test(pick) ? pick : (request.cf && request.cf.country) || '';
+  const cur = CURRENCIES[country];
+  // The multi-step quote form starts the phone field with the visitor's country code (data-cc, read by site.js).
+  const hasStepForm = /^\/(website-design-for-tradesmen|website-for-plumbers|website-for-electricians|wordpress-help|website-help|web-design-cork)\/$/.test(url.pathname);
+  if (!cur && !(hasStepForm && country)) return res;
+  let out = cur ? localPrices(res, cur) : res;
+  if (hasStepForm && country) out = new HTMLRewriter().on('form[data-steps]', { element: (el) => el.setAttribute('data-cc', country) }).transform(out);
   const headers = new Headers(out.headers);
   headers.set('cache-control', 'private, max-age=0, must-revalidate');
   headers.set('vary', 'CF-IPCountry');

@@ -1,4 +1,4 @@
-import { site, section, cards, steps, checklist, faqBand, formBlock, reviewsBand, scrollShot, freeOfferFaq, icon, tt, orgId } from '../layout.mjs';
+import { site, section, cards, steps, checklist, faqBand, stepForm, reviewsBand, scrollShot, freeOfferFaq, icon, tt, orgId } from '../layout.mjs';
 import { byId, priceCard, priceStrip, m } from '../prices.mjs';
 import { plugins } from '../site.mjs';
 import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
@@ -21,7 +21,7 @@ const lpCta = (h, p, label) => `
   <p class="cta-mail"><a href="mailto:${site.email}">${site.email}</a></p>
 </div></section>`;
 
-const hero = ({ tag, h1, lead, points, formHeading, cta }) => `
+const hero = ({ tag, h1, lead, points, formHeading, cta, preset = '' }) => `
 <section class="page-head lp-head"><div class="wrap contact-grid">
   <div>
     <p class="label">${tag}</p>
@@ -34,7 +34,7 @@ const hero = ({ tag, h1, lead, points, formHeading, cta }) => `
       <a href="mailto:${site.email}"><span class="ci">${icon.mail}</span>${site.email}</a>
     </div>
   </div>
-  <div id="quote">${formBlock({ heading: formHeading })}</div>
+  <div id="quote">${stepForm({ heading: formHeading, preset })}</div>
 </div></section>`;
 
 // Working demo of a tool in a navy band, with the tools we build next to it.
@@ -100,7 +100,7 @@ const tradePage = (c) => {
       faq.ld,
     ],
     body: `
-${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(547)}, one-time`, 'First year of plugin updates and fixes free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote' })}
+${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(547)}, one-time`, 'First year of plugin updates and fixes free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote', preset: 'website' })}
 ${section({
   tag: 'What You Get',
   title: c.h.offer,
@@ -305,7 +305,7 @@ const helpPage = (c) => {
     noindex: true,
     schema: [faq.ld],
     body: `
-${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: ['Pay only when it is fixed', 'Your site backed up before we start', 'A screen recording of the fix', 'Usually replies within minutes'], formHeading: c.formHeading, cta: 'Describe Your Issue' })}
+${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: ['Pay only when it is fixed', 'Your site backed up before we start', 'A screen recording of the fix', 'Usually replies within minutes'], formHeading: c.formHeading, cta: 'Describe Your Issue', preset: 'fix' })}
 ${section({ tag: 'What We Fix', title: c.fixTitle, intro: `<p>${c.fixIntro}</p>`, body: cards(c.fixes, { cols: 3 }) })}
 ${section({
   tone: 'light',

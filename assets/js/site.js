@@ -534,16 +534,104 @@
     };
   });
 
+  // Multi-step quote form (src/layout.mjs stepForm). Each answer moves on by itself; every step is counted:
+  // dataLayer event "lead_form" (form_action start | answer | back | contact | submit | error) and Clarity events.
+  var track = function (form, action, extra) {
+    var ev = { event: 'lead_form', form_action: action, form_step: form.sfStep || 1, form_page: window.location.pathname };
+    for (var k in extra) ev[k] = extra[k];
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(ev);
+    if (typeof window.clarity === 'function') {
+      try {
+        window.clarity('event', 'lead_form_' + action + (action === 'answer' ? '_' + ev.form_step : ''));
+        if (extra && extra.form_field && extra.form_answer) window.clarity('set', extra.form_field, String(extra.form_answer));
+      } catch (e) { /* Clarity not ready */ }
+    }
+  };
+  var CODES = { IE: '+353', GB: '+44', US: '+1', CA: '+1', AU: '+61', NZ: '+64', TR: '+90', DE: '+49', AT: '+43', NL: '+31', FR: '+33', ES: '+34', IT: '+39', BE: '+32', ZA: '+27' };
+  Array.prototype.forEach.call(document.querySelectorAll('form[data-steps]'), function (form) {
+    var steps = form.querySelectorAll('.sf-step');
+    var num = form.querySelector('[data-sf-num]');
+    var bar = form.querySelector('[data-sf-bar]');
+    var back = form.querySelector('[data-sf-back]');
+    var history = [];
+    var started = false;
+    var show = function (n, push) {
+      if (push && form.sfStep) history.push(form.sfStep);
+      form.sfStep = n;
+      Array.prototype.forEach.call(steps, function (st) { st.hidden = Number(st.getAttribute('data-step')) !== n; });
+      num.textContent = n;
+      bar.style.width = (n * 25) + '%';
+      back.hidden = history.length === 0;
+      if (n === 2) {
+        var need = (form.querySelector('input[name="need"]:checked') || {}).value;
+        Array.prototype.forEach.call(form.querySelectorAll('.sf-group'), function (g) { g.hidden = g.getAttribute('data-for') !== need; });
+      }
+    };
+    var advance = function (t) {
+      var next = { need: 2, timing: 4 }[t.name] || (t.name.indexOf('detail_') === 0 ? 3 : 0);
+      if (next && form.sfStep < next) setTimeout(function () { show(next, true); var f = form.querySelector('.sf-step:not([hidden]) input'); if (f && next === 4) f.focus({ preventScroll: true }); }, 180);
+    };
+    var cc = form.getAttribute('data-cc');
+    var phone = form.querySelector('[data-sf-phone]');
+    if (phone) {
+      var code = CODES[cc] || '';
+      phone.placeholder = code ? code + ' …' : 'Your WhatsApp number';
+      phone.addEventListener('focus', function () { if (!phone.value && code) phone.value = code + ' '; });
+      phone.addEventListener('blur', function () { if (phone.value.trim() === code) phone.value = ''; });
+    }
+    form.addEventListener('change', function (e) {
+      var t = e.target;
+      if (t.type !== 'radio') return;
+      if (!started) { started = true; track(form, 'start'); }
+      var field = t.name.indexOf('detail_') === 0 ? 'detail' : t.name;
+      track(form, 'answer', { form_field: field, form_answer: t.value });
+      t.sfChanged = true;
+      advance(t);
+    });
+    // Clicking an answer that is already selected (after Back) moves on too.
+    form.addEventListener('click', function (e) {
+      var t = e.target;
+      if (t.type !== 'radio') return;
+      setTimeout(function () { if (!t.sfChanged) advance(t); t.sfChanged = false; }, 0);
+    });
+    form.addEventListener('focusin', function (e) {
+      if (form.sfStep === 4 && !form.sfContact && e.target.matches('input[type="text"], input[type="tel"], input[type="email"], textarea')) { form.sfContact = true; track(form, 'contact'); }
+    });
+    back.addEventListener('click', function () {
+      var prev = history.pop();
+      if (prev) { track(form, 'back'); show(prev, false); }
+    });
+    var preset = form.getAttribute('data-preset');
+    var pre = preset && form.querySelector('input[name="need"][value="' + preset + '"]');
+    if (pre) { pre.checked = true; show(2, true); history = [1]; back.hidden = false; } else show(1, false);
+    form.sfTrack = function (action, extra) { track(form, action, extra); };
+    // Count how many visitors actually see the form.
+    if ('IntersectionObserver' in window) {
+      var seen = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { track(form, 'view'); seen.disconnect(); } }, { threshold: 0.4 });
+      seen.observe(form);
+    }
+  });
+
   // Forms -> /api/form
   Array.prototype.forEach.call(document.querySelectorAll('form[data-form]'), function (form) {
     var status = form.querySelector('.form-status');
     var started = Date.now();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!form.reportValidity()) return;
+      if (form.hasAttribute('data-steps')) {
+        var em = form.querySelector('input[name="email"]'), ph = form.querySelector('input[name="phone"]');
+        var hint = form.querySelector('[data-sf-contact]');
+        var hasPhone = ph.value.replace(/[^0-9]/g, '').length >= 7;
+        var hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim());
+        if (!hasPhone && !hasEmail) { hint.classList.add('err'); (em.value ? em : ph).focus(); form.sfTrack('error', { form_field: 'contact' }); return; }
+        hint.classList.remove('err');
+      }
+      if (!form.reportValidity()) { if (form.sfTrack) form.sfTrack('error', { form_field: 'required' }); return; }
       var btn = form.querySelector('button[type="submit"]');
       var data = {};
       new FormData(form).forEach(function (v, k) { data[k] = v; });
+      if (data.need) { data.detail = data['detail_' + data.need] || ''; Object.keys(data).forEach(function (k) { if (k.indexOf('detail_') === 0) delete data[k]; }); }
       data.form = form.getAttribute('data-form');
       data.page = window.location.pathname;
       data.elapsed = Date.now() - started;
@@ -561,7 +649,12 @@
             form.reset();
             status.className = 'form-status ok';
             status.textContent = L('Teşekkürler, mesajınız bize ulaştı. En kısa sürede dönüş yapacağız.', 'Thank you, your message has reached us. We will get back to you as soon as possible.');
-            if (window.dataLayer) window.dataLayer.push({ event: 'form_submit', form_name: data.form, voice_message: data.audio ? 'yes' : 'no' });
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'form_submit', form_name: data.form, voice_message: data.audio ? 'yes' : 'no', form_need: data.need || '', form_detail: data.detail || '', form_timing: data.timing || '' });
+            if (form.sfTrack) {
+              form.sfTrack('submit', { form_need: data.need || '', form_timing: data.timing || '', voice_message: data.audio ? 'yes' : 'no' });
+              Array.prototype.forEach.call(form.querySelectorAll('.sf-step, .sf-top, .sf-nav'), function (el) { el.hidden = true; });
+            }
           } else { throw new Error(res.j && res.j.error); }
         })
         .catch(function () {
