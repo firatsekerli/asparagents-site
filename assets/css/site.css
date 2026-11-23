@@ -680,3 +680,10 @@ ul { margin: 0 0 16px; }
 .price-badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--red-text); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; white-space: nowrap; }
 @media (min-width: 900px) { .prices .price-card.featured { transform: translateY(-14px); } }
 .price-strip .price-num { border: 0; padding: 0; }
+/* Phone footer: Company sits next to Services instead of at the far right; Services links stay on one line (Firat 23.11.2026) */
+@media (max-width: 680px) {
+  .footer-grid { display: flex; flex-wrap: wrap; column-gap: 40px; }
+  .footer-brand, .footer-grid > .footer-col:last-child { flex: 0 0 100%; }
+  .footer-col a { white-space: nowrap; }
+}
+@media (max-width: 360px) { .footer-grid { column-gap: 20px; } .footer-col a { white-space: normal; } }
