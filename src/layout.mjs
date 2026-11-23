@@ -169,11 +169,11 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 const monthYear = (d) => `${MONTHS[Number(d.slice(5, 7)) - 1]} ${d.slice(0, 4)}`;
 const initials = (n) => n.split(/\s+/).map((w) => w[0]).slice(0, 2).join('');
 const quoteMark = '<svg class="q-mark" aria-hidden="true" focusable="false" viewBox="0 0 48 36" width="48" height="36"><path d="M0 36V22C0 9.6 6.4 2.3 19.2 0l2 4.6C14 6.6 10.6 10.6 10.2 17H19v19zm27 0V22C27 9.6 33.4 2.3 46.2 0l1.8 4.6C41 6.6 37.6 10.6 37.2 17H46v19z" fill="currentColor"/></svg>';
-export const reviewsBand = ({ list = reviews, extra = '' } = {}) => `
+export const reviewsBand = ({ list = reviews, extra = '', title = 'What Our Clients [[Say]]' } = {}) => `
 <section class="sec tone-blue reviews" aria-labelledby="reviews-title"><div class="wrap">
   <div class="sec-head">
     <p class="label">Testimonials</p>
-    <h2 class="h2" id="reviews-title">${tt('What Our Clients [[Say]]')}</h2>
+    <h2 class="h2" id="reviews-title">${tt(title)}</h2>
     <div class="reviews-badge"><span class="stars" role="img" aria-label="5 out of 5 stars">${icon.star.repeat(5)}</span><span>Reviews from our Google profile</span></div>
   </div>
   <div class="quotes">${list

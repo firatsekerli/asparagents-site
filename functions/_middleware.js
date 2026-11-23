@@ -16,27 +16,22 @@ const CURRENCIES = {
   ...Object.fromEntries(EURO.map((c) => [c, ['€', 'euros']])),
 };
 
-// Landing page headlines per keyword (Google Ads, Firat 22.11.2026): ?trade= and ?need= swap the H1 phrase and the
-// title for the ad group's keyword. Unknown values keep the default page. The canonical URL never changes.
-const VARIANTS = {
-  '/websites-for-tradesmen/': { param: 'trade', values: {
-    plumbers: ['Plumbers', 'Website Design for Plumbers, Fixed Price | asparagents'],
-    builders: ['Builders', 'Website Design for Builders, Fixed Price | asparagents'],
-    electricians: ['Electricians', 'Website Design for Electricians, Fixed Price | asparagents'],
-    roofers: ['Roofers', 'Website Design for Roofers, Fixed Price | asparagents'],
-    'small-businesses': ['Small Businesses', 'Website Design for Small Businesses, Fixed Price | asparagents'],
-  } },
-  '/website-help/': { param: 'need', values: {
-    developer: ['Freelance WordPress Developer', 'Freelance WordPress Developer, Pay When Fixed | asparagents'],
-    maintenance: ['WordPress Maintenance and Help', 'WordPress Maintenance and Help | asparagents'],
-    fix: ['WordPress Fix', 'WordPress Fix, Pay Only When It Is Fixed | asparagents'],
-    wordpress: ['WordPress Help', 'WordPress Help, Pay Only When It Is Fixed | asparagents'],
-    'website-fix': ['Website Fix', 'Website Fix, Pay Only When It Is Fixed | asparagents'],
-  } },
+// Google Ads landing pages (Firat 23.11.2026): one page per ad group, so the old shared pages with ?trade= and ?need=
+// headline variants now redirect to the matching page. The query string (gclid and the rest) is kept.
+const OLD_LANDING = {
+  '/websites-for-tradesmen/': { param: 'trade', fallback: '/website-design-for-tradesmen/', to: { plumbers: '/website-for-plumbers/', electricians: '/website-for-electricians/' } },
+  '/website-help/': { param: 'need', to: { wordpress: '/wordpress-help/', fix: '/wordpress-help/', developer: '/wordpress-help/', maintenance: '/wordpress-help/' } },
 };
-function variant(url) {
-  const v = VARIANTS[url.pathname];
-  return v && v.values[(url.searchParams.get(v.param) || '').toLowerCase()];
+function oldLanding(url) {
+  const path = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`;
+  const o = OLD_LANDING[path];
+  if (!o) return null;
+  const v = (url.searchParams.get(o.param) || '').toLowerCase();
+  const to = o.to[v] || o.fallback;
+  if (!to) return null;
+  const q = new URLSearchParams(url.search); q.delete(o.param);
+  const qs = q.toString();
+  return `${url.origin}${to}${qs ? `?${qs}` : ''}`;
 }
 
 function localPrices(response, [sign, name]) {
@@ -51,8 +46,8 @@ const INDEXNOW_KEY = 'f41f2651db5847bc866ec4cee45457d3';
 
 export async function onRequest({ request, next }) {
   const url = new URL(request.url);
-  // The help landing page covers any platform since 22.11.2026; old links keep their ?need= and other parameters.
-  if (url.pathname.startsWith('/wordpress-help')) return Response.redirect(`${url.origin}/website-help/${url.search}`, 301);
+  const moved = oldLanding(url);
+  if (moved) return Response.redirect(moved, 301);
   if (url.pathname === `/${INDEXNOW_KEY}.txt`) return new Response(INDEXNOW_KEY, { headers: { 'content-type': 'text/plain; charset=utf-8' } });
   if (!url.pathname.startsWith('/api/') && KEYS.some((k) => url.searchParams.has(k))) {
     return Response.redirect(`${SHOP}${url.pathname}${url.search}`, request.method === 'GET' || request.method === 'HEAD' ? 301 : 308);
@@ -61,10 +56,8 @@ export async function onRequest({ request, next }) {
   if (url.pathname.startsWith('/api/') || request.method !== 'GET' || !(res.headers.get('content-type') || '').includes('text/html')) return res;
   const pick = (url.searchParams.get('cc') || '').toUpperCase();
   const cur = CURRENCIES[/^[A-Z]{2}$/.test(pick) ? pick : (request.cf && request.cf.country) || ''];
-  const vr = variant(url);
-  if (!cur && !vr) return res;
-  let out = cur ? localPrices(res, cur) : res;
-  if (vr) out = new HTMLRewriter().on('[data-variant]', { element: (el) => el.setInnerContent(vr[0]) }).on('title', { element: (el) => el.setInnerContent(vr[1]) }).transform(out);
+  if (!cur) return res;
+  const out = localPrices(res, cur);
   const headers = new Headers(out.headers);
   headers.set('cache-control', 'private, max-age=0, must-revalidate');
   headers.set('vary', 'CF-IPCountry');

@@ -3,6 +3,16 @@ import { demoShell } from './common.mjs';
 // Trades demo: an enquiry tool that answers at any hour, asks the questions the office would ask, sorts emergencies
 // from routine jobs and books a visit. Sample questions, slots and names only.
 
+// makeTradesDemo(jobs): the same tool with the jobs of one trade (Google Ads landing pages for plumbers and
+// electricians, 23.11.2026). Each job is [label, the urgency question]. The default is the mixed trades list.
+const defaultJobs = [
+  ['Roof leak', 'Is it causing damage inside the house right now?'],
+  ['Gutters', 'Is water overflowing onto walls or into the house right now?'],
+  ['Boiler or heating', 'Are you without heating or hot water right now?'],
+  ['Blocked drain', 'Is it causing damage inside the house right now?'],
+];
+
+export const makeTradesDemo = (jobs = defaultJobs) => {
 const html = demoShell(
   'tr-demo',
   ['Customer', 'Office', 'Text Message'],
@@ -19,7 +29,7 @@ const js = `
 (function () {
   var root = document.getElementById('tr-demo'); if (!root) return;
   var T = window.agDemo(root), esc = window.agEsc, chat = document.getElementById('tr-chat'), act = document.getElementById('tr-act');
-  var a = {};
+  var a = {}, JOBS = ${JSON.stringify(jobs)};
   var say = function (t, who) { var d = document.createElement('div'); d.className = 'msg ' + (who || 'bot'); d.innerHTML = t; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; };
   var sum = function () {
     var rows = [['Job', a.job], ['Urgency', a.urgent === undefined ? '' : a.urgent ? 'Emergency' : 'Routine'], ['Postcode', a.pc], ['Photo', a.photo === undefined ? '' : a.photo ? 'Added' : 'Skipped'], ['Visit', a.slot], ['Name', a.name]];
@@ -40,10 +50,10 @@ const js = `
   function start() {
     a = {}; chat.innerHTML = ''; sum();
     say('Hi, thanks for contacting Your Company. I can book you in right now. What do you need help with?');
-    choices(['Roof leak', 'Gutters', 'Boiler or heating', 'Blocked drain'], function (c) { a.job = c; later(q2); });
+    choices(JOBS.map(function (j) { return j[0]; }), function (c) { a.job = c; later(q2); });
   }
   function q2() {
-    say(a.job === 'Gutters' ? 'Is water overflowing onto walls or into the house right now?' : a.job === 'Boiler or heating' ? 'Are you without heating or hot water right now?' : 'Is it causing damage inside the house right now?');
+    say(JOBS.filter(function (j) { return j[0] === a.job; })[0][1]);
     choices(['Yes, right now', 'No, it can wait a few days'], function (c) { a.urgent = c.indexOf('Yes') === 0; later(q3); });
   }
   function q3() { say('What is your postcode?'); field('Postcode', 'GU51 4AB', function (v) { a.pc = v.toUpperCase(); later(q4); }); }
@@ -71,4 +81,7 @@ const js = `
 })();
 `;
 
-export const tradesDemo = { html, js, css: '' };
+return { html, js, css: '' };
+};
+
+export const tradesDemo = makeTradesDemo();
