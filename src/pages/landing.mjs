@@ -80,7 +80,7 @@ const tradePage = (c) => {
       { q: 'Can I change the content myself?', a: '<p>Yes. The site is built on WordPress so you can update your text, photos and prices yourself. We are there if you would rather we did it.</p>' },
       freeOfferFaq,
     ],
-    { aside: { icon: 'chat', title: 'One Contact, Fast Replies', text: 'You deal with one person from start to finish, and we usually reply within minutes, and always within 12 hours.' }, cta: '' }
+    { title: c.h.faq, aside: { icon: 'chat', title: 'One Contact, Fast Replies', text: 'You deal with one person from start to finish, and we usually reply within minutes, and always within 12 hours.' }, cta: '' }
   );
   return {
     path: `/${c.slug}/`,
@@ -93,19 +93,19 @@ const tradePage = (c) => {
       faq.ld,
     ],
     body: `
-${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(447)}, one-time`, 'First year of maintenance and support free', ...c.points, 'Usually replies within minutes'], formHeading: 'Get a Quote for Your Website', cta: 'Get a Quote' })}
+${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(447)}, one-time`, 'First year of maintenance and support free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote' })}
 ${section({
   tag: 'What You Get',
-  title: `Everything for ${m(447)}, [[No Surprises]]`,
+  title: c.h.offer,
   intro: `<p>${c.offerIntro}</p>`,
   body: `<div class="lp-offer">${priceCard(byId('wordpress-website'))}<div>${cards(c.offer, { cols: 2 })}</div></div>`,
 })}
 ${toolsBand(c.tools)}
-${cristal(c.proofTitle)}
-${reviewsBand()}
-${section({ tag: 'How It Works', title: 'Three Steps to [[Your New Website]]', body: steps(c.steps) })}
+${cristal(c.h.proof)}
+${reviewsBand({ title: c.h.reviews })}
+${section({ tag: 'How It Works', title: c.h.steps, body: steps(c.steps) })}
 ${faq.html}
-${lpCta(c.ctaTitle, c.ctaText, 'Get a Quote')}
+${lpCta(c.h.cta, c.ctaText, 'Get a Quote')}
 `,
   };
 };
@@ -119,6 +119,15 @@ const tradesmen = tradePage({
   crumb: 'Website Design for Tradesmen',
   audience: 'Tradesmen and small trade businesses',
   tradeWord: 'trade',
+  h: {
+    form: "Get a Quote for Your Tradesman Website",
+    offer: "Website Design for Tradesmen for [[One Fixed Price]]",
+    proof: "Website Design for Tradesmen That [[Brings Enquiries]]",
+    reviews: "What Clients Say About Our [[Website Design]]",
+    steps: "Three Steps to Your [[Tradesman Website]]",
+    faq: "Questions About Website Design for [[Tradesmen]]",
+    cta: "Ready for a Tradesman Website That [[Brings Work In]]?",
+  },
   tag: 'Websites for Trades',
   h1: 'Website Design for [[Tradesmen]]',
   lead: `Website design for tradesmen that brings you enquiries: a WordPress website of 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that answers enquiries and books jobs while you are working.`,
@@ -131,7 +140,7 @@ const tradesmen = tradePage({
     updateCard,
   ],
   tools: {
-    title: 'A Website That [[Books Jobs]] While You Work',
+    title: "A Tradesman Website That [[Books Jobs]] While You Work",
     intro: 'Your tradesman website can do more than show your phone number. We build web apps and tools into it that answer enquiries, give a rough price and book visits, so you stop losing jobs to missed calls.',
     tools: [
       { icon: 'chat', title: 'Enquiry and Booking Tool', text: 'Answers every enquiry at any hour, asks your questions, spots emergencies and books visits into your free slots. Try it below.' },
@@ -141,14 +150,12 @@ const tradesmen = tradePage({
     demo: makeTradesDemo(),
     demoIntro: 'Step 1 is a customer on your website. Step 2 is the job card you receive. Step 3 is the text your customer gets.',
   },
-  proofTitle: 'A Trade Website That [[Brings Enquiries]]',
   faq: [],
   steps: [
     ['Tell us about your business', 'Send the form or a WhatsApp message with your trade, the towns you cover and the work you want more of.'],
     ['We agree the pages and the price', 'You get a written list of the pages and what goes on them, at the fixed price, before any work starts.'],
     ['We build, you approve, it goes live', 'We design and build the site, check it on every phone and launch it when you are happy.'],
   ],
-  ctaTitle: 'Ready for a Website That [[Brings Work In]]?',
   ctaText: 'Tell us about your trade and we usually reply within minutes, and always within 12 hours.',
 });
 
@@ -159,9 +166,18 @@ const plumbers = tradePage({
   crumb: 'Website for Plumbers',
   audience: 'Plumbers, plumbing and heating businesses',
   tradeWord: 'plumbing',
+  h: {
+    form: "Get a Quote for Your Plumber Website",
+    offer: "Plumber Website Design for [[One Fixed Price]]",
+    proof: "Plumbing Website Design Built on [[Real Results]]",
+    reviews: "What Clients Say About Our [[Website Design]]",
+    steps: "Three Steps to Your [[Plumber Website]]",
+    faq: "Questions About a Website for [[Plumbers]]",
+    cta: "Ready for a Website for Plumbers That [[Brings Work In]]?",
+  },
   tag: 'Plumber Website Design',
   h1: 'Website for Plumbers That [[Brings In Jobs]]',
-  lead: `A website for plumbers that turns searches into booked jobs: plumber website design with 5 to 10 pages, fast on every phone, SEO for the plumbing work you want more of and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that takes plumbing enquiries while you are under a sink.`,
+  lead: `A website for plumbers that turns searches into booked jobs: plumber website design with 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that takes enquiries while you are under a sink.`,
   points: ['A booking tool for plumbing jobs'],
   offerIntro: 'Plumbing website design for sole traders and small plumbing and heating firms, made for the way customers look for a plumber: on a phone, often in a hurry.',
   offer: [
@@ -171,7 +187,7 @@ const plumbers = tradePage({
     updateCard,
   ],
   tools: {
-    title: 'A Plumber Website That [[Takes Bookings]]',
+    title: "A Website for Plumbers That [[Takes Bookings]]",
     intro: 'When you are on a job you cannot answer the phone. We build web apps and tools into your plumbing website that answer every enquiry, sort emergencies from routine jobs and book the visit.',
     tools: [
       { icon: 'chat', title: 'Enquiry and Booking Tool', text: 'Asks what you would ask about a leak, a boiler or a blocked drain, takes a photo and books a free slot. Try it below.' },
@@ -186,7 +202,6 @@ const plumbers = tradePage({
     ]),
     demoIntro: 'Step 1 is a customer reporting a plumbing job on your website. Step 2 is the job card you receive. Step 3 is the text your customer gets.',
   },
-  proofTitle: 'A Trade Website That [[Brings Enquiries]]',
   faq: [
     { q: 'Do you build websites for plumbing and heating firms?', a: '<p>Yes. We build the same website for a sole trader plumber and for a plumbing and heating firm with a team: the pages follow the jobs you do and the towns you cover.</p>' },
   ],
@@ -195,7 +210,6 @@ const plumbers = tradePage({
     ['We agree the pages and the price', 'You get a written list of the pages and what goes on them, at the fixed price, before any work starts.'],
     ['We build, you approve, it goes live', 'We design and build the site, check it on every phone and launch it when you are happy.'],
   ],
-  ctaTitle: 'Ready for a Plumber Website That [[Brings Work In]]?',
   ctaText: 'Tell us about your plumbing business and we usually reply within minutes, and always within 12 hours.',
 });
 
@@ -206,9 +220,18 @@ const electricians = tradePage({
   crumb: 'Website for Electricians',
   audience: 'Electricians and electrical contractors',
   tradeWord: 'electrical',
+  h: {
+    form: "Get a Quote for Your Electrician Website",
+    offer: "Electrician Website Design for [[One Fixed Price]]",
+    proof: "Electrician Website Design Built on [[Real Results]]",
+    reviews: "What Clients Say About Our [[Website Design]]",
+    steps: "Three Steps to Your [[Electrician Website]]",
+    faq: "Questions About a Website for [[Electricians]]",
+    cta: "Ready for a Website for Electricians That [[Brings Work In]]?",
+  },
   tag: 'Electrician Website Design',
   h1: 'Website for Electricians That [[Brings In Jobs]]',
-  lead: `A website for electricians and electrical contractors that turns searches into booked jobs: electrician website design with 5 to 10 pages, fast on every phone, SEO for the electrical work you want more of and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that takes enquiries while you are on site.`,
+  lead: `A website for electricians and electrical contractors that turns searches into booked jobs: 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that takes enquiries while you are on site.`,
   points: ['A booking tool for electrical jobs'],
   offerIntro: 'Electrician website design for sole traders and electrical contractors, made for homeowners, landlords and businesses looking for an electrician on their phone.',
   offer: [
@@ -218,7 +241,7 @@ const electricians = tradePage({
     updateCard,
   ],
   tools: {
-    title: 'An Electrician Website That [[Takes Bookings]]',
+    title: "A Website for Electricians That [[Takes Bookings]]",
     intro: 'When you are on site you cannot answer the phone. We build web apps and tools into your electrician website that answer every enquiry, sort urgent faults from planned work and book the visit.',
     tools: [
       { icon: 'chat', title: 'Enquiry and Booking Tool', text: 'Asks what you would ask about a fault, a rewire or an EV charger, takes a photo and books a free slot. Try it below.' },
@@ -233,7 +256,6 @@ const electricians = tradePage({
     ]),
     demoIntro: 'Step 1 is a customer reporting an electrical job on your website. Step 2 is the job card you receive. Step 3 is the text your customer gets.',
   },
-  proofTitle: 'A Trade Website That [[Brings Enquiries]]',
   faq: [
     { q: 'Do you build websites for electrical contractors?', a: '<p>Yes. We build the same website for a sole trader electrician and for an electrical contractor with a team: the pages follow the work you do, domestic or commercial, and the towns you cover.</p>' },
   ],
@@ -242,7 +264,6 @@ const electricians = tradePage({
     ['We agree the pages and the price', 'You get a written list of the pages and what goes on them, at the fixed price, before any work starts.'],
     ['We build, you approve, it goes live', 'We design and build the site, check it on every phone and launch it when you are happy.'],
   ],
-  ctaTitle: 'Ready for an Electrician Website That [[Brings Work In]]?',
   ctaText: 'Tell us about your electrical business and we usually reply within minutes, and always within 12 hours.',
 });
 
@@ -263,7 +284,7 @@ const helpPage = (c) => {
       { q: 'Do you need my login?', a: '<p>We need access to fix the issue. Create a separate user or administrator account for us and remove it when the fix is done; never send us your own password.</p>' },
       { q: 'How fast do you reply?', a: '<p>We usually reply within minutes, and always within 12 hours, in English or Turkish.</p>' },
     ],
-    { aside: { icon: 'moon', title: c.asideTitle, text: 'We usually reply within minutes, and always within 12 hours, and you deal with one person from start to finish.' }, cta: '' }
+    { title: c.h.faq, aside: { icon: 'moon', title: c.asideTitle, text: 'We usually reply within minutes, and always within 12 hours, and you deal with one person from start to finish.' }, cta: '' }
   );
   return {
     path: `/${c.slug}/`,
@@ -279,10 +300,10 @@ ${section({ tag: 'What We Fix', title: c.fixTitle, intro: `<p>${c.fixIntro}</p>`
 ${section({
   tone: 'light',
   tag: 'Prices',
-  title: 'Clear Prices, [[Paid When You Are Happy]]',
+  title: c.h.prices,
   body: `<div class="prices">${priceCard(c.card)}${priceCard(byId('seo-local-seo-geo'))}</div><p class="center note" style="margin-top:24px">Need ongoing ${c.maintWord} maintenance? It is included in the SEO, Local SEO and GEO plan.</p>`,
 })}
-${section({ tag: 'How It Works', title: 'Fixed in [[Three Steps]]', body: steps([
+${section({ tag: 'How It Works', title: c.h.steps, body: steps([
   ['Describe the issue', `Tell us what is wrong${c.platformAsk}, or send a short screen recording.`],
   ['We fix the issue', 'We back up your website and fix the issue, recording our screen while we work.'],
   ['You pay when happy', 'You pay after the issue is solved and you are happy with the fix.'],
@@ -292,15 +313,15 @@ ${section({
   tone: 'light',
   body: `<div class="two"><div class="two-media">${scrollShot('cristal-windows', 'Cristal Windows website, home page')}</div><div class="two-text">
     <p class="label">One Developer</p>
-    <h2 class="h2">${tt('The Person Who [[Fixes It]] Answers You')}</h2>
+    <h2 class="h2">${tt(c.h.developer)}</h2>
     <p>${c.developer}</p>
     ${checklist(['Live sites built for businesses in England, the United States and Türkiye', 'Our own WordPress plugins, sold in our shop', 'English or Turkish, usually within minutes'])}
     <p><a class="card-link" href="/references/">See our work</a></p>
   </div></div>`,
 })}
-${reviewsBand()}
+${reviewsBand({ title: c.h.reviews })}
 ${faq.html}
-${lpCta(c.ctaTitle, 'Your first small fix is free, and you only pay for a fix when you are happy.', 'Describe Your Issue')}
+${lpCta(c.h.cta, 'Your first small fix is free, and you only pay for a fix when you are happy.', 'Describe Your Issue')}
 `,
   };
 };
@@ -310,6 +331,14 @@ const wordpressHelp = helpPage({
   title: 'WordPress Help and Support, Pay Only When It Is Fixed',
   description: 'WordPress help and WordPress support: we back up your site, fix the WordPress issue while recording our screen, and you pay only when you are happy.',
   crumb: 'WordPress Help',
+  h: {
+    prices: "WordPress Help Prices, [[Paid When You Are Happy]]",
+    steps: "Your WordPress Fix in [[Three Steps]]",
+    developer: "The WordPress Developer Who [[Answers You]]",
+    reviews: "What Clients Say About Our [[WordPress Support]]",
+    faq: "Questions About WordPress Help and [[Support]]",
+    cta: "Tell Us What Is Wrong With [[Your WordPress Site]]",
+  },
   tag: 'WordPress Support',
   h1: 'WordPress Help, [[Pay Only When It Is Fixed]]',
   lead: `WordPress help from a developer who works in WordPress every day. Tell us what is wrong with your WordPress site: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time WordPress fix is ${m(27)}.`,
@@ -348,11 +377,19 @@ const websiteHelp = helpPage({
   title: 'Website Help, Pay Only When It Is Fixed',
   description: 'Website help and website support for WordPress, Shopify, Webflow, TYPO3 and custom sites: we back up your site, fix the issue and you pay only when you are happy.',
   crumb: 'Website Help',
+  h: {
+    prices: "Website Fix Prices, [[Paid When You Are Happy]]",
+    steps: "Your Website Fix in [[Three Steps]]",
+    developer: "The Developer Who Fixes Your Website [[Answers You]]",
+    reviews: "What Clients Say About Our [[Website Support]]",
+    faq: "Questions About Website Help and [[Support]]",
+    cta: "Tell Us What Is Broken on [[Your Website]]",
+  },
   tag: 'Website Support',
   h1: 'Website Help, [[Pay Only When It Is Fixed]]',
   lead: `Website help for any website, whatever it is built on. Tell us what is wrong: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time website fix is ${m(27)}.`,
   formHeading: 'Describe Your Website Issue',
-  fixTitle: 'Any Website, [[Any Issue]]',
+  fixTitle: 'Website Help for [[Any Website, Any Issue]]',
   fixIntro: 'A layout that falls apart after an update, a form that stops sending, a checkout error, a slow page, a broken link or a page that will not load: things break on every platform. Website support and website repair for any site: we fix your website wherever it runs.',
   fixes: [
     { icon: 'layers', title: 'WordPress and WooCommerce', text: 'Themes, page builders such as Elementor, Oxygen Builder and Breakdance, plugins, checkouts and updates that went wrong.' },

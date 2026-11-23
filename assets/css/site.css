@@ -639,7 +639,12 @@ ul { margin: 0 0 16px; }
 @media (prefers-reduced-motion: no-preference) { .hero-bg { animation: heroimg 2.4s cubic-bezier(.2, .7, .2, 1) both; } }
 
 /* Google Ads landing pages (Firat 22.11.2026) */
-.lp-offer { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.lp-offer { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 32px; align-items: stretch; }
+/* The four cards next to the price card share its height: two equal rows that end with the price card. */
+.lp-offer > div { display: flex; }
+.lp-offer .cards { flex: 1; grid-auto-rows: 1fr; row-gap: 24px; margin-bottom: 0; }
+.lp-offer .cards > .card { display: block; grid-row: auto; margin-bottom: 0; }
+.lp-offer .cards > .card > .card-icon { display: inline-flex; margin-bottom: 20px; }
 .lp-stats { margin: 20px 0 8px; }
 /* Ads landing pages: room between the lead and the points; on phones, where the form sits below the fold, a button jumps to it */
 .lp-points { margin-top: 24px; }
