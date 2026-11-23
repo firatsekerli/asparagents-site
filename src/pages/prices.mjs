@@ -11,7 +11,7 @@ export default (() => {
     { q: 'Does the Business Website have monthly costs?', a: '<p>No. A Business Website is hosted on Cloudflare, where static pages are free with no traffic limit (<a href="https://developers.cloudflare.com/pages/functions/pricing/" rel="noopener">Cloudflare pricing</a>), and its contact form fits within a free email plan. You only renew your domain name each year. A paid plan is only needed for heavy use, such as more than 100,000 form submissions a day or more than 100 form emails a day.</p>' },
     freeOfferFaq,
     { q: 'Is VAT added to your prices?', a: '<p>No. We invoice from Türkiye and add no VAT, so the price shown is the amount on your invoice.</p>' },
-    { q: 'Which currency do you use?', a: '<p><span class="cur-note">All prices are in US dollars. We convert them to your country’s currency when we send your quote, so you know the exact amount before we start.</span></p>' },
+    { q: 'Which currency do you use?', a: '<p><span class="cur-note">All prices are in US dollars. In the UK, the euro countries, Canada, Australia and New Zealand the same amounts are shown in your own currency.</span></p>' },
   ]);
   const list = allPlans();
   return {
@@ -21,7 +21,7 @@ export default (() => {
     crumbs: [{ name: 'Prices', path: '/prices/' }],
     schema: list.filter((p) => p.usd != null || p.gbp != null).map(offerLd).concat(faq.ld),
     body: `
-${pageHead({ tag: 'Prices', title: 'Clear and Transparent [[Prices]]', intro: '<p><span class="cur-note">All prices are in US dollars, and we convert them to your country’s currency in your quote.</span> One-time work is paid once; SEO, GEO and social media are monthly services.</p>', actions: ctaRow() })}
+${pageHead({ tag: 'Prices', title: 'Clear and Transparent [[Prices]]', intro: '<p><span class="cur-note">All prices are in US dollars, and your quote lists the exact amount before we start.</span> One-time work is paid once; SEO, GEO and social media are monthly services.</p>', actions: ctaRow() })}
 ${section({ tag: 'Tools', title: 'Tools Built for [[Your Industry]]', intro: '<p>Every tool is built around your services, rules and prices, so the price depends on what it needs to do. Try a demo below and <a href="/contact/">tell us about your business</a>; we usually reply within minutes with a price.</p>', body: cards(industryCards, { cls: 'services' }) })}
 ${section({ tone: 'blue', tag: 'One-Time', title: 'Fixes and [[Websites]]', body: `<div class="prices">${list.filter((p) => !p.monthly && p.id !== 'one-time-wordpress-support').map(priceCard).join('')}</div>${list.filter((p) => p.id === 'one-time-wordpress-support').map((p) => priceStrip(p, 'You tell us about <strong>one issue</strong>, we back up your site and fix it while recording our screen, and you <strong>pay only when you are happy</strong> with the result.')).join('')}` })}
 ${section({ tone: 'light', tag: 'Monthly', title: 'Search, AI Visibility and [[Social Media]]', body: `<div class="prices">${list.filter((p) => p.monthly).map(priceCard).join('')}</div>` })}
