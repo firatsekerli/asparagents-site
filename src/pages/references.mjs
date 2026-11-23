@@ -64,7 +64,7 @@ const detailPages = references.map((r) => {
     ogImage: `/assets/img/og-${r.key}.jpg`,
     schema: [{ '@type': 'CreativeWork', name: h1, description: r.text, url: `${site.url}/references/${r.detail}/`, creator: { '@id': `${site.url}/#organization` }, image: `${site.url}/assets/img/ref-${r.key}-1200.webp` }],
     body: `
-${pageHead({ tag: [r.sector, r.place].filter(Boolean).map(esc).join(' · '), title: `${esc(r.name)} [[Website]]`, intro: r.text, actions: buttons([r.url, 'View the Site', '', ' target="_blank" rel="noopener"'], ['/references/', 'All References', 'soft']), media: heroShot(r) })}
+${pageHead({ tag: [r.sector, r.place].filter(Boolean).map(esc).join(' · '), title: `${esc(r.name)} [[Website]]`, intro: r.key === 'total-health-chiropractic' ? `${r.text} Based in Cork too? See <a href="/web-design-cork/">web design in Cork</a>.` : r.text, actions: buttons([r.url, 'View the Site', '', ' target="_blank" rel="noopener"'], ['/references/', 'All References', 'soft']), media: heroShot(r) })}
 ${projectSection(r)}
 ${section({ body: `<div class="gallery">${shot(r.key, '-a', alts[r.key].a)}${shot(r.key, '-b', alts[r.key].b)}</div>` })}
 ${toolsSection(r)}

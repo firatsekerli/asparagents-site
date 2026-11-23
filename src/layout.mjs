@@ -351,7 +351,7 @@ ${contact ? ctaBand() : ''}
       <a href="/privacy-policy/">Privacy Policy</a>
       <a href="/cookie-policy-eu/">Cookie Policy</a>
       <button type="button" class="linklike" data-consent-open>Cookie Settings</button>
-      <a href="https://asparajans.com/" hreflang="tr" lang="tr">Türkçe: asparajans</a>
+      <a href="/web-design-cork/">Web Design Cork</a>
     </nav>
   </div></div>
 </footer>
