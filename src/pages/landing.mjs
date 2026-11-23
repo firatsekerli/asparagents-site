@@ -1,5 +1,5 @@
 import { site, section, cards, steps, checklist, faqBand, formBlock, reviewsBand, scrollShot, freeOfferFaq, icon, tt, orgId } from '../layout.mjs';
-import { byId, priceCard, m } from '../prices.mjs';
+import { byId, priceCard, priceStrip, m } from '../prices.mjs';
 import { plugins } from '../site.mjs';
 import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
 import { makeTradesDemo } from '../demos/trades.mjs';
@@ -70,6 +70,12 @@ const toolFaq = (trade) => ({
   a: `<p>A tool is priced by what it needs to do, so we tell you the price in writing before any work starts. First we build a free prototype with sample data from your own ${trade} work, so you can try it before you decide. It can be added to the website we build for you or to the one you already have.</p>`,
 });
 
+// Smaller option under the WordPress offer (Firat 23.11.2026: add the Business Website as an option and stress that it has no
+// ongoing costs). Static pages on Cloudflare's free plan; the only yearly cost is the domain name.
+const smallSite = (c) => priceStrip({ ...byId('business-website'), name: c.h.small, cta: ['Get a Quote', '#quote'] },
+  `1 to 5 pages of mostly static content, built without WordPress. <strong>No monthly costs</strong>: hosting on Cloudflare is free for a site like this, so you only renew your domain name. The code is yours in your own GitHub, your own AI assistant can make updates, and there are no plugins to update.`);
+const noCostsFaq = { q: 'Is there a smaller option with no monthly costs?', a: `<p>Yes. The Business Website is ${m(447)} for 1 to 5 pages of mostly static content, built without WordPress and hosted on Cloudflare, where static pages are free with no traffic limit (<a href="https://developers.cloudflare.com/pages/functions/pricing/" rel="noopener">Cloudflare pricing</a>). You only renew your domain name each year. Fixes after handover are paid per fix, and there is no free first year as there are no plugins to update.</p>` };
+
 const tradePage = (c) => {
   const faq = faqBand(
     [
@@ -78,6 +84,7 @@ const tradePage = (c) => {
       toolFaq(c.tradeWord),
       { q: 'What happens after the first year?', a: '<p>Plugin updates and fixes for technical problems such as plugin conflicts are free for the first year. After that, website maintenance is included in our SEO, Local SEO and GEO plan; tell us what you need and we will tell you the options.</p>' },
       { q: 'Can I change the content myself?', a: '<p>Yes. The site is built on WordPress so you can update your text, photos and prices yourself. We are there if you would rather we did it.</p>' },
+      noCostsFaq,
       freeOfferFaq,
     ],
     { title: c.h.faq, aside: { icon: 'chat', title: 'One Contact, Fast Replies', text: 'You deal with one person from start to finish, and we usually reply within minutes, and always within 12 hours.' }, cta: '' }
@@ -89,7 +96,7 @@ const tradePage = (c) => {
     crumbs: [{ name: c.crumb, path: `/${c.slug}/` }],
     contact: false,
     schema: [
-      { '@type': 'Service', name: c.crumb, serviceType: 'Website design', provider: { '@id': orgId }, url: `${site.url}/${c.slug}/`, audience: { '@type': 'BusinessAudience', audienceType: c.audience }, offers: { '@type': 'Offer', price: 447, priceCurrency: 'USD' } },
+      { '@type': 'Service', name: c.crumb, serviceType: 'Website design', provider: { '@id': orgId }, url: `${site.url}/${c.slug}/`, audience: { '@type': 'BusinessAudience', audienceType: c.audience }, offers: [{ '@type': 'Offer', name: 'WordPress Website', price: 547, priceCurrency: 'USD' }, { '@type': 'Offer', name: 'Business Website', price: 447, priceCurrency: 'USD' }] },
       faq.ld,
     ],
     body: `
@@ -98,7 +105,7 @@ ${section({
   tag: 'What You Get',
   title: c.h.offer,
   intro: `<p>${c.offerIntro}</p>`,
-  body: `<div class="lp-offer">${priceCard(byId('wordpress-website'))}<div>${cards(c.offer, { cols: 2 })}</div></div>`,
+  body: `<div class="lp-offer">${priceCard(byId('wordpress-website'))}<div>${cards(c.offer, { cols: 2 })}</div></div>${smallSite(c)}`,
 })}
 ${toolsBand(c.tools)}
 ${cristal(c.h.proof)}
@@ -121,6 +128,7 @@ const tradesmen = tradePage({
   tradeWord: 'trade',
   h: {
     form: "Get a Quote for Your Tradesman Website",
+    small: "A Smaller Tradesman Website With No Monthly Costs",
     offer: "Website Design for Tradesmen for [[One Fixed Price]]",
     proof: "Website Design for Tradesmen That [[Brings Enquiries]]",
     reviews: "What Clients Say About Our [[Website Design]]",
@@ -168,6 +176,7 @@ const plumbers = tradePage({
   tradeWord: 'plumbing',
   h: {
     form: "Get a Quote for Your Plumber Website",
+    small: "A Smaller Plumber Website With No Monthly Costs",
     offer: "Plumber Website Design for [[One Fixed Price]]",
     proof: "Plumbing Website Design Built on [[Real Results]]",
     reviews: "What Clients Say About Our [[Website Design]]",
@@ -222,6 +231,7 @@ const electricians = tradePage({
   tradeWord: 'electrical',
   h: {
     form: "Get a Quote for Your Electrician Website",
+    small: "A Smaller Electrician Website With No Monthly Costs",
     offer: "Electrician Website Design for [[One Fixed Price]]",
     proof: "Electrician Website Design Built on [[Real Results]]",
     reviews: "What Clients Say About Our [[Website Design]]",
