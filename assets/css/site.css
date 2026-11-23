@@ -656,3 +656,11 @@ ul { margin: 0 0 16px; }
 .lp-tools .card a:not(.btn) { color: var(--blue); text-decoration: underline; }
 @media (max-width: 1023px) { .lp-jump { display: flex; margin: 24px 0 8px; } }
 @media (max-width: 1023px) { .lp-offer { grid-template-columns: minmax(0, 1fr); } }
+/* One-time support as a full-width band under the website price cards (/prices/) */
+.price-strip .strip-buy { display: flex; align-items: center; gap: 24px; }
+.price-strip .price-num { margin: 0; }
+.price-strip .btns { margin-top: 0; }
+@media (max-width: 680px) { .price-strip .strip-buy { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 16px; } }
+.price-strip { color: var(--text); }
+.price-strip h3 { color: var(--navy); }
+.price-strip > div:first-child { flex: 1 1 420px; }

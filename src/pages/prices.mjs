@@ -1,5 +1,5 @@
 import { freeOfferFaq, pageHead, faqBand, ctaRow, section } from '../layout.mjs';
-import { allPlans, priceCard, offerLd } from '../prices.mjs';
+import { allPlans, priceCard, priceStrip, offerLd } from '../prices.mjs';
 import { industryCards } from './industries.mjs';
 import { cards } from '../layout.mjs';
 
@@ -21,7 +21,7 @@ export default (() => {
     body: `
 ${pageHead({ tag: 'Prices', title: 'Clear and Transparent [[Prices]]', intro: '<p><span class="cur-note">All prices are in US dollars, and we convert them to your country’s currency in your quote.</span> One-time work is paid once; SEO, GEO and social media are monthly services.</p>', actions: ctaRow() })}
 ${section({ tag: 'Tools', title: 'Tools Built for [[Your Industry]]', intro: '<p>Every tool is built around your services, rules and prices, so the price depends on what it needs to do. Try a demo below and <a href="/contact/">tell us about your business</a>; we usually reply within minutes with a price.</p>', body: cards(industryCards, { cls: 'services' }) })}
-${section({ tone: 'blue', tag: 'One-Time', title: 'Fixes and [[Websites]]', body: `<div class="prices">${list.filter((p) => !p.monthly).map(priceCard).join('')}</div>` })}
+${section({ tone: 'blue', tag: 'One-Time', title: 'Fixes and [[Websites]]', body: `<div class="prices">${list.filter((p) => !p.monthly && p.id !== 'one-time-wordpress-support').map(priceCard).join('')}</div>${list.filter((p) => p.id === 'one-time-wordpress-support').map((p) => priceStrip(p, 'You tell us about <strong>one issue</strong>, we back up your site and fix it while recording our screen, and you <strong>pay only when you are happy</strong> with the result.')).join('')}` })}
 ${section({ tone: 'light', tag: 'Monthly', title: 'Search, AI Visibility and [[Social Media]]', body: `<div class="prices">${list.filter((p) => p.monthly).map(priceCard).join('')}</div>` })}
 ${faq.html}
 `,
