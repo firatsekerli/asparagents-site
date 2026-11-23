@@ -10,6 +10,9 @@
 
 const LABELS = { quote: 'Quote request (asparagents)', partner: 'Agency partner request (asparagents)', iletisim: 'Contact form (asparagents)' };
 const FIELDS = [
+  ['need', 'Needs'],
+  ['detail', 'Details'],
+  ['timing', 'Start'],
   ['name', 'Name'],
   ['company', 'Company'],
   ['email', 'Email'],
@@ -101,7 +104,12 @@ export async function onRequestPost({ request, env }) {
 
   const form = LABELS[data.form] ? data.form : 'iletisim';
   const v = Object.fromEntries(FIELDS.map(([k]) => [k, clean(data[k], k === 'message' ? 4000 : 300)]));
-  if (!v.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email) || data.privacy !== '1') return json(422, { error: 'invalid' });
+  // The multi-step quote form (landing pages) asks for WhatsApp or email, so a quote needs one of the two;
+  // the other forms still need an email.
+  const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email);
+  const hasPhone = v.phone.replace(/[^0-9]/g, '').length >= 7;
+  if (!v.name || data.privacy !== '1' || !(hasEmail || (form === 'quote' && hasPhone))) return json(422, { error: 'invalid' });
+  if (v.email && !hasEmail) return json(422, { error: 'invalid' });
   const voice = readAudio(data);
   if (!voice) return json(422, { error: 'invalid_audio' });
   if (form === 'iletisim' && !v.message && voice.none) return json(422, { error: 'invalid' }); // a message or a recording
@@ -111,11 +119,12 @@ export async function onRequestPost({ request, env }) {
 
   const rows = FIELDS.filter(([k]) => v[k]).map(([k, label]) => `<tr><td style="padding:4px 12px 4px 0;color:#666">${label}</td><td style="padding:4px 0">${escHtml(v[k]).replace(/\n/g, '<br>')}</td></tr>`).join('');
   let text = FIELDS.filter(([k]) => v[k]).map(([k, label]) => `${label}: ${v[k]}`).join('\n');
-  let voiceRow = '';
+  const digits = v.phone.replace(/[^0-9]/g, '');
+  let voiceRow = digits.length >= 7 && v.phone.trim().startsWith('+') ? `<tr><td style="padding:4px 12px 4px 0;color:#666">WhatsApp</td><td style="padding:4px 0"><a href="https://wa.me/${digits}">wa.me/${digits}</a></td></tr>` : '';
   const attachments = [];
   if (!voice.none) {
     const len = voice.seconds ? ` (${mmss(voice.seconds)})` : '';
-    voiceRow = `<tr><td style="padding:4px 12px 4px 0;color:#666">Voice message</td><td style="padding:4px 0"><b>Attached${len}</b></td></tr>`;
+    voiceRow += `<tr><td style="padding:4px 12px 4px 0;color:#666">Voice message</td><td style="padding:4px 0"><b>Attached${len}</b></td></tr>`;
     text += `\nVoice message: attached${len}`;
     const stamp = new Date(Date.now() + 3 * 3600000).toISOString().slice(0, 16).replace(/[-:]/g, '').replace('T', '-');
     attachments.push({ filename: `voice-message-${stamp}.${voice.ext}`, content: voice.content });
@@ -127,8 +136,8 @@ export async function onRequestPost({ request, env }) {
     body: JSON.stringify({
       from: env.FORM_FROM,
       to: [env.FORM_TO || 'info@asparagents.com'],
-      reply_to: v.email,
-      subject: `${LABELS[form]}${voice.none ? '' : ' (voice message)'}: ${v.company || v.name}`,
+      ...(hasEmail ? { reply_to: v.email } : {}),
+      subject: `${LABELS[form]}${voice.none ? '' : ' (voice message)'}: ${v.company || v.name}${v.need ? ` (${v.need}${v.detail ? `, ${v.detail}` : ''})` : ''}`,
       html: `<h2 style="font-family:sans-serif">${LABELS[form]}</h2><table style="font-family:sans-serif;font-size:14px">${rows}${voiceRow}</table>`,
       text,
       ...(attachments.length ? { attachments } : {}),
