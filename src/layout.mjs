@@ -306,20 +306,20 @@ const STEP_DETAILS = {
 };
 export const stepForm = ({ heading = 'Get a Quote', preset = '' } = {}) => {
   const f = (lab, input, wide = false) => `<label class="field${wide ? ' wide' : ''}"><span>${lab}</span>${input}</label>`;
-  const step = (n, legend, body, hidden = true) => `<fieldset class="sf-step" data-step="${n}"${hidden ? ' hidden' : ''}><legend class="sf-q">${legend}</legend>${body}</fieldset>`;
+  const step = (n, legend, body, hidden = true, sub = '') => `<fieldset class="sf-step" data-step="${n}"${hidden ? ' hidden' : ''}><legend class="sf-q">${legend}</legend>${sub ? `<p class="sf-sub">${sub}</p>` : ''}${body}</fieldset>`;
   return `<form class="form step-form" data-form="quote" data-steps data-preset="${preset}" novalidate>
   ${heading ? `<h2 class="form-title">${heading}</h2>` : ''}
   <div class="sf-top"><div class="sf-row"><p class="sf-count" aria-live="polite">Step <b data-sf-num>1</b> of 4</p><button type="button" class="sf-back" data-sf-back hidden>&larr; Back</button></div><div class="sf-bar" aria-hidden="true"><span data-sf-bar></span></div></div>
   <div class="sf-steps">
-  ${step(1, 'What do you need?', `<div class="sf-opts">${STEP_NEEDS.map(([v, l]) => opt('need', v, l)).join('')}</div>`, false)}
+  ${step(1, 'What do you need?', `<div class="sf-opts">${STEP_NEEDS.map(([v, l]) => opt('need', v, l)).join('')}</div>`, false, 'Choose the one that fits best.')}
   ${step(2, 'Tell us a little more', '<div class="sf-groups">' + Object.entries(STEP_DETAILS).map(([k, [q, list]]) => `<div class="sf-group" data-for="${k}" hidden><p class="sf-sub">${q}</p><div class="sf-opts">${list.map(([v, l]) => opt(`detail_${k}`, v, l)).join('')}</div></div>`).join('') + '</div>')}
-  ${step(3, 'When do you want to start?', `<div class="sf-opts">${[['asap', 'As soon as possible'], ['this month', 'This month'], ['just looking', 'Just looking for now']].map(([v, l]) => opt('timing', v, l)).join('')}</div>`)}
+  ${step(3, 'When do you want to start?', `<div class="sf-opts">${[['asap', 'As soon as possible'], ['this month', 'This month'], ['just looking', 'Just looking for now']].map(([v, l]) => opt('timing', v, l)).join('')}</div>`, true, 'This only helps us plan, there is no commitment.')}
   ${step(4, 'How can we reach you?', `<div class="form-grid">
     ${f(`Your Name ${req}`, '<input type="text" name="name" autocomplete="name" placeholder="Your name" required>', true)}
     ${f('WhatsApp or Phone', '<input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+353 …" data-sf-phone>')}
     ${f('Email', '<input type="email" name="email" autocomplete="email" placeholder="Your email address">')}
     <p class="sf-hint wide" data-sf-contact>Fill in your WhatsApp number or your email, whichever you prefer.</p>
-    <details class="sf-note wide"><summary>Add a note (optional)</summary>${f('Your note', '<textarea name="message" rows="2" placeholder="Your website address, what you want to change, or a site you like"></textarea>', true)}</details>
+    <details class="sf-note wide"><summary>Add a note (optional)</summary><textarea name="message" rows="3" aria-label="Your note" placeholder="Your website address, what you want to change, or a site you like"></textarea></details>
     <div class="field wide voice" data-voice>
       <span>Prefer not to type? Leave a voice message.</span>
       <div class="voice-row">
@@ -333,7 +333,7 @@ export const stepForm = ({ heading = 'Get a Quote', preset = '' } = {}) => {
   </div>
   <label class="hp" aria-hidden="true">Leave this field empty<input type="text" name="fax" tabindex="-1" autocomplete="off"></label>
   <label class="check"><input type="checkbox" name="privacy" value="1" required><span>I have read the <a href="/privacy-policy/" target="_blank">Privacy Policy</a>. ${req}</span></label>
-  <button class="btn" type="submit">Send</button>`)}
+  <button class="btn" type="submit">Send</button>`, true, 'We usually reply within minutes.')}
   </div>
   <p class="form-status" role="status" aria-live="polite"></p>
 </form>`;

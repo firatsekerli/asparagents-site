@@ -738,3 +738,7 @@ ul { margin: 0 0 16px; }
 .sf-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .step-form .sf-row .sf-count { margin-bottom: 8px; }
 .sf-row .sf-back { padding: 0 0 8px; font-size: 14px; }
+.sf-note textarea { display: block; width: 100%; margin-top: 8px; font: 16px Arial, Helvetica, sans-serif; color: var(--navy); padding: 12px 14px; border: 1px solid #cfd4e2; border-radius: 6px; background: var(--white); resize: vertical; }
+.sf-note textarea:focus { border-color: var(--blue); outline: 2px solid var(--blue-soft); }
+.step-form .sf-step > .sf-sub { margin: -6px 0 12px; }
+.step-form .sf-note.wide { grid-column: 1 / -1; }
