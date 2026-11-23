@@ -149,7 +149,7 @@ const baseReferences = [
     text: 'For Dimak Kapı, which makes fire doors, sectional doors and steel doors, we designed a corporate website that highlights its products, reference projects and quote process.' },
 ];
 // Order (Firat 22.11.2026: every asparajans.com website build): English-speaking market first, then Türkiye.
-const order = ['cristal-windows', 'misbourne-design', 'academease', 'dr-tim-jaeger', 'dimak-kapi', 'hatupen', 'proga', 'intek-metal', 'neo-global-metal', 'arman-elektronik', 'meya-hukuk', 'lilia', 'nurhayat-tutuncu', 'dr-erkan-ozturk'];
+const order = ['cristal-windows', 'misbourne-design', 'academease', 'total-health-chiropractic', 'dr-tim-jaeger', 'dimak-kapi', 'hatupen', 'proga', 'intek-metal', 'neo-global-metal', 'arman-elektronik', 'meya-hukuk', 'lilia', 'nurhayat-tutuncu', 'dr-erkan-ozturk'];
 export const references = [...baseReferences, ...moreReferences]
   .map((r) => ({ ...r, ...(stories[r.key] || {}), alts: referenceAlts[r.key] }))
   .sort((x, y) => order.indexOf(x.key) - order.indexOf(y.key));

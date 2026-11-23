@@ -10,6 +10,9 @@ export const moreReferences = [
     text: 'For AcademEase, a higher education and university admissions consultancy, we designed a corporate website that explains its services to students, families and institutions.' },
   { key: 'dr-tim-jaeger', name: 'Dr. Tim Jaeger', sector: 'Healthcare', type: 'Membership Platform', url: 'https://drtimjaeger.com/', mock: true, detail: 'dr-tim-jaeger', color: '#b4cae9',
     text: 'We designed a membership-based, modern and SEO-friendly education site for Dr. Tim Jaeger. Its user-friendly interface and mobile-friendly structure give his patients easy access to exclusive content.' },
+  // Firat 24.11.2026: he built this site and it may be shown as a Cork reference. Name, place and content as on the live site.
+  { key: 'total-health-chiropractic', name: 'Total Health Chiropractic', sector: 'Chiropractic Clinic', type: 'Website', place: 'Douglas, Cork, Ireland', url: 'https://chiropractor-cork.ie/', mock: true, detail: 'total-health-chiropractic', color: '#3d7d22',
+    text: 'For Total Health Chiropractic Wellness Clinic in Douglas, Cork, we built a website that presents its chiropractic care, its team and video testimonials from patients, with an appointment request on every page.' },
   { key: 'hatupen', name: 'Hatüpen', sector: 'PVC Doors and Windows', type: 'Corporate Website', place: 'Ankara, Türkiye', url: 'https://www.hatupen.com.tr/', mock: true, detail: 'hatupen', color: '#cd2122',
     text: 'For Hatüpen, a PVC door and window manufacturer, we replaced a hard to update HTML site with a bilingual website the team runs itself, with product series, project news and online orders.' },
   { key: 'arman-elektronik', name: 'Arman Elektronik', sector: 'Electronics', type: 'Online Shop', place: 'Ankara, Türkiye', url: 'https://magaza.armanelektronik.com.tr/', mock: true, detail: 'arman-elektronik', color: '#40345e',
@@ -32,6 +35,7 @@ export const moreReferences = [
 
 export const stories = {
   'misbourne-design': { desc: 'WordPress website for Misbourne Design Associates, an architectural design practice in Oxfordshire: its services, way of working and projects.' },
+  'total-health-chiropractic': { desc: 'Website for Total Health Chiropractic Wellness Clinic in Douglas, Cork: its chiropractic care, team, patient video testimonials and appointment requests.' },
   'dr-tim-jaeger': { desc: 'Membership-based education site for Dr. Tim Jaeger that gives his patients easy access to exclusive content on any device.' },
   'cristal-windows': {
     desc: 'Website for Cristal Windows in Fleet, Hampshire: 34 area pages, a 4-step online quote and 95 contact forms plus 25 quote requests in about 18 months.',
@@ -124,6 +128,7 @@ export const referenceAlts = {
   'dimak-kapi': { a: 'Dimak Kapı website, certified fire door product page', b: 'Dimak Kapı website, About page' },
   hatupen: { a: 'Hatüpen website, products page', b: 'Hatüpen website, About page' },
   'arman-elektronik': { a: 'Arman Elektronik online shop, product category page', b: 'Arman Elektronik online shop, product page' },
+  'total-health-chiropractic': { a: 'Total Health Chiropractic website, About page', b: 'Total Health Chiropractic website, Meet the Team page' },
   'dr-tim-jaeger': { a: 'Dr. Tim Jaeger website, About page', b: 'Dr. Tim Jaeger website, Contact page' },
   'nurhayat-tutuncu': { a: 'Nurhayat Tütüncü website, Services page', b: 'Nurhayat Tütüncü website, Articles page' },
   'dr-erkan-ozturk': { a: 'Dr. Erkan Öztürk website, prices page', b: 'Dr. Erkan Öztürk website, Gallery page' },
