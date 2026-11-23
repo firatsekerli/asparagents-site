@@ -673,13 +673,10 @@ ul { margin: 0 0 16px; }
 .price-card .checklist { margin: 18px 0 22px; gap: 9px; font-size: 15px; line-height: 1.45; }
 .price-card .checklist .ck { width: 22px; height: 22px; box-shadow: none; margin-top: 0; }
 .price-card .checklist .ck svg { width: 13px; height: 13px; }
-.price-card.featured { background: var(--navy); color: #C9D0EE; box-shadow: 0 20px 48px rgba(6, 11, 35, 0.35); outline: 2px solid #fff; outline-offset: -2px; }
-.price-card.featured h3, .price-card.featured .price-num { color: #fff; }
-.price-card.featured .price-sub { color: #AEB7E0; }
-.price-card.featured .price-num { border-bottom-color: rgba(255, 255, 255, 0.16); }
-.price-card.featured .checklist .ck { background: var(--light-blue, #DCE1F9); color: var(--navy); }
-.price-card.featured .btn { background: #fff; color: var(--navy); }
-.price-card.featured .btn:hover { background: var(--light-blue, #DCE1F9); }
+.price-card.featured { background: var(--light-blue, #DCE1F9); color: var(--text); box-shadow: 0 20px 48px rgba(6, 11, 35, 0.35); outline: 3px solid #fff; outline-offset: -3px; }
+.price-card.featured h3, .price-card.featured .price-num { color: var(--navy); }
+.price-card.featured .price-sub { color: #3d4565; }
+.price-card.featured .price-num { border-bottom-color: rgba(6, 11, 35, 0.14); }
 .price-badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--red-text); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; white-space: nowrap; }
 @media (min-width: 900px) { .prices .price-card.featured { transform: translateY(-14px); } }
 .price-strip .price-num { border: 0; padding: 0; }
