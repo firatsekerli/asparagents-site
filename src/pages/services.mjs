@@ -86,17 +86,17 @@ const wpSupport = servicePage({
 
 const websites = servicePage({
   slug: 'websites',
-  title: 'WordPress Websites and WooCommerce Shops | asparagents',
-  description: 'Fast, mobile-friendly WordPress websites and WooCommerce shops for small businesses, with the SEO foundations built in from the start.',
+  title: 'Websites, WordPress and WooCommerce Shops | asparagents',
+  description: 'Fast, mobile-friendly websites for small businesses: WordPress websites, WooCommerce shops and small websites without WordPress, with the SEO foundations built in.',
   h1: 'Websites and [[Online Shops]]',
-  intro: 'We build WordPress websites that present your business clearly, open fast on every device and lead visitors to get in touch or buy. The SEO foundations are built in from the start, not added later.',
+  intro: 'We build WordPress websites, WooCommerce shops and small websites without WordPress that present your business clearly, open fast on every device and lead visitors to get in touch or buy. The SEO foundations are built in from the start, not added later.',
   includes: [
     ['Structure First', 'We agree on your goals, your audience and the page structure before the design starts.', 'layers'],
     ['Mobile-Friendly and Fast', 'Pages that work on every screen and open quickly.', 'web'],
     ['SEO Foundations', 'A clean heading structure, titles and descriptions, structured data and a sitemap.', 'seo'],
     ['WooCommerce', 'Online shops with payment setup.', 'plug'],
     ['Page Builders You Know', 'Breakdance, Oxygen, Elementor or the block editor.', 'code'],
-    ['Easy to Update', 'You can change your content yourself.', 'report'],
+    ['Easy to Update', 'Change your content in WordPress, or update a website without WordPress with your own AI assistant.', 'report'],
   ],
   forWho: {
     title: 'For small businesses and [[the agencies behind them]]',
@@ -109,7 +109,8 @@ const websites = servicePage({
   ],
   faqs: [
     { q: 'How long does a website take?', a: '<p>It depends on the number of pages and the content you have. We give you a timeline with the quote.</p>' },
-    { q: 'Can I update the website myself?', a: '<p>Yes. Every site we build has an admin panel you can use to change your content.</p>' },
+    { q: 'Can I update the website myself?', a: '<p>Yes. A WordPress website or shop has an admin panel you can use to change your content. A Business Website has no admin panel: we hand it over with a guide, so your own AI assistant can make updates.</p>' },
+    { q: 'WordPress Website or Business Website?', a: '<p>A Business Website suits 1 to 5 pages of mostly static content: it is very fast, hosted on Cloudflare, has no plugins to update and the code is yours in your own GitHub. A WordPress Website suits 5 to 10 pages you want to edit in an admin panel, and its first year of plugin updates and fixes is free.</p>' },
     { q: 'Do you build online shops?', a: '<p>Yes, with WooCommerce, including payment setup.</p>' },
     { q: 'Can you build a site my agency sells under its own name?', a: '<p>Yes. That is our <a href="/white-label/">white label service</a>: your brand, your client, our work in the background.</p>' },
   ],

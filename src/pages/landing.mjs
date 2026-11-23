@@ -76,7 +76,7 @@ const tradePage = (c) => {
       { q: 'Is the price really fixed?', a: `<p>Yes. A WordPress website of 5 to 10 pages is ${m(547)}, one-time. We agree on the pages and what goes on them before any work starts, so you know the full price up front.</p>` },
       ...c.faq,
       toolFaq(c.tradeWord),
-      { q: 'What happens after the first year?', a: '<p>Maintenance and support are free for the first year. After that, website maintenance is included in our SEO, Local SEO and GEO plan; tell us what you need and we will tell you the options.</p>' },
+      { q: 'What happens after the first year?', a: '<p>Plugin updates and fixes for technical problems such as plugin conflicts are free for the first year. After that, website maintenance is included in our SEO, Local SEO and GEO plan; tell us what you need and we will tell you the options.</p>' },
       { q: 'Can I change the content myself?', a: '<p>Yes. The site is built on WordPress so you can update your text, photos and prices yourself. We are there if you would rather we did it.</p>' },
       freeOfferFaq,
     ],
@@ -93,7 +93,7 @@ const tradePage = (c) => {
       faq.ld,
     ],
     body: `
-${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(547)}, one-time`, 'First year of maintenance and support free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote' })}
+${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(547)}, one-time`, 'First year of plugin updates and fixes free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote' })}
 ${section({
   tag: 'What You Get',
   title: c.h.offer,
@@ -110,7 +110,7 @@ ${lpCta(c.h.cta, c.ctaText, 'Get a Quote')}
   };
 };
 
-const updateCard = { icon: 'clock', title: 'Easy to Keep Up to Date', text: 'WordPress, so you can change text, photos and prices yourself, with the first year of maintenance and support free.' };
+const updateCard = { icon: 'clock', title: 'Easy to Keep Up to Date', text: 'WordPress, so you can change text, photos and prices yourself, with the first year of plugin updates and fixes free.' };
 
 const tradesmen = tradePage({
   slug: 'website-design-for-tradesmen',
@@ -367,7 +367,7 @@ const wordpressHelp = helpPage({
   asideTitle: 'Quick WordPress Support',
   faq: [
     { q: 'Which WordPress issues can you fix?', a: '<p>Updates that broke something, theme and page builder issues (Elementor, Oxygen Builder, Breakdance), plugin conflicts, WooCommerce checkout problems, forms that stopped sending and slow pages. If you are not sure, describe what you see and we will tell you honestly whether we can help.</p>' },
-    { q: 'Do you offer ongoing WordPress support and maintenance?', a: '<p>Yes. Website maintenance is included in our SEO, Local SEO and GEO plan, and every new website we build comes with the first year of maintenance free.</p>' },
+    { q: 'Do you offer ongoing WordPress support and maintenance?', a: '<p>Yes. Website maintenance is included in our SEO, Local SEO and GEO plan, and every new WordPress website or WooCommerce shop we build comes with the first year of plugin updates and fixes free.</p>' },
   ],
   ctaTitle: 'Tell Us What Is Wrong With [[Your WordPress Site]]',
 });
@@ -410,7 +410,7 @@ const websiteHelp = helpPage({
   asideTitle: 'Quick Website Support',
   faq: [
     { q: 'Which websites can you fix?', a: '<p>WordPress and WooCommerce, Shopify, Webflow, TYPO3, Next.js and plain HTML sites. If your site runs on something else, tell us what it is and we will tell you honestly whether we can help.</p>' },
-    { q: 'Do you offer ongoing website maintenance?', a: '<p>Yes. Website maintenance is included in our SEO, Local SEO and GEO plan, and every new website we build comes with the first year of maintenance free.</p>' },
+    { q: 'Do you offer ongoing website maintenance?', a: '<p>Yes. Website maintenance is included in our SEO, Local SEO and GEO plan, and every new WordPress website or WooCommerce shop we build comes with the first year of plugin updates and fixes free.</p>' },
   ],
   ctaTitle: 'Tell Us What Is [[Broken]]',
 });

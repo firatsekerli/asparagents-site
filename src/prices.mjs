@@ -16,7 +16,7 @@ export const plans = [
   {
     id: 'wordpress-website',
     name: 'WordPress Website',
-    sub: 'Business website, 5 to 10 pages, one-time',
+    sub: 'Built on WordPress, 5 to 10 pages, one-time',
     usd: 547,
     items: ['A WordPress website, 5 to 10 pages', 'Fast and mobile-friendly', 'SEO and GEO foundations', 'Google Business Profile setup', 'First year free: plugin updates and fixes such as plugin conflicts'],
     cta: ['Get a Quote', '/contact/'],
@@ -27,7 +27,7 @@ export const plans = [
     // Price $447 (Firat 23.11.2026; the WordPress website went up to $547 the same day). Highlighted on /prices/.
     id: 'business-website',
     name: 'Business Website',
-    sub: 'Fast website without WordPress, one-time',
+    sub: 'Without WordPress, 1 to 5 pages, one-time',
     usd: 447,
     items: ['A website for your business, 1 to 5 pages, mostly static content', 'Very fast on Cloudflare, usually no hosting bill', 'The code is yours, in your own GitHub', 'SEO, GEO and Google Business Profile setup', 'Update it with your own AI assistant', 'No plugins to update; later fixes are paid per fix'],
     featured: 'Recommended',
