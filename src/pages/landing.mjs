@@ -315,7 +315,7 @@ const wordpressHelp = helpPage({
   lead: `WordPress help from a developer who works in WordPress every day. Tell us what is wrong with your WordPress site: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time WordPress fix is ${m(27)}.`,
   formHeading: 'Describe Your WordPress Issue',
   fixTitle: 'WordPress Support for [[Any Issue]]',
-  fixIntro: 'A WordPress update that broke the layout, a plugin conflict, a contact form that stopped sending, a WooCommerce checkout error or a slow WordPress site: tell us what happened and we fix it.',
+  fixIntro: 'Fast WordPress support for whatever went wrong: a WordPress update that broke the layout, a plugin conflict, a contact form that stopped sending, a WooCommerce checkout error or a slow WordPress site: tell us what happened and we fix it.',
   fixes: [
     { icon: 'wrench', title: 'Updates That Went Wrong', text: 'A WordPress, theme or plugin update that broke a page, the layout or the admin area.' },
     { icon: 'layers', title: 'Page Builders and Themes', text: 'Elementor, Oxygen Builder, Breakdance and theme issues: layouts that fall apart, menus, headers and mobile views.' },
@@ -353,7 +353,7 @@ const websiteHelp = helpPage({
   lead: `Website help for any website, whatever it is built on. Tell us what is wrong: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time website fix is ${m(27)}.`,
   formHeading: 'Describe Your Website Issue',
   fixTitle: 'Any Website, [[Any Issue]]',
-  fixIntro: 'A layout that falls apart after an update, a form that stops sending, a checkout error, a slow page, a broken link or a page that will not load: things break on every platform, and we fix your website wherever it runs.',
+  fixIntro: 'A layout that falls apart after an update, a form that stops sending, a checkout error, a slow page, a broken link or a page that will not load: things break on every platform. Website support and website repair for any site: we fix your website wherever it runs.',
   fixes: [
     { icon: 'layers', title: 'WordPress and WooCommerce', text: 'Themes, page builders such as Elementor, Oxygen Builder and Breakdance, plugins, checkouts and updates that went wrong.' },
     { icon: 'web', title: 'Shopify and Webflow', text: 'Theme and layout issues, forms, apps and integrations, product pages and checkout problems.' },
