@@ -18,18 +18,19 @@ export const plans = [
     name: 'WordPress Website',
     sub: 'Business website, 5 to 10 pages, one-time',
     usd: 547,
-    items: ['A WordPress website made for your business, 5 to 10 pages', 'Mobile-friendly and fast on every device', 'Technical and on-page SEO foundations from the start', 'Google Business Profile setup', 'A basic structure for AI visibility (GEO)', 'First year free: plugin updates and fixes for technical problems such as plugin conflicts'],
+    items: ['A WordPress website, 5 to 10 pages', 'Fast and mobile-friendly', 'SEO and GEO foundations', 'Google Business Profile setup', 'First year free: plugin updates and fixes such as plugin conflicts'],
     cta: ['Get a Quote', '/contact/'],
   },
   {
     // Firat 23.11.2026: sell both. Built and hosted on Cloudflare, code in the client's own GitHub, form emails sent
     // with Resend, then handed over so the client's own AI assistant can keep it up to date. No free first year.
-    // Price: the same as the WordPress website (Firat 23.11.2026).
+    // Price $447 (Firat 23.11.2026; the WordPress website went up to $547 the same day). Highlighted on /prices/.
     id: 'business-website',
     name: 'Business Website',
     sub: 'Fast website without WordPress, one-time',
     usd: 447,
-    items: ['A website made for your business, pages agreed before we start', 'Very fast, hosted on Cloudflare: no hosting bill for a typical small business site', 'The code is yours, in your own GitHub account', 'Contact form messages straight to your inbox', 'Technical and on-page SEO, Google Business Profile setup and a basic structure for GEO', 'Handed over with a guide, so your own AI assistant can make updates', 'No plugins to update; fixes after handover are paid per fix'],
+    items: ['A website for your business, pages agreed up front', 'Very fast on Cloudflare, usually no hosting bill', 'The code is yours, in your own GitHub', 'SEO, GEO and Google Business Profile setup', 'Update it with your own AI assistant', 'No plugins to update; later fixes are paid per fix'],
+    featured: 'Recommended',
     cta: ['Get a Quote', '/contact/'],
   },
   {
@@ -37,7 +38,7 @@ export const plans = [
     name: 'WooCommerce Shop',
     sub: 'Online shop, unlimited products, one-time',
     usd: 847,
-    items: ['Unlimited products, and we add your first 100', 'Payment setup included', 'Mobile-friendly and fast', 'Technical and on-page SEO foundations', 'Google Business Profile setup and a basic structure for GEO', 'First year free: plugin updates and fixes for technical problems such as plugin conflicts'],
+    items: ['Unlimited products, we add your first 100', 'Payment setup included', 'Fast and mobile-friendly', 'SEO, GEO and Google Business Profile setup', 'First year free: plugin updates and fixes such as plugin conflicts'],
     cta: ['Get a Quote', '/contact/'],
   },
   {
@@ -88,8 +89,8 @@ export const offerLd = (p) => ({
   offers: [['usd', 'USD']].filter(([k]) => p[k] != null).map(([k, c]) => ({ '@type': 'Offer', price: p[k], priceCurrency: c, availability: 'https://schema.org/InStock', seller: { '@id': orgId } })),
 });
 
-export const priceCard = (p) => `<div class="price-card" id="${p.id}">
-  <h3>${p.name}</h3><p class="price-sub">${p.sub}</p>
+export const priceCard = (p) => `<div class="price-card${p.featured ? ' featured' : ''}" id="${p.id}">
+  ${p.featured ? `<span class="price-badge">${p.featured}</span>` : ''}<h3>${p.name}</h3><p class="price-sub">${p.sub}</p>
   ${priceLine(p)}
   ${checklist(p.items)}
   ${p.note ? `<p class="price-note">${wrapMoney(p.note)}</p>` : ''}
