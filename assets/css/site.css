@@ -716,8 +716,25 @@ ul { margin: 0 0 16px; }
 .sf-back { border: 0; background: none; padding: 6px 0; color: var(--blue); font: 700 15px Arial, Helvetica, sans-serif; cursor: pointer; }
 .sf-back:hover { text-decoration: underline; }
 .sf-back:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-@media (min-width: 560px) { .sf-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .page-head .step-form .sf-opt span, .page-head .step-form .sf-q { color: var(--navy); }
 .page-head .step-form .sf-count, .page-head .step-form .sf-hint { color: var(--muted); }
 .page-head .step-form .sf-hint.err { color: var(--red-text); }
 .step-form .sf-hint.wide { grid-column: 1 / -1; }
+
+/* Steps share one grid cell so the form height stays the same from step to step */
+.step-form.sf-ready .sf-steps { display: grid; }
+.step-form.sf-ready .sf-step, .step-form.sf-ready .sf-group { grid-area: 1 / 1; }
+.step-form.sf-ready .sf-step:not(.is-on), .step-form.sf-ready .sf-group:not(.is-on) { visibility: hidden; }
+.step-form.sf-ready .sf-step[hidden] { display: none; }
+.sf-step .sf-groups { display: grid; }
+.sf-back.is-off { visibility: hidden; }
+.sf-nav { min-height: 32px; }
+.step-form .form-grid { margin-bottom: 8px; }
+.sf-note { font-size: 14px; }
+.sf-note summary { cursor: pointer; color: var(--blue); font-weight: 700; padding: 2px 0; }
+.sf-note summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.sf-note .field { margin-top: 8px; }
+.step-form .voice-note { font-size: 13px; }
+.sf-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.step-form .sf-row .sf-count { margin-bottom: 8px; }
+.sf-row .sf-back { padding: 0 0 8px; font-size: 14px; }
