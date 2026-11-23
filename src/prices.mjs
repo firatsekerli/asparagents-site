@@ -18,7 +18,18 @@ export const plans = [
     name: 'WordPress Website',
     sub: 'Business website, 5 to 10 pages, one-time',
     usd: 447,
-    items: ['A WordPress website made for your business, 5 to 10 pages', 'Mobile-friendly and fast on every device', 'Technical and on-page SEO foundations from the start', 'Google Business Profile setup', 'A basic structure for AI visibility (GEO)', 'Maintenance and support free for the first year'],
+    items: ['A WordPress website made for your business, 5 to 10 pages', 'Mobile-friendly and fast on every device', 'Technical and on-page SEO foundations from the start', 'Google Business Profile setup', 'A basic structure for AI visibility (GEO)', 'First year free: plugin updates and fixes for technical problems such as plugin conflicts'],
+    cta: ['Get a Quote', '/contact/'],
+  },
+  {
+    // Firat 23.11.2026: sell both. Built and hosted on Cloudflare, code in the client's own GitHub, form emails sent
+    // with Resend, then handed over so the client's own AI assistant can keep it up to date. No free first year.
+    // Price: null until Firat confirms it (he asked whether to charge the same as the WordPress website).
+    id: 'business-website',
+    name: 'Business Website',
+    sub: 'Fast website without WordPress, one-time',
+    usd: null,
+    items: ['A website made for your business, pages agreed before we start', 'Very fast, hosted on Cloudflare: no hosting bill for a typical small business site', 'The code is yours, in your own GitHub account', 'Contact form messages straight to your inbox', 'Technical and on-page SEO, Google Business Profile setup and a basic structure for GEO', 'Handed over with a guide, so your own AI assistant can make updates', 'No plugins to update; fixes after handover are paid per fix'],
     cta: ['Get a Quote', '/contact/'],
   },
   {
@@ -26,7 +37,7 @@ export const plans = [
     name: 'WooCommerce Shop',
     sub: 'Online shop, unlimited products, one-time',
     usd: 747,
-    items: ['Unlimited products, and we add your first 100', 'Payment setup included', 'Mobile-friendly and fast', 'Technical and on-page SEO foundations', 'Google Business Profile setup and a basic structure for GEO', 'Maintenance and support free for the first year'],
+    items: ['Unlimited products, and we add your first 100', 'Payment setup included', 'Mobile-friendly and fast', 'Technical and on-page SEO foundations', 'Google Business Profile setup and a basic structure for GEO', 'First year free: plugin updates and fixes for technical problems such as plugin conflicts'],
     cta: ['Get a Quote', '/contact/'],
   },
   {
