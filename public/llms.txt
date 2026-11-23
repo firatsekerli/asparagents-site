@@ -23,7 +23,7 @@
 - [Social media management](https://asparagents.com/services/social-media-management/): content calendar, post designs, captions, scheduling and reporting
 - [Accessibility fixes](https://asparagents.com/services/accessibility-fixes/): fixes the issues an accessibility reporting tool lists, on the platform the site already uses
 - [One-time WordPress support](https://asparagents.com/services/wordpress-support/): one WordPress issue fixed, paid only when the client is happy with the result
-- [Prices](https://asparagents.com/prices/): one-time WordPress fix $27, WordPress website $447, WooCommerce shop $747, SEO, local SEO and GEO $247 a month, social media $147 a month, both monthly services together $345 a month. Shown in pounds, euros, Canadian, Australian or New Zealand dollars (same number) for visitors from those countries; tools are priced by what they need to do
+- [Prices](https://asparagents.com/prices/): one-time WordPress fix $27, WordPress website $547, website without WordPress $447, WooCommerce shop $847, SEO, local SEO and GEO $247 a month, social media $147 a month, both monthly services together $345 a month. Shown in pounds, euros, Canadian, Australian or New Zealand dollars (same number) for visitors from those countries; tools are priced by what they need to do
 
 ## Free offers
 
