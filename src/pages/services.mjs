@@ -5,7 +5,7 @@ import { byId, priceBand } from '../prices.mjs';
 // English articles in content/articles/. No rankings, traffic or results are promised.
 const pricing = {
   'wordpress-support': ['one-time-wordpress-support'],
-  websites: ['wordpress-website', 'woocommerce-shop'],
+  websites: ['wordpress-website', 'business-website', 'woocommerce-shop'],
   seo: ['seo-local-seo-geo'],
   'local-seo': ['seo-local-seo-geo'],
   'geo-ai-visibility': ['seo-local-seo-geo'],
