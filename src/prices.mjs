@@ -29,7 +29,7 @@ export const plans = [
     name: 'Business Website',
     sub: 'Without WordPress, 1 to 5 pages, one-time',
     usd: 447,
-    items: ['A website for your business, 1 to 5 pages, mostly static content', 'Very fast on Cloudflare, usually no hosting bill', 'The code is yours, in your own GitHub', 'SEO, GEO and Google Business Profile setup', 'Update it with your own AI assistant', 'No plugins to update; later fixes are paid per fix'],
+    items: ['A website for your business, 1 to 5 pages, mostly static content', 'No monthly costs: free hosting on Cloudflare, you only renew your domain', 'The code is yours, in your own GitHub', 'SEO, GEO and Google Business Profile setup', 'Update it with your own AI assistant', 'No plugins to update; later fixes are paid per fix'],
     featured: 'Recommended',
     cta: ['Get a Quote', '/contact/'],
   },

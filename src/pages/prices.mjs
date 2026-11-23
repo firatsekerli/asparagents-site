@@ -8,6 +8,7 @@ export default (() => {
   const faq = faqBand([
     { q: 'When do I pay for a one-time WordPress fix?', a: '<p>After the issue is fixed and you are happy with the result.</p>' },
     { q: 'Do agencies get different prices?', a: '<p>Agencies pay a wholesale fee and sell the service at their own price. <a href="/contact/">Tell us about your agency</a> and we will send the partner prices.</p>' },
+    { q: 'Does the Business Website have monthly costs?', a: '<p>No. A Business Website is hosted on Cloudflare, where static pages are free with no traffic limit (<a href="https://developers.cloudflare.com/pages/functions/pricing/" rel="noopener">Cloudflare pricing</a>), and its contact form fits within a free email plan. You only renew your domain name each year. A paid plan is only needed for heavy use, such as more than 100,000 form submissions a day or more than 100 form emails a day.</p>' },
     freeOfferFaq,
     { q: 'Which currency do you use?', a: '<p><span class="cur-note">All prices are in US dollars. We convert them to your country’s currency when we send your quote, so you know the exact amount before we start.</span></p>' },
   ]);
