@@ -10,13 +10,14 @@ export default (() => {
     { q: 'Do agencies get different prices?', a: '<p>Agencies pay a wholesale fee and sell the service at their own price. <a href="/contact/">Tell us about your agency</a> and we will send the partner prices.</p>' },
     { q: 'Does the Business Website have monthly costs?', a: '<p>No. A Business Website is hosted on Cloudflare, where static pages are free with no traffic limit (<a href="https://developers.cloudflare.com/pages/functions/pricing/" rel="noopener">Cloudflare pricing</a>), and its contact form fits within a free email plan. You only renew your domain name each year. A paid plan is only needed for heavy use, such as more than 100,000 form submissions a day or more than 100 form emails a day.</p>' },
     freeOfferFaq,
+    { q: 'Is VAT added to your prices?', a: '<p>No. We invoice from Türkiye and add no VAT, so the price shown is the amount on your invoice.</p>' },
     { q: 'Which currency do you use?', a: '<p><span class="cur-note">All prices are in US dollars. We convert them to your country’s currency when we send your quote, so you know the exact amount before we start.</span></p>' },
   ]);
   const list = allPlans();
   return {
     path: '/prices/',
     title: 'Prices for Websites, SEO, GEO and Support | asparagents',
-    description: 'Prices in US dollars for websites, SEO, local SEO, GEO, social media and WordPress support. Website tools are priced by what they need to do.',
+    description: 'Fixed prices for websites, SEO, local SEO, GEO, social media and WordPress support, with no VAT added. Website tools are priced by what they need to do.',
     crumbs: [{ name: 'Prices', path: '/prices/' }],
     schema: list.filter((p) => p.usd != null || p.gbp != null).map(offerLd).concat(faq.ld),
     body: `
