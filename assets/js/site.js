@@ -652,7 +652,7 @@
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ event: 'form_submit', form_name: data.form, voice_message: data.audio ? 'yes' : 'no', form_need: data.need || '', form_detail: data.detail || '', form_timing: data.timing || '' });
             if (form.sfTrack) {
-              form.sfTrack('submit', { form_need: data.need || '', form_timing: data.timing || '', voice_message: data.audio ? 'yes' : 'no' });
+              form.sfTrack('submit', { form_need: data.need || '', form_detail: data.detail || '', form_timing: data.timing || '', voice_message: data.audio ? 'yes' : 'no' });
               Array.prototype.forEach.call(form.querySelectorAll('.sf-step, .sf-top, .sf-nav'), function (el) { el.hidden = true; });
             }
           } else { throw new Error(res.j && res.j.error); }
