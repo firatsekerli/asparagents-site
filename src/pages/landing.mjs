@@ -325,7 +325,7 @@ ${section({
     <p class="label">One Developer</p>
     <h2 class="h2">${tt(c.h.developer)}</h2>
     <p>${c.developer}</p>
-    ${checklist(['Live sites built for businesses in England, the United States and Türkiye', 'Our own WordPress plugins, sold in our shop', 'English or Turkish, usually within minutes'])}
+    ${checklist(['Live sites built for businesses in England, Ireland, the United States and Türkiye', 'Our own WordPress plugins, sold in our shop', 'English or Turkish, usually within minutes'])}
     <p><a class="card-link" href="/references/">See our work</a></p>
   </div></div>`,
 })}
@@ -430,15 +430,15 @@ const websiteHelp = helpPage({
 // Ireland (Firat 24.11.2026): one page for Cork and the rest of Ireland, for organic search ("web design cork" and
 // "website design cork", low difficulty) and for the Facebook and Instagram ads. Visitors in Ireland see euros (the
 // middleware). Hooks agreed with Firat: one fixed price, no monthly costs with the Business Website, help for people who
-// tried to build their site themselves, and 3 homepage designs to choose from. Plan: claude/asparagents-ireland-meta-ads.md.
+// tried to build their site themselves, and 2 homepage designs to choose from (Firat 24.11.2026: 2 for everyone). Plan: claude/asparagents-ireland-meta-ads.md.
 
 const corkFaq = faqBand(
   [
     { q: 'How much does a website cost?', a: `<p>A Business Website of 1 to 5 pages is ${m(447)}, one-time, and a WordPress website of 5 to 10 pages is ${m(547)}. We agree the pages and what goes on them before any work starts, so the price is fixed.</p>` },
     { q: 'Are there monthly costs?', a: '<p>Not with a Business Website. It is hosted on Cloudflare, where static pages are free with no traffic limit (<a href="https://developers.cloudflare.com/pages/functions/pricing/" rel="noopener">Cloudflare pricing</a>), and its contact form fits within a free email plan. You only renew your domain name each year. A WordPress website needs hosting, which we help you choose.</p>' },
     { q: 'Is VAT added?', a: '<p>No. We invoice from Türkiye and add no VAT, so the price shown is the amount on your invoice.</p>' },
-    { q: 'I started building my website myself. Can you use what I have?', a: '<p>Yes. Send us your text, photos, logo and a website you like, even if they are half finished. We use them for the 3 homepage designs, and we help with the text where it is missing.</p>' },
-    { q: 'How do the 3 homepage designs work?', a: '<p>Based on your business and a website you like, we design 3 different homepages. You choose the one you like best, we build the rest of the site in the same style, and you approve it before it goes live.</p>' },
+    { q: 'I started building my website myself. Can you use what I have?', a: '<p>Yes. Send us your text, photos, logo and a website you like, even if they are half finished. We use them for the 2 homepage designs, and we help with the text where it is missing.</p>' },
+    { q: 'How do the 2 homepage designs work?', a: '<p>Based on your business and a website you like, we design 2 different homepages. You choose the one you like best, we build the rest of the site in the same style, and you approve it before it goes live.</p>' },
     { q: 'You are not in Ireland. How does it work?', a: '<p>We work fully remotely from Ankara, Türkiye, for clients in Ireland, the UK and the US. You talk to one person on WhatsApp, a call or email, and we usually reply within minutes, and always within 12 hours.</p>' },
     { q: 'Can I update the website myself?', a: '<p>Yes. A WordPress website has an admin panel for your text, photos and prices. A Business Website is handed over with a guide, so your own AI assistant can make updates; fixes after handover are paid per fix.</p>' },
     freeOfferFaq,
@@ -449,7 +449,7 @@ const corkFaq = faqBand(
 const webDesignCork = {
   path: '/web-design-cork/',
   title: 'Web Design Cork, Fixed Price and No Monthly Costs | asparagents',
-  description: 'Web design for Cork and Irish small businesses: a fast website of 1 to 5 pages for one fixed price, no monthly hosting costs and 3 homepage designs to choose from.',
+  description: 'Web design for Cork and Irish small businesses: a fast website of 1 to 5 pages for one fixed price, no monthly hosting costs and 2 homepage designs to choose from.',
   crumbs: [{ name: 'Web Design Cork', path: '/web-design-cork/' }],
   contact: false,
   schema: [
@@ -460,8 +460,8 @@ const webDesignCork = {
 ${hero({
   tag: 'Web Design Cork',
   h1: 'Web Design in Cork With [[No Monthly Costs]]',
-  lead: `Web design for small businesses in Cork and across Ireland: a fast website of 1 to 5 pages for one fixed price of ${m(447)}, with no monthly hosting costs. You choose from 3 homepage designs made for your business before we build the rest.`,
-  points: [`Fixed price: ${m(447)}, one-time, no VAT added`, 'No monthly costs: you only renew your domain', '3 homepage designs to choose from', 'Usually replies within minutes'],
+  lead: `Web design for small businesses in Cork and across Ireland: a fast website of 1 to 5 pages for one fixed price of ${m(447)}, with no monthly hosting costs. You choose from 2 homepage designs made for your business before we build the rest.`,
+  points: [`Fixed price: ${m(447)}, one-time, no VAT added`, 'No monthly costs: you only renew your domain', '2 homepage designs to choose from', 'Usually replies within minutes'],
   formHeading: 'Get a Quote for Your Website in Cork',
   cta: 'Get a Quote',
 })}
@@ -488,11 +488,19 @@ ${section({
   intro: '<p>Many small business owners start with a website builder and run out of time. Send us what you have and we take it from there.</p>',
   body: steps([
     ['Send what you have', 'Your text, photos, logo and a website you like, even if they are half finished. A WhatsApp message is enough.'],
-    ['Choose from 3 homepage designs', 'We design 3 different homepages for your business. You pick the one you like best.'],
+    ['Choose from 2 homepage designs', 'We design 2 different homepages for your business. You pick the one you like best.'],
     ['We build it and you approve it', 'We build the rest in the same style, check it on every phone and launch it when you are happy.'],
   ]),
 })}
-${cristal('Web Design That [[Brings Enquiries]]')}
+${section({
+  tone: 'light',
+  body: `<div class="two"><div class="two-media">${scrollShot('total-health-chiropractic', 'Total Health Chiropractic website, home page')}</div><div class="two-text">
+    <p class="label">Built in Cork</p>
+    <h2 class="h2">${tt('A Website for a [[Cork Clinic]]')}</h2>
+    <p>Total Health Chiropractic Wellness Clinic in Douglas, Cork, has been helping patients since 2003. We built its website to present its chiropractic care and its team, show video testimonials from patients and put an appointment request on every page.</p>
+    <p><a class="card-link" href="/references/total-health-chiropractic/">See the project</a></p>
+  </div></div>`,
+})}
 ${reviewsBand({ title: 'What Clients Say About Our [[Web Design]]' })}
 ${corkFaq.html}
 ${lpCta('Ready for a Website With [[No Monthly Costs]]?', 'Tell us about your business in Cork and we usually reply within minutes, and always within 12 hours.', 'Get a Quote')}

@@ -44,7 +44,7 @@ const shot = (key, suffix, alt) => img({ base: `ref-${key}${suffix}`, widths: RE
 const listPage = {
   path: '/references/',
   title: 'Website References | asparagents',
-  description: 'Websites, online shops and tools we built for businesses in England, the United States and Türkiye, from window installers to law firms and manufacturers.',
+  description: 'Websites, online shops and tools we built for businesses in England, Ireland, the United States and Türkiye, from window installers to law firms and manufacturers.',
   crumbs: [{ name: 'References', path: '/references/' }],
   body: `
 ${pageHead({ tag: 'References', title: 'Websites and Tools [[We Built]]', intro: 'Live websites we built directly for businesses. Most of our work for agencies is white label and carries their names, so it is not listed here. <a href="/contact/">Contact us</a> to see more examples privately.', actions: ctaRow() })}
