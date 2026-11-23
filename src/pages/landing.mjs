@@ -73,7 +73,7 @@ const toolFaq = (trade) => ({
 const tradePage = (c) => {
   const faq = faqBand(
     [
-      { q: 'Is the price really fixed?', a: `<p>Yes. A WordPress website of 5 to 10 pages is ${m(447)}, one-time. We agree on the pages and what goes on them before any work starts, so you know the full price up front.</p>` },
+      { q: 'Is the price really fixed?', a: `<p>Yes. A WordPress website of 5 to 10 pages is ${m(547)}, one-time. We agree on the pages and what goes on them before any work starts, so you know the full price up front.</p>` },
       ...c.faq,
       toolFaq(c.tradeWord),
       { q: 'What happens after the first year?', a: '<p>Maintenance and support are free for the first year. After that, website maintenance is included in our SEO, Local SEO and GEO plan; tell us what you need and we will tell you the options.</p>' },
@@ -93,7 +93,7 @@ const tradePage = (c) => {
       faq.ld,
     ],
     body: `
-${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(447)}, one-time`, 'First year of maintenance and support free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote' })}
+${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(547)}, one-time`, 'First year of maintenance and support free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote' })}
 ${section({
   tag: 'What You Get',
   title: c.h.offer,
@@ -130,7 +130,7 @@ const tradesmen = tradePage({
   },
   tag: 'Websites for Trades',
   h1: 'Website Design for [[Tradesmen]]',
-  lead: `Website design for tradesmen that brings you enquiries: a WordPress website of 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that answers enquiries and books jobs while you are working.`,
+  lead: `Website design for tradesmen that brings you enquiries: a WordPress website of 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(547)}. Add a tool that answers enquiries and books jobs while you are working.`,
   points: ['Booking and quote tools for your trade'],
   offerIntro: 'A tradesman website for roofers, plumbers, electricians, builders, heating engineers and every other trade, made to turn visitors into calls and booked jobs.',
   offer: [
@@ -177,7 +177,7 @@ const plumbers = tradePage({
   },
   tag: 'Plumber Website Design',
   h1: 'Website for Plumbers That [[Brings In Jobs]]',
-  lead: `A website for plumbers that turns searches into booked jobs: plumber website design with 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that takes enquiries while you are under a sink.`,
+  lead: `A website for plumbers that turns searches into booked jobs: plumber website design with 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(547)}. Add a tool that takes enquiries while you are under a sink.`,
   points: ['A booking tool for plumbing jobs'],
   offerIntro: 'Plumbing website design for sole traders and small plumbing and heating firms, made for the way customers look for a plumber: on a phone, often in a hurry.',
   offer: [
@@ -231,7 +231,7 @@ const electricians = tradePage({
   },
   tag: 'Electrician Website Design',
   h1: 'Website for Electricians That [[Brings In Jobs]]',
-  lead: `A website for electricians and electrical contractors that turns searches into booked jobs: 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(447)}. Add a tool that takes enquiries while you are on site.`,
+  lead: `A website for electricians and electrical contractors that turns searches into booked jobs: 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(547)}. Add a tool that takes enquiries while you are on site.`,
   points: ['A booking tool for electrical jobs'],
   offerIntro: 'Electrician website design for sole traders and electrical contractors, made for homeowners, landlords and businesses looking for an electrician on their phone.',
   offer: [
