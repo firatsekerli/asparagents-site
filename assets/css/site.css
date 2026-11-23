@@ -649,9 +649,10 @@ ul { margin: 0 0 16px; }
 /* Ads landing pages: room between the lead and the points; on phones, where the form sits below the fold, a button jumps to it */
 .lp-points { margin-top: 24px; }
 .lp-jump { display: none; }
-/* White cards inside a navy band (web apps and tools on the ads landing pages) keep the normal card colours. */
-.tone-navy .card { color: var(--text); }
-.tone-navy .card h3 { color: var(--navy); }
-.tone-navy .card a:not(.btn) { color: var(--blue); text-decoration: underline; }
+/* White cards inside a navy band (web apps and tools on the ads landing pages) keep the normal card colours.
+   Scoped to .lp-tools: the wider .tone-navy rule turned the AI band card titles navy on navy (Firat 23.11.2026). */
+.lp-tools .card { color: var(--text); }
+.lp-tools .card h3 { color: var(--navy); }
+.lp-tools .card a:not(.btn) { color: var(--blue); text-decoration: underline; }
 @media (max-width: 1023px) { .lp-jump { display: flex; margin: 24px 0 8px; } }
 @media (max-width: 1023px) { .lp-offer { grid-template-columns: minmax(0, 1fr); } }

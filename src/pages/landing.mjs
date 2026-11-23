@@ -308,7 +308,7 @@ ${section({ tag: 'How It Works', title: c.h.steps, body: steps([
   ['We fix the issue', 'We back up your website and fix the issue, recording our screen while we work.'],
   ['You pay when happy', 'You pay after the issue is solved and you are happy with the fix.'],
 ]) })}
-${section({ tone: 'navy', tag: 'Web Apps and Tools', title: c.toolsTitle, intro: `<p>${c.toolsIntro}</p>`, body: cards(c.tools, { cols: 3 }) })}
+${section({ tone: 'navy', tag: 'Web Apps and Tools', title: c.toolsTitle, intro: `<p>${c.toolsIntro}</p>`, body: cards(c.tools, { cols: 3, cls: 'lp-tools' }) })}
 ${section({
   tone: 'light',
   body: `<div class="two"><div class="two-media">${scrollShot('cristal-windows', 'Cristal Windows website, home page')}</div><div class="two-text">
