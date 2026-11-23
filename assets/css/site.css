@@ -687,3 +687,5 @@ ul { margin: 0 0 16px; }
   .footer-col a { white-space: nowrap; }
 }
 @media (max-width: 360px) { .footer-grid { column-gap: 20px; } .footer-col a { white-space: normal; } }
+/* Two price cards side by side (/web-design-cork/) */
+.prices-two { max-width: 820px; margin: 0 auto; }
