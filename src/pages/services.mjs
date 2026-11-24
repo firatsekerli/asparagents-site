@@ -96,7 +96,7 @@ const websites = servicePage({
     ['SEO Foundations', 'A clean heading structure, titles and descriptions, structured data and a sitemap.', 'seo'],
     ['WooCommerce', 'Online shops with payment setup.', 'plug'],
     ['Page Builders You Know', 'Breakdance, Oxygen, Elementor or the block editor.', 'code'],
-    ['Easy to Update', 'Change your content in WordPress, or update a website without WordPress with your own AI assistant.', 'report'],
+    ['Easy to Update', 'Change your text, photos and prices yourself in a simple editor, on WordPress or without it.', 'report'],
   ],
   forWho: {
     title: 'For small businesses and [[the agencies behind them]]',
@@ -109,8 +109,8 @@ const websites = servicePage({
   ],
   faqs: [
     { q: 'How long does a website take?', a: '<p>It depends on the number of pages and the content you have. We give you a timeline with the quote.</p>' },
-    { q: 'Can I update the website myself?', a: '<p>Yes. A WordPress website or shop has an admin panel you can use to change your content. A Business Website has no admin panel: we hand it over with a guide, so your own AI assistant can make updates.</p>' },
-    { q: 'WordPress Website or Business Website?', a: '<p>A Business Website suits 1 to 5 pages of mostly static content: it is very fast, hosted on Cloudflare, has no plugins to update and the code is yours in your own GitHub. A WordPress Website suits 5 to 10 pages you want to edit in an admin panel, and its first year of plugin updates and fixes is free.</p>' },
+    { q: 'Can I update the website myself?', a: '<p>Yes. A WordPress website or shop has an admin panel you can use to change your content. A Business Website comes with a simple editor for your text, photos and prices, and we show you how it works.</p>' },
+    { q: 'WordPress Website or Business Website?', a: '<p>A Business Website suits 1 to 5 pages of mostly static content: it is very fast, hosted on Cloudflare, has no plugins to update and the code is yours in your own GitHub. Both come with an editor for your content. A WordPress Website suits 5 to 10 pages and sites that need plugins, and its first year of plugin updates and fixes is free.</p>' },
     { q: 'Do you build online shops?', a: '<p>Yes, with WooCommerce, including payment setup.</p>' },
     { q: 'Can you build a site my agency sells under its own name?', a: '<p>Yes. That is our <a href="/white-label/">white label service</a>: your brand, your client, our work in the background.</p>' },
   ],
