@@ -23,13 +23,13 @@ export const plans = [
   },
   {
     // Firat 23.11.2026: sell both. Built and hosted on Cloudflare, code in the client's own GitHub, form emails sent
-    // with Resend, then handed over so the client's own AI assistant can keep it up to date. No free first year.
+    // with Resend, then handed over with a simple editor (EmDash, Firat 24.11.2026) for text, photos and prices. No free first year.
     // Price $447 (Firat 23.11.2026; the WordPress website went up to $547 the same day). Highlighted on /prices/.
     id: 'business-website',
     name: 'Business Website',
     sub: 'Without WordPress, 1 to 5 pages, one-time',
     usd: 447,
-    items: ['A website for your business, 1 to 5 pages, mostly static content', 'No monthly costs: free hosting on Cloudflare, you only renew your domain', 'The code is yours, in your own GitHub', 'SEO, GEO and Google Business Profile setup', 'Update it with your own AI assistant', 'No plugins to update; later fixes are paid per fix'],
+    items: ['A website for your business, 1 to 5 pages, mostly static content', 'No monthly costs: free hosting on Cloudflare, you only renew your domain', 'The code is yours, in your own GitHub', 'SEO, GEO and Google Business Profile setup', 'Edit your text, photos and prices in a simple editor', 'No plugins to update; later fixes are paid per fix'],
     featured: 'Recommended',
     cta: ['Get a Quote', '/contact/'],
   },
