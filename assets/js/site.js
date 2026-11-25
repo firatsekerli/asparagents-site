@@ -561,7 +561,7 @@
     var show = function (n, push) {
       if (push && form.sfStep) history.push(form.sfStep);
       form.sfStep = n;
-      // All steps share one grid cell, so the form keeps the height of its tallest step and nothing below it moves.
+      // All steps share one grid cell; fit() then gives the box the height of the step on screen (CSS glides it).
       Array.prototype.forEach.call(steps, function (st) { st.hidden = false; st.classList.toggle('is-on', Number(st.getAttribute('data-step')) === n); });
       num.textContent = n;
       bar.style.width = (n * 25) + '%';
@@ -569,7 +569,19 @@
       back.classList.toggle('is-off', history.length === 0);
       var need = (form.querySelector('input[name="need"]:checked') || {}).value;
       Array.prototype.forEach.call(form.querySelectorAll('.sf-group'), function (g) { g.hidden = false; g.classList.toggle('is-on', g.getAttribute('data-for') === need); });
+      fit();
     };
+    // The box is exactly as tall as the step on screen (plus its 6px bottom padding for focus rings). A ResizeObserver
+    // keeps it right when the step itself changes height: the note opening, a voice recording, a hint, a resize.
+    var box = form.querySelector('.sf-steps');
+    var fit = function () {
+      var on = form.querySelector('.sf-step.is-on');
+      if (box && on) box.style.height = (on.offsetHeight + 6) + 'px';
+    };
+    if (box && 'ResizeObserver' in window) {
+      var ro = new ResizeObserver(fit);
+      Array.prototype.forEach.call(steps, function (st) { ro.observe(st); });
+    }
     var advance = function (t) {
       var next = { need: 2, timing: 4 }[t.name] || (t.name.indexOf('detail_') === 0 ? 3 : 0);
       if (next && form.sfStep < next) setTimeout(function () { show(next, true); var f = form.querySelector('.sf-step.is-on input'); if (f && next === 4) f.focus({ preventScroll: true }); }, 180);
