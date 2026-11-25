@@ -722,11 +722,16 @@ ul { margin: 0 0 16px; }
 .step-form .sf-hint.wide { grid-column: 1 / -1; }
 
 /* Steps share one grid cell so the form height stays the same from step to step */
-.step-form.sf-ready .sf-steps { display: grid; }
-.step-form.sf-ready .sf-step, .step-form.sf-ready .sf-group { grid-area: 1 / 1; }
-.step-form.sf-ready .sf-step:not(.is-on), .step-form.sf-ready .sf-group:not(.is-on) { visibility: hidden; }
+/* Step heights (Firat 26.11.2026: no empty space under short steps, and no jumping). The steps still share one
+   grid cell, but each keeps its own height and the box glides to the height of the step on screen (the height is
+   set by site.js). The top of the form never moves; only its bottom edge slides. The details of the other
+   answers in step 2 are taken out of the layout, so step 2 is only as tall as the list on screen. */
+.step-form.sf-ready .sf-steps { display: grid; align-items: start; overflow: hidden; padding: 0 6px 6px; margin: 0 -6px -6px; transition: height .28s ease; }
+.step-form.sf-ready .sf-step { grid-area: 1 / 1; }
+.step-form.sf-ready .sf-step:not(.is-on) { visibility: hidden; }
+.step-form.sf-ready .sf-group:not(.is-on) { display: none; }
+@media (prefers-reduced-motion: reduce) { .step-form.sf-ready .sf-steps { transition: none; } }
 .step-form.sf-ready .sf-step[hidden] { display: none; }
-.sf-step .sf-groups { display: grid; }
 .sf-back.is-off { visibility: hidden; }
 .sf-nav { min-height: 32px; }
 .step-form .form-grid { margin-bottom: 8px; }

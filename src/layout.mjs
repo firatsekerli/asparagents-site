@@ -328,7 +328,7 @@ export const stepForm = ({ heading = 'Get a Quote', preset = '' } = {}) => {
         <audio class="voice-audio" data-voice-audio controls preload="metadata" hidden></audio>
         <button type="button" class="voice-del" data-voice-del hidden>Delete recording</button>
       </div>
-      <small class="voice-note" data-voice-note>Up to 2 minutes. You can listen to or delete the recording before sending.</small>
+      <small class="voice-note" data-voice-note>Up to 2 minutes; you can listen to it before sending.</small>
     </div>
   </div>
   <label class="hp" aria-hidden="true">Leave this field empty<input type="text" name="fax" tabindex="-1" autocomplete="off"></label>
