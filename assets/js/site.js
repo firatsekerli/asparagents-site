@@ -233,8 +233,9 @@
     });
     // In a 50/50 band (desktop) the text column gets a fixed minimum height: the height it needs with the longest
     // answer open. Opening another answer then never changes the band's height, so the image next to it stays put.
-    // On phones (< 1024px) the column keeps its natural height.
-    var col = faq.closest('.split > .col-text, .faq-grid > .faq-col');
+    // On phones (< 1024px) the column keeps its natural height. Not in the FAQ grid (text beside the questions, no
+    // image): there the reserved height showed as a large empty area under the questions (Firat 26.11.2026, Cork page).
+    var col = faq.closest('.split > .col-text');
     if (!col || !window.matchMedia) return;
     var wide = window.matchMedia('(min-width: 1024px)');
     var fit = function () {
