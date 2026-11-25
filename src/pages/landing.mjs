@@ -1,4 +1,4 @@
-import { site, section, cards, steps, checklist, faqBand, stepForm, reviewsBand, scrollShot, freeOfferFaq, icon, tt, orgId } from '../layout.mjs';
+import { site, section, cards, steps, checklist, faqBand, stepForm, reviewsBand, scrollShot, TWO_SIZES, freeOfferFaq, icon, tt, orgId } from '../layout.mjs';
 import { byId, priceCard, priceStrip, m } from '../prices.mjs';
 import { plugins } from '../site.mjs';
 import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
@@ -10,7 +10,8 @@ import { makeTradesDemo } from '../demos/trades.mjs';
 // form above the fold, the same call to action as the ads, a working tool demo, reviews and a real project as proof.
 // Facts only from the site (prices.mjs, services, reference stories, Google reviews). Plan:
 // claude/asparagents-google-ads-plan.md. The three trade pages are indexable (no other page targets these searches);
-// the two help pages are noindex, because /services/wordpress-support/ stays the organic page for those searches.
+// the two help pages were noindex until 26.11.2026; Firat wants PageSpeed 100 on all four scores, and noindex fails the
+// SEO check, so they are indexable now. Watch Search Console for overlap with /services/wordpress-support/.
 
 // Closing call to action: the same navy band as every other page, pointing at this page's form.
 const lpCta = (h, p, label) => `
@@ -52,7 +53,7 @@ const toolsBand = ({ title, intro, demo, demoIntro, tools }) => `
 const cristal = (title) =>
   section({
     tone: 'light',
-    body: `<div class="two"><div class="two-media">${scrollShot('cristal-windows', 'Cristal Windows website, home page')}</div><div class="two-text">
+    body: `<div class="two"><div class="two-media">${scrollShot('cristal-windows', 'Cristal Windows website, home page', TWO_SIZES)}</div><div class="two-text">
     <p class="label">Real Project</p>
     <h2 class="h2">${tt(title)}</h2>
     <p>Cristal Windows installs windows and doors in Hampshire, Surrey and Berkshire. We rebuilt its website in 2025 with a page for every town it covers, an online quote in 4 steps and its accreditations and reviews on every page. We also built its tools: the online quotation form, a survey app its surveyors use on a phone, and a conservation area checker.</p>
@@ -302,7 +303,6 @@ const helpPage = (c) => {
     description: c.description,
     crumbs: [{ name: c.crumb, path: `/${c.slug}/` }],
     contact: false,
-    noindex: true,
     schema: [faq.ld],
     body: `
 ${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: ['Pay only when it is fixed', 'Your site backed up before we start', 'A screen recording of the fix', 'Usually replies within minutes'], formHeading: c.formHeading, cta: 'Describe Your Issue', preset: 'fix' })}
@@ -321,7 +321,7 @@ ${section({ tag: 'How It Works', title: c.h.steps, body: steps([
 ${section({ tone: 'navy', tag: 'Web Apps and Tools', title: c.toolsTitle, intro: `<p>${c.toolsIntro}</p>`, body: cards(c.tools, { cols: 3, cls: 'lp-tools' }) })}
 ${section({
   tone: 'light',
-  body: `<div class="two"><div class="two-media">${scrollShot('cristal-windows', 'Cristal Windows website, home page')}</div><div class="two-text">
+  body: `<div class="two"><div class="two-media">${scrollShot('cristal-windows', 'Cristal Windows website, home page', TWO_SIZES)}</div><div class="two-text">
     <p class="label">One Developer</p>
     <h2 class="h2">${tt(c.h.developer)}</h2>
     <p>${c.developer}</p>
@@ -494,7 +494,7 @@ ${section({
 })}
 ${section({
   tone: 'light',
-  body: `<div class="two"><div class="two-media">${scrollShot('total-health-chiropractic', 'Total Health Chiropractic website, home page')}</div><div class="two-text">
+  body: `<div class="two"><div class="two-media">${scrollShot('total-health-chiropractic', 'Total Health Chiropractic website, home page', TWO_SIZES)}</div><div class="two-text">
     <p class="label">Built in Cork</p>
     <h2 class="h2">${tt('A Website for a [[Cork Clinic]]')}</h2>
     <p>Total Health Chiropractic Wellness Clinic in Douglas, Cork, has been helping patients since 2003. We built its website to present its chiropractic care and its team, show video testimonials from patients and put an appointment request on every page.</p>
