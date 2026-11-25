@@ -460,7 +460,7 @@ ${page.noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonica
 <meta property="og:url" content="${canonical}">
 <meta property="og:image" content="${site.url}${og}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0a2060">
+<meta name="theme-color" content="#23321f">
 <link rel="icon" href="/assets/img/icon-32.png" sizes="32x32">
 <link rel="icon" href="/assets/img/icon-192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/img/icon-180.png">
