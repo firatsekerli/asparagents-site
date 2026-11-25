@@ -43,6 +43,8 @@ export const REF_WIDTHS = [360, 420, 460, 520, 640, 760, 900, 1200];
 export const refShot = (key, alt, sizes = '(min-width: 1024px) 30vw, 90vw', suffix = '') => img({ base: `ref-${key}${suffix}`, widths: REF_WIDTHS, alt, w: 1200, h: 1920, sizes });
 // A tall website screenshot in a browser frame of fixed height; it scrolls to the bottom of the page on hover
 // (on touch screens it can be scrolled with a finger).
+// In a .two block the screenshot is at most 504px wide (394px at 1024px), measured 26.11.2026.
+export const TWO_SIZES = '(min-width: 1280px) 504px, (min-width: 1024px) 39vw, 90vw';
 export const scrollShot = (key, alt, sizes = '(min-width: 1024px) 46vw, 90vw') =>
   `<span class="scroll-shot"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="scroll-view">${refShot(key, alt, sizes)}</span><span class="scroll-hint" aria-hidden="true">Hover to scroll</span></span>`;
 // Fırat's photo (from firatsekerli.com), used instead of a stock team photo (Firat 21.11.2026). Portrait 720x892.
