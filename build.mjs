@@ -8,6 +8,8 @@ import { pathToFileURL } from 'node:url';
 import { render, esc } from './src/layout.mjs';
 import { site } from './src/site.mjs';
 import { pendingPrices } from './src/prices.mjs';
+import { fill } from './src/facts.mjs';
+import { checkDist } from './tools/check-consistency.mjs';
 
 const root = path.dirname(new URL(import.meta.url).pathname);
 const dist = path.join(root, 'dist');
@@ -51,10 +53,10 @@ for (const slug of (await readdir(articleDir)).sort()) {
   if (!/^[a-z0-9-]+$/.test(p.slug || '')) throw new Error(`${f}: bad slug`);
   const date = p.date || wpDates[p.slug];
   if (!date) console.warn(`WARNING ${p.slug}: no date in post.json`);
-  posts.push({ path: `/${p.slug}/`, h1: p.title, title: `${p.title} | asparagents`, description: meta(p.excerpt), excerpt: p.excerpt, date, label: 'Guide', body: p.content, ...(await coverFor(p.slug, p.image_alt || '', posts.length)) });
+  posts.push({ path: `/${p.slug}/`, h1: p.title, title: `${p.title} | asparagents`, description: meta(p.excerpt), excerpt: p.excerpt, date, label: 'Guide', body: fill(p.content, f), ...(await coverFor(p.slug, p.image_alt || '', posts.length)) });
 }
 for (const p of await loadDir(path.join(root, 'content/legacy'))) {
-  posts.push({ path: `/${p.slug}/`, h1: p.title, title: `${p.title} | asparagents`, description: meta(p.excerpt), excerpt: p.excerpt, date: p.date, updated: p.updated, label: 'WordPress', body: p.content, ...(await coverFor(p.slug, '', posts.length)) });
+  posts.push({ path: `/${p.slug}/`, h1: p.title, title: `${p.title} | asparagents`, description: meta(p.excerpt), excerpt: p.excerpt, date: p.date, updated: p.updated, label: 'WordPress', body: fill(p.content, p.slug), ...(await coverFor(p.slug, '', posts.length)) });
 }
 posts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
@@ -103,7 +105,9 @@ for (const p of pages) {
 }
 await fp('/assets/img/og-default.jpg');
 
-for (const f of ['_headers', '_redirects', '_routes.json', 'robots.txt', 'llms.txt']) await cp(path.join(root, 'public', f), path.join(dist, f));
+for (const f of ['_headers', '_redirects', '_routes.json', 'robots.txt']) await cp(path.join(root, 'public', f), path.join(dist, f));
+// llms.txt may use {{price:...}} and {{fact:...}} like the posts (src/facts.mjs), so its prices never go out of date.
+await writeFile(path.join(dist, 'llms.txt'), fill(await readFile(path.join(root, 'public/llms.txt'), 'utf8'), 'public/llms.txt'));
 
 const today = new Date().toISOString().slice(0, 10);
 const urls = pages
@@ -114,4 +118,7 @@ await writeFile(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="U
 
 const pending = pendingPrices();
 if (pending.length) console.warn(`WARNING prices not given yet (shown as "Price on request"): ${pending.join(', ')}`);
+// Site-wide consistency (tools/check-consistency.mjs): an old price or a fact stated two ways stops the build.
+const inconsistent = await checkDist(dist);
+if (inconsistent.length) throw new Error(`Consistency check failed (${inconsistent.length}), fix every place before merging:\n${inconsistent.join('\n')}`);
 console.log(`Built ${pages.length} pages (${posts.length} posts, ${fingerprints.size} assets) into dist/, assets v${assetVersion}`);

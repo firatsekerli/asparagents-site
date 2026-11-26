@@ -3,6 +3,7 @@
 One folder per article: `content/articles/<slug>/` with
 
 - `post.json`: `{ "title", "slug", "date", "excerpt", "content", "image", "image_alt" }`
+- Prices and repeated facts in `content` are written as placeholders, never as numbers: `{{price:wordpress-website}}`, `{{price:business-website}}`, `{{price:woocommerce-shop}}`, `{{price:one-time-wordpress-support}}`, `{{price:seo-local-seo-geo}}`, `{{price:social-media-management}}`, `{{price:bundle}}`, `{{price:plugin}}`, `{{fact:free-fix-minutes}}` (see `src/facts.mjs`). The build fills in the current value, so a price change reaches every post.
   - `content` is HTML using only h2, h3, p, ul, ol, li, a, strong, em, code (no h1: the page shows the title).
   - `slug`: lowercase letters, digits and hyphens; the article is published at `https://asparagents.com/<slug>/`.
   - `date`: publication date, YYYY-MM-DD.

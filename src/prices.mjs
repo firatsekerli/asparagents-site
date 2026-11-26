@@ -47,7 +47,7 @@ export const plans = [
     name: 'SEO, Local SEO and GEO',
     sub: 'Monthly service',
     usd: 247,
-    note: 'With social media management: <b>$345 a month</b> <small>(instead of $394)</small>',
+    get note() { return `With social media management: <b>$${bundle.usd} a month</b> <small>(instead of $${bundle.fullUsd})</small>`; },
     items: ['Regular SEO: keyword and competitor tracking, a content plan', 'Google Business Profile management and review strategy', 'Tracking your visibility in ChatGPT and Google AI answers', 'Website maintenance included', 'A plain-language monthly report'],
     cta: ['Get a Quote', '/contact/'],
   },
@@ -57,12 +57,15 @@ export const plans = [
     name: 'Social Media Management',
     sub: 'Monthly service, Instagram',
     usd: 147,
-    note: 'With SEO, Local SEO and GEO: <b>$345 a month</b> <small>(instead of $394)</small>',
+    get note() { return `With SEO, Local SEO and GEO: <b>$${bundle.usd} a month</b> <small>(instead of $${bundle.fullUsd})</small>`; },
     items: ['12 posts and 4 Reels a month', 'A content calendar, post designs and captions', 'Reels made from footage your business sends', 'Regular posting and a monthly report', 'Each extra platform (Facebook, LinkedIn) +20%', 'Ads management and ad budget not included'],
     cta: ['Get a Quote', '/contact/'],
   },
 ];
 
+// SEO, Local SEO and GEO plus Social Media Management together (Firat 21.11.2026: $345 a month instead of $394).
+// The "instead of" amount is the two monthly prices added up, so it follows any price change.
+export const bundle = { usd: 345, get fullUsd() { return plans.find((p) => p.id === 'seo-local-seo-geo').usd + plans.find((p) => p.id === 'social-media-management').usd; } };
 export const allPlans = () => plans;
 export const byId = (id) => plans.find((p) => p.id === id);
 export const pendingPrices = () => plans.filter((p) => p.usd == null).map((p) => p.name);
