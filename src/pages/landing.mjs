@@ -1,5 +1,7 @@
 import { site, section, cards, steps, checklist, faqBand, stepForm, reviewsBand, scrollShot, TWO_SIZES, freeOfferFaq, icon, tt, orgId } from '../layout.mjs';
 import { byId, priceCard, priceStrip, m } from '../prices.mjs';
+// Prices always come from src/prices.mjs (never typed here), so a price change reaches every landing page.
+const P = (id) => m(byId(id).usd);
 import { plugins } from '../site.mjs';
 import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
 import { makeTradesDemo } from '../demos/trades.mjs';
@@ -75,12 +77,12 @@ const toolFaq = (trade) => ({
 // ongoing costs). Static pages on Cloudflare's free plan; the only yearly cost is the domain name.
 const smallSite = (c) => priceStrip({ ...byId('business-website'), name: c.h.small, cta: ['Get a Quote', '#quote'] },
   `1 to 5 pages of mostly static content, built without WordPress. <strong>No monthly costs</strong>: hosting on Cloudflare’s free plan covers a site like this, so you only renew your domain name. The code is yours in your own GitHub, you edit text, photos and prices in a simple editor, and there are no plugins to update.`);
-const noCostsFaq = { q: 'Is there a smaller option with no monthly costs?', a: `<p>Yes. The Business Website is ${m(447)} for 1 to 5 pages of mostly static content, built without WordPress and hosted on Cloudflare’s free plan, which covers a small business site. You only renew your domain name each year; the <a href="/prices/">prices page</a> explains when a Cloudflare fee can apply. Fixes after handover are paid per fix, and there is no free first year as there are no plugins to update.</p>` };
+const noCostsFaq = { q: 'Is there a smaller option with no monthly costs?', a: `<p>Yes. The Business Website is ${P('business-website')} for 1 to 5 pages of mostly static content, built without WordPress and hosted on Cloudflare’s free plan, which covers a small business site. You only renew your domain name each year; the <a href="/prices/">prices page</a> explains when a Cloudflare fee can apply. Fixes after handover are paid per fix, and there is no free first year as there are no plugins to update.</p>` };
 
 const tradePage = (c) => {
   const faq = faqBand(
     [
-      { q: 'Is the price really fixed?', a: `<p>Yes. A WordPress website of 5 to 10 pages is ${m(547)}, one-time. We agree on the pages and what goes on them before any work starts, so you know the full price up front.</p>` },
+      { q: 'Is the price really fixed?', a: `<p>Yes. A WordPress website of 5 to 10 pages is ${P('wordpress-website')}, one-time. We agree on the pages and what goes on them before any work starts, so you know the full price up front.</p>` },
       ...c.faq,
       toolFaq(c.tradeWord),
       { q: 'What happens after the first year?', a: '<p>Plugin updates and fixes for technical problems such as plugin conflicts are free for the first year. After that, website maintenance is included in our SEO, Local SEO and GEO plan; tell us what you need and we will tell you the options.</p>' },
@@ -101,7 +103,7 @@ const tradePage = (c) => {
       faq.ld,
     ],
     body: `
-${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${m(547)}, one-time`, 'First year of plugin updates and fixes free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote', preset: 'website' })}
+${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: [`Fixed price: ${P('wordpress-website')}, one-time`, 'First year of plugin updates and fixes free', ...c.points, 'Usually replies within minutes'], formHeading: c.h.form, cta: 'Get a Quote', preset: 'website' })}
 ${section({
   tag: 'What You Get',
   title: c.h.offer,
@@ -139,7 +141,7 @@ const tradesmen = tradePage({
   },
   tag: 'Websites for Trades',
   h1: 'Website Design for [[Tradesmen]]',
-  lead: `Website design for tradesmen that brings you enquiries: a WordPress website of 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(547)}. Add a tool that answers enquiries and books jobs while you are working.`,
+  lead: `Website design for tradesmen that brings you enquiries: a WordPress website of 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${P('wordpress-website')}. Add a tool that answers enquiries and books jobs while you are working.`,
   points: ['Booking and quote tools for your trade'],
   offerIntro: 'A tradesman website for roofers, plumbers, electricians, builders, heating engineers and every other trade, made to turn visitors into calls and booked jobs.',
   offer: [
@@ -187,7 +189,7 @@ const plumbers = tradePage({
   },
   tag: 'Plumber Website Design',
   h1: 'Website for Plumbers That [[Brings In Jobs]]',
-  lead: `A website for plumbers that turns searches into booked jobs: plumber website design with 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(547)}. Add a tool that takes enquiries while you are under a sink.`,
+  lead: `A website for plumbers that turns searches into booked jobs: plumber website design with 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${P('wordpress-website')}. Add a tool that takes enquiries while you are under a sink.`,
   points: ['A booking tool for plumbing jobs'],
   offerIntro: 'Plumbing website design for sole traders and small plumbing and heating firms, made for the way customers look for a plumber: on a phone, often in a hurry.',
   offer: [
@@ -242,7 +244,7 @@ const electricians = tradePage({
   },
   tag: 'Electrician Website Design',
   h1: 'Website for Electricians That [[Brings In Jobs]]',
-  lead: `A website for electricians and electrical contractors that turns searches into booked jobs: 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${m(547)}. Add a tool that takes enquiries while you are on site.`,
+  lead: `A website for electricians and electrical contractors that turns searches into booked jobs: 5 to 10 pages, fast on every phone, with SEO and your Google Business Profile set up, for one fixed price of ${P('wordpress-website')}. Add a tool that takes enquiries while you are on site.`,
   points: ['A booking tool for electrical jobs'],
   offerIntro: 'Electrician website design for sole traders and electrical contractors, made for homeowners, landlords and businesses looking for an electrician on their phone.',
   offer: [
@@ -290,7 +292,7 @@ const helpPage = (c) => {
     [
       ...c.faq,
       { q: 'What if my issue is not fixed?', a: '<p>Then you do not pay. You pay only after the issue is fixed and you are happy with the result.</p>' },
-      { q: 'Is the first fix really free?', a: `<p>Yes, if it takes up to 30 minutes, once per business. After that a one-time fix of one issue is ${m(27)}, paid when you are happy, and bigger custom work is priced before we start.</p>` },
+      { q: 'Is the first fix really free?', a: `<p>Yes, if it takes up to 30 minutes, once per business. After that a one-time fix of one issue is ${P('one-time-wordpress-support')}, paid when you are happy, and bigger custom work is priced before we start.</p>` },
       { q: 'Can you build a tool or a feature, not only fix things?', a: '<p>Yes. We build web apps and tools such as quote calculators, booking tools and plugins. A tool is priced by what it needs to do, and we first build a free prototype with sample data so you can try it before you decide.</p>' },
       { q: 'Do you need my login?', a: '<p>We need access to fix the issue. Create a separate user or administrator account for us and remove it when the fix is done; never send us your own password.</p>' },
       { q: 'How fast do you reply?', a: '<p>We usually reply within minutes, and always within 12 hours, in English or Turkish.</p>' },
@@ -352,7 +354,7 @@ const wordpressHelp = helpPage({
   },
   tag: 'WordPress Support',
   h1: 'WordPress Help, [[Pay Only When It Is Fixed]]',
-  lead: `WordPress help from a developer who works in WordPress every day. Tell us what is wrong with your WordPress site: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time WordPress fix is ${m(27)}.`,
+  lead: `WordPress help from a developer who works in WordPress every day. Tell us what is wrong with your WordPress site: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time WordPress fix is ${P('one-time-wordpress-support')}.`,
   formHeading: 'Describe Your WordPress Issue',
   fixTitle: 'WordPress Support for [[Any Issue]]',
   fixIntro: 'Fast WordPress support for whatever went wrong: a WordPress update that broke the layout, a plugin conflict, a contact form that stopped sending, a WooCommerce checkout error or a slow WordPress site: tell us what happened and we fix it.',
@@ -398,7 +400,7 @@ const websiteHelp = helpPage({
   },
   tag: 'Website Support',
   h1: 'Website Help, [[Pay Only When It Is Fixed]]',
-  lead: `Website help for any website, whatever it is built on. Tell us what is wrong: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time website fix is ${m(27)}.`,
+  lead: `Website help for any website, whatever it is built on. Tell us what is wrong: we back up your site, fix the issue while recording our screen, and you pay only when you are happy. Your first small fix, up to 30 minutes, is free; after that a one-time website fix is ${P('one-time-wordpress-support')}.`,
   formHeading: 'Describe Your Website Issue',
   fixTitle: 'Website Help for [[Any Website, Any Issue]]',
   fixIntro: 'A layout that falls apart after an update, a form that stops sending, a checkout error, a slow page, a broken link or a page that will not load: things break on every platform. Website support and website repair for any site: we fix your website wherever it runs.',
@@ -435,7 +437,7 @@ const websiteHelp = helpPage({
 
 const corkFaq = faqBand(
   [
-    { q: 'How much does a website cost?', a: `<p>A Business Website of 1 to 5 pages is ${m(447)}, one-time, and a WordPress website of 5 to 10 pages is ${m(547)}. We agree the pages and what goes on them before any work starts, so the price is fixed.</p>` },
+    { q: 'How much does a website cost?', a: `<p>A Business Website of 1 to 5 pages is ${P('business-website')}, one-time, and a WordPress website of 5 to 10 pages is ${P('wordpress-website')}. We agree the pages and what goes on them before any work starts, so the price is fixed.</p>` },
     { q: 'Are there monthly costs?', a: '<p>Not with a Business Website. It runs on Cloudflare’s free plan: the pages, the editor and its database are free, and the contact form fits within a free email plan. You only renew your domain name each year.</p><p>When a fee can apply:</p><ul><li>Photos are stored in Cloudflare R2. Its free tier covers 10 GB a month, far more than a small site needs, but Cloudflare asks you to add a payment method to switch it on. You are only charged above the free tier.</li><li>The free plan covers 100,000 requests a day. Above that, the site needs the Workers Paid plan, from $5 a month.</li><li>The free email plan covers 100 form emails a day.</li></ul><p>Sources: Cloudflare <a href="https://developers.cloudflare.com/workers/platform/pricing/" rel="noopener">Workers</a>, <a href="https://developers.cloudflare.com/d1/platform/pricing/" rel="noopener">D1</a> and <a href="https://developers.cloudflare.com/r2/pricing/" rel="noopener">R2</a> pricing.</p><p>A WordPress website needs hosting, which we help you choose.</p>' },
     { q: 'Is VAT added?', a: '<p>No. We invoice from Türkiye and add no VAT, so the price shown is the amount on your invoice.</p>' },
     { q: 'I started building my website myself. Can you use what I have?', a: '<p>Yes. Send us your text, photos, logo and a website you like, even if they are half finished. We use them for the 2 homepage designs, and we help with the text where it is missing.</p>' },
@@ -461,8 +463,8 @@ const webDesignCork = {
 ${hero({
   tag: 'Web Design Cork',
   h1: 'Web Design in Cork With [[No Monthly Costs]]',
-  lead: `Web design for small businesses in Cork and across Ireland: a fast website of 1 to 5 pages for one fixed price of ${m(447)}, with no monthly hosting costs. You choose from 2 homepage designs made for your business before we build the rest.`,
-  points: [`Fixed price: ${m(447)}, one-time, no VAT added`, 'No monthly costs: you only renew your domain', '2 homepage designs to choose from', 'Usually replies within minutes'],
+  lead: `Web design for small businesses in Cork and across Ireland: a fast website of 1 to 5 pages for one fixed price of ${P('business-website')}, with no monthly hosting costs. You choose from 2 homepage designs made for your business before we build the rest.`,
+  points: [`Fixed price: ${P('business-website')}, one-time, no VAT added`, 'No monthly costs: you only renew your domain', '2 homepage designs to choose from', 'Usually replies within minutes'],
   formHeading: 'Get a Quote for Your Website in Cork',
   cta: 'Get a Quote',
 })}
@@ -478,7 +480,7 @@ ${section({
   title: 'What a Website in Cork [[Really Costs]]',
   intro: '<p>With a Business Website you pay once. After that, the only yearly cost is your domain name.</p>',
   body: cards([
-    { icon: 'check', title: 'Once: the Website', text: `${m(447)} for 1 to 5 pages, designed, built and launched. No VAT added.` },
+    { icon: 'check', title: 'Once: the Website', text: `${P('business-website')} for 1 to 5 pages, designed, built and launched. No VAT added.` },
     { icon: 'clock', title: 'Every Year: Your Domain', text: 'Your .ie or .com domain is renewed with the company you bought it from, in your own name.' },
     { icon: 'shield', title: 'Hosting: Free', text: 'Static pages on Cloudflare are free with no traffic limit, and a small site stays well within the free plan for its contact form.' },
   ], { cols: 3 }),

@@ -23,7 +23,7 @@ const omutPage = (() => {
   return {
     path: '/plugins/oxygen-media-usage-tracker-pro/',
     title: 'Oxygen Media Usage Tracker Pro Plugin | asparagents',
-    description: 'See every page that uses each image in your Oxygen Builder site, find unused media and clean up your media library with confidence. $27, 7-day refund.',
+    description: `See every page that uses each image in your Oxygen Builder site, find unused media and clean up your media library with confidence. $${plugins[0].priceUsd}, 7-day refund.`,
     crumbs: [{ name: 'Plugins', path: '/plugins/' }, { name: omut.name, path: '/plugins/oxygen-media-usage-tracker-pro/' }],
     schema: [
       { '@type': 'SoftwareApplication', name: omut.name, applicationCategory: 'DeveloperApplication', operatingSystem: 'WordPress with Oxygen Builder (Classic)', description: omut.short, url: `${site.url}/plugins/oxygen-media-usage-tracker-pro/`, publisher: { '@id': orgId }, offers: { '@type': 'Offer', price: omut.priceUsd, priceCurrency: 'USD', url: buyUrl, availability: 'https://schema.org/InStock' } },

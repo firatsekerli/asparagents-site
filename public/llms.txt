@@ -23,7 +23,7 @@
 - [Social media management](https://asparagents.com/services/social-media-management/): content calendar, post designs, captions, scheduling and reporting
 - [Accessibility fixes](https://asparagents.com/services/accessibility-fixes/): fixes the issues an accessibility reporting tool lists, on the platform the site already uses
 - [One-time WordPress support](https://asparagents.com/services/wordpress-support/): one WordPress issue fixed, paid only when the client is happy with the result
-- [Prices](https://asparagents.com/prices/): one-time WordPress fix $27, WordPress website $547, website without WordPress $447, WooCommerce shop $847, SEO, local SEO and GEO $247 a month, social media $147 a month, both monthly services together $345 a month. Shown in pounds, euros, Canadian, Australian or New Zealand dollars (same number) for visitors from those countries; tools are priced by what they need to do
+- [Prices](https://asparagents.com/prices/): one-time WordPress fix {{price:one-time-wordpress-support}}, WordPress website {{price:wordpress-website}}, website without WordPress {{price:business-website}}, WooCommerce shop {{price:woocommerce-shop}}, SEO, local SEO and GEO {{price:seo-local-seo-geo}} a month, social media {{price:social-media-management}} a month, both monthly services together {{price:bundle}} a month. Shown in pounds, euros, Canadian, Australian or New Zealand dollars (same number) for visitors from those countries; tools are priced by what they need to do
 
 ## Free offers
 
@@ -43,7 +43,7 @@
 ## Company
 
 - [About asparagents and Fırat Şekerli](https://asparagents.com/about-us/)
-- [Plugins](https://asparagents.com/plugins/): WordPress plugins for Oxygen Builder and Breakdance users, such as Oxygen Media Usage Tracker Pro ($27, 7-day refund for technical issues)
+- [Plugins](https://asparagents.com/plugins/): WordPress plugins for Oxygen Builder and Breakdance users, such as Oxygen Media Usage Tracker Pro ({{price:plugin}}, 7-day refund for technical issues)
 - [Blog](https://asparagents.com/blog/): guides on WordPress, SEO, local SEO, GEO and white label work
 - [Contact](https://asparagents.com/contact/): info@asparagents.com, WhatsApp +90 533 631 19 07
 - [Shop](https://shop.asparagents.com/): plugins and one-time WordPress support
