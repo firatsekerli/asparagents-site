@@ -578,6 +578,18 @@
       var on = form.querySelector('.sf-step.is-on');
       if (box && on) box.style.height = (on.offsetHeight + 6) + 'px';
     };
+    // The section around the form is made tall enough for the tallest step from the start (Firat 26.11.2026), so the
+    // section never grows when the visitor reaches the contact step; the card itself stays as tall as its step.
+    var holder = form.parentElement;
+    var reserve = function () {
+      if (!box || !holder) return;
+      var tallest = 0;
+      Array.prototype.forEach.call(steps, function (st) { if (!st.hidden) tallest = Math.max(tallest, st.offsetHeight); });
+      if (!tallest) return;
+      holder.style.minHeight = Math.ceil(form.offsetHeight - box.offsetHeight + tallest + 6) + 'px';
+    };
+    var fitBase = fit;
+    fit = function () { fitBase(); reserve(); };
     if (box && 'ResizeObserver' in window) {
       var ro = new ResizeObserver(fit);
       Array.prototype.forEach.call(steps, function (st) { ro.observe(st); });
