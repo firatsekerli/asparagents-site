@@ -9,3 +9,4 @@
 - Published content shows its sources and never names internal tools (OpenSEO, DataForSEO, Metricool, Claude, the Growth Sheet).
 - Branches content/, publish/, site/, tech-audit/ auto-merge after the checks; .github/, tools/ and build.mjs need Firat's "merge".
 - WooCommerce lives only on shop.asparagents.com; everything else is this static site.
+- Every change that goes live on asparagents.com gets one entry in the asparagents Desk change log (https://claude.ai/artifact/7oczZW3BvXdX84FHVmgsYH, ArtifactData collection "log", doc id "<YYYYMMDD-HHMM>-<short-slug>"): at (ISO time of the merge), title (one plain line), area (Content, Design, Forms, Prices, SEO, Speed, Shop, Ads pages, Legal, References), by ("Chat session" or the agent's name), link (the PR URL).
