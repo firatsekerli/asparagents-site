@@ -10,8 +10,8 @@ import { makeTradesDemo } from '../demos/trades.mjs';
 // form above the fold, the same call to action as the ads, a working tool demo, reviews and a real project as proof.
 // Facts only from the site (prices.mjs, services, reference stories, Google reviews). Plan:
 // claude/asparagents-google-ads-plan.md. The three trade pages are indexable (no other page targets these searches);
-// the two help pages were noindex until 26.11.2026; Firat wants PageSpeed 100 on all four scores, and noindex fails the
-// SEO check, so they are indexable now. Watch Search Console for overlap with /services/wordpress-support/.
+// the two help pages are noindex (Firat 26.11.2026: they must not compete with /services/wordpress-support/, the organic
+// page for those searches). PageSpeed shows SEO below 100 on them for that reason only, which is accepted.
 
 // Closing call to action: the same navy band as every other page, pointing at this page's form.
 const lpCta = (h, p, label) => `
@@ -303,6 +303,7 @@ const helpPage = (c) => {
     description: c.description,
     crumbs: [{ name: c.crumb, path: `/${c.slug}/` }],
     contact: false,
+    noindex: true,
     schema: [faq.ld],
     body: `
 ${hero({ tag: c.tag, h1: c.h1, lead: c.lead, points: ['Pay only when it is fixed', 'Your site backed up before we start', 'A screen recording of the fix', 'Usually replies within minutes'], formHeading: c.formHeading, cta: 'Describe Your Issue', preset: 'fix' })}
