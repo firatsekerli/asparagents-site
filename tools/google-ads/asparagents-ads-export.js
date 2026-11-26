@@ -9,8 +9,7 @@
  *   Ads Keywords     per keyword, last 28 days: match type, status, Quality Score, impressions, clicks, cost, conversions
  *   Ads Landing Pages per final URL, last 28 days
  *   Ads Share        per campaign, last 28 days: search impression share and why impressions were lost
- *   Ads Auction      per campaign and competitor domain, last 28 days (Google only returns this to some accounts;
- *                    when it does not, the Status tab says so)
+ *   (Competitor auction insights are not available to scripts: Google refuses those metrics, tested 26.11.2026.)
  *   Ads Status       last run time, currency, export results
  *
  * Setup (once): Google Ads > Tools > Bulk actions > Scripts > + New script, paste this file, Authorize,
@@ -73,16 +72,6 @@ function main() {
     'AND campaign.advertising_channel_type = \'SEARCH\'',
     function (r) { return [r.campaign.name, n(r.metrics.impressions), pct(r.metrics.searchImpressionShare), pct(r.metrics.searchRankLostImpressionShare),
       pct(r.metrics.searchBudgetLostImpressionShare), pct(r.metrics.searchTopImpressionShare), pct(r.metrics.searchAbsoluteTopImpressionShare)]; }));
-
-  results.push(write(ss, 'Ads Auction',
-    ['Campaign', 'Domain', 'Impression share', 'Overlap rate', 'Position above rate', 'Top of page rate', 'Outranking share'],
-    'SELECT campaign.name, segments.auction_insight_domain, metrics.auction_insight_search_impression_share, ' +
-    'metrics.auction_insight_search_overlap_rate, metrics.auction_insight_search_position_above_rate, ' +
-    'metrics.auction_insight_search_top_impression_percentage, metrics.auction_insight_search_outranking_share ' +
-    'FROM campaign WHERE segments.date BETWEEN \'' + d28 + '\' AND \'' + today + '\' AND campaign.status != \'REMOVED\'',
-    function (r) { return [r.campaign.name, r.segments.auctionInsightDomain, pct(r.metrics.auctionInsightSearchImpressionShare),
-      pct(r.metrics.auctionInsightSearchOverlapRate), pct(r.metrics.auctionInsightSearchPositionAboveRate),
-      pct(r.metrics.auctionInsightSearchTopImpressionPercentage), pct(r.metrics.auctionInsightSearchOutrankingShare)]; }));
 
   var st = tab(ss, 'Ads Status');
   st.clear();
