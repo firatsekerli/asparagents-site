@@ -50,7 +50,7 @@ const listPage = {
   body: `
 ${pageHead({ tag: 'References', title: 'Websites and Tools [[We Built]]', intro: 'Live websites we built directly for businesses. Most of our work for agencies is white label and carries their names, so it is not listed here. <a href="/contact/">Contact us</a> to see more examples privately.', actions: ctaRow() })}
 ${section({ body: refGrid(references.slice(0, 5), { h: 'h2' }) })}
-${section({ tone: 'light', tag: 'More Projects', title: 'More Websites [[We Built]]', body: refCards(references.slice(5)) })}
+${section({ tone: 'light', tag: 'Portfolio', title: 'More Websites [[We Built]]', intro: 'Corporate websites, online shops and personal sites. Open any project to see what we built.', body: refCards(references.slice(5)) })}
 ${worldBand('light')}
 `,
 };
@@ -69,7 +69,7 @@ ${pageHead({ tag: [r.sector, r.place].filter(Boolean).map(esc).join(' · '), tit
 ${projectSection(r)}
 ${section({ body: `<div class="gallery">${shot(r.key, '-a', alts[r.key].a)}${shot(r.key, '-b', alts[r.key].b)}</div>` })}
 ${toolsSection(r)}
-${section({ tone: r.tools ? 'white' : 'light', tag: 'More Projects', title: 'Other Websites [[We Built]]', body: refCards(nextRefs(r)) + `<div class="btns" style="justify-content:center;margin-top:40px"><a class="btn" href="/references/">All References</a></div>` })}
+${section({ tone: r.tools ? 'white' : 'light', tag: 'Keep Exploring', title: 'More [[Projects]]', body: refCards(nextRefs(r)) + `<div class="btns" style="justify-content:center;margin-top:44px"><a class="btn" href="/references/">See All References</a></div>` })}
 `,
   };
 });
