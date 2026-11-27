@@ -53,7 +53,7 @@ for (const slug of (await readdir(articleDir)).sort()) {
   if (!/^[a-z0-9-]+$/.test(p.slug || '')) throw new Error(`${f}: bad slug`);
   const date = p.date || wpDates[p.slug];
   if (!date) console.warn(`WARNING ${p.slug}: no date in post.json`);
-  posts.push({ path: `/${p.slug}/`, h1: p.title, title: `${p.title} | asparagents`, description: meta(p.excerpt), excerpt: p.excerpt, date, label: 'Guide', body: fill(p.content, f), ...(await coverFor(p.slug, p.image_alt || '', posts.length)) });
+  posts.push({ path: `/${p.slug}/`, h1: p.title, title: `${p.title} | asparagents`, description: meta(p.excerpt), excerpt: p.excerpt, date, updated: p.updated, label: 'Guide', body: fill(p.content, f), ...(await coverFor(p.slug, p.image_alt || '', posts.length)) });
 }
 for (const p of await loadDir(path.join(root, 'content/legacy'))) {
   posts.push({ path: `/${p.slug}/`, h1: p.title, title: `${p.title} | asparagents`, description: meta(p.excerpt), excerpt: p.excerpt, date: p.date, updated: p.updated, label: 'WordPress', body: fill(p.content, p.slug), ...(await coverFor(p.slug, '', posts.length)) });
