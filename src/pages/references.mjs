@@ -1,13 +1,14 @@
 import { windowsDemo } from '../demos/windows.mjs';
 import { demoCss, tabsJs, lockJs } from '../demos/common.mjs';
 import { cristalDemos } from '../demos/cristal.mjs';
+import { dimakDemos } from '../demos/dimak.mjs';
 import { site, references, pageHead, section, refGrid, refCards, worldBand, ctaRow, img, esc, REF_WIDTHS, buttons, twoCol, checklist, tt } from '../layout.mjs';
 
 // References: live sites Fırat Şekerli built directly (src/site.mjs). Screenshots are shared with asparajans.com.
 const alts = Object.fromEntries(references.map((r) => [r.key, r.alts || { a: `${r.name} website, inner page`, b: `${r.name} website, inner page` }]));
 const meta = (text) => (text.length > 155 ? text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : text);
 // Tools built for a client, each shown as a working prototype with sample data (Firat 22.11.2026).
-const demos = { quote: windowsDemo, survey: cristalDemos.survey, checker: cristalDemos.checker };
+const demos = { quote: windowsDemo, survey: cristalDemos.survey, checker: cristalDemos.checker, prospector: dimakDemos.prospector, montaj: dimakDemos.montaj };
 const toolsSection = (r) =>
   r.tools
     ? section({
@@ -15,14 +16,14 @@ const toolsSection = (r) =>
         cls: 'tools-sec',
         tag: 'Built Beyond the Website',
         title: `Tools We Built for [[${esc(r.name)}]]`,
-        intro: `Alongside the website, we built ${['one', 'two', 'three', 'four', 'five'][r.tools.length - 1]} tools for ${esc(r.name)}. Each one is a WordPress plugin made for how the business works. Try simplified versions below, with sample data.`,
+        intro: r.toolsIntro || `Alongside the website, we built ${['one', 'two', 'three', 'four', 'five'][r.tools.length - 1]} tools for ${esc(r.name)}. Each one is a WordPress plugin made for how the business works. Try simplified versions below, with sample data.`,
         body:
           r.tools
             .map(
               (t) => `<div class="tool-block"><div class="tool-head"><div><p class="label">${t.label}</p><h3 class="h2">${tt(t.title)}</h3><p>${t.text}</p></div><div>${checklist(t.points)}</div></div>${demos[t.demo].html}${t.source ? `<p class="tool-source">${t.source}</p>` : ''}</div>`
             )
             .join(''),
-      }) + `<style>${demoCss}${cristalDemos.css}</style><script>${tabsJs}${r.tools.map((t) => demos[t.demo].js).join('')}${lockJs}</script>`
+      }) + `<style>${demoCss}${cristalDemos.css}${r.tools.some((t) => t.demo === 'prospector' || t.demo === 'montaj') ? dimakDemos.css : ''}</style><script>${tabsJs}${r.tools.map((t) => demos[t.demo].js).join('')}${lockJs}</script>`
     : '';
 // The hero shows the top of the home page (Firat 22.11.2026) in a browser frame, so it stands apart from the band.
 const heroShot = (r) =>
