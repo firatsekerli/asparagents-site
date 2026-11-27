@@ -6,6 +6,10 @@
  *   Ads Daily        per day and campaign, last 90 days: impressions, clicks, cost, conversions
  *   Ads Ad Groups    per ad group, last 28 days
  *   Ads Search Terms per search term, last 28 days (top 200 by impressions)
+ *   Ads Keywords     per keyword, last 28 days: match type, status, Quality Score, impressions, clicks, cost, conversions
+ *   Ads Landing Pages per final URL, last 28 days
+ *   Ads Share        per campaign, last 28 days: search impression share and why impressions were lost
+ *   (Competitor auction insights are not available to scripts: Google refuses those metrics, tested 26.11.2026.)
  *   Ads Status       last run time, currency, export results
  *
  * Setup (once): Google Ads > Tools > Bulk actions > Scripts > + New script, paste this file, Authorize,
@@ -43,6 +47,32 @@ function main() {
     function (r) { return [r.searchTermView.searchTerm, r.campaign.name, r.adGroup.name, n(r.metrics.impressions), n(r.metrics.clicks),
       money(r.metrics.costMicros), n(r.metrics.conversions)]; }));
 
+  results.push(write(ss, 'Ads Keywords',
+    ['Campaign', 'Ad group', 'Keyword', 'Match type', 'Status', 'Quality Score', 'Impressions', 'Clicks', 'Cost', 'Conversions'],
+    'SELECT campaign.name, ad_group.name, ad_group_criterion.keyword.text, ad_group_criterion.keyword.match_type, ad_group_criterion.status, ' +
+    'ad_group_criterion.quality_info.quality_score, metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions ' +
+    'FROM keyword_view WHERE segments.date BETWEEN \'' + d28 + '\' AND \'' + today + '\' AND ad_group_criterion.status != \'REMOVED\' ' +
+    'AND campaign.status != \'REMOVED\' ORDER BY metrics.impressions DESC',
+    function (r) { return [r.campaign.name, r.adGroup.name, r.adGroupCriterion.keyword.text, r.adGroupCriterion.keyword.matchType,
+      r.adGroupCriterion.status, (r.adGroupCriterion.qualityInfo && r.adGroupCriterion.qualityInfo.qualityScore) || '', n(r.metrics.impressions),
+      n(r.metrics.clicks), money(r.metrics.costMicros), n(r.metrics.conversions)]; }));
+
+  results.push(write(ss, 'Ads Landing Pages',
+    ['Landing page', 'Impressions', 'Clicks', 'Cost', 'Conversions'],
+    'SELECT landing_page_view.unexpanded_final_url, metrics.impressions, metrics.clicks, metrics.cost_micros, metrics.conversions ' +
+    'FROM landing_page_view WHERE segments.date BETWEEN \'' + d28 + '\' AND \'' + today + '\' ORDER BY metrics.impressions DESC',
+    function (r) { return [r.landingPageView.unexpandedFinalUrl, n(r.metrics.impressions), n(r.metrics.clicks), money(r.metrics.costMicros),
+      n(r.metrics.conversions)]; }));
+
+  results.push(write(ss, 'Ads Share',
+    ['Campaign', 'Impressions', 'Impression share', 'Lost to rank', 'Lost to budget', 'Top of page', 'Absolute top'],
+    'SELECT campaign.name, metrics.impressions, metrics.search_impression_share, metrics.search_rank_lost_impression_share, ' +
+    'metrics.search_budget_lost_impression_share, metrics.search_top_impression_share, metrics.search_absolute_top_impression_share ' +
+    'FROM campaign WHERE segments.date BETWEEN \'' + d28 + '\' AND \'' + today + '\' AND campaign.status != \'REMOVED\' ' +
+    'AND campaign.advertising_channel_type = \'SEARCH\'',
+    function (r) { return [r.campaign.name, n(r.metrics.impressions), pct(r.metrics.searchImpressionShare), pct(r.metrics.searchRankLostImpressionShare),
+      pct(r.metrics.searchBudgetLostImpressionShare), pct(r.metrics.searchTopImpressionShare), pct(r.metrics.searchAbsoluteTopImpressionShare)]; }));
+
   var st = tab(ss, 'Ads Status');
   st.clear();
   var rows = [['Item', 'Value'], ['Last run', Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm')],
@@ -69,4 +99,5 @@ function write(ss, name, headers, query, map) {
 function tab(ss, name) { return ss.getSheetByName(name) || ss.insertSheet(name); }
 function day(back) { return Utilities.formatDate(new Date(Date.now() - back * 864e5), TZ, 'yyyy-MM-dd'); }
 function n(v) { return Number(v || 0); }
+function pct(v) { return (v === undefined || v === null || v === '') ? '' : Math.round(Number(v) * 1000) / 10; }
 function money(micros) { return Math.round(Number(micros || 0) / 10000) / 100; }
