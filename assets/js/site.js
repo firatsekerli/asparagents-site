@@ -345,9 +345,12 @@
   var read = function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
   var write = function (v) { try { localStorage.setItem(KEY, v); } catch (e) { /* storage blocked: choice lasts this page view */ } };
   var gtmLoaded = false;
+  // Only the live site sends data: preview copies (*.pages.dev) and local builds load no Google tags.
+  var LIVE_HOSTS = ['asparagents.com'];
   var loadGtm = function () {
     if (gtmLoaded) return;
     gtmLoaded = true;
+    if (LIVE_HOSTS.indexOf(location.hostname) === -1) return;
     window.dataLayer = window.dataLayer || [];
     // Google Consent Mode v2 ("basic"): nothing Google loads before the visitor accepts; once they do,
     // tags also receive the consent state, which Google Ads needs for conversion measurement.
