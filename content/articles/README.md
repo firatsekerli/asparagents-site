@@ -7,6 +7,7 @@ One folder per article: `content/articles/<slug>/` with
   - `content` is HTML using only h2, h3, p, ul, ol, li, a, strong, em, code (no h1: the page shows the title).
   - `slug`: lowercase letters, digits and hyphens; the article is published at `https://asparagents.com/<slug>/`.
   - `date`: publication date, YYYY-MM-DD.
+  - `updated` (optional): the date of the last real content change, YYYY-MM-DD. Set it to today whenever a post's text, facts, sources or links change (a refresh, a Quick Fix change, a fact fix); leave it out for a new post. It becomes dateModified on the post and on /blog/, and lastmod in sitemap.xml. Never set it for a change that only touches styling or covers.
 - the cover image named in `image`: every post uses the same green code cover with the white logo, uncropped at 2:1
   (Firat 21.11.2026). Copy `cover.jpg` from any existing article folder, and copy the existing
   `assets/img/cover-<slug>-*.webp` and `og-cover-<slug>.jpg` files under the new slug (the build picks them up by
