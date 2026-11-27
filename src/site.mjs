@@ -146,7 +146,21 @@ const baseReferences = [
     text: 'For Misbourne Design Associates, which offers residential and commercial architectural design in Oxfordshire and the surrounding counties in England, we developed a WordPress website that highlights its services, way of working and projects.' },
   // Firat 21.11.2026: Dimak gets its own reference page; the tools are shown as built for Dimak. Text and images from asparajans.com.
   { key: 'dimak-kapi', name: 'Dimak Kapı', sector: 'Fire Door Manufacturer', type: 'Corporate Website', place: 'Ankara, Türkiye', url: 'https://www.dimak.com.tr/', mock: true, detail: 'dimak-kapi', color: '#ff6b00',
-    text: 'For Dimak Kapı, which makes fire doors, sectional doors and steel doors, we designed a corporate website that highlights its products, reference projects and quote process.' },
+    text: 'For Dimak Kapı, which makes fire doors, sectional doors and steel doors, we designed a corporate website that highlights its products, reference projects and quote process.',
+    // Firat 27.11.2026: show the two web apps built for Dimak as working prototypes (no screenshots exist). Facts only
+    // from the apps' repos (dimak-prospector: README, lib/config.ts, lib/score.ts, app/guide, docs/V2.md;
+    // montaj-programi: README, docs/domain-model.md, packages/rules, supabase/migrations/0003_seed_dimak.sql).
+    toolsIntro: 'Alongside the website, we built two web apps for Dimak Kapı: one finds companies to sell to, the other plans door installations. Try simplified versions below, rebuilt from the apps with sample data.',
+    tools: [
+      { demo: 'prospector', label: 'Prospector', title: 'New Buyers Found [[and Scored]]',
+        text: 'Prospector searches Google business listings for distributors, contractors and suppliers in the countries and cities chosen, then scores, tags and tracks every company in one list.',
+        points: ['Every chosen city is searched and the results merged, so each company appears once', 'A clear fit score from the business type and your own good-fit keywords', 'Status, segment tags and a dated note log for every lead', 'Phone numbers and websites load only for the leads you open, which keeps Google costs low', 'Business details are read live from Google and never stored', 'Steel door import figures by country from UN Comtrade show which markets to target'],
+        source: 'Companies in this demo are invented samples. The real app reads live data from Google and steel door import statistics from UN Comtrade, the United Nations trade database.' },
+      { demo: 'montaj', label: 'Montaj Programı', title: 'Installations Planned [[Team by Team]]',
+        text: 'Montaj Programı, the installation planner, turns the backlog of door orders into a day by day plan for the installation teams, based on how many doors of each type a team can fit into a day.',
+        points: ['Daily capacity for each door type, on normal and overtime days', 'Large leaves and demolition work lower the day’s capacity by set rules', 'Travel time and site entry time count against the day', 'A weekly board: generate the plan, then drag jobs between teams and days', 'Installed doors are recorded, and what is left is planned again', 'Door types, rules, teams and vehicles are all settings, not code'],
+        source: 'The figures in this demo are the capacity rules set for Dimak in the app. Orders and teams are samples. The real app runs in Turkish.' },
+    ] },
 ];
 // Order (Firat 22.11.2026: every asparajans.com website build): English-speaking market first, then Türkiye.
 const order = ['cristal-windows', 'misbourne-design', 'academease', 'total-health-chiropractic', 'dr-tim-jaeger', 'dimak-kapi', 'hatupen', 'proga', 'intek-metal', 'neo-global-metal', 'arman-elektronik', 'meya-hukuk', 'lilia', 'nurhayat-tutuncu', 'dr-erkan-ozturk'];
