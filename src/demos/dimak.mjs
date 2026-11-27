@@ -52,7 +52,7 @@ const prospectorJs = `
   var cities = { 'UAE': ['Dubai', 'Abu Dhabi', 'Sharjah'], 'Saudi Arabia': ['Riyadh', 'Jeddah', 'Dammam'], 'Qatar': ['Doha'], 'Kuwait': ['Kuwait City'], 'Oman': ['Muscat'], 'Bahrain': ['Manama'] };
   var segs = ["Don't tag", 'Distributor / Trading', 'Contractor', 'Specifier', 'Facility / FM'];
   var statuses = ['New', 'Contacted', 'Replied', 'Not a fit'];
-  var hints = ['door', 'manufacturer', 'hardware', 'building material', 'building supply', 'construction', 'contractor', 'supplier', 'wholesal', 'distribut', 'metal', 'steel', 'iron', 'alumin', 'glass', 'window', 'joinery', 'carpentry', 'timber', 'interior', 'fit out', 'architect', 'industrial', 'trading', 'fire'];
+  var hints = ['door', 'manufacturer', 'hardware', 'building material', 'building supply', 'construction', 'contractor', 'supplier', 'wholesal', 'distribut', 'metal', 'steel', 'iron', 'alumin', 'glass', 'window', 'joinery', 'carpentry', 'timber', 'lumber', 'interior', 'fit out', 'fitout', 'architect', 'industrial', 'trading', 'home improvement', 'home goods', 'furniture', 'fire'];
   // Invented sample companies. A city search returns some of them; one appears in every city to show the merge.
   var pool = [
     ['Sample Steel Doors Trading', 'Door supplier', 'all'],
