@@ -118,7 +118,7 @@ const prospectorJs = `
   function res(h) { $('pr-res').hidden = false; $('pr-res').innerHTML = h; }
   $('pr-contact').addEventListener('click', function () { res('<b>Contact loaded.</b> In the app this is a paid Google lookup, made only for leads you pursue, and it gives WhatsApp and website links. Contact details are not stored.'); });
   $('pr-analyze').addEventListener('click', function () { res('<b>Website signals (sample):</b> business type: supplier, distributor. Certification: EN 1634. Company social profiles. The app reads the company’s own site and keeps no personal data.'); });
-  $('pr-out').addEventListener('click', function () { res('<b>Draft first message (sample):</b> Hello, we manufacture certified fire doors and are looking for distribution partners in ' + E(cur.city) + '. Could we send you our catalogue? <br><small>In the app, AI writes this from the lead and your saved pitch, in the language you pick. The salesperson edits and sends it.</small>'); });
+  $('pr-out').addEventListener('click', function () { res('<b>Draft first message (sample):</b> Hello, we manufacture fire doors and are looking for distribution partners in ' + E(cur.city) + '. Could we send you our catalogue? <br><small>In the app, AI writes this from the lead and your saved pitch, in the language you pick. The salesperson edits and sends it.</small>'); });
   $('pr-stat').addEventListener('click', function (e) { var b = e.target.closest('[data-s]'); if (!b) return; cur.st = statuses[+b.getAttribute('data-s')]; lead(); rows(); });
   $('pr-add').addEventListener('click', function () { var v = $('pr-note').value.trim(); if (!v) return; cur.notes.unshift({ t: v, at: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) }); $('pr-note').value = ''; lead(); });
   $('pr-back').addEventListener('click', function () { ui.show(1); });
@@ -140,11 +140,11 @@ const montajHtml = demoShell(
         <div class="demo-btns"><button type="button" class="btn" id="mp-gen">Generate Plan</button></div>
       </div>
       <aside class="demo-preview" aria-label="Door types and daily capacity">
-        <h3>Door types (per day, 2-person crew)</h3>
+        <h3>Door types and daily capacity</h3><p class="demo-hint" style="margin:0 0 8px">Doors a day for a 2-person crew.</p>
         <ul class="kv" id="mp-types"></ul>
         <h3 style="margin-top:18px">Capacity rules</h3>
         <ul class="kv"><li><span>Leaf wider than 1150 mm and taller than 2400 mm</span><b>-20%</b></li><li><span>Door removal or wall demolition</span><b>-50%</b></li></ul>
-        <p class="demo-note">Teams: Team A (in house, fire and industrial doors), Team B (in house, fire doors), Subcontractor (industrial doors). In-house teams are used first.</p>
+        <p class="demo-note">Teams: Team A (in house, fire and industrial doors), Team B (in house, fire doors), Subcontractor (industrial doors, 2 a day). One team per order, in-house teams first.</p>
       </aside>
     </div>`,
     `<p class="demo-hint" id="mp-msg" aria-live="polite"></p>
@@ -190,31 +190,40 @@ const montajJs = `
     { no: 'S-104', t: 'fd', q: 6, due: 4, demo: false, big: false, ready: false }
   ];
   var fixed = [], cards = [], unplaced = [];
-  function cost(o) {
-    var ty = types[o.t];
-    if (ty.effort) return (ty.effort[0] + ty.effort[1] * o.area) / 9;
-    var f = (o.big ? 0.8 : 1) * (o.demo ? 0.5 : 1);
+  // Subcontractor: a fixed 2 industrial doors a day (the seed's daily cap), which wins over the effort rule.
+  function cost(o, tm) {
+    var ty = types[o.t], f = (o.big ? 0.8 : 1) * (o.demo ? 0.5 : 1);
+    if (ty.effort) return tm === 'S' ? 1 / (2 * f) : (ty.effort[0] + ty.effort[1] * o.area) / 9 / f;
     return 1 / (ty.n * f);
   }
   function capable(tm, o) { return types[o.t].fire ? tm.fire : tm.ind; }
+  // One team per order: in-house first, then the least loaded. A second team is used only when one team cannot
+  // finish the order by its delivery date.
   function plan() {
     var used = {}; teams.forEach(function (tm) { used[tm.id] = [0, 0, 0, 0, 0]; });
-    cards = fixed.map(function (c) { used[c.team][c.day] += c.q * cost(c.o); return c; });
+    cards = fixed.map(function (c) { used[c.team][c.day] += c.q * cost(c.o, c.team); return c; });
     unplaced = [];
+    var eps = 1e-9, load = function (id) { return used[id].reduce(function (x, y) { return x + y; }, 0); };
+    function fill(tm, o, left, last, commit) {
+      for (var d = 0; d <= last && left > 0; d++) {
+        var n = Math.min(left, Math.floor((1 - used[tm.id][d] + eps) / cost(o, tm.id))); if (n <= 0) continue;
+        left -= n; if (commit) { used[tm.id][d] += n * cost(o, tm.id); cards.push({ o: o, team: tm.id, day: d, q: n, done: false, pin: false }); }
+      }
+      return left;
+    }
     orders.slice().sort(function (a, b) { return a.due - b.due; }).forEach(function (o) {
       if (!o.ready) { unplaced.push([o, 'Outside the horizon / production date is later']); return; }
-      var left = o.q - fixed.filter(function (c) { return c.o === o; }).reduce(function (s, c) { return s + c.q; }, 0);
-      var opts = teams.filter(function (tm) { return capable(tm, o); });
+      var mine = fixed.filter(function (c) { return c.o === o; });
+      var left = o.q - mine.reduce(function (s, c) { return s + c.q; }, 0); if (left <= 0) return;
+      var opts = teams.filter(function (tm) { return capable(tm, o); }).sort(function (x, y) {
+        var px = mine.some(function (c) { return c.team === x.id; }) ? 0 : 1, py = mine.some(function (c) { return c.team === y.id; }) ? 0 : 1;
+        return px - py || (x.id === 'S') - (y.id === 'S') || load(x.id) - load(y.id);
+      });
       if (!opts.length) { unplaced.push([o, 'No capable team']); return; }
-      var c = cost(o), eps = 1e-9;
-      for (var d = 0; d < 5 && left > 0; d++) {
-        opts.forEach(function (tm) {
-          if (left <= 0) return;
-          var fit = Math.floor((1 - used[tm.id][d] + eps) / c);
-          var n = Math.min(left, fit); if (n <= 0) return;
-          used[tm.id][d] += n * c; left -= n; cards.push({ o: o, team: tm.id, day: d, q: n, done: false, pin: false });
-        });
-      }
+      var one = opts.filter(function (tm) { return fill(tm, o, left, o.due, false) === 0; })[0];
+      if (one) { fill(one, o, left, o.due, true); return; }
+      opts.forEach(function (tm) { left = fill(tm, o, left, o.due, true); });
+      opts.forEach(function (tm) { left = fill(tm, o, left, 4, true); });
       if (left > 0) unplaced.push([o, 'Capacity not enough (cannot meet the delivery date): ' + left + ' left']);
     });
     return used;
@@ -223,7 +232,7 @@ const montajJs = `
     $('mp-types').innerHTML = Object.keys(types).map(function (k) { var t = types[k]; return '<li><span>' + t.name + '</span><b>' + (t.effort ? '4.3125 h + 0.1875 h per m²' : t.n + ' normal, ' + t.o + ' overtime') + '</b></li>'; }).join('');
     $('mp-orders').innerHTML = orders.map(function (o, i) {
       return '<li><span><b>' + o.no + '</b>: ' + o.q + ' × ' + types[o.t].name + (o.area ? ' (3 × 3 m)' : '') + '<small>Delivery: ' + days[o.due] + (o.ready ? '' : ' · production ready next week') + '</small>' +
-        (types[o.t].fire ? '<label class="pr-check"><input type="checkbox" data-i="' + i + '" data-k="demo"' + (o.demo ? ' checked' : '') + '> Door removal or wall demolition</label><label class="pr-check"><input type="checkbox" data-i="' + i + '" data-k="big"' + (o.big ? ' checked' : '') + '> Large leaf</label>' : '') + '</span></li>';
+        '<label class="pr-check"><input type="checkbox" data-i="' + i + '" data-k="demo"' + (o.demo ? ' checked' : '') + '> Door removal or wall demolition</label><label class="pr-check"><input type="checkbox" data-i="' + i + '" data-k="big"' + (o.big ? ' checked' : '') + '> Large leaf</label>' + '</span></li>';
     }).join('');
   }
   $('mp-orders').addEventListener('change', function (e) { var c = e.target.closest('[data-k]'); if (!c) return; orders[+c.getAttribute('data-i')][c.getAttribute('data-k')] = c.checked; });
@@ -237,7 +246,7 @@ const montajJs = `
         h += '<div class="mp-cell"><div class="mp-fill"><span>' + pct + '%</span><div class="bar"><i style="width:' + Math.min(pct, 100) + '%"></i></div></div>' +
           cards.filter(function (c) { return c.team === tm.id && c.day === di; }).map(function (c) {
             var late = !c.done && di > c.o.due;
-            return '<div class="mp-card' + (c.done ? ' done' : '') + '"><b>' + c.o.no + (c.pin && !c.done ? ' <span aria-label="pinned">📌</span>' : '') + '</b><span>' + c.q + ' × ' + types[c.o.t].name + '</span><small>' + Math.round(c.q * cost(c.o) * 100) + '% day' + (c.done ? ' · installed' : '') + '</small>' + (late ? '<span class="dtag em">Late</span>' : '') + '</div>';
+            return '<div class="mp-card' + (c.done ? ' done' : '') + '"><b>' + c.o.no + (c.pin && !c.done ? ' <span aria-label="pinned">📌</span>' : '') + '</b><span>' + c.q + ' × ' + types[c.o.t].name + '</span><small>' + Math.round(c.q * cost(c.o, c.team) * 100) + '% day' + (c.done ? ' · installed' : '') + '</small>' + (late ? '<span class="dtag em">Late</span>' : '') + '</div>';
           }).join('') + '</div>';
       });
     });
