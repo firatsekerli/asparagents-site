@@ -190,13 +190,22 @@ export const reviewsBand = ({ list = reviews, extra = '', title = 'What Our Clie
 // References: a browser frame with the home page and one inner page beside the name, place, sector, the short
 // case text and links to the case page and the live site. Every second one is mirrored.
 const browser = (inner, cls = '') => `<span class="browser${cls ? ` ${cls}` : ''}"><span class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="browser-shot">${inner}</span></span>`;
-// Compact reference cards for the references page, after the featured showcases (Firat 22.11.2026: every website build).
+// Project cards for the references page and the "more projects" band on case pages (redesign 28.11.2026): the
+// screenshot peeks out of a pale green panel and scrolls on hover, then type, name, sector and place, a three line
+// summary and one link. The whole card is clickable through the title link.
+const arrow = svg('0 0 24 24', '<path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>', 18);
 export const refCards = (list) =>
   `<div class="ref-cards">${list
     .map(
-      (r) => `<article class="ref-card"><a class="ref-card-media" href="/references/${r.detail}/" tabindex="-1" aria-hidden="true">${browser(refShot(r.key, `${esc(r.name)} website, home page`, '(min-width: 1024px) 30vw, (min-width: 700px) 45vw, 90vw'), 'main')}</a>
-    <p class="show-tags">${[r.type, r.sector, r.place].filter(Boolean).map((t) => `<span>${esc(t)}</span>`).join('')}</p>
-    <h3 class="ref-card-title"><a href="/references/${r.detail}/">${esc(r.name)}</a></h3><p>${esc(r.text)}</p></article>`
+      (r) => `<article class="ref-card">
+    <div class="ref-card-media" aria-hidden="true">${browser(refShot(r.key, `${esc(r.name)} website, home page`, '(min-width: 1024px) 30vw, (min-width: 700px) 45vw, 90vw'), 'main')}</div>
+    <div class="ref-card-body">
+      <p class="ref-card-type">${esc(r.type || 'Website')}</p>
+      <h3 class="ref-card-title"><a href="/references/${r.detail}/">${esc(r.name)}</a></h3>
+      <ul class="ref-card-meta">${r.sector ? `<li>${icon.layers}<span>${esc(r.sector)}</span></li>` : ''}${r.place ? `<li>${icon.pin}<span>${esc(r.place)}</span></li>` : ''}</ul>
+      <p class="ref-card-text">${esc(r.text)}</p>
+      <span class="ref-card-more" aria-hidden="true">View the Project${arrow}</span>
+    </div></article>`
     )
     .join('')}</div>`;
 export const refGrid = (list = references, { h = 'h3' } = {}) =>
