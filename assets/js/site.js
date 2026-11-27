@@ -660,6 +660,9 @@
       if (data.need) { data.detail = data['detail_' + data.need] || ''; Object.keys(data).forEach(function (k) { if (k.indexOf('detail_') === 0) delete data[k]; }); }
       data.form = form.getAttribute('data-form');
       data.page = window.location.pathname;
+      // For the lead count on the Desk (no personal data): did the visitor arrive from an ad on this page, and from which site.
+      data.from_ad = /[?&](gclid|gbraid|wbraid)=/.test(window.location.search) ? 'yes' : '';
+      try { data.ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (err) { data.ref = ''; }
       data.elapsed = Date.now() - started;
       btn.disabled = true;
       status.className = 'form-status';

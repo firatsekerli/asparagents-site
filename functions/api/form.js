@@ -4,6 +4,10 @@
 //   RESEND_API_KEY  secret, from resend.com (the sending domain must be verified there)
 //   FORM_FROM       e.g. "asparagents website <form@asparajans.com>" (asparajans.com is already verified)
 //   FORM_TO         optional, defaults to info@asparagents.com
+//   LEADS_URL       optional, the Google Apps Script web app on the asparagents Content Sheet (tab "Leads")
+//   LEADS_TOKEN     secret, the same token as in that script's properties
+// With both set, every accepted submission also adds one row to the Leads tab (no name, email, phone or message),
+// so the asparagents Desk counts every form lead, also from visitors who declined cookies (Firat 27.11.2026).
 // Until RESEND_API_KEY is set the endpoint answers 503 and the page tells the visitor to email or WhatsApp instead.
 // Abuse protection: origin/size checks and spam filters below, plus a Cloudflare rate-limiting rule on
 // POST /api/form (Security > WAF > Rate limiting rules) that blocks an IP sending too many requests.
@@ -80,7 +84,25 @@ const looksLikeSpam = (v) => {
   return false;
 };
 
-export async function onRequestPost({ request, env }) {
+// One row per accepted submission for the Desk lead count. Only what is needed to count leads per page and source.
+const sheetSafe = (x) => (/^[=+\-@]/.test(x) ? `'${x}` : x);
+const leadRow = (form, v, data, voice, sent) => ({
+  received: new Date().toISOString(),
+  form,
+  page: sheetSafe(clean(data.page, 200)),
+  need: sheetSafe(v.need.slice(0, 60)),
+  detail: sheetSafe(v.detail.slice(0, 60)),
+  from_ad: data.from_ad === 'yes' ? 'yes' : '',
+  ref: sheetSafe(clean(data.ref, 100).replace(/[^a-z0-9.-]/gi, '')),
+  voice: voice.none ? '' : 'yes',
+  email: sent ? 'sent' : 'failed',
+});
+const logLead = (env, row) =>
+  env.LEADS_URL && env.LEADS_TOKEN
+    ? fetch(env.LEADS_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: env.LEADS_TOKEN, row }), redirect: 'follow' }).catch(() => null)
+    : Promise.resolve(null);
+
+export async function onRequestPost({ request, env, waitUntil }) {
   // Cheap checks before reading the body: same-site origin, JSON, sensible size.
   const origin = hostOf(request.headers.get('Origin') || request.headers.get('Referer') || '');
   if (!ALLOWED_HOSTS.test(origin)) return json(403, { error: 'forbidden' });
@@ -144,6 +166,9 @@ export async function onRequestPost({ request, env }) {
     }),
   });
 
+  const lead = logLead(env, leadRow(form, v, data, voice, res.ok));
+  if (typeof waitUntil === 'function') waitUntil(lead);
+  else await lead;
   if (!res.ok) return json(502, { error: 'send_failed' });
   return json(200, { ok: true });
 }
